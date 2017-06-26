@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>実例によるPureScript</title>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
+  <link rel="stylesheet" href="github-markdown.css" type="text/css"/>
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto"/>
+  <style>
+    body {
+      background-color: #f5f5f5;
+    }
+
+    div.main {
+        min-width: 540px;
+        max-width: 980px;
+        margin: 0 auto;
+        
+        background-color: white;
+        border: solid 1px #cbcbcb;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+
+        font-family: 'Roboto', 'Meiryo UI', sans-serif !important;
+    }
+
+    div.header img.logo:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    div.header {
+      background-color: #1d222d;
+      color: white;
+      padding: 50px;
+    }
+
+    div.header a {
+      color: white;
+      text-decoration: none;
+    }
+
+    div.header a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    div.header h1 {
+      letter-spacing: 0.2em;
+      border-bottom: solid 1px rgba(255, 255, 255, 0.4);
+      padding: 0.4em;
+    }
+
+    div.header p.author {
+      font-family: 'Roboto', sans-serif;
+    }
+
+    div.content {
+        padding: 30px;
+
+        font-family: 'Roboto', 'Meiryo UI', sans-serif !important;
+    }
+
+    div.content a {
+      color: #c4953a;
+      text-decoration: none;
+    }
+
+
+
+    .main ol {
+        list-style-type: decimal;
+    }
+    .main ol ol {
+        list-style-type: decimal;
+    }
+    .main ol ol ol {
+        list-style-type: decimal;
+    }
+
+    .main blockquote {
+      color: #333;
+    }
+
+    .markdown code {
+      white-space: pre;
+      word-wrap: keep-all !important;  
+    }
+
+    /* Bug Workaround for Readium */
+    .main h1, h2, h3, h4, h5, h6 {
+      position: static !important;
+      font-family: serif;
+      font-weight: bold;
+      letter-spacing: 0.12em;
+    }
+
+    .columns2 {
+      -webkit-column-count: 2; /* Chrome, Safari, Opera */
+      -moz-column-count: 2; /* Firefox */
+      column-count: 2;
+    }
+
+    .columns3 {
+      -webkit-column-count: 3; /* Chrome, Safari, Opera */
+      -moz-column-count: 3; /* Firefox */
+      column-count: 3;
+    }    
+
+    table.sourceCode tr {
+      padding: 0;
+      border: none;
+    }
+
+    table.sourceCode td {
+      padding: 0;
+      border: none;
+    }
+
+    table.sourceCode pre {
+      margin: 0;
+      border: none;
+    }
+
+    @media print {
+      body {
+        background-color: transparent;
+      }
+
+      .previous {
+        visibility: hidden;
+      }
+
+      .main {
+        font-family: 'MS PMincho', Serif;
+        text-justify: inter-cluster;
+
+        background-color: transparent;
+        border: none 0px transparent;
+        box-shadow: none;
+      }
+      .main h1, h2, h3, h4, h5, h6 {
+        position: static !important;
+      
+      }
+      pre {
+        overflow: visible !important;
+      }
+    }
+
+    .sourceCode, .shell {
+      font-family: 'Courier New', Monospace;
+      
+    }
+
+  </style>
+
+
+
+</head>
+
+<body>
+  <div class="main">
+    <div class="header" style="position:relative;">
+      <a href="/purescript/">
+          <img class="logo" src="logo-shadow.png"  style="display:block; position:absolute; left:50px;">
+      </a>
+      <div class="title" style="margin-left: 220px; position:relative; left:0px; right:0px;">
+          <h1 id="実例によるpurescript">実例によるPureScript</h1>
+          <p>ウェブのための関数型プログラミング</p>
+          <p class="author"><a href="https://leanpub.com/purescript/read">Phil Freeman, &quot;PureScript by Example - Functional Programming for the Web&quot;</a></p>
+      </div>
+      <div style="clear:both;"></div>
+    </div>
+
+    <div class="markdown-body content">
+      <p class="previous" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
+<h1 id="型クラス"><span class="header-section-number">6</span> 型クラス</h1>
+<h2 id="章の目標"><span class="header-section-number">6.1</span> 章の目標</h2>
+<p>この章では、PureScriptの型システムによって可能になる強力な抽象化の形式、型クラスを導入します。</p>
+<p>この章ではデータ構造をハッシュするためのライブラリを題材に説明していきます。データ自身の構造について直接考えることなく複雑なデータ構造をハッシュするために、型クラスの仕組みがどのようにして働くのかを見ていきます。</p>
+<p>またPureScriptのPreludeと標準ライブラリに含まれる標準的な型クラスも見ていきます。PureScriptのコードは概念を簡潔に表現するために型クラスの強力さに大きく依存しているので、これらのクラスに慣れておくと役に立つでしょう。</p>
+<h2 id="プロジェクトの準備"><span class="header-section-number">6.2</span> プロジェクトの準備</h2>
+<p>この章のソースコードは、ファイル <code>src/data/Hashable.purs</code>で定義されています。</p>
+<p>このプロジェクトには以下のBower依存関係があります。</p>
+<ul>
+<li><code>purescript-maybe</code>: オプショナルな値を表す <code>Maybe</code>データ型が定義されています。</li>
+<li><code>purescript-tuples</code>: 値の組を表す <code>Tuple</code>データ型が定義されています。</li>
+<li><code>purescript-either</code>: 非交和を表す <code>Either</code>データ型が定義されています。</li>
+<li><code>purescript-strings</code>: 文字列を操作する関数が定義されています。</li>
+</ul>
+<p>モジュール <code>Data.Hashable</code>は、これらのBowerパッケージによって提供されるモジュールをいくつかインポートします。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">module</span> <span class="dt">Data.Hashable</span> <span class="kw">where</span>
+
+<span class="kw">import </span><span class="dt">Data.Maybe</span>
+<span class="kw">import </span><span class="dt">Data.Tuple</span>
+<span class="kw">import </span><span class="dt">Data.Either</span>
+<span class="kw">import </span><span class="dt">Data.String</span>
+<span class="kw">import </span><span class="dt">Data.Function</span></code></pre>
+<h2 id="見せてください"><span class="header-section-number">6.3</span> 見せてください！</h2>
+<p>型クラスの最初に扱う例は、すでに何回か見てきた関数に関係します。<code>show</code>は何らかの値を取りそれを文字列として表示する関数です。</p>
+<p><code>show</code>は<code>Prelude</code>モジュールの<code>Show</code>と呼ばれる型クラスで次のように定義されています。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Show</span> a <span class="kw">where</span>
+<span class="ot">  show ::</span> a <span class="ot">-&gt;</span> <span class="dt">String</span></code></pre>
+<p>このコードでは、型変数 <code>a</code>でパラメータ化された、<code>Show</code>という新しい<strong>型クラス</strong>(type class)を宣言しています。</p>
+<p>型クラス<strong>インスタンス</strong>には、型クラスで定義された関数の、その型に特殊化された実装が含まれています。</p>
+<p>例えば、Preludeにある<code>Boolean</code>値に対する<code>Show</code>型クラスインスタンスの定義は次のとおりです。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> showBoolean ::</span> <span class="dt">Show</span> <span class="dt">Boolean</span> <span class="kw">where</span>
+  show true <span class="fu">=</span> <span class="st">&quot;true&quot;</span>
+  show false <span class="fu">=</span> <span class="st">&quot;false&quot;</span></code></pre>
+<p>このコードは <code>showBool​​ean</code>という名前の型クラスのインスタンスを宣言します。</p>
+<p>PureScriptでは、生成されたJavaScriptの可読性を良くするために型クラスインスタンスには名前をつけます。このとき、<strong><code>Boolean</code>型は<code>Show</code>型クラスに属している</strong>といいます。</p>
+<p><code>psci</code>で<code>Show</code>型クラスについて異なる型でいくつかの値を表示してみましょう。</p>
+<pre class="text"><code>&gt; show true
+
+&quot;true&quot;
+
+&gt; show 1.0
+
+&quot;1&quot;
+
+&gt; show &quot;Hello World&quot;
+
+&quot;\&quot;Hello World\&quot;&quot;</code></pre>
+<p>この例ではさまざまなプリミティブ型の値を<code>show</code>しましたが、もっと複雑な型を持つ値を<code>show</code>することもできます。</p>
+<pre class="text"><code>&gt; i Data.Tuple
+&gt; show $ Tuple 1 true
+&quot;Tuple (1) (true)&quot;
+
+&gt; :i Data.Maybe
+&gt; show $ Just &quot;testing&quot;
+&quot;Just (\&quot;testing\&quot;)&quot;</code></pre>
+<p>型<code>Data.Either</code>の値を表示しようとすると、興味深いエラーメッセージが表示されます。</p>
+<pre class="text"><code>&gt; :i Data.Either
+&gt; show $ Left 10
+  
+Error in declaration it
+No instance found for Prelude.Show (Data.Either.Either Prim.String u8)</code></pre>
+<p>ここでの問題は<code>show</code>しようとしている型に対する<code>Show</code>インスタンスが存在しないということではなく、<code>psci</code>がこの型を推論できなかったということです。このエラーメッセージで<strong>未知の型</strong><code>u8</code>と表示されているのがそれです。</p>
+<p><code>::</code>演算子を使って式に対して型注釈を加えると、<code>psci</code>が正しい型クラスインスタンスを選ぶことができるようになります。</p>
+<pre class="text"><code>&gt; show (Left 10 :: Either Number String)
+  
+&quot;Left (10)&quot;</code></pre>
+<p><code>Show</code>インスタンスをまったく持っていない型もあります。関数の型<code>-&gt;</code>がその一例です。<code>Number</code>から<code>Number</code>への関数を<code>show</code>しようとすると、型検証器によってその通りのエラーメッセージが表示されます。</p>
+<pre class="text"><code>&gt; show $ \n -&gt; n + 1
+  
+Error in declaration it
+No instance found for Prelude.Show (Prim.Number -&gt; Prim.Number)</code></pre>
+<blockquote>
+<h2 id="演習" class="unnumbered">演習</h2>
+<ol type="1">
+<li>(簡単)前章の<code>showShape</code>関数を使って、<code>Shape</code>型に対しての<code>Show</code>インスタンスを定義してみましょう。</li>
+</ol>
+</blockquote>
+<h2 id="標準的な型クラス"><span class="header-section-number">6.4</span> 標準的な型クラス</h2>
+<p>この節では、Preludeや標準ライブラリで定義されている標準的な型クラスをいくつか見ていきましょう。これらの型クラスはPureScript特有の抽象化の基礎としてあちこちで使われているので、これらの関数の基本についてよく理解しておくことを強くお勧めします。</p>
+<h3 id="eq型クラス"><span class="header-section-number">6.4.1</span> Eq型クラス</h3>
+<p><code>Eq</code>型クラスは等値演算子(<code>==</code>)と不等値演算子(<code>/=</code>)を定義します。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Eq</span> a <span class="kw">where</span>
+<span class="ot">  (==) ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Boolean</span>
+<span class="ot">  (/=) ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Boolean</span></code></pre>
+<p>異なる型の2つの値を比較しても意味がありませんから、いずれの演算子も2つの引数が同じ型を持つ必要があることに注意してください。</p>
+<p><code>psci</code> で<code>Eq</code>型クラスを試してみましょう。</p>
+<pre class="text"><code>&gt; 1 == 2
+false
+
+&gt; &quot;Test&quot; == &quot;Test&quot;
+true</code></pre>
+<h3 id="ord型クラス"><span class="header-section-number">6.4.2</span> Ord型クラス</h3>
+<p><code>Ord</code>型クラスは順序付け可能な型に対して2つの値を比較する<code>compare</code>関数を定義します。<code>compare</code>関数が定義されていると、比較演算子 <code>&lt;</code>、<code>&gt;</code>と、その仲間<code>&lt;=</code>、<code>&gt;=</code>も定義されます。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Ordering</span> <span class="fu">=</span> <span class="dt">LT</span> <span class="fu">|</span> <span class="dt">EQ</span> <span class="fu">|</span> <span class="dt">GT</span>
+
+<span class="kw">class</span> (<span class="dt">Eq</span> a) <span class="fu">&lt;=</span> <span class="dt">Ord</span> a <span class="kw">where</span>
+<span class="ot">  compare ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Ordering</span></code></pre>
+<p><code>compare</code>関数は2つの値を比較して<code>Ordering</code>の3つの値のうちいずれかを返します。</p>
+<ul>
+<li><code>LT</code> - 最初の引数が2番目の値より小さいとき</li>
+<li><code>EQ</code> - 最初の引数が2番目の値と等しい(または比較できない)とき</li>
+<li><code>GT</code> - 最初の引数が2番目の値より大きいとき</li>
+</ul>
+<p><code>compare</code>関数についても<code>psci</code>で試してみましょう。</p>
+<pre class="text"><code>&gt; compare 1 2
+LT
+
+&gt; compare &quot;A&quot; &quot;Z&quot;
+LT</code></pre>
+<h3 id="num型クラス"><span class="header-section-number">6.4.3</span> 　Num型クラス</h3>
+<p><code>Num</code>型クラスは加算、減算、乗算、除算などの数値演算子を使用可能な型を示します。必要に応じて再利用できるように、これらの演算子を抽象化するわけです。</p>
+<p><strong>注意</strong>: 関数呼び出しが型クラスの実装に基いて呼び出されるのとは対照的に、型クラス<code>Eq</code>や<code>Ord</code>、<code>Num</code>などはPureScriptでは特別に扱われ、<code>1 + 2 * 3</code>のような単純な式は単純なJavaScriptへと変換されます。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Num</span> a <span class="kw">where</span>
+<span class="ot">  (+) ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a
+<span class="ot">  (-) ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a
+<span class="ot">  (*) ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a
+<span class="ot">  (/) ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a
+<span class="ot">  (%) ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a
+<span class="ot">  negate ::</span> a <span class="ot">-&gt;</span> a</code></pre>
+<h3 id="半群とモノイド"><span class="header-section-number">6.4.4</span> 半群とモノイド</h3>
+<p><code>Semigroup</code>(半群)型クラスは、連結演算子 <code>&lt;&gt;</code>を提供する型を示します。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Semigroup</span> a <span class="kw">where</span>
+<span class="ot">  (&lt;&gt;) ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a</code></pre>
+<p>普通の文字列連結について文字列は半群をなしますし、同様に配列も半群をなします。その他の標準的なインスタンスの幾つかは、 <code>purescript-monoid</code>パッケージで提供されています。</p>
+<p>以前に見た<code>++</code>連結演算子は、<code>&lt;&gt;</code>の別名として提供されています。</p>
+<p><code>purescript-monoid</code>パッケージで提供されている<code>Monoid</code>型クラスは、<code>mempty</code>と呼ばれる空の値の概念で<code>Semigroup</code>型クラスを拡張します。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> (<span class="dt">Semigroup</span> m) <span class="fu">&lt;=</span> <span class="dt">Monoid</span> m <span class="kw">where</span>
+<span class="ot">  mempty ::</span> m</code></pre>
+<p>文字列や配列はモノイドの簡単な例になっています。</p>
+<p><code>Monoid</code>型クラスインスタンスでは、「空」の値から始めて新たな値を合成していき、その型で<strong>累積</strong>した結果を返すにはどうするかを記述する型クラスです。例えば、畳み込みを使っていくつかのモノイドの値の配列を連結する関数を書くことができます。<code>psci</code>で試すと次のようになります。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">&gt;</span> <span class="fu">:</span>i <span class="dt">Data.Monoid</span>
+<span class="fu">&gt;</span> <span class="fu">:</span>i <span class="dt">Data.Foldable</span>
+  
+<span class="fu">&gt;</span> foldl (<span class="fu">&lt;&gt;</span>) mempty [<span class="st">&quot;Hello&quot;</span>, <span class="st">&quot; &quot;</span>, <span class="st">&quot;World&quot;</span>]  
+<span class="st">&quot;Hello World&quot;</span>
+  
+<span class="fu">&gt;</span> foldl (<span class="fu">&lt;&gt;</span>) mempty [[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>], [<span class="dv">6</span>]]
+[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>]</code></pre>
+<p><code>purescript-monoid</code>パッケージにはモノイドと半群の多くの例を提供しており、これらを本書で扱っていきます。</p>
+<h3 id="foldable型クラス"><span class="header-section-number">6.4.5</span> Foldable型クラス</h3>
+<p><code>Monoid</code>型クラスは畳み込みの結果になるような型を示しますが、<code>Foldable</code>型クラスは、畳み込みの元のデータとして使えるような型構築子を示しています。</p>
+<p>また、<code>Foldable</code>型クラスは、配列や<code>Maybe</code>などのいくつかの標準的なコンテナのインスタンスを含む<code>purescript-foldable-traversable</code>パッケージで提供されています。</p>
+<p><code>Foldable</code>クラスに属する関数の型シグネチャは、これまで見てきたものよりも少し複雑です。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Foldable</span> f <span class="kw">where</span>
+<span class="ot">  foldr ::</span> forall a b<span class="fu">.</span> (a <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> f a <span class="ot">-&gt;</span> b
+<span class="ot">  foldl ::</span> forall a b<span class="fu">.</span> (b <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> f a <span class="ot">-&gt;</span> b
+<span class="ot">  foldMap ::</span> forall a m<span class="fu">.</span> (<span class="dt">Monoid</span> m) <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> m) <span class="ot">-&gt;</span> f a <span class="ot">-&gt;</span> m</code></pre>
+<p>この定義は<code>f</code>を配列の型構築子だと特殊化して考えてみるとわかりやすくなります。この場合、すべての<code>a</code>について<code>f a</code>を<code>[a]</code>に置き換える事ができますが、<code>foldl</code>と<code>foldr</code>の型が、最初に見た配列に対する畳み込みの型になるとわかります。</p>
+<p><code>foldMap</code>についてはどうでしょうか？これは<code>forall m. (Monoid m)=&gt;(a -&gt; m) -&gt; [a]  -&gt; m</code>になります。この型シグネチャは、型<code>m</code>が<code>Monoid</code>型クラスのインスタンスであればどんな型でも返り値の型として選ぶことができると言っています。配列の要素をそのモノイドの値へと変換する関数を提供すれば、そのモノイドの構造を利用して配列を畳み込み、ひとつの値にして返すことができます。</p>
+<p>それでは<code>psci</code> で<code>foldMap</code>を試してみましょう。</p>
+<pre class="text"><code>&gt; :i Data.Foldable
+
+&gt; foldMap show [1, 2, 3, 4, 5]
+&quot;12345&quot;</code></pre>
+<p>ここではモノイドとして文字列を選び、<code>Number</code>を文字列として表示する<code>show</code>関数を使いました。それから、数の配列を渡し、それぞれの数を<code>show</code>してひとつの文字列へと連結した結果出力されました。</p>
+<p>畳み込み可能な型は配列だけではありません。<code>purescript-foldable-traversable</code>では<code>Maybe</code>や<code>Tuple</code>のような型の<code>Foldable</code>インスタンスが定義されており、<code>purescript-lists</code>のような他のライブラリでは、そのライブラリのそれぞれのデータ型に対して<code>Foldable</code>インスタンスが定義されています。<code>Foldable</code>は<strong>順序付きコンテナ</strong>(ordered container)の概念を抽象化するのです。</p>
+<h3 id="関手と型クラス則"><span class="header-section-number">6.4.6</span> 関手と型クラス則</h3>
+<p>PureScriptで副作用を伴う関数型プログラミングのスタイルを可能にするための<code>Functor</code>と<code>Applicative</code>、<code>Monad</code>といった型クラスがPreludeでは定義されています。これらの抽象については本書で後ほど扱いますが、まずは「持ち上げ演算子」<code>&lt;$&gt;</code>の形ですでに見てきた<code>Functor</code>型クラスの定義を見てみましょう。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Functor</span> f <span class="kw">where</span>
+<span class="ot">  (&lt;$&gt;) ::</span> forall a b<span class="fu">.</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> f a <span class="ot">-&gt;</span> f b</code></pre>
+<p>演算子<code>&lt;$&gt;</code>は関数をそのデータ構造まで「持ち上げる」(lift)ことができます。ここで「持ち上げ」という言葉の具体的な定義は問題のデータ構造に依りますが、すでにいくつかの単純な型についてその動作を見てきました。</p>
+<pre class="text"><code>&gt; :i Data.Array
+&gt; (\n -&gt; n &lt; 3) &lt;$&gt; [1, 2, 3, 4, 5]
+  
+[true, true, false, false, false]
+
+&gt; :i Data.Maybe
+&gt; Data.String.length &lt;$&gt; Just &quot;testing&quot;
+  
+Just (7)</code></pre>
+<p><code>&lt;$&gt;</code>演算子は様々な構造の上でそれぞれ異なる振る舞いをしますが、<code>&lt;$&gt;</code>演算子の意味はどのように理解すればいいのでしょうか。</p>
+<p>直感的には、<code>&lt;$&gt;</code>演算子はコンテナのそれぞれの要素へ関数を適用し、その結果から元のデータと同じ形状を持った新しいコンテナを構築するのだというように理解することができます。しかし、この概念を厳密にするにはどうしたらいいでしょうか？。</p>
+<p><code>Functor</code> の型クラスのインスタンスは、<strong>関手則</strong>(functor laws)と呼ばれる法則を順守するものと期待されています。</p>
+<ul>
+<li><code>id &lt;$&gt; xs = xs</code></li>
+<li><code>g &lt;$&gt; (f &lt;$&gt; xs) = (g &lt;&lt;&lt; f) &lt;$&gt; xs</code></li>
+</ul>
+<p>最初の法則は<strong>恒等射律</strong>(identity law)です。これは、恒等関数をその構造まで持ち上げると、元の構造をそのまま返す恒等射になるということと言っています。恒等関数は入力を変更しませんから、これは理にかなっています。</p>
+<p>第二の法則は<strong>合成律</strong>(composition law)です。構造をひとつの関数で写してから２つめの関数で写すのは、２つの関数の合成で構造を写すのと同じだ、と言っています。</p>
+<p>「持ち上げ」の一般的な意味が何であれ、データ構造に対する持ち上げ関数の正しい定義はこれらの法則に従っていなければなりません。</p>
+<p>標準の型クラスの多くには、このような法則が付随しています。一般に、型クラスに与えられた法則は、型クラスの関数に構造を与え、インスタンスについて調べられるようにします。興味のある読者は、すでに見てきた標準の型クラスに属する法則について調べてみてもよいでしょう。</p>
+<blockquote>
+<h2 id="演習-1" class="unnumbered">演習</h2>
+<ol type="1">
+<li><p>(簡単)次のnewtypeは複素数を表します。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">Complex</span> <span class="fu">=</span> <span class="dt">Complex</span> 
+    {<span class="ot"> real ::</span> <span class="dt">Number</span>
+    ,<span class="ot"> imaginary ::</span> <span class="dt">Number</span> 
+    }</code></pre>
+<p><code>Complex</code>について、<code>Show</code>と<code>Eq</code>のインスタンスを定義してください。</p></li>
+<li><p>(やや難しい)次は型<code>a</code>の要素の空でない配列の型を定義しています。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">NonEmpty</span> a <span class="fu">=</span> <span class="dt">NonEmpty</span> a [a]</code></pre>
+<p><code>[]</code>についての<code>Semigroup</code>インスタンスを再利用し、空でない配列についての<code>Semigroup</code>インスタンスを書いてみてください。</p></li>
+<li><p>(やや難しい) <code>NonEmpty</code>の<code>Functor</code>インスタンスを書いてみましょう。</p></li>
+<li><p>(難しい) <code>NonEmpty</code>の<code>Foldable</code>インスタンスを書いてみましょう。<strong>ヒント</strong>：配列の <code>Foldable</code>インスタンスを再利用してみましょう。</p></li>
+</ol>
+</blockquote>
+<h2 id="型注釈"><span class="header-section-number">6.5</span> 型注釈</h2>
+<p>型クラスを使うと、関数の型に制約を加えることができます。例を示しましょう。 <code>Eq</code>型クラスのインスタンスで定義された等値性を使って、３つの値が等しいかどうかを調べる関数を書きたいとします。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">threeAreEqual ::</span> forall a<span class="fu">.</span> (<span class="dt">Eq</span> a) <span class="ot">=&gt;</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Boolean</span>
+threeAreEqual a1 a2 a3 <span class="fu">=</span> a1 <span class="fu">==</span> a2 <span class="fu">&amp;&amp;</span> a2 <span class="fu">==</span> a3</code></pre>
+<p>この型宣言は<code>forall</code>を使って定義された通常の多相型のようにも見えます。しかし、太い矢印 <code>=&gt;</code>で型の残りの部分から区切られた、括弧内の型クラス制約があります。</p>
+<p>インポートされたモジュールのどれかに<code>a</code>に対する<code>Eq</code>インスタンスが存在するなら、どんな型<code>a</code>を選んでも<code>threeAsEqual</code>を呼び出すことができる、とこの型は言っています。</p>
+<p>制約された型には複数の型クラスインスタンスを含めることができますし、インスタンスの型は単純な型変数に限定されません。<code>Ord</code>と<code>Show</code>のインスタンスを使って2つの値を比較する例を次に示します。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">showCompare ::</span> forall a<span class="fu">.</span> (<span class="dt">Ord</span> a, <span class="dt">Show</span> a) <span class="ot">=&gt;</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">String</span>
+showCompare a1 a2 <span class="fu">|</span> a1 <span class="fu">&lt;</span> a2 <span class="fu">=</span> 
+  show a1 <span class="fu">++</span> <span class="st">&quot; is less than &quot;</span> <span class="fu">++</span> show a2
+showCompare a1 a2 <span class="fu">|</span> a1 <span class="fu">&gt;</span> a2 <span class="fu">=</span> 
+  show a1 <span class="fu">++</span> <span class="st">&quot; is greater than &quot;</span> <span class="fu">++</span> show a2
+showCompare a1 a2 <span class="fu">=</span> 
+  show a1 <span class="fu">++</span> <span class="st">&quot; is equal to &quot;</span> <span class="fu">++</span> show a2</code></pre>
+<p>型クラスで制約された関数を使うときには重要な制限があります。PureScriptコンパイラは制約された型を推論しません。型注釈の提供は必須になります。</p>
+<p><code>psci</code> で<code>Num</code>のような標準の型クラスのいずれかを使って、このことを試してみましょう。</p>
+<pre class="text"><code>&gt; :t \x -&gt; x + x
+
+Error in declaration it
+No instance found for Prelude.Num u2</code></pre>
+<p>ここで、数を倍にするこの関数の型を、数の型の<code>Num</code>インスタンスを使って見つけようとしますが、<code>psci</code>は<code>x</code>の型が不明であるときはこの関数の制約された型を推論しないので、<code>psci</code>は未知の型の型クラスインスタンスを見つけることができないという旨を報告します。</p>
+<p>たとえば<code>x</code>が数であることを表すには、次のように型検証器に指示しなければいけません。</p>
+<pre class="text"><code>&gt; :t \x -&gt; x + (x :: Number)
+
+Prim.Number -&gt; Prim.Number</code></pre>
+<h2 id="インスタンスの重複"><span class="header-section-number">6.6</span> インスタンスの重複</h2>
+<p>PureScriptには型クラスのインスタンスに関する<strong>重複インスタンス規則</strong>(Overlapping instances rule)という規則があります。型クラスのインスタンスが関数呼び出しのところで必要とされるときはいつでも、PureScriptは正しいインスタンスを選択するために型検証器によって推論された情報を使用します。そのとき、その型の適切なインスタンスがちょうどひとつだけ存在しなければなりません。</p>
+<p>これを実証するために、適当な型に対して2つの異なる型クラスのインスタンスを作成してみましょう。次のコードでは、型 <code>T</code>の2つの重複する<code>Show</code>インスタンスを作成しています。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">module</span> <span class="dt">Overlapped</span> <span class="kw">where</span>
+
+<span class="kw">data</span> <span class="dt">T</span> <span class="fu">=</span> <span class="dt">T</span>
+
+<span class="kw">instance</span><span class="ot"> showT1 ::</span> <span class="dt">Show</span> <span class="dt">T</span> <span class="kw">where</span>
+  show _ <span class="fu">=</span> <span class="st">&quot;Instance 1&quot;</span>
+  
+<span class="kw">instance</span><span class="ot"> showT2 ::</span> <span class="dt">Show</span> <span class="dt">T</span> <span class="kw">where</span>
+  show _ <span class="fu">=</span> <span class="st">&quot;Instance 2&quot;</span></code></pre>
+<p>このモジュールはエラーなくコンパイルされます。<code>psci</code>を起動し、型<code>T</code>の<code>Show</code>インスタンスを見つけようとすると、重複インスタンス規則が適用され、エラーになります。</p>
+<pre class="text"><code>&gt; show T
+  
+Compiling Overlapped
+Error in declaration it
+Overlapping instances found for Prelude.Show Overlapped.T</code></pre>
+<p>重複インスタンスルールが適用されるのは、型クラスのインスタンスの自動選択が予測可能な処理であるようにするためです。もし型に対してふたつの型クラスインスタンスを許し、モジュールインポートの順序に従ってどちらかを選ぶようにすると、実行時のプログラムの振る舞いが予測できなくなってしまい好ましくありません。</p>
+<p>適切な法則を満たすふたつ妥当な型クラスインスタンスが存在しうるなら、既存の型を包むnewtypeを定義するのが一般的な方法です。重複インスタンスのルールの下でも、異なるnewtypesなら異なる型クラスインスタンスを持つことが許されるので、問題はなくなります。この手法はPureScriptの標準ライブラリでも使われており、例えば<code>purescript-monoid</code>では、<code>Maybe a</code>型は<code>Monoid</code>型クラスの妥当なインスタンスを複数持っています。</p>
+<h2 id="インスタンスの依存関係"><span class="header-section-number">6.7</span> インスタンスの依存関係</h2>
+<p>制約された型を使うと関数の実装が型クラスインスタンスに依存できるように、型クラスインスタンスの実装は他の型クラスインスタンスに依存することができます。これにより、型を使ってプログラムの実装を推論するという、プログラム推論の強力な形式を提供します。</p>
+<p><code>Show</code>型クラスを例に考えてみましょう。要素を<code>show</code>する方法があるとき、その要素の配列を<code>show</code>する型クラスインスタンスを書くことができます。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> showArray ::</span> (<span class="dt">Show</span> a) <span class="ot">=&gt;</span> <span class="dt">Show</span> [a] <span class="kw">where</span>
+  show xs <span class="fu">=</span> <span class="st">&quot;[&quot;</span> <span class="fu">++</span> go xs <span class="fu">++</span> <span class="st">&quot;]&quot;</span>
+    <span class="kw">where</span>
+    go [] <span class="fu">=</span> <span class="st">&quot;&quot;</span>
+    go [x] <span class="fu">=</span> show x
+    go (x <span class="fu">:</span> xs) <span class="fu">=</span> show x <span class="fu">++</span> <span class="st">&quot;, &quot;</span> <span class="fu">++</span> go xs</code></pre>
+<p>PureScriptのPreludeに、このコードの最適化されたものが含まれています。</p>
+<p>ここで、関数 <code>show</code>は様々な型の入力に対して使われていることに注意してください。<code>[a]</code>つまり要素が型<code>a</code>の配列の入力に対して動作するように<code>show</code>を定義しています。しかし、 <code>go</code>関数では、入力の先頭の要素を名前<code>x</code>として導入し、<code>show x</code>というように呼び出しています。ここでの<code>show</code>は型 <code>a</code>の<strong>要素</strong>に適用されています。</p>
+<p>プログラムがコンパイルされると、<code>Show</code>の正しい型クラスのインスタンスは<code>show</code>の引数の推論された型に基づいて選ばれますが、このあたりの複雑さに開発者が関与することはありません。</p>
+<blockquote>
+<h2 id="演習-2" class="unnumbered">演習</h2>
+<ol type="1">
+<li><p>(簡単) <code>Eq a</code>と<code>Eq [a]</code>のインスタンスを再利用して、型<code>NonEmpty a</code>に対する<code>Eq</code>インスタンスを書いてみましょう。</p></li>
+<li><p>(やや難しい) <code>Ord</code>のインスタンスを持つ任意の型<code>a</code>について、その他のどんな値よりも大きい「無限大」の値を新たに追加することができます。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Extended</span> a <span class="fu">=</span> <span class="dt">Finite</span> a <span class="fu">|</span> <span class="dt">Infinite</span></code></pre>
+<p><code>a</code>の<code>Ord</code>インスタンスを再利用して、<code>Extended a</code>の<code>Ord</code>インスタンスを書いてみましょう。</p></li>
+<li><p>(難しい)　順序付きコンテナを定義する(そして<code>Foldable</code>のインスタンスを持っている)ような型構築子<code>f</code>が与えられたとき、追加の要素を先頭に含めるような新たなコンテナ型を作ることができます。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">OneMore</span> f a <span class="fu">=</span> <span class="dt">OneMore</span> a (f a)</code></pre>
+<p>このコンテナ<code>OneMore f</code>もまた順序を持っています。ここで、新しい要素は任意の<code>f</code>の要素よりも前にきます。この<code>OneMore f</code>の<code>Foldable</code>インスタンスを書いてみましょう。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> foldableOneMore ::</span> (<span class="dt">Foldable</span> f) <span class="ot">=&gt;</span> <span class="dt">Foldable</span> (<span class="dt">OneMore</span> f) <span class="kw">where</span>
+  <span class="fu">...</span></code></pre></li>
+</ol>
+</blockquote>
+<h2 id="多変数型クラス"><span class="header-section-number">6.8</span> 多変数型クラス</h2>
+<p>型クラスは必ずしもひとつの型だけを型変数としてとるわけではありません。型変数がひとつだけなのが最も一般的ですが、実際には型クラスは<strong>ゼロ個以上の</strong>型変数を持つことができます。</p>
+<p>それでは2つの型引数を持つ型クラスの例を見てみましょう。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">module</span> <span class="dt">Stream</span> <span class="kw">where</span>
+
+<span class="kw">import </span><span class="dt">Data.Maybe</span>
+<span class="kw">import </span><span class="dt">Data.Tuple</span>
+<span class="kw">import </span><span class="dt">Data.String</span>
+
+<span class="kw">class</span> <span class="dt">Stream</span> list element <span class="kw">where</span>
+<span class="ot">  uncons ::</span> list <span class="ot">-&gt;</span> <span class="dt">Maybe</span> (<span class="dt">Tuple</span> element list)
+
+<span class="kw">instance</span><span class="ot"> streamArray ::</span> <span class="dt">Stream</span> [a] a <span class="kw">where</span>
+  uncons [] <span class="fu">=</span> <span class="dt">Nothing</span>
+  uncons (x <span class="fu">:</span> xs) <span class="fu">=</span> <span class="dt">Just</span> (<span class="dt">Tuple</span> x xs)
+
+<span class="kw">instance</span><span class="ot"> streamString ::</span> <span class="dt">Stream</span> <span class="dt">String</span> <span class="dt">String</span> <span class="kw">where</span>
+  uncons <span class="st">&quot;&quot;</span> <span class="fu">=</span> <span class="dt">Nothing</span>
+  uncons s <span class="fu">=</span> <span class="dt">Just</span> (<span class="dt">Tuple</span> (take <span class="dv">1</span> s) (drop <span class="dv">1</span> s))</code></pre>
+<p>この<code>Stream</code>モジュールでは、<code>uncons</code>関数を使ってストリームの先頭から要素を取り出すことができる、要素のストリームのような型を示すクラス <code>Stream</code>が定義されています。</p>
+<p><code>Stream</code>型クラスは、ストリーム自身の型だけでなくその要素の型も型変数として持っていることに注意してください。これによって、ストリームの型が同じでも要素の型について異なる型クラスインスタンスを定義することができます。</p>
+<p>このモジュールでは、<code>uncons</code>がパターン照合で配列の先頭の要素を取り除くような配列のインスタンスと、文字列から最初の文字を取り除くような文字列のインスタンスという、 ２つの型クラスインスタンスが定義されています。</p>
+<p>任意のストリーム上で動作する関数を記述することができます。例えば、ストリームの要素に基づいたモノイドで結果を累積する関数は次のようになります。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Data.Monoid</span>
+
+<span class="ot">foldStream ::</span> forall l e m<span class="fu">.</span> (<span class="dt">Stream</span> l e, <span class="dt">Monoid</span> m) <span class="ot">=&gt;</span> (e <span class="ot">-&gt;</span> m) <span class="ot">-&gt;</span> l <span class="ot">-&gt;</span> m
+foldStream f list <span class="fu">=</span>
+  <span class="kw">case</span> uncons list <span class="kw">of</span>
+    <span class="dt">Nothing</span> <span class="ot">-&gt;</span> mempty
+    <span class="dt">Just</span> (<span class="dt">Tuple</span> head tail) <span class="ot">-&gt;</span> f head <span class="fu">&lt;&gt;</span> foldStream f tail</code></pre>
+<p><code>psci</code>で使って、異なる<code>Stream</code>の型や異なる<code>Monoid</code>の型について<code>foldStream</code>を呼び出してみましょう。</p>
+<h2 id="型変数のない型クラス"><span class="header-section-number">6.9</span> 型変数のない型クラス</h2>
+<p>ゼロ個の型変数を持つ型クラスを定義することもできます！型システムによってコードの大域的な性質の追跡ができるようになる、関数についてのコンパイル時表明に関係しています。</p>
+<p>たとえば、型システムを使って部分関数の使用を追跡したいとしましょう。型引数のない型クラス<code>Partial</code>を定義し、すべての部分関数を<code>Partial</code>制約で注釈します。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">module</span> <span class="dt">Partial</span> <span class="kw">where</span>
+
+<span class="kw">class</span> <span class="dt">Partial</span>
+
+head<span class="ot"> ::</span> forall a<span class="fu">.</span> (<span class="dt">Partial</span>) <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> a
+head (x <span class="fu">:</span> _) <span class="fu">=</span> x
+
+tail<span class="ot"> ::</span> forall a<span class="fu">.</span> (<span class="dt">Partial</span>) <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> [a]
+tail (_ <span class="fu">:</span> xs) <span class="fu">=</span> xs</code></pre>
+<p><code>Partial</code>モジュールの<code>Partial</code>型クラスのインスタンスを定義していないことに注意してください。こうすると目的を達成できます。このままの定義では<code>head</code>関数を使用しようとすると型エラーになるのです。</p>
+<pre class="text"><code>&gt; Partial.head [1, 2, 3]
+  
+Error in declaration it
+No instance found for Partial.Partial </code></pre>
+<p>このライブラリを使うには、2つの選択肢があります。</p>
+<ul>
+<li><p>このモジュールで<code>Partial</code>型クラスのインスタンスを定義し、そのモジュールの関数が部分的であることを了承したと表明します。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">module</span> <span class="dt">Main</span> <span class="kw">where</span>
+
+<span class="kw">import </span><span class="dt">Partial</span>
+
+<span class="kw">instance</span><span class="ot"> partial ::</span> <span class="dt">Partial</span></code></pre></li>
+<li><p>あるいは、これらの部分関数を利用するすべての関数で <code>Partial</code>制約を再発行する方法もあります。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">secondElement ::</span> forall a<span class="fu">.</span> (<span class="dt">Partial</span>) <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> a
+secondElement xs <span class="fu">=</span> head (tail xs)</code></pre></li>
+</ul>
+<h2 id="上位クラス"><span class="header-section-number">6.10</span> 上位クラス</h2>
+<p>インスタンスを別のインスタンスに依存させることによって型クラスのインスタンス間の関係を表現することができるように、いわゆる<strong>上位クラス</strong>(superclass)を使って型クラス間の関係を表現することができます。</p>
+<p>あるクラスのどんなインスタンスも、その他のあるクラスのインスタンスで必要とされているとき、前者の型クラスは後者の型クラスの上位クラスであるといい、クラス定義で逆向きの太い矢印を使い上位クラス関係を示します。</p>
+<p>すでに上位クラスの関係の一例について見ています。<code>Eq</code>クラスは<code>Ord</code>の上位クラスです。<code>Ord</code>クラスのすべての型クラスインスタンスについて、その同じ型に対応する<code>Eq</code>インスタンスが存在しなければなりません。<code>compare</code>関数が2つの値が比較できないと報告した時は、それらが実は同値であるかどうかを決定するために<code>Eq</code>クラスを使いたくなることが多いでしょうから、これは理にかなっています。</p>
+<p>一般に、下位クラスの法則が上位クラスのメンバに言及しているとき、上位クラス関係を定義するのは理にかなっています。例えば、<code>Ord</code>と<code>Eq</code>のインスタンスのどんな組についても、もしふたつの値が<code>Eq</code>インスタンスのもとで同値であるなら、<code>compare</code>関数は<code>EQ</code>を返すはずだとみなすのは妥当です。言い換えれば、<code>a == b</code>ならば<code>compare a b == EQ</code>です。法則の階層上のこの関係は、<code>Eq</code>と<code>Ord</code>の間の上位クラス関係を説明します。</p>
+<p>この場合に上位クラス関係を定義する別の考え方としては、この２つのクラスの間には明らかに&quot;is-a&quot;の関係があることです。下位クラスのすべてのメンバは、上位クラスのメンバでもあるということです。</p>
+<blockquote>
+<h3 id="演習-3" class="unnumbered">演習</h3>
+<ol type="1">
+<li><p>(やや難しい) 次の<code>Action</code>クラスは、ある型の動作(action)を定義する、多変数型クラスです。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> (<span class="dt">Monoid</span> m) <span class="fu">&lt;=</span> <span class="dt">Action</span> m a <span class="kw">where</span>
+<span class="ot">  act ::</span> m <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a</code></pre>
+<p><strong>act</strong>はモノイドがどうやって他の型の値を変更するのに使われるのかを説明する関数です。この動作が　モノイドの連結演算子に従っていると期待しましょう。例えば、乗算を持つ自然数のモノイドは、文字列の何度かの繰り返しとして文字列に対して<strong>動作</strong>します。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> repeatAction ::</span> <span class="dt">Action</span> <span class="dt">Number</span> <span class="dt">String</span> <span class="kw">where</span>
+  act <span class="dv">0</span> _ <span class="fu">=</span> <span class="st">&quot;&quot;</span>
+  act n s <span class="fu">=</span> s <span class="fu">++</span> act (n <span class="fu">-</span> <span class="dv">1</span>) s</code></pre>
+<p><code>Action</code>クラスが<code>Monoid</code>クラスとどのように連携するかを説明する、妥当な法則を書いてみましょう。</p></li>
+<li><p>(やや難しい) インスタンス <code>Action m a =&gt; Action m [a]</code>を書いてみましょう。ここで、 配列上の動作は要素の順序で実行されるように定義されるものとします。</p></li>
+<li><p>(難しい) 以下のnewtypeが与えられたとき、<code>Action m (Self m)</code>のインスタンスを書いてみましょう。ここで、モノイド<code>m</code>は連結によって自身に作用するものとします。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">Self</span> m <span class="fu">=</span> <span class="dt">Self</span> m</code></pre></li>
+<li><p>(やや難しい) 引数のない型クラス<code>Unsafe</code>を定義し、型安全性を欠いていることを表現する制約としてそれを使い、<code>Prelude.Unsafe</code>モジュールから<code>unsafeIndex</code>関数の別バージョンを定義してみましょう。また、その関数を使って、 <code>Unsafe</code>制約を失わないように、配列の最後の要素を選択する<code>last</code>を定義してみましょう。</p></li>
+</ol>
+</blockquote>
+<h2 id="ハッシュの型クラス"><span class="header-section-number">6.11</span> ハッシュの型クラス</h2>
+<p>この最後の節では、章の残りを費やしてデータ構造をハッシュするライブラリを作ります。</p>
+<p>このライブラリの目的は説明だけであり、堅牢なハッシングの仕組みの提供を目的としていないことに注意してください。</p>
+<p>ハッシュ関数に期待される性質とはどのようなものでしょうか？</p>
+<ul>
+<li>ハッシュ関数は決定的でなくてはなりません。つまり、同じ値には同じハッシュ値を対応させなければなりません</li>
+<li>ハッシュ関数はいろいろなハッシュ値の集合で結果が一様に分布しなければなりません。</li>
+</ul>
+<p>最初の性質はまさに型クラスの法則のように見える一方で、２番目の性質はもっとぼんやりとした規約に従っていて、PureScriptの型システムによって確実に強制できるようなものではなさそうです。しかし、これは型クラスについて次のような直感的理解を与えるはずです。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">HashCode</span> <span class="fu">=</span> <span class="dt">Number</span>
+
+<span class="kw">class</span> (<span class="dt">Eq</span> a) <span class="fu">&lt;=</span> <span class="dt">Hashable</span> a <span class="kw">where</span>
+<span class="ot">  hash ::</span> a <span class="ot">-&gt;</span> <span class="dt">HashCode</span> </code></pre>
+<p>これに、<code>a == b</code>ならば<code>hash a == hash b</code>という関係性の法則が付随しています。</p>
+<p>この節の残りの部分を費やして、<code>Hashable</code>型クラスに関連付けられているインスタンスと関数のライブラリを構築していきます。</p>
+<p>決定的な方法でハッシュ値を結合する方法が必要になります。２つのハッシュ値を混ぜて結果を0-65535の間に分布させる次のような関数がその要求を満たしています。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">(&lt;#&gt;) ::</span> <span class="dt">HashCode</span> <span class="ot">-&gt;</span> <span class="dt">HashCode</span> <span class="ot">-&gt;</span> <span class="dt">HashCode</span>
+(<span class="fu">&lt;#&gt;</span>) h1 h2 <span class="fu">=</span> (<span class="dv">73</span> <span class="fu">*</span> h1 <span class="fu">+</span> <span class="dv">51</span> <span class="fu">*</span> h2) <span class="fu">%</span> <span class="dv">65536</span></code></pre>
+<p>この演算子を使うと、２つのハッシュ値<code>h1</code>、<code>h2</code>を、<code>h1 &lt;#&gt; h2</code>.というように中置で連結することができます。</p>
+<p>それでは、入力の種類を制限する<code>Hashable</code>制約を使う関数を書いてみましょう。ハッシュ関数を必要とするよくある目的としては、2つの値が同じハッシュ値にハッシュされるかどうかを決定することです。<code>hashEqual</code>関係はそのような機能を提供します。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">hashEqual ::</span> forall a<span class="fu">.</span> (<span class="dt">Hashable</span> a) <span class="ot">=&gt;</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Boolean</span>
+hashEqual <span class="fu">=</span> (<span class="fu">==</span>) <span class="ot">`on`</span> hash</code></pre>
+<p>この関数はハッシュ同値性を定義するために<code>Data.Function</code>の<code>on</code>関数を使っていますが、このハッシュ同値性の定義は『それぞれの値が<code>hash</code>関数に渡されたあとで２つの値が等しいなら、それらの値は「ハッシュ同値」である』というように宣言的に読めるはずです。</p>
+<p>プリミティブ型の<code>Hashable</code>インスタンスをいくつか書いてみましょう。まずは文字列のインスタンスです。<code>Data.String</code>モジュールにある<code>length</code>、<code>charCodeAt</code>という名前の関数を使います。以下の <code>Hashable</code>インスタンスは、累積されたハッシュ値と文字コードを<code>&lt;＃&gt;</code>演算子を使って連結するという動作を、文字列中の文字に対して反復します。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> hashString ::</span> <span class="dt">Hashable</span> <span class="dt">String</span> <span class="kw">where</span>
+  hash s <span class="fu">=</span> go <span class="dv">0</span> <span class="dv">0</span>
+    <span class="kw">where</span>
+<span class="ot">    go ::</span> <span class="dt">Number</span> <span class="ot">-&gt;</span> <span class="dt">HashCode</span> <span class="ot">-&gt;</span> <span class="dt">HashCode</span>
+    go i acc <span class="fu">|</span> i <span class="fu">&gt;=</span> length s <span class="fu">=</span> acc
+    go i acc <span class="fu">=</span> go (i <span class="fu">+</span> <span class="dv">1</span>) acc <span class="fu">&lt;#&gt;</span> charCodeAt i s</code></pre>
+<p><code>Number</code>型のインスタンスについてはどうでしょうか。小数や無限大が出現するせいでJavaScriptの<code>Number</code>型を扱うといろいろ問題が生じますが、ここでは説明が目的なので、単純に<code>show</code>で計算された数値の文字列表現をハッシュすることにします。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> hashNumber ::</span> <span class="dt">Hashable</span> <span class="dt">Number</span> <span class="kw">where</span>
+  hash n <span class="fu">=</span> hash (show n)</code></pre>
+<p><code>Number</code> の型クラスインスタンスは必ず<code>String</code>の型クラスインスタンスを使うことに注意してください。</p>
+<p><code>Boolean</code>型のインスタンスではさらに簡単です。単に型の2つの値に2つのハッシュ値を静的に割り当てるだけです。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> hashBoolean ::</span> <span class="dt">Hashable</span> <span class="dt">Boolean</span> <span class="kw">where</span>
+  hash false <span class="fu">=</span> <span class="dv">0</span>
+  hash true  <span class="fu">=</span> <span class="dv">1</span></code></pre>
+<p>これらの <code>Hashable</code>インスタンスが先ほどの型クラスの法則を満たしていることを証明するにはどうしたらいいでしょうか。同じ値が等しいハッシュ値を持っていることを確認する必要があります。<code>String</code>と<code>Boolean</code>の場合は、<code>Eq</code>の意味では同じ値でも厳密には同じではない、というような文字列や真偽値は存在しないので簡単です。</p>
+<p>数値の場合は同じ数が同​​じ文字列表現を持っていることを簡単に説明しておかなければなりませんが、そうすれば後は文字列に対してすでに与えられた証明に従うことができます。</p>
+<p>もっと面白い型についてはどうでしょうか。<code>&lt;#&gt;</code>使って入力配列の要素のハッシュ値を組み合わせた、配列の<code>Hashable</code>インスタンスは、次のようになります。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> hashArray ::</span> (<span class="dt">Hashable</span> a) <span class="ot">=&gt;</span> <span class="dt">Hashable</span> [a] <span class="kw">where</span>
+  hash [] <span class="fu">=</span> <span class="dv">0</span>
+  hash (x <span class="fu">:</span> xs) <span class="fu">=</span> hash x <span class="fu">&lt;#&gt;</span> hash xs</code></pre>
+<p>この場合、配列の長さに関する帰納を使うと、型クラスの法則を証明することができます。長さゼロの唯一の配列は <code>[]</code>です。配列の<code>Eq</code>の定義により、任意の二つの空でない配列は、それらの先頭の要素が同じで配列の残りの部分が等しいとき、その時に限り等しくなります。この帰納的な仮定により、配列の残りの部分は同じハッシュ値を持ちますし、もし<code>Hashable a</code>インスタンスがこの法則を満たすなら、先頭の要素も同じハッシュ値をもつことがわかります。したがって、２つの配列は同じハッシュ値を持ち、<code>Hashable [a]</code>も同様に型クラス法則を満たしています。</p>
+<p>この章のソースコードには、 <code>Maybe</code>と<code>Tuple</code>型のインスタンスなど、他にも <code>Hashable</code>インスタンスの例が含まれています。</p>
+<blockquote>
+<h3 id="演習-4" class="unnumbered">演習</h3>
+<ol type="1">
+<li><p>(簡単) <code>psci</code>を使って、各インスタンスのハッシュ関数をテストしてください。</p></li>
+<li><p>(やや難しい) 同値性の近似として<code>hashEqual</code>関数のハッシュ同値性を使い、配列が重複する要素を持っているかどうかを調べる関数を書いてください。ハッシュ値が一致したペアが見つかった場合は、<code>==</code>を使って値の同値性を厳密に検証することを忘れないようにしてください。</p></li>
+<li><p>(やや難しい) 型クラスの法則を満たす、次のnewtypeの <code>Hashable</code>インスタンスを書いてください。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">Uniform</span> <span class="fu">=</span> <span class="dt">Uniform</span> <span class="dt">Number</span>
+
+<span class="kw">instance</span><span class="ot"> eqUniform ::</span> <span class="dt">Eq</span> <span class="dt">Uniform</span> <span class="kw">where</span>
+  (<span class="fu">==</span>) (<span class="dt">Uniform</span> u1) (<span class="dt">Uniform</span> u2) <span class="fu">=</span> u1 <span class="fu">%</span> <span class="fl">1.0</span> <span class="fu">==</span> u2 <span class="fu">%</span> <span class="fl">1.0</span> 
+  (<span class="fu">/=</span>) (<span class="dt">Uniform</span> u1) (<span class="dt">Uniform</span> u2) <span class="fu">=</span> u1 <span class="fu">%</span> <span class="fl">1.0</span> <span class="fu">/=</span> u2 <span class="fu">%</span> <span class="fl">1.0</span> </code></pre>
+<p>newtypeの<code>Uniform</code>とその<code>Eq</code>インスタンスは、同じ小数部分を持っているかの同値関係を持つ数の型を表しています。そのインスタンスが型クラスの法則を満たしていることを証明してください。</p></li>
+<li><p>(難しい) <code>Maybe</code>、<code>Either</code>、<code>Tuple</code>の<code>Hashable</code>インスタンスが型クラスの法則を満たしていることを証明してください。</p></li>
+</ol>
+</blockquote>
+<h2 id="まとめ"><span class="header-section-number">6.12</span> まとめ</h2>
+<p>この章では、型に基づく抽象化で、コードの再利用のための強力な形式化を可能にする<strong>型クラス</strong>を導入しました。PureScriptの標準ライブラリから標準の型クラスを幾つか見てきました。また、ハッシュ値を計算する型クラスに基づく独自のライブラリを定義しました。</p>
+<p>この章では型クラス法則の考え方を導入するとともに、抽象化のための型クラスを使うコードについて、その性質を証明する手法を導入しました。型クラス法則は<strong>等式推論</strong>(equational reasoning)と呼ばれる大きな分野の一部であり、プログラミング言語の性質と型システムはプログラムについて論理的な推論をできるようにするために使われています。これは重要な考え方で、本書では今後あらゆる箇所で立ち返る話題となるでしょう。</p>
+      <p class="previous" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
+    </div>
+
+    <script>
+        if(location.pathname !== "/purescript/" && location.pathname !== "/purescript/index.html"){
+            Array.prototype.forEach.call(document.querySelectorAll(".previous"), function(elem){
+                elem.style.visibility = "visible";
+            });
+        }
+    </script>
+  </div>
+</body>
+</html>

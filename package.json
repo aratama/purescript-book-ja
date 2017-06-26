@@ -1,0 +1,26 @@
+{
+  "name": "purescript-book-ja",
+  "version": "1.0.0",
+  "description": "",
+  "main": " ",
+  "scripts": {
+    "test": " "
+  },
+  "repository": {
+    "type": "git",
+    "url": " "
+  },
+  "keywords": [],
+  "author": "",
+  "license": " ",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-concat": "^2.5.2",
+    "gulp-foreach": "^0.1.0",
+    "gulp-pandoc": "^0.2.1",
+    "gulp-print": "^1.1.0",
+    "gulp-watch": "^4.2.0",
+    "rimraf": "^2.3.2"
+  }
+}

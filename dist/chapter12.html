@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>実例によるPureScript</title>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
+  <link rel="stylesheet" href="github-markdown.css" type="text/css"/>
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto"/>
+  <style>
+    body {
+      background-color: #f5f5f5;
+    }
+
+    div.main {
+        min-width: 540px;
+        max-width: 980px;
+        margin: 0 auto;
+        
+        background-color: white;
+        border: solid 1px #cbcbcb;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+
+        font-family: 'Roboto', 'Meiryo UI', sans-serif !important;
+    }
+
+    div.header img.logo:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    div.header {
+      background-color: #1d222d;
+      color: white;
+      padding: 50px;
+    }
+
+    div.header a {
+      color: white;
+      text-decoration: none;
+    }
+
+    div.header a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    div.header h1 {
+      letter-spacing: 0.2em;
+      border-bottom: solid 1px rgba(255, 255, 255, 0.4);
+      padding: 0.4em;
+    }
+
+    div.header p.author {
+      font-family: 'Roboto', sans-serif;
+    }
+
+    div.content {
+        padding: 30px;
+
+        font-family: 'Roboto', 'Meiryo UI', sans-serif !important;
+    }
+
+    div.content a {
+      color: #c4953a;
+      text-decoration: none;
+    }
+
+
+
+    .main ol {
+        list-style-type: decimal;
+    }
+    .main ol ol {
+        list-style-type: decimal;
+    }
+    .main ol ol ol {
+        list-style-type: decimal;
+    }
+
+    .main blockquote {
+      color: #333;
+    }
+
+    .markdown code {
+      white-space: pre;
+      word-wrap: keep-all !important;  
+    }
+
+    /* Bug Workaround for Readium */
+    .main h1, h2, h3, h4, h5, h6 {
+      position: static !important;
+      font-family: serif;
+      font-weight: bold;
+      letter-spacing: 0.12em;
+    }
+
+    .columns2 {
+      -webkit-column-count: 2; /* Chrome, Safari, Opera */
+      -moz-column-count: 2; /* Firefox */
+      column-count: 2;
+    }
+
+    .columns3 {
+      -webkit-column-count: 3; /* Chrome, Safari, Opera */
+      -moz-column-count: 3; /* Firefox */
+      column-count: 3;
+    }    
+
+    table.sourceCode tr {
+      padding: 0;
+      border: none;
+    }
+
+    table.sourceCode td {
+      padding: 0;
+      border: none;
+    }
+
+    table.sourceCode pre {
+      margin: 0;
+      border: none;
+    }
+
+    @media print {
+      body {
+        background-color: transparent;
+      }
+
+      .previous {
+        visibility: hidden;
+      }
+
+      .main {
+        font-family: 'MS PMincho', Serif;
+        text-justify: inter-cluster;
+
+        background-color: transparent;
+        border: none 0px transparent;
+        box-shadow: none;
+      }
+      .main h1, h2, h3, h4, h5, h6 {
+        position: static !important;
+      
+      }
+      pre {
+        overflow: visible !important;
+      }
+    }
+
+    .sourceCode, .shell {
+      font-family: 'Courier New', Monospace;
+      
+    }
+
+  </style>
+
+
+
+</head>
+
+<body>
+  <div class="main">
+    <div class="header" style="position:relative;">
+      <a href="/purescript/">
+          <img class="logo" src="logo-shadow.png"  style="display:block; position:absolute; left:50px;">
+      </a>
+      <div class="title" style="margin-left: 220px; position:relative; left:0px; right:0px;">
+          <h1 id="実例によるpurescript">実例によるPureScript</h1>
+          <p>ウェブのための関数型プログラミング</p>
+          <p class="author"><a href="https://leanpub.com/purescript/read">Phil Freeman, &quot;PureScript by Example - Functional Programming for the Web&quot;</a></p>
+      </div>
+      <div style="clear:both;"></div>
+    </div>
+
+    <div class="markdown-body content">
+      <p class="previous" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
+<h1 id="コールバック地獄"><span class="header-section-number">12</span> コールバック地獄</h1>
+<h2 id="この章の目標"><span class="header-section-number">12.1</span> この章の目標</h2>
+<p>この章では、これまでに見てきたモナド変換子やApplicative関手といった道具が、現実世界の問題解決にどのように役立つかを見ていきましょう。ここでは特に、<strong>コールバック地獄</strong>(callback hell)の問題を解決について見ていきます。</p>
+<h2 id="プロジェクトの準備"><span class="header-section-number">12.2</span> プロジェクトの準備</h2>
+<p>この章のソースコードは、<code>grunt</code>でコンパイルし、NodeJSを使って実行することができます。</p>
+<h2 id="問題"><span class="header-section-number">12.3</span> 問題</h2>
+<p>通常、JavaScriptの非同期処理コードでは、プログラムの流れを構造化するために<strong>コールバック</strong>(callbacks)を使用します。たとえば、ファイルからテキストを読み取るのに好ましいアプローチとしては、<code>readFile</code>関数を使用し、コールバック、つまりテキストが利用可能になったときに呼び出される関数を渡すことです。</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="fu">readText</span>(onSuccess, onFailure) {
+  <span class="kw">var</span> fs = <span class="fu">require</span>(<span class="st">&#39;fs&#39;</span>);
+  <span class="ot">fs</span>.<span class="fu">readFile</span>(<span class="st">&#39;file1.txt&#39;</span>, { <span class="dt">encoding</span>: <span class="st">&#39;utf-8&#39;</span> }, <span class="kw">function</span> (error, data) {
+    <span class="kw">if</span> (error) {
+      <span class="fu">onFailure</span>(<span class="ot">error</span>.<span class="fu">code</span>);
+    } <span class="kw">else</span> {
+      <span class="fu">onSuccess</span>(data);
+    }   
+  });
+}</code></pre>
+<p>しかしながら、複数の非同期操作が関与している場合には入れ子になったコールバックを生じることになり、すぐに読めないコードになってしまいます。</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="fu">copyFile</span>(onSuccess, onFailure) {
+  <span class="kw">var</span> fs = <span class="fu">require</span>(<span class="st">&#39;fs&#39;</span>);
+  <span class="ot">fs</span>.<span class="fu">readFile</span>(<span class="st">&#39;file1.txt&#39;</span>, { <span class="dt">encoding</span>: <span class="st">&#39;utf-8&#39;</span> }, <span class="kw">function</span> (error, data1) {
+    <span class="kw">if</span> (error) {
+      <span class="fu">onFailure</span>(<span class="ot">error</span>.<span class="fu">code</span>);
+    } <span class="kw">else</span> {
+      <span class="ot">fs</span>.<span class="fu">writeFile</span>(<span class="st">&#39;file2.txt&#39;</span>, data, { <span class="dt">encoding</span>: <span class="st">&#39;utf-8&#39;</span> }, <span class="kw">function</span> (error) {
+        <span class="kw">if</span> (error) {
+          <span class="fu">onFailure</span>(<span class="ot">error</span>.<span class="fu">code</span>);
+        } <span class="kw">else</span> {
+          <span class="fu">onSuccess</span>();
+        }
+      });
+    }   
+  });
+} </code></pre>
+<p>この問題に対する解決策のひとつとしては、独自の関数に個々の非同期呼び出しを分割することです。</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="fu">writeCopy</span>(data, onSuccess, onFailure) {
+  <span class="kw">var</span> fs = <span class="fu">require</span>(<span class="st">&#39;fs&#39;</span>);
+  <span class="ot">fs</span>.<span class="fu">writeFile</span>(<span class="st">&#39;file2.txt&#39;</span>, data, { <span class="dt">encoding</span>: <span class="st">&#39;utf-8&#39;</span> }, <span class="kw">function</span> (error) {
+    <span class="kw">if</span> (error) {
+      <span class="fu">onFailure</span>(<span class="ot">error</span>.<span class="fu">code</span>);
+    } <span class="kw">else</span> {
+      <span class="fu">onSuccess</span>();
+    }
+  });
+}
+
+<span class="kw">function</span> <span class="fu">copyFile</span>(onSuccess, onFailure) {
+  <span class="kw">var</span> fs = <span class="fu">require</span>(<span class="st">&#39;fs&#39;</span>);
+  <span class="ot">fs</span>.<span class="fu">readFile</span>(<span class="st">&#39;file1.txt&#39;</span>, { <span class="dt">encoding</span>: <span class="st">&#39;utf-8&#39;</span> }, <span class="kw">function</span> (error, data) {
+    <span class="kw">if</span> (error) {
+      <span class="fu">onFailure</span>(<span class="ot">error</span>.<span class="fu">code</span>);
+    } <span class="kw">else</span> {
+      <span class="fu">writeCopy</span>(data, onSuccess, onFailure);
+    }   
+  });
+} </code></pre>
+<p>この解決策は一応は機能しますが、いくつか問題があります。</p>
+<ul>
+<li>上で<code>writeCopy</code>へ<code>data</code>を渡したのと同じ方法で、非同期関数に関数の引数として途中の結果を渡さなければなりません。これは小さな関数についてはうまくいきますが、多くのコールバック関係する場合はデータの依存関係は複雑になることがあり、関数の引数が大量に追加される結果になります。</li>
+<li>どんな非同期関数でもコールバック<code>onSuccess</code>と<code>onFailure</code>が引数として定義されるという共通のパターンがありますが、このパターンはソースコードに付随したモジュールのドキュメントに記述することで実施しなければなりません。このパターンを管理するには型システムのほうがよいですし、型システムで使い方を強制しておくほうがいいでしょう。</li>
+</ul>
+<p>次に、これらの問題を解決するために、これまでに学んだ手法を使用する方法について説明していきます。</p>
+<h2 id="継続モナド"><span class="header-section-number">12.4</span> 継続モナド</h2>
+<p><code>copyFile</code>の例をFFIを使ってPureScriptへと翻訳していきましょう。PureScriptで書いていくにつれ、計算の構造はわかりやすくなり、<code>purescript-transformers</code>パッケージで定義されている継続モナド変換子<code>ContT</code>が自然に導入されることになるでしょう。</p>
+<p>まず、FFIを使って<code>readFile</code>と<code>writeFile</code>に型を与えなくてはなりません。型同義語をいくつかと、ファイル入出力のための作用を定義することから始めましょう。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">foreign <span class="kw">import </span>data <span class="dt">FS</span> :: !
+
+<span class="kw">type</span> <span class="dt">ErrorCode</span> <span class="fu">=</span> <span class="dt">String</span>
+<span class="kw">type</span> FilePath <span class="fu">=</span> <span class="dt">String</span></code></pre>
+<p><code>readFile</code>はファイル名と2引数のコールバックを引数に取ります。ファイルが正常に読み込まれた場合は、2番目の引数にはファイルの内容が含まれますが、そうでない場合は、最初の引数がエラーを示すために使われます。</p>
+<p>今回は<code>readFile</code>を2つのコールバックを引数としてとる関数としてラップすることにします。先ほどの<code>copyFile</code>や<code>writeCopy</code>とまったく同じように、エラーコールバック(<code>onFailure</code>)と結果コールバック(<code>onSuccess</code>)の2つです。簡単のために<code>Data.Function</code>の多引数関数の機能を使うと、このラップされた関数<code>readFileImpl</code>は次のようになるでしょう。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">foreign <span class="kw">import </span>readFileImpl
+  <span class="st">&quot;function readFileImpl(path, onSuccess, onFailure) {\</span>
+<span class="st">  \  return function() {\</span>
+<span class="st">  \    require(&#39;fs&#39;).readFile(path, \</span>
+<span class="st">  \      { encoding: &#39;utf-8&#39; }, \</span>
+<span class="st">  \      function(error, data) {\</span>
+<span class="st">  \        if (error) {\</span>
+<span class="st">  \          onFailure(error.code)();\</span>
+<span class="st">  \        } else {\</span>
+<span class="st">  \          onSuccess(data)();\</span>
+<span class="st">  \        }\</span>
+<span class="st">  \      }\</span>
+<span class="st">  \    );\</span>
+<span class="st">  \  };\</span>
+<span class="st">  \}&quot;</span><span class="ot"> ::</span> forall eff<span class="fu">.</span> <span class="dt">Fn3</span> FilePath
+                         (<span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)
+                         (<span class="dt">ErrorCode</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)
+                         (<span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)</code></pre>
+<p><code>readFileImpl</code>はファイルパス、成功時のコールバック、失敗時のコールバックという３つの引数を取り、空(<code>Unit</code>)の結果を返す副作用のある計算を返す、ということをこの型は言っています。コー​​ルバック自身にも、その作用を追跡するために<code>Eff</code>モナドを使うような型が与えられていることに注意してください。</p>
+<p>この<code>readFileImpl</code>の実装がその型の正しい実行時表現を持っている理由を、よく理解しておくようにしてください。</p>
+<p><code>writeFileImpl</code>もよく似ています。違いはファイルがコールバックではなく関数自身に渡されるということだけです。実装は次のようになります。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">foreign <span class="kw">import </span>writeFileImpl
+  <span class="st">&quot;function writeFileImpl(path, data, onSuccess, onFailure) {\</span>
+<span class="st">  \  return function() {\</span>
+<span class="st">  \    require(&#39;fs&#39;).writeFile(path, data, \</span>
+<span class="st">  \      { encoding: &#39;utf-8&#39; }, \</span>
+<span class="st">  \      function(error) {\</span>
+<span class="st">  \        if (error) {\</span>
+<span class="st">  \          onFailure(error.code)();\</span>
+<span class="st">  \        } else {\</span>
+<span class="st">  \          onSuccess();\</span>
+<span class="st">  \        }\</span>
+<span class="st">  \      }\</span>
+<span class="st">  \    );\</span>
+<span class="st">  \  };\</span>
+<span class="st">  \}&quot;</span><span class="ot"> ::</span> forall eff<span class="fu">.</span> <span class="dt">Fn4</span> FilePath
+                         <span class="dt">String</span>
+                         (<span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)
+                         (<span class="dt">ErrorCode</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)
+                         (<span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)</code></pre>
+<p>これらのFFIの宣言が与えられれば、<code>readFile</code>と<code>writeFile</code>の実装を書くことができます。<code>Data.Function</code>ライブラリを使って、多引数のFFIバインディングを通常の(カリー化された)PureScript関数へと変換するので、もう少し読みやすい型になるでしょう。</p>
+<p>さらに、成功時と失敗時の２つの必須のコールバックに代わって、成功か失敗の<strong>どちらか</strong>(Either) に対応した単一のコールバックを要求するようにします。つまり、新しいコールバックは引数として<code>Either ErrorCode</code>モナドの値をとります。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">readFile<span class="ot"> ::</span> forall eff<span class="fu">.</span> 
+  FilePath <span class="ot">-&gt;</span> 
+  (<span class="dt">Either</span> <span class="dt">ErrorCode</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>) <span class="ot">-&gt;</span> 
+  <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>
+readFile path k <span class="fu">=</span> 
+  runFn3 readFileImpl 
+         path 
+         (k <span class="fu">&lt;&lt;&lt;</span> <span class="dt">Right</span>) 
+         (k <span class="fu">&lt;&lt;&lt;</span> <span class="dt">Left</span>)
+
+writeFile<span class="ot"> ::</span> forall eff<span class="fu">.</span> 
+  FilePath <span class="ot">-&gt;</span> 
+  <span class="dt">String</span> <span class="ot">-&gt;</span> 
+  (<span class="dt">Either</span> <span class="dt">ErrorCode</span> <span class="dt">Unit</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>) <span class="ot">-&gt;</span> 
+  <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>
+writeFile path text k <span class="fu">=</span> 
+  runFn4 writeFileImpl 
+         path 
+         text 
+         (k <span class="fu">$</span> <span class="dt">Right</span> unit) 
+         (k <span class="fu">&lt;&lt;&lt;</span> <span class="dt">Left</span>)</code></pre>
+<p><code>Eff</code>モナドはこれらの型シグネチャの両方に現れます。次のような新しい型同義語を導入すると、型を​​簡素化できます。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">M</span> eff <span class="fu">=</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff)
+
+readFile<span class="ot"> ::</span> forall eff<span class="fu">.</span> 
+  FilePath <span class="ot">-&gt;</span> 
+  (<span class="dt">Either</span> <span class="dt">ErrorCode</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">M</span> eff <span class="dt">Unit</span>) <span class="ot">-&gt;</span> 
+  <span class="dt">M</span> eff <span class="dt">Unit</span>
+
+writeFile<span class="ot"> ::</span> forall eff<span class="fu">.</span> 
+  FilePath <span class="ot">-&gt;</span> 
+<span class="dt">String</span>
+  (<span class="dt">Either</span> <span class="dt">ErrorCode</span> <span class="dt">Unit</span> <span class="ot">-&gt;</span> <span class="dt">M</span> eff <span class="dt">Unit</span>) <span class="ot">-&gt;</span> 
+  <span class="dt">M</span> eff <span class="dt">Unit</span></code></pre>
+<p>ここで、重要なパターンを見つけることができます。これらの関数は何らかのモナド(この場合は<code>M eff</code>)で値を返すコールバックをとり、<strong>同一のモナド</strong>で値を返します。これは、最初のコールバックが結果を返したときに、そのモナドは次の非同期関数の入力に結合するためにその結果を使用することができることを意味しています。実際、<code>copyFile</code>の例で手作業でやったことがまさにそれです。</p>
+<p>これは<code>purescript-transformers</code>の <code>Control.Monad.Cont.Trans</code>モジュールで定義されている<strong>継続モナド変換子</strong>(continuation monad transformer)の基礎となっています。</p>
+<p><code>ContT</code>は次のようなnewtypeとして定義されます。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">ContT</span> r m a <span class="fu">=</span> <span class="dt">ContT</span> ((a <span class="ot">-&gt;</span> m r) <span class="ot">-&gt;</span> m r)</code></pre>
+<p><strong>継続</strong>(continuation)はコールバックの別名です。継続は計算の<strong>残余</strong>(remainder)を捕捉します。ここで「残余」とは、非同期呼び出しが行われ、結果が提供された後に起こることを指しています。</p>
+<p><code>ContT</code>データ構築子の引数は<code>readFile</code>と<code>writeFile</code>の型ととてもよく似ています。実際、もし型<code>a</code> を型<code>Either ErrorCode String</code>、<code>r</code>を<code>Unit</code>、<code>m</code> をモナド<code>M eff</code>というように選ぶと、<code>readFile</code>の型の右辺を復元することができます。</p>
+<p>今回の目的では<code>Eff</code>モナドを変換するために常に<code>ContT</code>を使い、型<code>r</code>は常に<code>Unit</code>になりますが、このことは必須ではありません。</p>
+<p><code>ContT</code>構築子を適用するだけで、<code>readFile</code>と<code>writeFile</code>を<code>ContT Unit (M eff)</code>モナドの計算として扱うことができます。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">C</span> eff <span class="fu">=</span> <span class="dt">ContT</span> <span class="dt">Unit</span> (<span class="dt">M</span> eff)
+
+<span class="ot">readFileCont ::</span> forall eff<span class="fu">.</span> 
+  FilePath <span class="ot">-&gt;</span> 
+  <span class="dt">C</span> eff (<span class="dt">Either</span> <span class="dt">ErrorCode</span> <span class="dt">String</span>)
+readFileCont path <span class="fu">=</span> <span class="dt">ContT</span> <span class="fu">$</span> readFile path
+
+<span class="ot">writeFileCont ::</span> forall eff<span class="fu">.</span> 
+  FilePath <span class="ot">-&gt;</span> 
+  <span class="dt">String</span> <span class="ot">-&gt;</span> 
+  <span class="dt">C</span> eff (<span class="dt">Either</span> <span class="dt">ErrorCode</span> <span class="dt">Unit</span>)
+writeFileCont path text <span class="fu">=</span> <span class="dt">ContT</span> <span class="fu">$</span> writeFile path text</code></pre>
+<p>ここで<code>ContT</code>モナド変換子に対してdo記法を使うだけで、ファイル複製処理を書くことができます。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">copyFileCont ::</span> forall eff<span class="fu">.</span> FilePath <span class="ot">-&gt;</span> FilePath <span class="ot">-&gt;</span> <span class="dt">C</span> eff (<span class="dt">Either</span> <span class="dt">ErrorCode</span> <span class="dt">Unit</span>)
+copyFileCont src dest <span class="fu">=</span> <span class="kw">do</span>
+  e <span class="ot">&lt;-</span> readFileCont src
+  <span class="kw">case</span> e <span class="kw">of</span>
+    <span class="dt">Left</span> err <span class="ot">-&gt;</span> return <span class="fu">$</span> <span class="dt">Left</span> err
+    <span class="dt">Right</span> content <span class="ot">-&gt;</span> writeFileCont dest content</code></pre>
+<p><code>readFileCont</code>の非同期性がdo記法によってモナドの束縛に隠されていることに注目してください。これはまさに同期的なコードのように見えますが、<code>ContT</code>モナドは非同期関数を書くのを手助けしているのです。</p>
+<p>継続を与えて<code>runContT</code>ハンドラを使うと、この計算を実行することができます。この継続は<strong>次に何をするか</strong>、例えば非同期なファイル複製処理が完了した時に何をするか、を表しています。この簡単な例では、型<code>Either ErrorCode Unit</code>の結果をコンソールに出力する<code>print</code>関数を単に継続として選んでいます。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Debug.Trace</span>
+
+<span class="kw">import </span><span class="dt">Control.Monad.Eff</span>
+<span class="kw">import </span><span class="dt">Control.Monad.Cont.Trans</span>
+
+main <span class="fu">=</span> runContT 
+  (copyFileCont <span class="st">&quot;/tmp/1.txt&quot;</span> <span class="st">&quot;/tmp/2.txt&quot;</span>) 
+  print</code></pre>
+<blockquote>
+<h2 id="演習" class="unnumbered">演習</h2>
+<ol type="1">
+<li><p>(簡単) <code>readFileCont</code>と<code>writeFileCont</code>を使って、2つのテキストフ​​ァイルを連結する関数を書いてください。</p></li>
+<li><p>(やや難しい) FFIを使って、<code>setTimeout</code>関数に適切な型を与えてください。また、<code>ContT</code>モナド変換子を使った次のようなラッパー関数を書いてください。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Milliseconds</span> <span class="fu">=</span> <span class="dt">Number</span>
+
+foreign <span class="kw">import </span>data <span class="dt">Timeout</span> :: !
+
+<span class="ot">setTimeoutCont ::</span> forall eff<span class="fu">.</span> 
+  <span class="dt">Milliseconds</span> <span class="ot">-&gt;</span> 
+  <span class="dt">ContT</span> <span class="dt">Unit</span> (<span class="dt">Eff</span> (<span class="ot">timeout ::</span> <span class="dt">Timeout</span> <span class="fu">|</span> eff)) <span class="dt">Unit</span></code></pre></li>
+</ol>
+</blockquote>
+<h2 id="errortを機能させる"><span class="header-section-number">12.5</span> ErrorTを機能させる</h2>
+<p>この方法はうまく動きますが、まだ改良の余地があります。</p>
+<p><code>copyFileCont</code>の実装において、次に何をするかを決定するためには、パターン照合を使って(型<code>Either ErrorCode String</code>の)<code>readFileCont</code>計算の結果を解析しなければなりません。しかしながら、<code>Either</code>モナドは対応するモナド変換子<code>ErrorT</code>を持っていることがわかっているので、<code>ErrorT</code>を使って非同期計算とエラー処理の２つの作用を結合できると期待するのは理にかなっています。</p>
+<p>実際にそれは可能で、<code>ErrorT</code>の定義を見ればそれがなぜかがわかります。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">ErrorT</span> e m a <span class="fu">=</span> <span class="dt">ErrorT</span> (m (<span class="dt">Either</span> e a))</code></pre>
+<p><code>ErrorT</code>は基礎のモナドの結果を単純に<code>a</code>から<code>Either e a</code>に変更します。現在のモナドスタックを<code>ErrorT ErrorCode</code>変換子で変換するように、<code>copyFileCont</code>を書き換えることができることを意味します。それは現在の方法に<code>ErrorT</code>データ構築子を適用するだけなので簡単です。型同義語を与えると、ここでも型シグネチャを整理することができます。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">EC</span> eff <span class="fu">=</span> <span class="dt">ErrorT</span> <span class="dt">ErrorCode</span> (<span class="dt">C</span> eff)
+
+<span class="ot">readFileContErr ::</span> forall eff<span class="fu">.</span> FilePath <span class="ot">-&gt;</span> <span class="dt">EC</span> eff <span class="dt">String</span>
+readFileContErr path <span class="fu">=</span> <span class="dt">ErrorT</span> <span class="fu">$</span> readFileCont path
+
+<span class="ot">writeFileContErr ::</span> forall eff<span class="fu">.</span> FilePath <span class="ot">-&gt;</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">EC</span> eff <span class="dt">Unit</span>
+writeFileContErr path text <span class="fu">=</span> <span class="dt">ErrorT</span> <span class="fu">$</span> writeFileCont path text</code></pre>
+<p>非同期エラー処理が<code>ErrorT</code>モナド変換子の内部に隠されているので、このファイル複製処理ははるかに単純になります。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">copyFileContErr ::</span> forall eff<span class="fu">.</span> FilePath <span class="ot">-&gt;</span> FilePath <span class="ot">-&gt;</span> <span class="dt">EC</span> eff <span class="dt">Unit</span>
+copyFileContErr src dest <span class="fu">=</span> <span class="kw">do</span>
+  content <span class="ot">&lt;-</span> readFileContErr src
+  writeFileContErr dest content</code></pre>
+<blockquote>
+<h2 id="演習-1" class="unnumbered">演習</h2>
+<ol type="1">
+<li>(やや難しい) 任意のエラーを処理するために、<code>ErrorT</code>を使用して2つのファイルを連結しする先ほどの解決策を書きなおしてください。</li>
+</ol>
+</blockquote>
+<h2 id="httpクライアント"><span class="header-section-number">12.6</span> HTTPクライアント</h2>
+<p><code>ContT</code>を使って非同期機能を処理する例として、この章のソースコードの<code>Network.HTTP.Client</code>モジュールについても見ていきましょう。このモジュールでは、NodeJSの非同期HTTPリクエストをラップするために継続を使っています。</p>
+<p><code>http</code>モジュールを使った典型的な<code>GET</code>リクエストは次のようになります。</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="fu">getRequest</span>(onChunk, onComplete) {
+  <span class="kw">return</span> <span class="kw">function</span>() {
+    <span class="fu">require</span>(<span class="st">&#39;http&#39;</span>).<span class="fu">request</span>({
+      <span class="dt">host</span>: <span class="st">&#39;www.purescript.org&#39;</span>,
+      <span class="dt">path</span>: <span class="st">&#39;/&#39;</span> 
+    }, <span class="kw">function</span>(res) {
+      <span class="ot">res</span>.<span class="fu">setEncoding</span>(<span class="st">&#39;utf8&#39;</span>);
+      <span class="ot">res</span>.<span class="fu">on</span>(<span class="st">&#39;data&#39;</span>, <span class="kw">function</span> (chunk) {
+        <span class="fu">onChunk</span>(chunk);
+      });
+      <span class="ot">res</span>.<span class="fu">on</span>(<span class="st">&#39;end&#39;</span>, <span class="kw">function</span> () {
+        <span class="fu">onComplete</span>();
+      });
+    }).<span class="fu">end</span>();
+  };
+}</code></pre>
+<p><code>http</code>モジュールの<code>request</code>メソッドは、ホストとパスを指定するオブジェクトをとり、レスポンスオブジェクトを返します。レスポンスオブジェクトは今回扱う2種類のイベントを発します。</p>
+<ul>
+<li>レスポンスの新しいチャンクが使用可能であることを示す <code>data</code>イベント</li>
+<li>レスポンスが完了したことを示す <code>end</code>イベント</li>
+</ul>
+<p>上の例では、<code>data</code>と<code>end</code>イベントが発生した時に呼び出される2つのコールバック <code>onChunk</code>と<code>onComplete</code>を渡しています。</p>
+<p><code>Network.HTTP.Client</code>モジュールでは、 <code>request</code>メソッドは以下のようなAPIを持つ関数<code>getImpl</code>としてラップされています。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">foreign <span class="kw">import </span>data <span class="dt">HTTP</span> :: !
+
+<span class="kw">type</span> <span class="dt">WithHTTP</span> eff <span class="fu">=</span> <span class="dt">Eff</span> (<span class="ot">http ::</span> <span class="dt">HTTP</span> <span class="fu">|</span> eff)
+
+<span class="kw">newtype</span> <span class="dt">Request</span> <span class="fu">=</span> <span class="dt">Request</span>
+  {<span class="ot"> host ::</span> <span class="dt">String</span>
+  ,<span class="ot"> path ::</span> <span class="dt">String</span>
+  }
+
+<span class="kw">newtype</span> <span class="dt">Chunk</span> <span class="fu">=</span> <span class="dt">Chunk</span> <span class="dt">String</span>
+
+<span class="ot">getImpl ::</span> forall eff<span class="fu">.</span> 
+  <span class="dt">Fn3</span> <span class="dt">Request</span>
+      (<span class="dt">Chunk</span> <span class="ot">-&gt;</span> <span class="dt">WithHTTP</span> eff <span class="dt">Unit</span>)
+      (<span class="dt">WithHTTP</span> eff <span class="dt">Unit</span>)
+      (<span class="dt">WithHTTP</span> eff <span class="dt">Unit</span>)</code></pre>
+<p>再び<code>Data.Function</code>モジュールを使って、これを通常のカリー化されたPureScript関数に変換します。先ほどと同じように、２つのコールバックを型<code>Maybe Chunk</code>の値を受け入れるひとつのコールバックに変換しています。コールバックに渡された<code>Nothing</code>の値は<code>end</code>イベントに対応しており、<code>Just chunk</code>の値は<code>deta</code>イベントに対応しています。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">getChunk ::</span> forall eff<span class="fu">.</span> 
+  <span class="dt">Request</span> <span class="ot">-&gt;</span>
+  (<span class="dt">Maybe</span> <span class="dt">Chunk</span> <span class="ot">-&gt;</span> <span class="dt">WithHTTP</span> eff <span class="dt">Unit</span>) <span class="ot">-&gt;</span>
+  <span class="dt">WithHTTP</span> eff <span class="dt">Unit</span>
+getChunk req k <span class="fu">=</span> 
+  runFn3 getImpl 
+         req 
+         (k <span class="fu">&lt;&lt;&lt;</span> <span class="dt">Just</span>) 
+         (k <span class="dt">Nothing</span>)</code></pre>
+<p>ここでも<code>ContT</code>データ構築子を適用することにより、この非同期関数をこの継続モナドの演算に変換しています。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">getCont ::</span> forall eff<span class="fu">.</span> 
+  <span class="dt">Request</span> <span class="ot">-&gt;</span> 
+  <span class="dt">ContT</span> <span class="dt">Unit</span> (<span class="dt">WithHTTP</span> eff) (<span class="dt">Maybe</span> <span class="dt">Chunk</span>)
+getCont req <span class="fu">=</span> <span class="dt">ContT</span> <span class="fu">$</span> getChunk req</code></pre>
+<p><code>readFile</code>の例では、ファイルの内容が利用可能になったとき(または、エラーが発生したとき)、コールバックは一度だけ呼ばれていました。しかし今度は、レスポンスのそれぞれのチャンクについて１回づつ、複数回コールバックが呼び出されることが期待されます。</p>
+<blockquote>
+<h2 id="演習-2" class="unnumbered">演習</h2>
+<ol type="1">
+<li><p>(やや難しい) <code>runContT</code>を使ってHTTP応答の各チャンクをコンソールへ出力することで、<code>getCont</code>を試してみてください。</p></li>
+<li><p>(難しい) <code>getImpl</code>と<code>getCont</code>関数は非同期エラーを処理しません。<code>getImpl</code>を<code>error</code>イベントに対応するよう変更し、<code>ErrorT</code>を使って非同期エラーを表現する<code>getCont</code>の亜種を書いてください。</p>
+<p><strong>ヒント</strong>： <code>readFile</code>の例で取ったのと同じアプローチに従うことができます。</p></li>
+</ol>
+</blockquote>
+<h2 id="チャンク応答の畳み込み"><span class="header-section-number">12.7</span> チャンク応答の畳み込み</h2>
+<p>これでHTTP応答の個々のチャンクを集めることができるようになりましたが、すべての応答が利用可能になったときだけ継続が呼び出される非同期関数を作ると便利な時があるかもしれません。このような関数を実装する方法のひとつは、HTTP応答のチャンクに対する<strong>畳み込み</strong>を書くことです。</p>
+<p>継続に渡された複数の結果を畳み込む関数<code>foldC</code>を書きましょう。<code>foldC</code>関数はこの章のソースコードの<code>Control.Monad.Cont.Extras</code>モジュールで定義されています。</p>
+<p>累積値を追跡するために、<code>Eff</code>モナドで<code>Ref</code>作用を使います。次の型同義語を使って型シグネチャを整理します。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">WithRef</span> eff <span class="fu">=</span> <span class="dt">Eff</span> (<span class="ot">ref ::</span> <span class="dt">Ref</span> <span class="fu">|</span> eff)
+
+<span class="kw">type</span> <span class="dt">ContRef</span> eff <span class="fu">=</span> <span class="dt">ContT</span> <span class="dt">Unit</span> (<span class="dt">WithRef</span> eff)</code></pre>
+<p>これらの同義語を使うと、<code>foldC</code>には次のような型を与えることができます。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">foldC ::</span> forall eff a b r<span class="fu">.</span> 
+  (b <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Either</span> b r) <span class="ot">-&gt;</span> 
+  b <span class="ot">-&gt;</span> <span class="dt">ContRef</span> eff a <span class="ot">-&gt;</span> <span class="dt">ContRef</span> eff r</code></pre>
+<p><code>foldC</code>に渡された関数は、現在の累積値と継続に渡された値を受け取り、新しい累積値か新しい継続に渡される結果のどちらかを返します。</p>
+<p><code>foldC</code>が実装されれば、応答のデータ本体の様々なチャンクの収集を可能にする簡単な関数<code>collect</code>を書くことができます。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">collect ::</span> forall eff a<span class="fu">.</span> 
+  <span class="dt">ContRef</span> eff (<span class="dt">Maybe</span> a) <span class="ot">-&gt;</span> 
+  <span class="dt">ContRef</span> eff [a]
+collect <span class="fu">=</span> foldC f []
+  <span class="kw">where</span>
+  f xs <span class="dt">Nothing</span> <span class="fu">=</span> <span class="dt">Right</span> xs
+  f xs (<span class="dt">Just</span> x) <span class="fu">=</span> <span class="dt">Left</span> (xs <span class="fu">++</span> [x])</code></pre>
+<p><code>foldC</code>の実装では、累積値の初期値を持つ新しい参照を作成して開始します。この参照は、コールバックの本体でそれが変更されるときに、累積器を追跡し続けるために使用されます。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">foldC f b0 c <span class="fu">=</span> <span class="kw">do</span>
+  current <span class="ot">&lt;-</span> lift <span class="fu">$</span> newRef b0</code></pre>
+<p>また、<code>foldC</code>は<strong>現在の継続とともに呼び出す</strong>(call with current continuation)を略して<code>callCC</code>と呼ばれる関数を使っています。<code>callCC</code>は引数として関数をひとつ取りますが、この関数は<strong>現在の継続</strong>、つまり現在のdo記法ブロックの<code>callCC</code>の<strong>あと</strong>のコードを表しています。現在の継続に返り値を渡すと、<code>callCC</code>内のコードのブロックからいつでも早期に返ることができます。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">  callCC <span class="fu">$</span> \k <span class="ot">-&gt;</span> quietly <span class="fu">$</span> <span class="kw">do</span></code></pre>
+<p>ここで<code>k</code>は現在の継続です。これは <code>foldC</code>を定義するdo記法ブロックの最後の式であるため、現在の継続は実際には<code>foldC</code>に渡されたちょうどその継続です。畳み込み関数の結果が累積の結果を表しているとき、<code>foldC</code>の最終的な値にこれを使います。</p>
+<p><code>quietly</code>コンビネータは<code>where</code>宣言で定義されており、あとでその定義について見ていきます。<code>quietly</code>コンビネータの役目は、ここで明示的に<code>k</code>を呼び出さない場合に、<code>callCC</code>の内側のコードがその継続へ値を返すのを妨げることです。これが必要な理由はすぐに明らかになるはずです。</p>
+<p>次に、<code>foldC</code>は非同期関数<code>c</code>の結果を名前<code>a</code>に束縛します。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">    a <span class="ot">&lt;-</span> c</code></pre>
+<p>もとの計算によって新しい値が非同期に生成されたとき(この場合は、HTTP応答の新しいチャンクが利用可能になったとき)、この行の後ろのコードが実行されるでしょう。それが起こるとき、畳み込み関数を適用したいので、次のように累積器の現在の値を読み取る必要があります。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">    r <span class="ot">&lt;-</span> lift <span class="fu">$</span> readRef current</code></pre>
+<p>最後に、畳み込み関数を評価し、その結果に応じて2つの場合に場合分けします。畳み込み関数が新しい累積値を返すなら、参照を新しい値で更新します。畳み込み関数が結果を返すなら、これを継続<code>k</code>に渡します。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">    <span class="kw">case</span> f b a <span class="kw">of</span>
+      <span class="dt">Left</span> next <span class="ot">-&gt;</span> lift <span class="fu">$</span> writeRef current next
+      <span class="dt">Right</span> r <span class="ot">-&gt;</span> k r</code></pre>
+<p>ここで<code>quietly</code>関数が必要だった理由が明らかになったと思います。<code>callCC</code>内部のコードの結果 を<code>quietly</code>関数で黙らせなかったら、畳み込み関数が<code>Left</code>構築子で包んだ値を返すとき、型<code>r</code>の結果を生成しなければならなくなったでしょう。しかし、そのような結果を生成する方法は一切ありません！</p>
+<p><code>quietly</code>関数の定義は次のようになっています。<code>quietly</code>は非同期関数の結果の型を変更できるようにします。これは継続関数を変換することを可能にする<code>withContT</code>関数を使って書かれています。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">  <span class="kw">where</span>
+<span class="ot">  quietly ::</span> forall m a b<span class="fu">.</span> (<span class="dt">Monad</span> m) <span class="ot">=&gt;</span> <span class="dt">ContT</span> <span class="dt">Unit</span> m a <span class="ot">-&gt;</span> <span class="dt">ContT</span> <span class="dt">Unit</span> m b
+  quietly <span class="fu">=</span> withContT (\_ _ <span class="ot">-&gt;</span> return unit)</code></pre>
+<p><code>foldC</code>関数とその亜種<code>collect</code>は特に、チャンクが利用可能になった時に連結することで、完全なHTTP応答本体を累積することを可能にします。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">Response</span> <span class="fu">=</span> <span class="dt">Response</span> [<span class="dt">Chunk</span>]
+
+<span class="ot">getAll ::</span> forall eff<span class="fu">.</span> 
+  <span class="dt">Request</span> <span class="ot">-&gt;</span> 
+  <span class="dt">ContT</span> <span class="dt">Unit</span> (<span class="dt">WithHTTP</span> (<span class="ot">ref ::</span> <span class="dt">Ref</span> <span class="fu">|</span> eff)) <span class="dt">Response</span>
+getAll req <span class="fu">=</span> <span class="dt">Response</span> <span class="fu">&lt;$&gt;</span> collect (getCont req)</code></pre>
+<p>これで、<code>String</code>として応答本体を次のように取得することができます。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">getResponseText ::</span> forall eff<span class="fu">.</span> 
+  <span class="dt">Request</span> <span class="ot">-&gt;</span> 
+  <span class="dt">ContT</span> <span class="dt">Unit</span> (<span class="dt">WithHTTP</span> (<span class="ot">ref ::</span> <span class="dt">Ref</span> <span class="fu">|</span> eff)) <span class="dt">String</span>
+getResponseText req <span class="fu">=</span> responseToString <span class="fu">&lt;$&gt;</span> getAll req
+  <span class="kw">where</span>
+<span class="ot">  responseToString ::</span> <span class="dt">Response</span> <span class="ot">-&gt;</span> <span class="dt">String</span>
+  responseToString (<span class="dt">Response</span> chunks) <span class="fu">=</span> joinWith <span class="st">&quot;&quot;</span> <span class="fu">$</span> map runChunk chunks</code></pre>
+<p>例えば、次のように継続の中で<code>getResponseText</code>と<code>trace</code>アクションを使えば、HTTP応答本体の長さをコンソールに出力することができるでしょう。</p>
+<pre class="main"><code>main = runContT (getResponseText request) $ \response -&gt; do
+  let responseLength = length response
+  trace responseLength
+  
+  where
+  request :: Request
+  request = Request
+    { host: &quot;www.purescript.org&quot;
+    , path: &quot;/&quot;
+    }</code></pre>
+<p>これはうまく動作しますが、次の演習で見るように、もっと慎重に<code>foldC</code>を使うとこの方法を改良することができます。</p>
+<blockquote>
+<h2 id="演習-3" class="unnumbered">演習</h2>
+<ol type="1">
+<li><p>(やや難しい) <code>writeFileCont</code>を使用して、ディスク上のファイルにそのHTTP要求の応答本体を保存する関数を書いてください。</p></li>
+<li><p>(難しい) 長さを決定するのに、メモリ内のHTTP応答本体全体を連結する必要はありません。チャンクが利用可能になるたびにそのバイトサイズを調べるようにすれば、応答全体のザイズから単一のチャンクのサイズへと、この関数のメモリ使用量を低減することができます。</p>
+<p><code>collect</code>の代わりに<code>foldC</code>を直接使って、このコード例を書きなおしてください。</p></li>
+</ol>
+</blockquote>
+<h2 id="並列計算"><span class="header-section-number">12.8</span> 並列計算</h2>
+<p><code>ContT</code>モナドとdo記法を使って、非同期計算を順番に実行されるように合成する方法を見てきました。非同期計算を<strong>並列に</strong>合成することもできたら便利でしょう。</p>
+<p><code>Eff</code>モナドを変換するために<code>ContT</code>を使用している場合、単に２つの計算のうち一方を開始した後に他方の計算を開始すれば、並列に計算することができます。</p>
+<p>次のような型シグネチャを持つ関数を書きましょう。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">par ::</span> forall a b r eff<span class="fu">.</span> 
+  (a <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> r) <span class="ot">-&gt;</span> 
+  <span class="dt">ContRef</span> eff a <span class="ot">-&gt;</span> <span class="dt">ContRef</span> eff b <span class="ot">-&gt;</span> <span class="dt">ContRef</span> eff r</code></pre>
+<p><code>par</code>は、2つの非同期計算とその結果を合成する関数をとり、並列に計算を実行し結果を合成するような単一の計算を返します。</p>
+<p>(<code>Ref</code>作用で)変更可能な参照を使い、呼び出された2つの継続を追跡します。両方の結果が返ってきたとき、最終的な結果を計算し、メインの継続に渡すことができます。</p>
+<p>直接<code>ContT</code>データ構築子で値を構築すると、<code>par</code>を最も簡単に実装できます。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">par f ca cb <span class="fu">=</span> <span class="dt">ContT</span> <span class="fu">$</span> \k <span class="ot">-&gt;</span> <span class="kw">do</span></code></pre>
+<p>ここで<code>f</code>は合成を行う関数で、<code>ca</code>と <code>cb</code>はそれぞれ型<code>a</code>と<code>b</code>の値を返す非同期的な計算です。<code>k</code>は<code>ca</code>と<code>cb</code>の両方が完了した時に型<code>r</code>の値を返すのに使う継続です。</p>
+<p>利用可能になったときに<code>ca</code>と<code>cb</code>の結果を保持するために、2つの新しい参照を作成することから始めます。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">  ra <span class="ot">&lt;-</span> newRef <span class="dt">Nothing</span>
+  rb <span class="ot">&lt;-</span> newRef <span class="dt">Nothing</span></code></pre>
+<p>これらの参照<code>ra</code>と<code>rb</code>は、それぞれ型<code>Maybe a</code>と<code>Maybe b</code>の値を保持します。どちらも最初は<code>Nothiing</code>の値が格納されていますが、計算が完了したとき値が更新されます。</p>
+<p>次に、<code>runContT</code>を使用して最初の非同期計算を開始します。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">  runContT ca <span class="fu">$</span> \a <span class="ot">-&gt;</span> <span class="kw">do</span>
+    mb <span class="ot">&lt;-</span> readRef rb
+    <span class="kw">case</span> mb <span class="kw">of</span>
+      <span class="dt">Nothing</span> <span class="ot">-&gt;</span> writeRef ra <span class="fu">$</span> <span class="dt">Just</span> a
+      <span class="dt">Just</span> b <span class="ot">-&gt;</span> k (f a b)</code></pre>
+<p>第二の値が利用可能であるかどうかを調べるする継続を提供します。そうである場合は、継続 <code>k</code>に最終結果を渡すために結合関数を使用します。そうでなければ、単に最初の値を含むように参照<code>ra</code>を更新します。</p>
+<p>ふたつめの計算についても同様です。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">  runContT cb <span class="fu">$</span> \b <span class="ot">-&gt;</span> <span class="kw">do</span>
+    ma <span class="ot">&lt;-</span> readRef ra
+    <span class="kw">case</span> ma <span class="kw">of</span>
+      <span class="dt">Nothing</span> <span class="ot">-&gt;</span> writeRef rb <span class="fu">$</span> <span class="dt">Just</span> b
+      <span class="dt">Just</span> a <span class="ot">-&gt;</span> k (f a b)</code></pre>
+<p><code>par</code>コンビネータを使うと、ふたつのファイルを並列に読んだり、2つのHTTP要求を平行して発行し、並列に結果を待つことができます。</p>
+<p>２つのテキストファイルを並列に読み取り、連結してその結果を出力する簡単な例は次のようになります。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Control.Apply</span> (lift2)
+
+main <span class="fu">=</span> flip runContT print <span class="fu">$</span>
+  par (lift2 (<span class="fu">++</span>)) (readFileCont <span class="st">&quot;/tmp/1.txt&quot;</span>)
+                   (readFileCont <span class="st">&quot;/tmp/2.txt&quot;</span>)</code></pre>
+<p><code>readFileCont</code>は型<code>Either ErrorCode String</code>の値を返すので、結合関数を作るには<code>lift2</code>を使って演算子<code>(++)</code>を<code>Either</code>型構築子まで持ち上げなければいけません。</p>
+<blockquote>
+<h2 id="演習-4" class="unnumbered">演習</h2>
+<ol type="1">
+<li>(簡単) <code>par</code>を使用して、２つのHTTP要求を作成し、並列に応答本体を集めてください。結合関数は2つの応答本体を連結する必要があり、継続は<code>trace</code>を使用してコンソールに結果を出力しなくてはいけません。</li>
+<li><p>(やや難しい) ２つの計算を並列に実行し、先に完了したほうの計算の結果を返す次のような関数を書いてください。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">race ::</span> forall a eff<span class="fu">.</span> 
+  <span class="dt">ContRef</span> eff a <span class="ot">-&gt;</span> 
+  <span class="dt">ContRef</span> eff a <span class="ot">-&gt;</span> 
+  <span class="dt">ContRef</span> eff a</code></pre>
+<p><strong>ヒント</strong>：結果が返されたかどうかを示す<code>Boolean</code>を格納する参照を使ってみましょう。</p></li>
+<li><p>(やや難しい) <code>race</code>関数を<code>setTimeoutCont</code>関数と一緒に使って、次のような関数を定義してください。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">timeout ::</span> forall a eff<span class="fu">.</span> 
+  <span class="dt">Milliseconds</span> <span class="ot">-&gt;</span> 
+  <span class="dt">ContRef</span> eff a <span class="ot">-&gt;</span> 
+  <span class="dt">ContRef</span> eff (<span class="dt">Maybe</span> a)</code></pre>
+<p>この関数は指定された計算が与えられたミリ秒以内で結果を返さないなら<code>Nothing</code>を返します。</p></li>
+</ol>
+</blockquote>
+<h2 id="並列処理のためのapplicative関手"><span class="header-section-number">12.9</span> 　並列処理のためのApplicative関手</h2>
+<p><code>par</code>コンビネータの型は<code>ContRef eff</code>モナドについての<code>lift2</code>の型にとても良く似ています。実際に、<code>par</code>が<strong>厳密に</strong><code>lift2</code>であるような新しいApplicative関手を定義することは可能で、<code>par</code>と<code>ContRef eff</code>に関してこれを簡単に定義することができます。</p>
+<p><code>par</code>に関する<code>ContRef eff</code>の<code>Applicative</code>インスタンスを定義していないのはなぜかと不思議に思われるかもしれません。これには２つの理由があります。</p>
+<ul>
+<li><p>型コンストラクタが <code>Monad</code>インスタンスも持っている場合、それは通常<code>(&lt;*&gt;)</code>が以下の関数と同値であるという意味で、<code>Monad</code>と<code>Applicative</code>インスタンスは一致しています。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">ap ::</span> forall m a b<span class="fu">.</span> (<span class="dt">Monad</span> m) <span class="ot">=&gt;</span> m (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> m a <span class="ot">-&gt;</span> m b
+ap mf ma <span class="fu">=</span> <span class="kw">do</span>
+  f <span class="ot">&lt;-</span> mf
+  a <span class="ot">&lt;-</span> ma
+  return (f a)</code></pre>
+<p>しかしながら、この仮定的な<code>Applicative</code>インスタンスは、並列性に関して<code>Monad</code>インスタンスとは異なるでしょう。<code>(&lt;*&gt;)</code>は引数を並列に評価するのに対して、<code>ap</code>は２番めの計算を実行する前に、最初の計算の完了を待つからです。</p></li>
+<li><p>PureScriptは行型を含む型の型クラスのインスタンスを許可していません。<code>Eff</code>モナドは作用の行によってパラメータ化され、その場合、行は<code>Ref</code>作用を含まなければならないので、<code>ContRef</code>についての<code>Applicative</code>インスタンスを定義することは不可能なのです。</p></li>
+</ul>
+<p>その代わりに、<code>Parallel eff</code>と呼ばれる<code>ContRef eff</code>のnewtypeラッパーを次のように作成します。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">Parallel</span> eff a <span class="fu">=</span> <span class="dt">Parallel</span> (<span class="dt">ContRef</span> eff a)</code></pre>
+<p>単に外側のデータ構築子を除去することで、<code>Parallel</code>計算を<code>ContRef eff</code>モナドにおける演算に変換する関数を書くことができます。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">runParallel ::</span> forall eff a<span class="fu">.</span> <span class="dt">Parallel</span> eff a <span class="ot">-&gt;</span> <span class="dt">ContRef</span> eff a
+runParallel (<span class="dt">Parallel</span> c) <span class="fu">=</span> c</code></pre>
+<p>型クラスのインスタンスは、大部分は<code>ContT</code>の対応するインスタンスから複製することができます。しかし、<code>Apply</code>型クラスの場合には、<code>(&lt;*&gt;)</code>を再定義するために<code>par</code>を使用してください。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> functorParallel ::</span> <span class="dt">Functor</span> (<span class="dt">Parallel</span> eff) <span class="kw">where</span>
+  (<span class="fu">&lt;$&gt;</span>) f (<span class="dt">Parallel</span> c) <span class="fu">=</span> <span class="dt">Parallel</span> (f <span class="fu">&lt;$&gt;</span> c)
+
+<span class="kw">instance</span><span class="ot"> applyParallel ::</span> <span class="dt">Apply</span> (<span class="dt">Parallel</span> eff) <span class="kw">where</span>
+  (<span class="fu">&lt;*&gt;</span>) (<span class="dt">Parallel</span> f) (<span class="dt">Parallel</span> x) <span class="fu">=</span> <span class="dt">Parallel</span> (par (<span class="fu">$</span>) f x)
+
+<span class="kw">instance</span><span class="ot"> applicativeParallel ::</span> <span class="dt">Applicative</span> (<span class="dt">Parallel</span> eff) <span class="kw">where</span>
+  pure a <span class="fu">=</span> <span class="dt">Parallel</span> <span class="fu">$</span> pure a</code></pre>
+<p><code>Apply</code>インスタンスの定義では、結合関数として関数適用<code>($)</code>を使って、関数をその引数と結合するために<code>par</code>を使っています。</p>
+<p><code>Parallel</code>型構築子を使用して並列に二つのファイルを読むように上の例を書き直すことができるようになりました。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Control.Apply</span> (lift2)
+
+main <span class="fu">=</span> flip runContT print <span class="fu">$</span> runParallel <span class="fu">$</span>
+  lift2 (<span class="fu">++</span>) <span class="fu">&lt;$&gt;</span> <span class="dt">Parallel</span> (readFileCont <span class="st">&quot;/tmp/1.txt&quot;</span>)
+             <span class="fu">&lt;*&gt;</span> <span class="dt">Parallel</span> (readFileCont <span class="st">&quot;/tmp/2.txt&quot;</span>)</code></pre>
+<p>Applicative関手では任意個引数の関数の持ち上げができるので、このApplicativeコンビネータを使ってより多くの計算を並列に実行することができます。<code>traverse</code>と<code>sequence</code>のようなApplicative関手を扱うすべての標準ライブラリ関数から恩恵を受けることもできます。</p>
+<p>必要に応じて<code>Parralel</code>と<code>runParallel</code>を使って型構築子を変更することで、do記法ブロックのApplicativeコンビネータを使って、直列的なコードの一部で並列計算を結合したり、またはその逆を行ったりすることができます。</p>
+<blockquote>
+<h2 id="演習-5" class="unnumbered">演習</h2>
+<ol type="1">
+<li><p>(簡単) <code>traverse</code>関数を使って、ファイルの名前の配列を与えるとその内容を並列に読み取り、内容の文字列表現の配列を返す関数<code>readMany</code>を書いてください。</p></li>
+<li><p>(簡単) <code>race</code>コンビネータを使って、<code>Parallel eff</code>の<code>Alt</code>インスタンスを書いてください。<code>Alternative</code>のインスタンスは作れるでしょうか。</p></li>
+<li><p>(やや難しい) <code>lift2</code>で<code>(++)</code>を持ち上げる代わりに、<code>ErrorT</code>を使ってエラー処理を行うように、並列ファイル入出力の例を書きなおしてください。解決策は<code>Parallel</code>関手を変換するために<code>ErrorT</code>変換子を使用しなければいけません。</p>
+<p>同様の手法で<code>readMany</code>関数を書き換えてください。</p></li>
+<li><p>(難しい、拡張) ディスク上のJSON文書のコレクションが与えられ、それぞれの文書はディスク上の他のファイルへの参照の配列を含んでいるとします。</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">{ <span class="dt">references</span>: [<span class="st">&#39;/tmp/1.json&#39;</span>, <span class="st">&#39;/tmp/2.json&#39;</span>] }</code></pre>
+<p>入力として単一のファイル名をとり、そのファイルから参照されているディスク上のすべてのJSONファイルをたどって、参照されたすべてのファイルの一覧を収集するユーティリティを書いてください。</p>
+<p>そのユーティリティは、JSON文書を解析するために <code>purescript-foreign</code>ライブラリを使用する必要があり、単一のファイルが参照するファイルは並列に取得しなければなりません！</p></li>
+</ol>
+</blockquote>
+<h2 id="まとめ"><span class="header-section-number">12.10</span> まとめ</h2>
+<p>この章ではモナド変換子の実用的なデモンストレーションを見てきました。</p>
+<ul>
+<li>コールバック渡しの一般的なJavaScriptのイディオムを <code>ContT</code>モナド変換子によって捉えることができる方法を説明しました。</li>
+<li>どのようにコールバック地獄の問題を解決するかを説明しました。　直列の非同期計算を表現するdo記法を使用して、かつ並列性を表現するためにApplicative関手によって解決することができる方法を説明しました。</li>
+<li><strong>非同期エラー</strong>を表現するために<code>ErrorT</code>を使いました。</li>
+</ul>
+      <p class="previous" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
+    </div>
+
+    <script>
+        if(location.pathname !== "/purescript/" && location.pathname !== "/purescript/index.html"){
+            Array.prototype.forEach.call(document.querySelectorAll(".previous"), function(elem){
+                elem.style.visibility = "visible";
+            });
+        }
+    </script>
+  </div>
+</body>
+</html>

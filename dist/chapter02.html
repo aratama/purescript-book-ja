@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>実例によるPureScript</title>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
+  <link rel="stylesheet" href="github-markdown.css" type="text/css"/>
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto"/>
+  <style>
+    body {
+      background-color: #f5f5f5;
+    }
+
+    div.main {
+        min-width: 540px;
+        max-width: 980px;
+        margin: 0 auto;
+        
+        background-color: white;
+        border: solid 1px #cbcbcb;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+
+        font-family: 'Roboto', 'Meiryo UI', sans-serif !important;
+    }
+
+    div.header img.logo:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    div.header {
+      background-color: #1d222d;
+      color: white;
+      padding: 50px;
+    }
+
+    div.header a {
+      color: white;
+      text-decoration: none;
+    }
+
+    div.header a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    div.header h1 {
+      letter-spacing: 0.2em;
+      border-bottom: solid 1px rgba(255, 255, 255, 0.4);
+      padding: 0.4em;
+    }
+
+    div.header p.author {
+      font-family: 'Roboto', sans-serif;
+    }
+
+    div.content {
+        padding: 30px;
+
+        font-family: 'Roboto', 'Meiryo UI', sans-serif !important;
+    }
+
+    div.content a {
+      color: #c4953a;
+      text-decoration: none;
+    }
+
+
+
+    .main ol {
+        list-style-type: decimal;
+    }
+    .main ol ol {
+        list-style-type: decimal;
+    }
+    .main ol ol ol {
+        list-style-type: decimal;
+    }
+
+    .main blockquote {
+      color: #333;
+    }
+
+    .markdown code {
+      white-space: pre;
+      word-wrap: keep-all !important;  
+    }
+
+    /* Bug Workaround for Readium */
+    .main h1, h2, h3, h4, h5, h6 {
+      position: static !important;
+      font-family: serif;
+      font-weight: bold;
+      letter-spacing: 0.12em;
+    }
+
+    .columns2 {
+      -webkit-column-count: 2; /* Chrome, Safari, Opera */
+      -moz-column-count: 2; /* Firefox */
+      column-count: 2;
+    }
+
+    .columns3 {
+      -webkit-column-count: 3; /* Chrome, Safari, Opera */
+      -moz-column-count: 3; /* Firefox */
+      column-count: 3;
+    }    
+
+    table.sourceCode tr {
+      padding: 0;
+      border: none;
+    }
+
+    table.sourceCode td {
+      padding: 0;
+      border: none;
+    }
+
+    table.sourceCode pre {
+      margin: 0;
+      border: none;
+    }
+
+    @media print {
+      body {
+        background-color: transparent;
+      }
+
+      .previous {
+        visibility: hidden;
+      }
+
+      .main {
+        font-family: 'MS PMincho', Serif;
+        text-justify: inter-cluster;
+
+        background-color: transparent;
+        border: none 0px transparent;
+        box-shadow: none;
+      }
+      .main h1, h2, h3, h4, h5, h6 {
+        position: static !important;
+      
+      }
+      pre {
+        overflow: visible !important;
+      }
+    }
+
+    .sourceCode, .shell {
+      font-family: 'Courier New', Monospace;
+      
+    }
+
+  </style>
+
+
+
+</head>
+
+<body>
+  <div class="main">
+    <div class="header" style="position:relative;">
+      <a href="/purescript/">
+          <img class="logo" src="logo-shadow.png"  style="display:block; position:absolute; left:50px;">
+      </a>
+      <div class="title" style="margin-left: 220px; position:relative; left:0px; right:0px;">
+          <h1 id="実例によるpurescript">実例によるPureScript</h1>
+          <p>ウェブのための関数型プログラミング</p>
+          <p class="author"><a href="https://leanpub.com/purescript/read">Phil Freeman, &quot;PureScript by Example - Functional Programming for the Web&quot;</a></p>
+      </div>
+      <div style="clear:both;"></div>
+    </div>
+
+    <div class="markdown-body content">
+      <p class="previous" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
+<h1 id="開発環境の準備"><span class="header-section-number">2</span> 開発環境の準備</h1>
+<h2 id="この章の目標"><span class="header-section-number">2.1</span> この章の目標</h2>
+<p>この章の目標は、作業用のPureScript開発環境を準備し、最初のPureScriptプログラムを書くことです。</p>
+<p>これから書く最初のコードは、NPMとBowerから依存するライブラリを使用し、ビルド自動化ツールであるGruntを使用してビルドされるライブラリの例です。このライブラリは直角三角形の対角線の長さを計算する関数ひとつだけを提供します。</p>
+<h2 id="導入"><span class="header-section-number">2.2</span> 導入</h2>
+<p>PureScript開発環境を準備するために、次のツールを使います。</p>
+<ul>
+<li><a href="http://purescript.org"><code>psc</code></a> - PureScriptコンパイラ本体</li>
+<li><a href="http://npmjs.org"><code>npm</code></a> - 残りの開発ツールをインストールできるようにする、Nodeパッケージマネージャ</li>
+<li><a href="http://bower.io/"><code>bower</code></a> ​​- 必要となる様々なバージョンのPureScriptパッケージで使われているパッケージマネージャ</li>
+<li><a href="http://gruntjs.com/"><code>grunt</code></a> - PureScriptコードをビルドするために使用する自動化ツール</li>
+</ul>
+<p>この章ではこれらのツールのインストール方法と設定を説明します。</p>
+<h2 id="purescriptのインストール"><span class="header-section-number">2.3</span> PureScriptのインストール</h2>
+<p>PureScriptコンパイラをインストールするときに推奨される方法は、ソースからコンパイラをビルドすることです。PureScriptコンパイラは<a href="http://purescript.org">PureScriptのウェブサイト</a>から64ビットのUbuntu用のバイナリディストリビューションとしてダウンロードすることもできますが、現在のところバイナリディストリビューションは主要なリリースについてだけ提供されています。もし最近のバグ修正や機能追加がなされた最新版に保ち、コンパイラで最新のパッケージをビルドできるようにしたいなら、最新のマイナーリリースをビルドするよう以下の指示に従ってください。</p>
+<p>主なソフトウェア要件としては、<a href="http://haskell.org/platform">Haskell Platform</a>がインストールされていることです。お使いのオペレーティングシステムによっては、パッケージマネージャを使用して<code>ncurses</code>開発パッケージもインストールする必要があるかもしれません(例えば、Ubuntuでは<code>libncurses5-dev</code>パッケージとしての利用できます)。</p>
+<p>Cabal実行ファイルの最新版を持っているのを確認することから始めましょう。</p>
+<pre class="shell"><code>$ cabal install Cabal cabal-install</code></pre>
+<p>また、Cabalのパッケージ一覧が最新であることも確認してください。</p>
+<pre class="shell"><code>$ cabal update</code></pre>
+<p>PureScriptコンパイラは、グローバルもしくはローカルディレクトリ内のCabalサンドボックス内のどちらかにインストールすることができます。この節ではグローバルにPureScriptをインストールし、その実行ファイルがパス上で利用できるようにする方法を説明します。</p>
+<p><code>cabal install</code>コマンドを使用して、HackageからPureScriptをインストールします。</p>
+<pre class="shell"><code>$ cabal install purescript</code></pre>
+<p>これでコンパイラおよび関連する実行ファイルはあなたのパス上で利用できるようになるでしょう。確認のために、コマンドラインでPureScriptコンパイラを実行してみましょう：</p>
+<pre class="shell"><code>$ psc</code></pre>
+<h2 id="各ツールのインストール"><span class="header-section-number">2.4</span> 各ツールのインストール</h2>
+<p>もし<a href="http://nodejs.org/">NodeJS</a>がインストールされていないなら、NodeJSをインストールする必要があります。そうするとシステムに <code>npm</code>パッケージマネージャもインストールされるはずです。 <code>npm</code>がインストールされ、パス上で利用可能であることを確認してください。</p>
+<p><code>npm</code> がインストールされたら、GruntとBowerもインストールする必要があります。プロジェクトがどこで作業しているかにかかわらずこれらのコマンドラインツールを利用可能にするため、通常はグローバルにインストールしておくのがいいでしょう。</p>
+<pre class="shell"><code>$ npm install -g grunt-cli bower</code></pre>
+<p>これで、最初のPureScriptプロジェクトを作成するために必要なすべてのツールの用意ができたことになります。</p>
+<h2 id="hello-purescript"><span class="header-section-number">2.5</span> Hello, PureScript!</h2>
+<p>まずはシンプルに始めましょう。PureScriptコンパイラ <code>psc</code>を直接使用して、基本的なHello World! プログラムをコンパイルします。3つの標準のコマンドですべての依存関係ライブラリを含めてゼロからアプリをビルドできるようになるまで、この章を読み進むにつれて開発手順をだんだんと自動化していきます。</p>
+<p>まず最初に、ソースファイルのディレクトリ <code>src</code>を作成し、<code>src/Chapter2.purs</code>という名前のファイルに以下のコードを貼り付けます。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">module</span> <span class="dt">Chapter2</span> <span class="kw">where</span>
+
+<span class="kw">import </span><span class="dt">Debug.Trace</span>
+
+main <span class="fu">=</span> trace <span class="st">&quot;Hello, World!&quot;</span></code></pre>
+<p>これは小さなサンプルコードですが、​​いくつかの重要な概念を示しています。</p>
+<ul>
+<li>すべてのソースファイルはモジュールヘッダから始まります。モジュール名は、ドットで区切られた大文字で始まる1つ以上の単語から構成されています。ここではモジュール名としてひとつの単語だけが使用されていますが、<code>My.First.Module</code>というようなモジュール名も有効です。</li>
+<li>モジュールは、モジュール名の各部分を区切るためのドットを含めた、完全な名前を使用してインポートされます。ここでは<code>trace</code>関数を提供する <code>Debug.Trace</code>モジュールをインポートしています。</li>
+<li>この<code>main</code>プログラムの定義本体は、関数適用の式になっています。PureScriptでは、関数適用は関数名の後に引数を空白で区切って書くことで示されます。</li>
+</ul>
+<p>それではこのコードをビルドして実行してみましょう。次のコマンドを実行します。</p>
+<pre class="shell"><code>$ psc src/Chapter2.purs</code></pre>
+<p>うまくいくと、大量のJavaScriptがコンソールに出力されるのを目にするはずです。コンソールに出力する代わりに、<code>--output</code>コマンドラインオプションで出力をファイルにリダイレクトしてみましょう。</p>
+<pre class="shell"><code>$ psc src/Chapter2.purs --output dist/Main.js</code></pre>
+<p>これでNodeJSを使用してコードを実行することができるはずです。</p>
+<pre class="shell"><code>$ node dist/Main.js</code></pre>
+<p>うまくいくと、NodeJSはこのコードを正常に実行し、コンソールには何も出力されないはずです。これは、メインとなるモジュールの名前をPureScriptコンパイラに教えていないためです！</p>
+<pre class="shell"><code>$ psc src/Chapter2.purs --output dist/Main.js --main=Chapter2</code></pre>
+<p>再びNodeJSで実行すると、今度は &quot;Hello, World!&quot; という単語がコンソールに出力されるのがわかるはずです。</p>
+<h2 id="使用されていないコードを取り除く"><span class="header-section-number">2.6</span> 使用されていないコードを取り除く</h2>
+<p>テキストエディタで <code>dist/Main.js</code>ファイルを開くと、大量のJavaScriptコードが書かれているのがわかります。これはコンパイラがPreludeと呼ばれるモジュール群で定義されている標準関数を追加しているためです。Preludeにはコンソールに出力するのに使う <code>Debug.Trace</code>モジュールが含まれています。</p>
+<p>ここで生成されたコードのほとんどは実際には使用されていないので、別のコンパイラオプションを指定すると未使用のコードを削除することができます。</p>
+<pre class="shell"><code>$ psc src/Chapter2.purs --output dist/Main.js --main=Chapter2 --module Chapter2</code></pre>
+<p><code>Chapter2</code>モジュールで定義されたコードで必要とされているJavaScriptだけを含めるよう<code>psc</code>に指示する<code>--module Chapter2</code>オプションを追加しました。生成されたコードをテキストエディタで開くと、次のように出力されているのがわかるはずです。</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> PS = PS || {};
+<span class="ot">PS</span>.<span class="fu">Debug_Trace</span> = (<span class="kw">function</span> () {
+    <span class="st">&quot;use strict&quot;</span>;
+    <span class="kw">function</span> <span class="fu">trace</span>(s) { 
+      <span class="kw">return</span> <span class="kw">function</span>() {
+        <span class="ot">console</span>.<span class="fu">log</span>(s);
+        <span class="kw">return</span> {};  
+      };
+    };
+    <span class="kw">return</span> {
+        <span class="dt">trace</span>: trace
+    };
+})();
+
+<span class="kw">var</span> PS = PS || {};
+<span class="ot">PS</span>.<span class="fu">Chapter2</span> = (<span class="kw">function</span> () {
+    <span class="st">&quot;use strict&quot;</span>;
+    <span class="kw">var</span> Debug_Trace = <span class="ot">PS</span>.<span class="fu">Debug_Trace</span>;
+    <span class="kw">var</span> main = <span class="ot">Debug_Trace</span>.<span class="fu">trace</span>(<span class="st">&quot;Hello, World!&quot;</span>);
+    <span class="kw">return</span> {
+        <span class="dt">main</span>: main
+    };
+})();
+
+<span class="ot">PS</span>.<span class="ot">Chapter2</span>.<span class="fu">main</span>();</code></pre>
+<p>NodeJSを使用してこのコードを実行すると、先ほどと同じ文字列がコンソールに出力されるはずです。</p>
+<p>ここでPureScriptコンパイラがJavascriptコードを生成する方法の要点が示されています。</p>
+<ul>
+<li>すべてのモジュールはオブジェクトに変換され、そのオブジェクトにはそのモジュールのエクスポートされたメンバが含まれています。モジュールは即時関数パターンによってスコープが限定されたコードで初期化されています。</li>
+<li>PureScriptは可能な限り変数の名前をそのまま使おうとします</li>
+<li>PureScriptにおける関数適用は、そのままJavaScriptの関数適用に変換されます。</li>
+<li>引数のない単純な呼び出しとしてメインメソッド呼び出しが生成され、すべてのモジュールが定義された後に実行されます。</li>
+<li>PureScriptコードはどんな実行時ライブラリにも依存しません。コンパイラによって生成されるすべてのコードは、あなたのコードが依存するいずれかのPureScriptモジュールをもとに出力されているものです。</li>
+</ul>
+<p>PureScriptはシンプルで理解しやすいコードを生成すること重視しているので、これらの点は大切です。実際に、ほとんどのコード生成処理はごく軽い変換です。PureScriptについての理解が比較的浅くても、ある入力からどのようなJavaScriptコードが生成されるかを予測することは難しくありません。</p>
+<h2 id="gruntによるビルドの自動化"><span class="header-section-number">2.7</span> Gruntによるビルドの自動化</h2>
+<p>今度は、PureScriptコンパイラオプションを毎回手で入力する代わりに、コードを自動でビルドできるように、Gruntを設定してみましょう。</p>
+<p>プロジェクトディレクトリに<code>Gruntfile.js</code>という名前のファイルを作成し、次のコードを貼り付けてください。</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="ot">module</span>.<span class="fu">exports</span> = <span class="kw">function</span>(grunt) {
+
+  <span class="st">&quot;use strict&quot;</span>;
+
+  <span class="ot">grunt</span>.<span class="fu">initConfig</span>({
+
+    <span class="dt">srcFiles</span>: [<span class="st">&quot;src/**/*.purs&quot;</span>],
+
+    <span class="dt">psc</span>: {
+      <span class="dt">options</span>: {
+        <span class="dt">main</span>: <span class="st">&quot;Chapter2&quot;</span>,
+        <span class="dt">modules</span>: [<span class="st">&quot;Chapter2&quot;</span>]
+      },
+      <span class="dt">all</span>: {
+        <span class="dt">src</span>: [<span class="st">&quot;&lt;%=srcFiles%&gt;&quot;</span>],
+        <span class="dt">dest</span>: <span class="st">&quot;dist/Main.js&quot;</span>
+      }
+    }
+  });
+
+  <span class="ot">grunt</span>.<span class="fu">loadNpmTasks</span>(<span class="st">&quot;grunt-purescript&quot;</span>);
+  
+  <span class="ot">grunt</span>.<span class="fu">registerTask</span>(<span class="st">&quot;default&quot;</span>, [<span class="st">&quot;psc:all&quot;</span>]);
+};</code></pre>
+<p>このファイルではNodeモジュールを定義しており、ビルド構成を定義するために<code>grunt</code>モジュールをライブラリとして使用しています。JSONプロパティとしてコマンドラインオプションを指定してPureScriptコンパイラを呼び出せる<code>grunt-purescript</code>プラグインを使用しています。</p>
+<p><code>grunt-purescript</code>プラグインは他にも便利な機能を提供しており、コードから自動的にMarkdownドキュメントを生成する機能や、ライブラリから<code>psci</code>対話式コンパイラ向けの設定ファイルを自動生成する機能があります。興味があれば <code>grunt-purescript</code> <a href="http://github.com/purescript-contrib/grunt-purescript">プロジェクトのホームページ</a>を参照してみてください。</p>
+<p>次のように入力して、ローカルのmodulesディレクトリに <code>grunt</code>ライブラリと<code>grunt-purescript</code>プラグインをインストールしてください。</p>
+<pre class="shell"><code>$ npm install grunt grunt-purescript@0.6.0</code></pre>
+<p>保存された<code>Gruntfile.js</code>ファイルを使うと、次のようにコードをコンパイルできるようになります。</p>
+<pre class="shell"><code>$ grunt
+&gt;&gt; Created file dist/Main.js.
+
+Done, without errors.</code></pre>
+<h2 id="npmパッケージの作成"><span class="header-section-number">2.8</span> NPMパッケージの作成</h2>
+<p>Gruntを設定したので、コンパイルするときに毎回コマンドラインにコマンドを入力する必要はなくなりましたが、もっと重要なのは、アプリケーションのエンドユーザはどちらも必要ないということです。そのためには、ビルドする前にNPMパッケージの必要なモジュールを自動的にインストールしておくという手順を追加しておきましょう。</p>
+<p>依存関係が指定された独自のNPMパッケージを定義します。</p>
+<p>プロジェクトディレクトリで <code>init</code>サブコマンドを指定して<code>npm</code>を実行し、新しいプロジェクトを初期化します。</p>
+<pre class="shell"><code>$ npm init</code></pre>
+<p>いろいろと質問されますが、それが終わると<code>package.json</code>という名前のファイルがプロジェクトディレクトリに追加されます。このファイルではプロジェクトのプロパティを指定したり、依存するライブラリの指定を追加することができます。テキストエディタでこのファイルを開き、JSONオブジェクトに次のプロパティを追加しましょう。</p>
+<pre class="sourceCode json"><code class="sourceCode json"><span class="er">&quot;dependencies&quot;:</span> <span class="fu">{</span>
+  <span class="dt">&quot;grunt-purescript&quot;</span><span class="fu">:</span> <span class="st">&quot;0.6.0&quot;</span>
+<span class="fu">}</span></code></pre>
+<p>このコードではインストールする<code>grunt-purescript</code>プラグインの厳密なバージョンを指定しています。</p>
+<p>依存するライブラリを手作業でインストールするかわりに、エンドユーザーは単に <code>npm</code>コマンドを使用するだけで必要なものすべてをインストールできるようになりました。</p>
+<pre class="shell"><code>$ npm install</code></pre>
+<h2 id="bowerによる依存関係の追跡"><span class="header-section-number">2.9</span> Bowerによる依存関係の追跡</h2>
+<p>この章の目的となっている<code>diagonal</code>関数を書くためには、平方根を計算できるようにする必要があります。<code>purescript-math</code>パッケージにはJavaScriptの<code>Math</code>オブジェクトのプロパティとして定義されている関数の型定義が含まれていますので、<code>purescript-math</code>パッケージをインストールしてみましょう。 <code>npm</code>の依存関係でやったのと同じように、次のようにコマンドラインに入力すると直接このパッケージをダウンロードできます。</p>
+<pre class="shell"><code>$ bower install purescript-math#0.1.0</code></pre>
+<p>このコマンドは <code>purescript-math</code>ライブラリのバージョン0.1.0をそれが依存するライブラリと一緒にインストールします。</p>
+<p>しかし、<code>package.json</code>を作成してNPMの依存関係を制御するために<code>npm init</code>を使用したのと同じような方法で、Bowerの依存関係が含まれている<code>bower.json</code>ファイルを設定することができます。</p>
+<p>コマンドラインに次のコマンドを入力します。</p>
+<pre class="shell"><code>$ bower init</code></pre>
+<p>NPMの場合とちょうど同じように、いくつか質問をされ、それが終わると <code>bower.json</code>ファイルがプロジェクトディレクトリに配置されます。この処理の途中で、すでに存在するライブラリの依存関係をプロジェクトファイルに含めたいかどうかを尋ねられるでしょう。「はい」を選択した場合は、<code>bower.json</code> にこのようなセクションがあるのがわかるでしょう。</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="st">&quot;dependencies&quot;</span>: {
+  <span class="st">&quot;purescript-math&quot;</span>: <span class="st">&quot;0.1.0&quot;</span>
+}</code></pre>
+<p>エンドユーザーが手作業で依存するライブラリを指示する必要がなくなり、代わりに次のようにコマンドを呼び出すだけで依存するライブラリを取り込むことができるようになりました。</p>
+<pre class="shell"><code>$ bower update</code></pre>
+<p>それでは、Bowerから取り込んだ依存先ライブラリをコンパイルに含めるように、Gruntスクリプトを更新してみましょう。<code>Gruntfile.js</code>を編集し、ソースファイルについての行を次のように変更します。</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">srcFiles: [<span class="st">&quot;src/**/*.purs&quot;</span>, <span class="st">&quot;bower_components/**/src/**/*.purs&quot;</span>]</code></pre>
+<p>この行では <code>bower_components</code>ディレクトリのソースファイルをコンパイルするソースファイルに含めています。独自のBower構成がある場合は、それに応じてこの行を修正する必要があるかもしれません。</p>
+<blockquote>
+<h3 id="なぜnpmとbowerの両方を使うのか" class="unnumbered">なぜNPMとBowerの両方を使うのか？</h3>
+<p>疑問に思ったかもしれませんが、なぜ2つ​​のパッケージマネージャを使い分ける必要があるのでしょうか？PureScriptライブラリをNPMレジストリに含めることはできないのでしょうか？</p>
+<p>PureScriptコミュニティは、さまざまな理由でPureScriptの依存ライブラリをBowerを使用して標準化しています。</p>
+<ul>
+<li>PureScriptのライブラリパッケージがJavaScriptのソースコードを含むことはめったになく、コンパイルされないままでNPMレジストリへ配置するのには適していません。</li>
+<li>Bowerレジストリは、直接コードをホスティングする代わりに、既存のGitリポジトリのパッケージ名とバージョンの対応関係だけを管理しています。これによりコミュニティがコードおよびリリースを管理するのにGitHubのような既存のツールを使用することができます。</li>
+<li>BowerはCommonJSのモジュール標準のような特定の配置に従うようパッケージに要求してしません。</li>
+</ul>
+<p>もちろん、任意のパッケージマネージャを自由に選択して使用することもできます。PureScriptコンパイラおよびツール群は、Bowerに（またはNPM、Gruntなどにも）依存しているわけではありません。</p>
+</blockquote>
+<h2 id="対角線の長さの計算"><span class="header-section-number">2.10</span> 対角線の長さの計算</h2>
+<p>それでは外部ライブラリの関数を使用する例として <code>diagonal</code>関数を書いてみましょう。</p>
+<p>まず、 <code>src/Chapter2.purs</code>ファイルの先頭に次の行を追加し、<code>Math</code>モジュールをインポートします。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Math</span></code></pre>
+<p>そして、次のように<code>diagonal</code>関数を定義します。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">diagonal w h <span class="fu">=</span> sqrt (w <span class="fu">*</span> w <span class="fu">+</span> h <span class="fu">*</span> h)</code></pre>
+<p>この関数の型を定義する必要はないことに注意してください。<code>diagonal</code> は2つの数値を取り数を返す関数である とコンパイラは推論することができます。しかし、ドキュメントとしても役立つので、通常は型注釈を提供しておくことをお勧めします。</p>
+<p>それでは、新しい<code>diagonal</code>関数を使うように<code>main</code>関数も変更してみましょう。</p>
+<pre class="sourceCode haskell"><code class="sourceCode haskell">main <span class="fu">=</span> print (diagonal <span class="dv">3</span> <span class="dv">4</span>)</code></pre>
+<p>Gruntを使用して、モジュールを再コンパイルします。</p>
+<pre class="shell"><code>$ grunt</code></pre>
+<p>生成されたコードを再び実行すると、このコードが正常に呼び出されたことがわかるでしょう。</p>
+<pre class="shell"><code>$ node dist/Main.js 
+
+5</code></pre>
+<h2 id="対話式処理系を使用したコードのテスト"><span class="header-section-number">2.11</span> 対話式処理系を使用したコードのテスト</h2>
+<p>PureScriptコンパイラには <code>psci</code>と呼ばれる対話式のREPL(Read-eval-print loop)が付属しています。<code>psci</code>はコードをテストしたり思いついたことを試すのにとても便利です。それでは、<code>psci</code>を使って<code>diagonal</code>関数をテストしてみましょう。</p>
+<p><code>grunt-purescript</code>プラグインは、ソースファイルに応じて<code>psci</code>設定を自動で生成するように設定することができます。これにより<code>psci</code>に手作業でモジュールを読み込む手間を省くことができます。</p>
+<p>これを設定するには、<code>Gruntfile.js</code>ファイルに以下のような<code>psc</code>や<code>pscMake</code>という新しいビルドターゲットを追加します。</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">dotPsci: [<span class="st">&quot;&lt;%=srcFiles%&gt;&quot;</span>]</code></pre>
+<p>また、デフォルトのタスクにこのターゲットを追加しておきましょう。</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="ot">grunt</span>.<span class="fu">registerTask</span>(<span class="st">&quot;default&quot;</span>, [<span class="st">&quot;psc:all&quot;</span>, <span class="st">&quot;dotPsci&quot;</span>]);</code></pre>
+<p>これで <code>grunt</code>を実行すると<code>.psci</code>ファイルがプロジェクトディレクトリに自動生成されるようになりました。このファイルは、 <code>psci</code>の起動時に設定で使用されるコマンドを指定するのに使われます。</p>
+<p>それでは <code>psci</code>を起動してみます。</p>
+<pre class="shell"><code>$ psci
+&gt; </code></pre>
+<p>コマンドの一覧を見るには、<code>:?</code>と入力します。</p>
+<pre class="shell"><code>&gt; :?
+The following commands are available:
+
+    :?              Show this help menu
+    :i &lt;module&gt;     Import &lt;module&gt; for use in PSCI
+    :m &lt;file&gt;       Load &lt;file&gt; for importing
+    :q              Quit PSCi
+    :r              Reset
+    :t &lt;expr&gt;       Show the type of &lt;expr&gt;</code></pre>
+<p>Tabキーを押すと、自分のコードで利用可能なすべての関数、及びBowerの依存関係とプレリュードモジュールのリストをすべて見ることができるはずです。</p>
+<p>幾つか数式を評価してみてください。<code>psci</code>で評価を行うには、1行以上の式を入力し、Ctrl+ Dで入力を終了します。</p>
+<pre class="shell"><code>&gt; 1 + 2
+3
+
+&gt; &quot;Hello, &quot; ++ &quot;World!&quot;
+&quot;Hello, World!&quot;</code></pre>
+<p>それでは<code>psci</code>で<code>diagonal</code>関数を試してみましょう。</p>
+<pre class="shell"><code>&gt; Chapter2.diagonal 5 12
+
+13</code></pre>
+<p>また、<code>psci</code>で関数を定義する使こともできます。</p>
+<pre class="shell"><code>&gt; let double x = x * 2
+
+&gt; double 10
+20</code></pre>
+<p>コード例の構文がまだよくわからなくても心配はいりません。 この本を読み進めるうちにわかるようになっていきます。</p>
+<p>最後に、<code>:t</code>コマンドを使うと式の型を確認することができます。</p>
+<pre class="shell"><code>&gt; :t true
+Prim.Boolean
+
+&gt; :t [1, 2, 3]
+[Prim.Number]</code></pre>
+<p><code>psci</code>で試してみてください。もしどこかでつまづいた場合は、メモリ内にあるコンパイル済みのすべてのモジュールをアンロードするリセットコマンド<code>:r</code>を使用してみてください。</p>
+<h2 id="任意-commonjsのモジュールのビルド"><span class="header-section-number">2.12</span> 任意: CommonJSのモジュールのビルド</h2>
+<p>PureScriptコンパイラの<code>psc</code>コマンドは、ウェブブラウザでの使用に適した、単一の出力ファイルにJavaScriptコードを生成します。それとは別に、コンパイルには<code>psc-make</code>という選択肢もあります。<code>psc-make</code>では、コンパイルされるPureScriptモジュールそれぞれについて、個別のCommonJSモジュール生成することができます。もしCommonJSモジュール標準に対応したNodeJSのような実行環境を対象とするなら、<code>psc-make</code>のほうが望ましい場合があるでしょう。</p>
+<p>コマンドラインで<code>psc-make</code>を実行するには、入力ファイルを指定し、<code>--output</code>オプションでCommonJSモジュールが作成されるディレクトリも指定します。</p>
+<pre class="shell"><code>$ psc-make src/Chapter2.purs --output dist/</code></pre>
+<p>与えられた入力ファイルのそれぞれのモジュールについて、<code>dist/</code>ディレクトリの中にサブディレクトリが作成されるでしょう。Bowerの依存関係を使用している場合は、<code>bower_components/</code>ディレクトリ内のソースファイルを含めることを忘れないでください！</p>
+<p><code>grunt-purescript</code>プラグインは<code>psc-make</code>を使用したコンパイルにも対応しています。Gruntから <code>psc-make</code>を使用するには、<code>Gruntfile.js</code>ファイルを次のように変更します。</p>
+<ul>
+<li>ビルドターゲットを<code>psc</code>から<code>pscMake</code> へ変更します</li>
+<li>出力先を<code>dist/Main.js</code>という単一のファイルからディレクトリ<code>dest： &quot;dist /&quot;</code>へ変更します</li>
+<li>デフォルトのタスクを<code>pscMake</code>ビルドターゲットを参照するように変更します</li>
+</ul>
+<p>これで、 <code>Chapter2</code>モジュールとその依存先ライブラリそれぞれについて、<code>grunt</code>コマンドラインツールが <code>dist/</code>の下にサブディレクトリを作成するようになりました。</p>
+<h2 id="gruntプロジェクトテンプレートの使用"><span class="header-section-number">2.13</span> Gruntプロジェクトテンプレートの使用</h2>
+<p>様々なビルドプロセスに対応するために、NPMやGrunt、Bowerはいろいろな方法でカスタマイズすることができます。しかし、簡単なプロジェクトでは、この手順はGruntプロジェクトテンプレートを使用して自動化することもできます。</p>
+<p><code>grunt-init</code>ツールは、テンプレートを利用して簡単なプロジェクトを開始する方法を提供します。<code>grunt-init-purescript</code>プロジェクトは、簡単なテストスイートを含むPureScriptプロジェクトのシンプルなテンプレートを提供します。</p>
+<p><code>grunt-init</code>を使用してプロジェクトを設定するには、最初にNPMを使用して<code>grunt-init</code>のコマンドラインツールをインストールします。</p>
+<pre class="shell"><code>$ npm install -g grunt-init</code></pre>
+<p>そして、ホームディレクトリにPureScriptテンプレートを複製してください。たとえば、LinuxやMacでは、次のようにします。</p>
+<pre class="shell"><code>$ mkdir ~/.grunt-init
+$ git clone https://github.com/purescript-contrib/grunt-init-purescript.git \
+    ~/.grunt-init/purescript</code></pre>
+<p>これで、新しいディレクトリに簡単なプロジェクトを作成できるようになりました。</p>
+<pre class="shell"><code>$ mkdir new-project
+$ cd new-project/
+$ grunt-init purescript</code></pre>
+<p>いくつかの簡単な質問を受けたあと、現在のディレクトリにプロジェクトが初期化されますので、これまで見てきたコマンドを使ってビルドの準備をしましょう。</p>
+<pre class="shell"><code>$ npm install
+$ bower update
+$ grunt</code></pre>
+<p>最後のコマンドでは、ソースファイルをビルドし、テストスイートを実行しています。</p>
+<p>より複雑なプロジェクトの雛形として、このプロジェクトテンプレートを使用することができます。</p>
+<blockquote>
+<h2 id="演習" class="unnumbered">演習</h2>
+<ol type="1">
+<li><p>(簡単） <code>Math.pi</code>定数を使用し、指定された半径の円の面積を計算する関数 <code>circleArea</code>を書いてみましょう。また、<code>psci</code>を使用してその関数をテストしてください。</p></li>
+<li><p>（やや難しい） <code>node dist/Main.js</code>と入力する代わりにユーザが単に <code>grunt run</code>を入力するだけで、コンパイルされたコードをNodeJSで実行できるように、<code>Gruntfile.js</code>ファイルにタスクを追加しましょう。<strong>ヒント</strong>： <code>grunt-execute</code> Gruntプラグインを使用することを検討してください。</p></li>
+</ol>
+</blockquote>
+<h2 id="まとめ"><span class="header-section-number">2.14</span> まとめ</h2>
+<p>この章では、JavaScriptのエコシステムのNPMとBower、Gruntという標準的なツールを使用し、一から開発環境をセットアップしました。</p>
+<p>また最初のPureScript関数を書き、コンパイルし、NodeJSを使用して実行することができました。</p>
+<p>以降の章では、コードをコンパイルやデバッグ、テストするためにこの開発設定を使用しますので、これらのツールや使用手順に十分習熟しておくとよいでしょう。</p>
+      <p class="previous" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
+    </div>
+
+    <script>
+        if(location.pathname !== "/purescript/" && location.pathname !== "/purescript/index.html"){
+            Array.prototype.forEach.call(document.querySelectorAll(".previous"), function(elem){
+                elem.style.visibility = "visible";
+            });
+        }
+    </script>
+  </div>
+</body>
+</html>
