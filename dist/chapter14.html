@@ -5,23 +5,69 @@
   <meta name="generator" content="pandoc">
   <title>実例によるPureScript</title>
   <style type="text/css">
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; }
-code > span.dt { color: #902000; }
-code > span.dv { color: #40a070; }
-code > span.bn { color: #40a070; }
-code > span.fl { color: #40a070; }
-code > span.ch { color: #4070a0; }
-code > span.st { color: #4070a0; }
-code > span.co { color: #60a0b0; font-style: italic; }
-code > span.ot { color: #007020; }
-code > span.al { color: #ff0000; font-weight: bold; }
-code > span.fu { color: #06287e; }
-code > span.er { color: #ff0000; font-weight: bold; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
   <link rel="stylesheet" href="github-markdown.css" type="text/css"/>
@@ -197,52 +243,59 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>この章では、多数の標準的な手法を使ったPureScriptにおける<strong>領域特化言語</strong>(domain-specific language, DSL) の実装について探求していきます。</p>
 <p>領域特化言語とは、特定の問題領域での開発に適した言語のことです。領域特化言語の構文および機能は、その領域内の考え方を表現するコードの読みやすさを最大限に発揮すべく選択されます。本書の中では、すでに領域特化言語の例を幾つか見てきています。</p>
 <ul>
-<li>第11章で開発された<code>Game</code>モナドと関連するアクションは、<strong>テキストアドベンチャーゲーム開発</strong>という領域に対しての領域特化言語を構成しています。</li>
-<li>第12章で <code>ContT</code>と<code>Parallel</code>関手のために書いたコンビネータのライブラリは、<strong>非同期プログラミング</strong>の領域に対する領域特化言語の例と考えることができます。</li>
+<li>第11章で開発された <code>Game</code>モナドと関連するアクションは、<strong>テキストアドベンチャーゲーム開発</strong>という領域に対しての領域特化言語を構成しています。</li>
+<li>第12章で <code>ContT</code>と <code>Parallel</code>関手のために書いたコンビネータのライブラリは、<strong>非同期プログラミング</strong>の領域に対する領域特化言語の例と考えることができます。</li>
 <li>第13章で扱った <code>purescript-quickcheck</code>パッケージは、<strong>生成的テスティング</strong>の領域の領域特化言語です。このコンビネータはテストの性質対して特に表現力の高い記法を可能にします。</li>
 </ul>
 <p>この章では、領域特化言語の実装において、いくつかの標準的な手法による構造的なアプローチを取ります。これがこの話題の完全な説明だということでは決してありませんが、独自の目的に対する具体的なDSLを構築するには十分な知識を与えてくれるでしょう。</p>
 <p>この章で実行している例は、HTML文書を作成するための領域特化言語になります。正しいHTML文書を記述するための型安全な言語を開発することが目的で、少しづつ実装を改善することによって作業していきます。</p>
 <h2 id="プロジェクトの準備"><span class="header-section-number">14.2</span> プロジェクトの準備</h2>
-<p>この章で使うプロジェクトには新しいBower依存性が追加されます。これから使う道具のひとつである<strong>Freeモナド</strong>が定義されている<code>purescript-free</code>ライブラリです。</p>
-<p>このプロジェクトのソースコードは、Gruntを使ってビルドすることができます。</p>
+<p>この章で使うプロジェクトには新しいBower依存性が追加されます。これから使う道具のひとつである<strong>Freeモナド</strong>が定義されている <code>purescript-free</code>ライブラリです。</p>
+<p>このプロジェクトのソースコードは、PSCiを使ってビルドすることができます。</p>
 <h2 id="htmlデータ型"><span class="header-section-number">14.3</span> HTMLデータ型</h2>
 <p>このHTMLライブラリの最も基本的なバージョンは <code>Data.DOM.Simple</code>モジュールで定義されています。このモジュールには次の型定義が含まれています。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">Element</span> <span class="fu">=</span> <span class="dt">Element</span>
-  {<span class="ot"> name         ::</span> <span class="dt">String</span>
-  ,<span class="ot"> attribs      ::</span> [<span class="dt">Attribute</span>]
-  ,<span class="ot"> content      ::</span> <span class="dt">Maybe</span> [<span class="dt">Content</span>]
-  }
-
-<span class="kw">data</span> <span class="dt">Content</span>
-  <span class="fu">=</span> <span class="dt">TextContent</span> <span class="dt">String</span>
-  <span class="fu">|</span> <span class="dt">ElementContent</span> <span class="dt">Element</span>
-
-<span class="kw">newtype</span> <span class="dt">Attribute</span> <span class="fu">=</span> <span class="dt">Attribute</span>
-  {<span class="ot"> key          ::</span> <span class="dt">String</span>
-  ,<span class="ot"> value        ::</span> <span class="dt">String</span>
-  }</code></pre>
-<p><code>Element</code>型はHTMLの要素を表しており、各要素は要素名、属性のペア​​の配列と、要素の内容でで構成されています。<code>content</code>プロパティでは、<code>Maybe</code>タイプを使って要素が開いている(他の要素やテキストを含む)か閉じているかを示しています。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">newtype</span> <span class="dt">Element</span> <span class="fu">=</span> <span class="dt">Element</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  {<span class="ot"> name         ::</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  ,<span class="ot"> attribs      ::</span> <span class="dt">Array</span> <span class="dt">Attribute</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  ,<span class="ot"> content      ::</span> <span class="dt">Maybe</span> (<span class="dt">Array</span> <span class="dt">Content</span>)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  }</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw">data</span> <span class="dt">Content</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">  <span class="fu">=</span> <span class="dt">TextContent</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">  <span class="fu">|</span> <span class="dt">ElementContent</span> <span class="dt">Element</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="kw">newtype</span> <span class="dt">Attribute</span> <span class="fu">=</span> <span class="dt">Attribute</span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">  {<span class="ot"> key          ::</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">  ,<span class="ot"> value        ::</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">  }</a></code></pre></div>
+<p><code>Element</code>型はHTMLの要素を表しており、各要素は要素名、属性のペア​​の配列と、要素の内容でで構成されています。 <code>content</code>プロパティでは、 <code>Maybe</code>タイプを使って要素が開いている(他の要素やテキストを含む)か閉じているかを示しています。</p>
 <p>このライブラリの鍵となる機能は次の関数です。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">render ::</span> <span class="dt">Element</span> <span class="ot">-&gt;</span> <span class="dt">String</span></code></pre>
-<p>この関数はHTML要素をHTML文字列として出力します。<code>psci</code> で明示的に適当な型の値を構築し、ライブラリのこのバージョンを試してみましょう。</p>
-<pre class="text"><code>&gt; :i Data.DOM.Simple
-&gt; :i Data.Maybe
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ot">render ::</span> <span class="dt">Element</span> <span class="ot">-&gt;</span> <span class="dt">String</span></a></code></pre></div>
+<p>この関数はHTML要素をHTML文字列として出力します。 <code>PSCi</code>で明示的に適当な型の値を構築し、ライブラリのこのバージョンを試してみましょう。</p>
+<pre class="text"><code>$ pulp repl
 
-&gt; render $ Element 
-    { name: &quot;p&quot;
-    , attribs: [
-        Attribute 
-          { key: &quot;class&quot;
-          , value: &quot;main&quot; 
-          }
-      ]
-    , content: Just [
-        TextContent &quot;Hello World!&quot;
-      ] 
-    }
-  
-&quot;&lt;p class=\&quot;main\&quot;&gt;Hello World!&lt;/p&gt;&quot;</code></pre>
+&gt; import Prelude
+&gt; import Data.DOM.Simple
+&gt; import Data.Maybe
+&gt; import Control.Monad.Eff.Console
+
+&gt; :paste
+… log $ render $ Element
+…   { name: &quot;p&quot;
+…   , attribs: [
+…       Attribute
+…         { key: &quot;class&quot;
+…         , value: &quot;main&quot;
+…         }
+…     ]
+…   , content: Just [
+…       TextContent &quot;Hello World!&quot;
+…     ]
+…   }
+… ^D
+
+&lt;p class=&quot;main&quot;&gt;Hello World!&lt;/p&gt;
+unit</code></pre>
 <p>現状のライブラリにはいくつかの問題があります。</p>
 <ul>
 <li>HTML文書の作成に手がかかります。すべての新しい要素が少なくとも1つのレコードと1つのデータ構築子が必要です。</li>
@@ -255,39 +308,35 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </ul>
 <p>この章では、さまざまな手法を用いてこれらの問題を解決し、このライブラリーをHTML文書を作成するために使える領域特化言語にしていきます。</p>
 <h2 id="スマート構築子"><span class="header-section-number">14.4</span> スマート構築子</h2>
-<p>最初に導入する手法は方法は単純なものですが、とても効果的です。モジュールの使用者にデータの表現を露出する代わりに、モジュールエクスポートリスト(module exports list)を使ってデータ構築子<code>Element</code>、<code>Content</code>、<code>Attribute</code>を隠蔽し、正しいことが明らかなデータだけ構築する、いわゆる<strong>スマート構築子</strong>(smart constructors)だけをエクスポートします。</p>
+<p>最初に導入する手法は方法は単純なものですが、とても効果的です。モジュールの使用者にデータの表現を露出する代わりに、モジュールエクスポートリスト(module exports list)を使ってデータ構築子 <code>Element</code>、 <code>Content</code>、 <code>Attribute</code>を隠蔽し、正しいことが明らかなデータだけ構築する、いわゆる<strong>スマート構築子</strong>(smart constructors)だけをエクスポートします。</p>
 <p>例を示しましょう。まず、HTML要素を作成するための便利な関数を提供します。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">element ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> [<span class="dt">Attribute</span>] <span class="ot">-&gt;</span> <span class="dt">Maybe</span> [<span class="dt">Content</span>] <span class="ot">-&gt;</span> <span class="dt">Element</span>
-element name attribs content <span class="fu">=</span> <span class="dt">Element</span>
-  { name<span class="fu">:</span>      name
-  , attribs<span class="fu">:</span>   attribs
-  , content<span class="fu">:</span>   content
-  }</code></pre>
-<p>次に、<code>element</code>関数を適用することによってHTML要素を作成する、スマート構築子を作成します。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">a ::</span> [<span class="dt">Attribute</span>] <span class="ot">-&gt;</span> [<span class="dt">Content</span>] <span class="ot">-&gt;</span> <span class="dt">Element</span>
-a attribs content <span class="fu">=</span> element <span class="st">&quot;a&quot;</span> attribs (<span class="dt">Just</span> content)
-
-div<span class="ot"> ::</span> [<span class="dt">Attribute</span>] <span class="ot">-&gt;</span> [<span class="dt">Content</span>] <span class="ot">-&gt;</span> <span class="dt">Element</span>
-div attribs content <span class="fu">=</span> element <span class="st">&quot;div&quot;</span> attribs (<span class="dt">Just</span> content)
-
-<span class="ot">p ::</span> [<span class="dt">Attribute</span>] <span class="ot">-&gt;</span> [<span class="dt">Content</span>] <span class="ot">-&gt;</span> <span class="dt">Element</span>
-p attribs content <span class="fu">=</span> element <span class="st">&quot;p&quot;</span> attribs (<span class="dt">Just</span> content)
-
-<span class="ot">img ::</span> [<span class="dt">Attribute</span>] <span class="ot">-&gt;</span> <span class="dt">Element</span>
-img attribs <span class="fu">=</span> element <span class="st">&quot;img&quot;</span> attribs <span class="dt">Nothing</span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="ot">element ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Array</span> <span class="dt">Attribute</span> <span class="ot">-&gt;</span> <span class="dt">Maybe</span> (<span class="dt">Array</span> <span class="dt">Content</span>) <span class="ot">-&gt;</span> <span class="dt">Element</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">element name attribs content <span class="fu">=</span> <span class="dt">Element</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  { name<span class="fu">:</span>      name</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  , attribs<span class="fu">:</span>   attribs</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  , content<span class="fu">:</span>   content</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">  }</a></code></pre></div>
+<p>次に、 <code>element</code>関数を適用することによってHTML要素を作成する、スマート構築子を作成します。</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="ot">a ::</span> <span class="dt">Array</span> <span class="dt">Attribute</span> <span class="ot">-&gt;</span> <span class="dt">Array</span> <span class="dt">Content</span> <span class="ot">-&gt;</span> <span class="dt">Element</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">a attribs content <span class="fu">=</span> element <span class="st">&quot;a&quot;</span> attribs (<span class="dt">Just</span> content)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="ot">p ::</span> <span class="dt">Array</span> <span class="dt">Attribute</span> <span class="ot">-&gt;</span> <span class="dt">Array</span> <span class="dt">Content</span> <span class="ot">-&gt;</span> <span class="dt">Element</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">p attribs content <span class="fu">=</span> element <span class="st">&quot;p&quot;</span> attribs (<span class="dt">Just</span> content)</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="ot">img ::</span> <span class="dt">Array</span> <span class="dt">Attribute</span> <span class="ot">-&gt;</span> <span class="dt">Element</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">img attribs <span class="fu">=</span> element <span class="st">&quot;img&quot;</span> attribs <span class="dt">Nothing</span></a></code></pre></div>
 <p>最後に、正しいデータ構造だけを構築することがわかっているこれらの関数をエクスポートするように、モジュールエクスポートリストを更新します。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">module</span> <span class="dt">Data.DOM.Smart</span>
-  ( <span class="dt">Element</span>()
-  , <span class="dt">Attribute</span>(<span class="fu">..</span>)
-  , <span class="dt">Content</span>(<span class="fu">..</span>)
-
-  , a
-  , div
-  , p
-  , img
-
-  , render
-  ) <span class="kw">where</span></code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">module</span> <span class="dt">Data.DOM.Smart</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">  ( <span class="dt">Element</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">  , <span class="dt">Attribute</span>(<span class="fu">..</span>)</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">  , <span class="dt">Content</span>(<span class="fu">..</span>)</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">  , a</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">  , p</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">  , img</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">  , render</a>
+<a class="sourceLine" id="cb6-11" data-line-number="11">  ) <span class="kw">where</span></a></code></pre></div>
 <p>モジュールエクスポートリストはモジュール名の直後の括弧内に書きます。各モジュールのエクスポートは次の3種類のいずれかです。</p>
 <ul>
 <li>値の名前で示された、値(または関数)</li>
@@ -295,291 +344,295 @@ img attribs <span class="fu">=</span> element <span class="st">&quot;img&quot;</
 <li>型の名前で示された型構築子、およびそれに続けて括弧で囲まれた関連するデータ構築子のリスト</li>
 </ul>
 <p>ここでは、 <code>Element</code>の<strong>型</strong>をエクスポートしていますが、データ構築子はエクスポートしていません。もしデータ構築子をエクスポートすると、モジュールの使用者が不正なHTML要素を構築できてしまいます。</p>
-<p><code>Attribute</code>と<code>Content</code>型についてはデータ構築子をすべてエクスポートしています(エクスポートリストの記号<code>..</code>で示されています)。これから、これらの型にスマート構築子の手法を適用していきます。</p>
+<p><code>Attribute</code>と <code>Content</code>型についてはデータ構築子をすべてエクスポートしています(エクスポートリストの記号 <code>..</code>で示されています)。これから、これらの型にスマート構築子の手法を適用していきます。</p>
 <p>すでにライブラリにいくつかの大きな改良を加わっていることに注意してください。</p>
 <ul>
 <li>不正な名前を持つHTML要素を表現することは不可能です(もちろん、ライブラリが提供する要素名に制限されています)。</li>
 <li>閉じた要素は、構築するときに内容を含めることはできません。</li>
 </ul>
-<p><code>Content</code>型にもとても簡単にこの手法を適用することができます。単にエクスポートリストから<code>Content</code>型のデータ構築子を取り除き、次のスマート構築子を提供します。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">text ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Content</span>
-text <span class="fu">=</span> <span class="dt">TextContent</span>
-
-elem<span class="ot"> ::</span> <span class="dt">Element</span> <span class="ot">-&gt;</span> <span class="dt">Content</span>
-elem <span class="fu">=</span> <span class="dt">ElementContent</span></code></pre>
+<p><code>Content</code>型にもとても簡単にこの手法を適用することができます。単にエクスポートリストから <code>Content</code>型のデータ構築子を取り除き、次のスマート構築子を提供します。</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="ot">text ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Content</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">text <span class="fu">=</span> <span class="dt">TextContent</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">elem<span class="ot"> ::</span> <span class="dt">Element</span> <span class="ot">-&gt;</span> <span class="dt">Content</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">elem <span class="fu">=</span> <span class="dt">ElementContent</span></a></code></pre></div>
 <p><code>Attribute</code>型にも同じ手法を適用してみましょう。まず、属性のための汎用のスマート構築子を用意します。最初の試みとしては、次のようなものになるかもしれません。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">(:=) ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Attribute</span>
-(<span class="fu">:=</span>) key value <span class="fu">=</span> <span class="dt">Attribute</span>
-  { key<span class="fu">:</span> key
-  , value<span class="fu">:</span> value
-  }</code></pre>
-<p>この定義では元の<code>Element</code>型と同じ問題に悩まされています。存在しなかったり、名前が間違っているような属性を表現することが可能です。この問題を解決するために、属性名を表すnewtypeを作成します。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">AttributeKey</span> <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="dt">String</span></code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="ot">attribute ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Attribute</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">attribute key value <span class="fu">=</span> <span class="dt">Attribute</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">  { key<span class="fu">:</span> key</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">  , value<span class="fu">:</span> value</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">  }</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">infix <span class="dv">4</span> attribute as <span class="fu">:=</span></a></code></pre></div>
+<p>この定義では元の <code>Element</code>型と同じ問題に悩まされています。存在しなかったり、名前が間違っているような属性を表現することが可能です。この問題を解決するために、属性名を表すnewtypeを作成します。</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">newtype</span> <span class="dt">AttributeKey</span> <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="dt">String</span></a></code></pre></div>
 <p>それから、この演算子を次のように変更します。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">(:=) ::</span> <span class="dt">AttributeKey</span> <span class="ot">-&gt;</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Attribute</span>
-(<span class="fu">:=</span>) (<span class="dt">AttributeKey</span> key) value <span class="fu">=</span> <span class="dt">Attribute</span>
-  { key<span class="fu">:</span> key
-  , value<span class="fu">:</span> value
-  }</code></pre>
-<p><code>AttributeKey</code>データ構築子をエクスポートしなければ、明示的にエクスポートされた次のような関数を使う以外に、使用者が型<code>AttributeKey</code>の値を構築する方法はありません。いくつかの例を示します。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">href ::</span> <span class="dt">AttributeKey</span>
-href <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;href&quot;</span>
-
-_<span class="ot">class ::</span> <span class="dt">AttributeKey</span>
-_class <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;class&quot;</span>
-
-<span class="ot">src ::</span> <span class="dt">AttributeKey</span>
-src <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;src&quot;</span>
-
-<span class="ot">width ::</span> <span class="dt">AttributeKey</span>
-width <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;width&quot;</span>
-
-<span class="ot">height ::</span> <span class="dt">AttributeKey</span>
-height <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;height&quot;</span></code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="ot">attribute ::</span> <span class="dt">AttributeKey</span> <span class="ot">-&gt;</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Attribute</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">attribute (<span class="dt">AttributeKey</span> key) value <span class="fu">=</span> <span class="dt">Attribute</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">  { key<span class="fu">:</span> key</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">  , value<span class="fu">:</span> value</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">  }</a></code></pre></div>
+<p><code>AttributeKey</code>データ構築子をエクスポートしなければ、明示的にエクスポートされた次のような関数を使う以外に、使用者が型 <code>AttributeKey</code>の値を構築する方法はありません。いくつかの例を示します。</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="ot">href ::</span> <span class="dt">AttributeKey</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">href <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;href&quot;</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="ot">_class ::</span> <span class="dt">AttributeKey</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">_class <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;class&quot;</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="ot">src ::</span> <span class="dt">AttributeKey</span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8">src <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;src&quot;</span></a>
+<a class="sourceLine" id="cb11-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="ot">width ::</span> <span class="dt">AttributeKey</span></a>
+<a class="sourceLine" id="cb11-11" data-line-number="11">width <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;width&quot;</span></a>
+<a class="sourceLine" id="cb11-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb11-13" data-line-number="13"><span class="ot">height ::</span> <span class="dt">AttributeKey</span></a>
+<a class="sourceLine" id="cb11-14" data-line-number="14">height <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;height&quot;</span></a></code></pre></div>
 <p>新しいモジュールの最終的なエクスポートリストは次のようになります。もうどんなデータ構築子も直接エクスポートしていないことに注意してください。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">module</span> <span class="dt">Data.DOM.Smart</span>
-  ( <span class="dt">Element</span>()
-  , <span class="dt">Attribute</span>()
-  , <span class="dt">Content</span>()
-  , <span class="dt">AttributeKey</span>()
+<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">module</span> <span class="dt">Data.DOM.Smart</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">  ( <span class="dt">Element</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">  , <span class="dt">Attribute</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">  , <span class="dt">Content</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5">  , <span class="dt">AttributeKey</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7">  , a</a>
+<a class="sourceLine" id="cb12-8" data-line-number="8">  , p</a>
+<a class="sourceLine" id="cb12-9" data-line-number="9">  , img</a>
+<a class="sourceLine" id="cb12-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb12-11" data-line-number="11">  , href</a>
+<a class="sourceLine" id="cb12-12" data-line-number="12">  , _class</a>
+<a class="sourceLine" id="cb12-13" data-line-number="13">  , src</a>
+<a class="sourceLine" id="cb12-14" data-line-number="14">  , width</a>
+<a class="sourceLine" id="cb12-15" data-line-number="15">  , height</a>
+<a class="sourceLine" id="cb12-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb12-17" data-line-number="17">  , attribute, (<span class="fu">:=</span>)</a>
+<a class="sourceLine" id="cb12-18" data-line-number="18">  , text</a>
+<a class="sourceLine" id="cb12-19" data-line-number="19">  , elem</a>
+<a class="sourceLine" id="cb12-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb12-21" data-line-number="21">  , render</a>
+<a class="sourceLine" id="cb12-22" data-line-number="22">  ) <span class="kw">where</span></a></code></pre></div>
+<p><code>PSCi</code>でこの新しいモジュールを試してみると、コードが大幅に簡潔になり、改良されていることがわかります。</p>
+<pre class="text"><code>$ pulp repl
 
-  , a
-  , div
-  , p
-  , img
+&gt; import Prelude
+&gt; import Data.DOM.Smart
+&gt; import Control.Monad.Eff.Console
+&gt; log $ render $ p [ _class := &quot;main&quot; ] [ text &quot;Hello World!&quot; ]
 
-  , href
-  , _class
-  , src
-  , width
-  , height
-
-  , (<span class="fu">:=</span>)
-  , text
-  , elem
-
-  , render
-  ) <span class="kw">where</span></code></pre>
-<p><code>psci</code> でこの新しいモジュールを試してみると、コードが大幅に簡潔になり、改良されていることがわかります。</p>
-<pre class="text"><code>&gt; :i Data.DOM.Smart
-&gt; render $ p [ _class := &quot;main&quot; ] [ text &quot;Hello World!&quot; ]
-  
-&quot;&lt;p class=\&quot;main\&quot;&gt;Hello World!&lt;/p&gt;&quot;</code></pre>
-<p>しかし、基礎のデータ表現が変更されていないので、<code>render</code>関数を変更する必要はなかったことにも注目してください。これはスマート構築子による手法の利点のひとつです。外部APIの使用者によって認識される表現から、モジュールの内部データ表現を分離することができるのです。</p>
+&lt;p class=&quot;main&quot;&gt;Hello World!&lt;/p&gt;
+unit</code></pre>
+<p>しかし、基礎のデータ表現が変更されていないので、 <code>render</code>関数を変更する必要はなかったことにも注目してください。これはスマート構築子による手法の利点のひとつです。外部APIの使用者によって認識される表現から、モジュールの内部データ表現を分離することができるのです。</p>
 <blockquote>
 <h2 id="演習" class="unnumbered">演習</h2>
 <ol type="1">
-<li><p>(簡単) <code>Data.DOM.Smart</code>モジュールで<code>render</code>を使った新しいHTML文書の作成を試してみましょう。</p></li>
-<li><p>(やや難しい)　<code>checked</code>と<code>disabled</code>など、値を要求しないHTML属性がありますが、これらは次のような<strong>空の属性</strong>として表示されるかもしれません。</p>
-<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;input</span><span class="ot"> disabled</span><span class="kw">&gt;</span></code></pre>
-<p>空の属性を扱えるように<code>Attribute</code>の表現を変更してください。要素に空の属性を追加するために、 <code>：(=)</code>の代わりに使える関数を記述してください。</p></li>
+<li><p>(簡単)<code>Data.DOM.Smart</code>モジュールで <code>render</code>を使った新しいHTML文書の作成を試してみましょう。</p></li>
+<li><p>(やや難しい)　<code>checked</code>と <code>disabled</code>など、値を要求しないHTML属性がありますが、これらは次のような<strong>空の属性</strong>として表示されるかもしれません。</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">&lt;input</span><span class="ot"> disabled</span><span class="kw">&gt;</span></a></code></pre></div>
+<p>空の属性を扱えるように <code>Attribute</code>の表現を変更してください。要素に空の属性を追加するために、 <code>attribute</code>または <code>:=</code>の代わりに使える関数を記述してください。</p></li>
 </ol>
 </blockquote>
 <h2 id="幻影型"><span class="header-section-number">14.5</span> 幻影型</h2>
 <p>次に適用する手法についての動機を与えるために、次のコードを考えてみます。</p>
-<pre class="text"><code>&gt; :i Data.DOM.Phantom
-&gt; render $ img [ src    := &quot;cat.jpg&quot;
-               , width  := &quot;foo&quot;
-               , height := &quot;bar&quot; 
-               ]
-  
-&quot;&lt;img src=\&quot;cat.jpg\&quot; width=\&quot;foo\&quot; height=\&quot;bar\&quot; /&gt;&quot;</code></pre>
-<p>ここでの問題は、<code>width</code>と<code>height</code>についての文字列値を提供しているということで、ここで与えることができるのはピクセルやパーセントの単位の数値だけであるべきです。</p>
+<pre class="text"><code>&gt; log $ render $ img
+    [ src    := &quot;cat.jpg&quot;
+    , width  := &quot;foo&quot;
+    , height := &quot;bar&quot;
+    ]
+
+&lt;img src=&quot;cat.jpg&quot; width=&quot;foo&quot; height=&quot;bar&quot; /&gt;
+unit</code></pre>
+<p>ここでの問題は、 <code>width</code>と <code>height</code>についての文字列値を提供しているということで、ここで与えることができるのはピクセルやパーセントの単位の数値だけであるべきです。</p>
 <p><code>AttributeKey</code>型にいわゆる<strong>幻影型</strong>(phantom type)引数を導入すると、この問題を解決できます。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">AttributeKey</span> a <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="dt">String</span></code></pre>
-<p>定義の右辺に対応する型<code>a</code>の値が存在しないので、この型変数<code>a</code>は<strong>幻影型</strong>と呼ばれています。この型<code>a</code>はコンパイル時により多くの情報を提供するためだけに存在しています。任意の型<code>AttributeKey a</code>の値は実行時には単なる文字列ですが、そのキーに関連付けられた値に期待されている型を教えてくれます。</p>
-<p><code>AttributeKey</code>の新しい形式で受け取るように、<code>(:=)</code>演算子の型を次のように変更します。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">(:=) ::</span> forall a<span class="fu">.</span> (<span class="dt">IsValue</span> a) <span class="ot">=&gt;</span> <span class="dt">AttributeKey</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Attribute</span>
-(<span class="fu">:=</span>) (<span class="dt">AttributeKey</span> key) value <span class="fu">=</span> <span class="dt">Attribute</span>
-  { key<span class="fu">:</span> key
-  , value<span class="fu">:</span> toValue value
-  }</code></pre>
-<p>ここで、ファントム型引数 <code>a</code>は、属性キーと属性値が互換性のある型を持っていることを確認するために使われます。使用者は<code>AttributeKey a</code>を型の値を直接作成できないので(ライブラリで提供されている定数を介してのみ得ることができます)、すべての属性が正しくなります。</p>
-<p><code>IsValue</code>制約は、キーに関連付けられた値がなんであれ、その値を文字列に変換し、生成したHTML内に出力できることを保証します。<code>IsValue</code>型クラスは次のように定義されています。　　</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">IsValue</span> a <span class="kw">where</span>
-<span class="ot">  toValue ::</span> a <span class="ot">-&gt;</span> <span class="dt">String</span></code></pre>
-<p><code>String</code>と<code>Number</code>型についての型クラスインスタンスも提供しておきます。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> stringIsValue ::</span> <span class="dt">IsValue</span> <span class="dt">String</span> <span class="kw">where</span>
-  toValue <span class="fu">=</span> id
+<div class="sourceCode" id="cb16"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">newtype</span> <span class="dt">AttributeKey</span> a <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="dt">String</span></a></code></pre></div>
+<p>定義の右辺に対応する型 <code>a</code>の値が存在しないので、この型変数 <code>a</code>は<strong>幻影型</strong>と呼ばれています。この型 <code>a</code>はコンパイル時により多くの情報を提供するためだけに存在しています。任意の型 <code>AttributeKey a</code>の値は実行時には単なる文字列ですが、そのキーに関連付けられた値に期待されている型を教えてくれます。</p>
+<p><code>AttributeKey</code>の新しい形式で受け取るように、 <code>attribute</code>関数の型を次のように変更します。</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="ot">attribute ::</span> forall a<span class="fu">.</span> <span class="dt">IsValue</span> a <span class="ot">=&gt;</span> <span class="dt">AttributeKey</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Attribute</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">attribute (<span class="dt">AttributeKey</span> key) value <span class="fu">=</span> <span class="dt">Attribute</span></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">  { key<span class="fu">:</span> key</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">  , value<span class="fu">:</span> toValue value</a>
+<a class="sourceLine" id="cb17-5" data-line-number="5">  }</a></code></pre></div>
+<p>ここで、ファントム型引数 <code>a</code>は、属性キーと属性値が互換性のある型を持っていることを確認するために使われます。使用者は <code>AttributeKey a</code>を型の値を直接作成できないので(ライブラリで提供されている定数を介してのみ得ることができます)、すべての属性が正しくなります。</p>
+<p><code>IsValue</code>制約は、キーに関連付けられた値がなんであれ、その値を文字列に変換し、生成したHTML内に出力できることを保証します。 <code>IsValue</code>型クラスは次のように定義されています。　　</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">class</span> <span class="dt">IsValue</span> a <span class="kw">where</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="ot">  toValue ::</span> a <span class="ot">-&gt;</span> <span class="dt">String</span></a></code></pre></div>
+<p><code>String</code>と <code>Int</code>型についての型クラスインスタンスも提供しておきます。</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">instance</span><span class="ot"> stringIsValue ::</span> <span class="dt">IsValue</span> <span class="dt">String</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">  toValue <span class="fu">=</span> id</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="kw">instance</span><span class="ot"> intIsValue ::</span> <span class="dt">IsValue</span> <span class="dt">Int</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb19-5" data-line-number="5">  toValue <span class="fu">=</span> show</a></code></pre></div>
+<p>また、これらの型が新しい型変数を反映するように、 <code>AttributeKey</code>定数を更新しなければいけません。</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="ot">href ::</span> <span class="dt">AttributeKey</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">href <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;href&quot;</span></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="ot">_class ::</span> <span class="dt">AttributeKey</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb20-5" data-line-number="5">_class <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;class&quot;</span></a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb20-7" data-line-number="7"><span class="ot">src ::</span> <span class="dt">AttributeKey</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb20-8" data-line-number="8">src <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;src&quot;</span></a>
+<a class="sourceLine" id="cb20-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb20-10" data-line-number="10"><span class="ot">width ::</span> <span class="dt">AttributeKey</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb20-11" data-line-number="11">width <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;width&quot;</span></a>
+<a class="sourceLine" id="cb20-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb20-13" data-line-number="13"><span class="ot">height ::</span> <span class="dt">AttributeKey</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb20-14" data-line-number="14">height <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;height&quot;</span></a></code></pre></div>
+<p>これで、不正なHTML文書を表現することが不可能で、 <code>width</code>と <code>height</code>属性を表現するのに数を使うことが強制されていることがわかります。</p>
+<pre class="text"><code>&gt; import Prelude
+&gt; import Data.DOM.Phantom
+&gt; import Control.Monad.Eff.Console
 
-<span class="kw">instance</span><span class="ot"> numberIsValue ::</span> <span class="dt">IsValue</span> <span class="dt">Number</span> <span class="kw">where</span>
-  toValue <span class="fu">=</span> show</code></pre>
-<p>また、これらの型が新しい型変数を反映するように、<code>AttributeKey</code>定数を更新しなければいけません。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">href ::</span> <span class="dt">AttributeKey</span> <span class="dt">String</span>
-href <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;href&quot;</span>
+&gt; :paste
+… log $ render $ img
+…   [ src    := &quot;cat.jpg&quot;
+…   , width  := 100
+…   , height := 200
+…   ]
+… ^D
 
-_<span class="ot">class ::</span> <span class="dt">AttributeKey</span> <span class="dt">String</span>
-_class <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;class&quot;</span>
-
-<span class="ot">src ::</span> <span class="dt">AttributeKey</span> <span class="dt">String</span>
-src <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;src&quot;</span>
-
-<span class="ot">width ::</span> <span class="dt">AttributeKey</span> <span class="dt">Number</span>
-width <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;width&quot;</span>
-
-<span class="ot">height ::</span> <span class="dt">AttributeKey</span> <span class="dt">Number</span>
-height <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;height&quot;</span></code></pre>
-<p>これで、不正なHTML文書を表現することが不可能で、<code>width</code>と<code>height</code>属性を表現するのに数を使うことが強制されていることがわかります。</p>
-<pre class="text"><code>&gt; :i Data.DOM.Phantom
-&gt; render $ img [ src    := &quot;cat.jpg&quot;
-               , width  := 100
-               , height := 200 
-               ]
-  
-&quot;&lt;img src=\&quot;cat.jpg\&quot; width=\&quot;100\&quot; height=\&quot;200\&quot; /&gt;&quot;</code></pre>
+&lt;img src=&quot;cat.jpg&quot; width=&quot;100&quot; height=&quot;200&quot; /&gt;
+unit</code></pre>
 <blockquote>
 <h2 id="演習-1" class="unnumbered">演習　</h2>
 <ol type="1">
-<li><p>(簡単) ピクセルまたはパーセントの長さのいずれかを表すデータ型を作成してください。その型について <code>IsValue</code>のインスタンスを書いてください。この型を使うように<code>width</code>と<code>height</code>属性を変更してください。</p></li>
-<li><p>(難しい) ファントム型を使って真偽値<code>true</code>、<code>false</code>についての表現を最上位で定義することで、<code>AttributeKey</code>が<code>disabled</code>や<code>chacked</code>のような<strong>空の属性</strong>を表現しているかどうかを符号化することができます。、</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">True</span>
-<span class="kw">data</span> <span class="dt">False</span></code></pre>
-<p>ファントム型を使って、使用者が<code>(:=)</code>演算子を空の属性に対して使うことを防ぐように、前の演習の解答を変更してください。</p></li>
+<li><p>(簡単) ピクセルまたはパーセントの長さのいずれかを表すデータ型を作成してください。その型について <code>IsValue</code>のインスタンスを書いてください。この型を使うように <code>width</code>と <code>height</code>属性を変更してください。</p></li>
+<li><p>(難しい) ファントム型を使って真偽値 <code>true</code>、 <code>false</code>についての表現を最上位で定義することで、 <code>AttributeKey</code>が <code>disabled</code>や <code>chacked</code>のような<strong>空の属性</strong>を表現しているかどうかを符号化することができます。</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">data</span> <span class="dt">True</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="kw">data</span> <span class="dt">False</span></a></code></pre></div>
+<p>ファントム型を使って、使用者が <code>attribute</code>演算子を空の属性に対して使うことを防ぐように、前の演習の解答を変更してください。</p></li>
 </ol>
 </blockquote>
 <h2 id="freeモナド"><span class="header-section-number">14.6</span> Freeモナド</h2>
-<p>APIに施す最後の変更は、<code>Content</code>型をモナドにしてdo記法を使えるようにするために、<strong>Freeモナド</strong>と呼ばれる構造を使うことです。Freeモナドは、入れ子になった要素をわかりやすくなるよう、HTML文書の構造化を可能にします。次のようなコードを考えます。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell">p [ _class <span class="fu">:=</span> <span class="st">&quot;main&quot;</span> ]
-  [ elem <span class="fu">$</span> img 
-      [ src    <span class="fu">:=</span> <span class="st">&quot;cat.jpg&quot;</span>
-      , width  <span class="fu">:=</span> <span class="dv">100</span>
-      , height <span class="fu">:=</span> <span class="dv">200</span> 
-      ]
-  , text <span class="st">&quot;A cat&quot;</span>
-  ]</code></pre>
+<p>APIに施す最後の変更は、 <code>Content</code>型をモナドにしてdo記法を使えるようにするために、<strong>Freeモナド</strong>と呼ばれる構造を使うことです。Freeモナドは、入れ子になった要素をわかりやすくなるよう、HTML文書の構造化を可能にします。次のようなコードを考えます。</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb23-1" data-line-number="1">p [ _class <span class="fu">:=</span> <span class="st">&quot;main&quot;</span> ]</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">  [ elem <span class="fu">$</span> img</a>
+<a class="sourceLine" id="cb23-3" data-line-number="3">      [ src    <span class="fu">:=</span> <span class="st">&quot;cat.jpg&quot;</span></a>
+<a class="sourceLine" id="cb23-4" data-line-number="4">      , width  <span class="fu">:=</span> <span class="dv">100</span></a>
+<a class="sourceLine" id="cb23-5" data-line-number="5">      , height <span class="fu">:=</span> <span class="dv">200</span></a>
+<a class="sourceLine" id="cb23-6" data-line-number="6">      ]</a>
+<a class="sourceLine" id="cb23-7" data-line-number="7">  , text <span class="st">&quot;A cat&quot;</span></a>
+<a class="sourceLine" id="cb23-8" data-line-number="8">  ]</a></code></pre></div>
 <p>これを次のように書くことができるようになります。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell">p [ _class <span class="fu">:=</span> <span class="st">&quot;main&quot;</span> ] <span class="fu">$</span> <span class="kw">do</span>
-  elem <span class="fu">$</span> img 
-    [ src    <span class="fu">:=</span> <span class="st">&quot;cat.jpg&quot;</span>
-    , width  <span class="fu">:=</span> <span class="dv">100</span>
-    , height <span class="fu">:=</span> <span class="dv">200</span> 
-    ]
-  text <span class="st">&quot;A cat&quot;</span></code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb24-1" data-line-number="1">p [ _class <span class="fu">:=</span> <span class="st">&quot;main&quot;</span> ] <span class="fu">$</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">  elem <span class="fu">$</span> img</a>
+<a class="sourceLine" id="cb24-3" data-line-number="3">    [ src    <span class="fu">:=</span> <span class="st">&quot;cat.jpg&quot;</span></a>
+<a class="sourceLine" id="cb24-4" data-line-number="4">    , width  <span class="fu">:=</span> <span class="dv">100</span></a>
+<a class="sourceLine" id="cb24-5" data-line-number="5">    , height <span class="fu">:=</span> <span class="dv">200</span></a>
+<a class="sourceLine" id="cb24-6" data-line-number="6">    ]</a>
+<a class="sourceLine" id="cb24-7" data-line-number="7">  text <span class="st">&quot;A cat&quot;</span></a></code></pre></div>
 <p>しかし、do記法だけがFreeモナドの恩恵だというわけではありません。モナドのアクションの<strong>表現</strong>をその<strong>解釈</strong>から分離し、同じアクションに<strong>複数の解釈</strong>を持たせることをFreeモナドは可能にします。</p>
-<p><code>Free</code>モナドは<code>purescript-free</code>ライブラリの<code>Control.Monad.Free</code>モジュールで定義されています。<code>psci</code>を使うと、次のようにFreeモナドについての基本的な情報を見ることができます。</p>
-<pre class="text"><code>&gt; :i Control.Monad.Free
-&gt; :k Free
-(* -&gt; *) -&gt; * -&gt; *</code></pre>
-<p><code>Free</code>の種は、引数として型構築子を取り、別の型構築子を返すことを示しています。実は、<code>Free</code>モナドは任意の<code>Functor</code>を<code>Monad</code>にするために使うことができます！</p>
-<p>モナドのアクションの<strong>表現</strong>を定義することから始めます。これを行うには、サポートする各モナドアクションそれぞれについて、ひとつのデータ構築子を持つ<code>Functor</code>を作成する必要があります。今回の場合、2つのモナドのアクションは<code>elem</code>と<code>text</code>になります。実際には、<code>Content</code>型を次のように変更するだけです。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">ContentF</span> a
-  <span class="fu">=</span> <span class="dt">TextContent</span> <span class="dt">String</span> a
-  <span class="fu">|</span> <span class="dt">ElementContent</span> <span class="dt">Element</span> a
+<p><code>Free</code>モナドは <code>purescript-free</code>ライブラリの <code>Control.Monad.Free</code>モジュールで定義されています。 <code>PSCi</code>を使うと、次のようにFreeモナドについての基本的な情報を見ることができます。</p>
+<pre class="text"><code>&gt; import Control.Monad.Free
 
-<span class="kw">instance</span><span class="ot"> functorContentF ::</span> <span class="dt">Functor</span> <span class="dt">ContentF</span> <span class="kw">where</span>
-  (<span class="fu">&lt;$&gt;</span>) f (<span class="dt">TextContent</span> s a) <span class="fu">=</span> <span class="dt">TextContent</span> s (f a)
-  (<span class="fu">&lt;$&gt;</span>) f (<span class="dt">ElementContent</span> e a) <span class="fu">=</span> <span class="dt">ElementContent</span> e (f a)</code></pre>
-<p>ここで、この<code>ContentF</code>型構築子は以前の<code>Content</code>データ型とよく似ています。<code>Functor</code>インスタンスでは、単に各データ構築子で型<code>a</code>の構成要素に関数<code>f</code>を適用します。</p>
-<p>これにより、最初の型引数として<code>ContentF</code>型構築子を使うことで構築された、新しい<code>Content</code>型構築子を<code>Free</code>モナドを包むnewtypeとして定義することができます。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">Content</span> a <span class="fu">=</span> <span class="dt">Content</span> (<span class="dt">Free</span> <span class="dt">ContentF</span> a)</code></pre>
-<p>ここでnewtypeを使っているのは、使用者に対してライブラリの内部表現を露出することを避けるためです。<code>Content</code>データ構築子を隠すことで、提供しているモナドのアクションだけを使うことを仕様者に制限しています。</p>
-<p><code>ContentF</code>は<code>Functor</code>なので、<code>Free ContentF</code>に対する<code>Monad</code>インスタンスが自動的に手に入り、このインスタンスを<code>Content</code>上の<code>Monad</code>インスタンスへと持ち上げることができます。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">runContent ::</span> forall a<span class="fu">.</span> <span class="dt">Content</span> a <span class="ot">-&gt;</span> <span class="dt">Free</span> <span class="dt">ContentF</span> a
-runContent (<span class="dt">Content</span> x) <span class="fu">=</span> x
-
-<span class="kw">instance</span><span class="ot"> functorContent ::</span> <span class="dt">Functor</span> <span class="dt">Content</span> <span class="kw">where</span>
-  (<span class="fu">&lt;$&gt;</span>) f (<span class="dt">Content</span> x) <span class="fu">=</span> <span class="dt">Content</span> (f <span class="fu">&lt;$&gt;</span> x)
-
-<span class="kw">instance</span><span class="ot"> applyContent ::</span> <span class="dt">Apply</span> <span class="dt">Content</span> <span class="kw">where</span>
-  (<span class="fu">&lt;*&gt;</span>) (<span class="dt">Content</span> f) (<span class="dt">Content</span> x) <span class="fu">=</span> <span class="dt">Content</span> (f <span class="fu">&lt;*&gt;</span> x)
-
-<span class="kw">instance</span><span class="ot"> applicativeContent ::</span> <span class="dt">Applicative</span> <span class="dt">Content</span> <span class="kw">where</span>
-  pure <span class="fu">=</span> <span class="dt">Content</span> <span class="fu">&lt;&lt;&lt;</span> pure
-
-<span class="kw">instance</span><span class="ot"> bindContent ::</span> <span class="dt">Bind</span> <span class="dt">Content</span> <span class="kw">where</span>
-  (<span class="fu">&gt;&gt;=</span>) (<span class="dt">Content</span> x) f <span class="fu">=</span> <span class="dt">Content</span> (x <span class="fu">&gt;&gt;=</span> (runContent <span class="fu">&lt;&lt;&lt;</span> f))
-
-<span class="kw">instance</span><span class="ot"> monadContent ::</span> <span class="dt">Monad</span> <span class="dt">Content</span></code></pre>
-<p><code>Content</code>の新しい型引数を考慮するように、少し<code>Element</code>データ型を変更する必要があります。モナドの計算の戻り値の型が<code>Unit</code>であることだけが要求されます。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">Element</span> <span class="fu">=</span> <span class="dt">Element</span>
-  {<span class="ot"> name         ::</span> <span class="dt">String</span>
-  ,<span class="ot"> attribs      ::</span> [<span class="dt">Attribute</span>]
-  ,<span class="ot"> content      ::</span> <span class="dt">Maybe</span> (<span class="dt">Content</span> <span class="dt">Unit</span>)
-  }</code></pre>
-<p>また、 <code>Content</code>モナドについての新しいモナドのアクションになる<code>elem</code>と<code>text</code>関数を変更する必要があります。これを行うには、 <code>Control.Monad.Free</code>モジュールで提供されている<code>liftF</code>関数を使います。この関数の(簡略化された)型は次のようになっています。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">liftF ::</span> forall f a<span class="fu">.</span> (<span class="dt">Functor</span> f) <span class="ot">=&gt;</span> f a <span class="ot">-&gt;</span> <span class="dt">Free</span> f a</code></pre>
-<p><code>liftF</code>は、何らかの型<code>a</code>について、型<code>f a</code>の値からFreeモナドのアクションを構築できるようにします。今回の場合、<code>ContentF</code>型構築子のデータ構築子を次のようにそのまま使うだけです。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">text ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Content</span> <span class="dt">Unit</span>
-text s <span class="fu">=</span> <span class="dt">Content</span> <span class="fu">$</span> liftF <span class="fu">$</span> <span class="dt">TextContent</span> s unit
-
-elem<span class="ot"> ::</span> <span class="dt">Element</span> <span class="ot">-&gt;</span> <span class="dt">Content</span> <span class="dt">Unit</span>
-elem e <span class="fu">=</span> <span class="dt">Content</span> <span class="fu">$</span> liftF <span class="fu">$</span> <span class="dt">ElementContent</span> e unit</code></pre>
-<p>他にもコードの変更はありますが、興味深い変更は<code>render</code>関数に対してのものです。ここでは、このFreeモナドを<strong>解釈</strong>しなければいけません。</p>
+&gt; :kind Free
+(Type -&gt; Type) -&gt; Type -&gt; Type</code></pre>
+<p><code>Free</code>の種は、引数として型構築子を取り、別の型構築子を返すことを示しています。実は、 <code>Free</code>モナドは任意の <code>Functor</code>を <code>Monad</code>にするために使うことができます！</p>
+<p>モナドのアクションの<strong>表現</strong>を定義することから始めます。これを行うには、サポートする各モナドアクションそれぞれについて、ひとつのデータ構築子を持つ <code>Functor</code>を作成する必要があります。今回の場合、2つのモナドのアクションは <code>elem</code>と <code>text</code>になります。実際には、 <code>Content</code>型を次のように変更するだけです。</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">data</span> <span class="dt">ContentF</span> a</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2">  <span class="fu">=</span> <span class="dt">TextContent</span> <span class="dt">String</span> a</a>
+<a class="sourceLine" id="cb26-3" data-line-number="3">  <span class="fu">|</span> <span class="dt">ElementContent</span> <span class="dt">Element</span> a</a>
+<a class="sourceLine" id="cb26-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb26-5" data-line-number="5"><span class="kw">instance</span><span class="ot"> functorContentF ::</span> <span class="dt">Functor</span> <span class="dt">ContentF</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb26-6" data-line-number="6">  map f (<span class="dt">TextContent</span> s x) <span class="fu">=</span> <span class="dt">TextContent</span> s (f x)</a>
+<a class="sourceLine" id="cb26-7" data-line-number="7">  map f (<span class="dt">ElementContent</span> e x) <span class="fu">=</span> <span class="dt">ElementContent</span> e (f x)</a></code></pre></div>
+<p>ここで、この <code>ContentF</code>型構築子は以前の <code>Content</code>データ型とよく似ています。 <code>Functor</code>インスタンスでは、単に各データ構築子で型 <code>a</code>の構成要素に関数 <code>f</code>を適用します。</p>
+<p>これにより、最初の型引数として <code>ContentF</code>型構築子を使うことで構築された、新しい <code>Content</code>型構築子を <code>Free</code>モナドを包むnewtypeとして定義することができます。</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">type</span> <span class="dt">Content</span> <span class="fu">=</span> <span class="dt">Free</span> <span class="dt">ContentF</span></a></code></pre></div>
+<p>型のシノニムの代わりにnewtypeを使用して、使用者に対してライブラリの内部表現を露出することを避ける事ができます。 <code>Content</code>データ構築子を隠すことで、提供しているモナドのアクションだけを使うことを仕様者に制限しています。</p>
+<p><code>ContentF</code>は <code>Functor</code>なので、 <code>Free ContentF</code>に対する <code>Monad</code>インスタンスが自動的に手に入り、このインスタンスを <code>Content</code>上の <code>Monad</code>インスタンスへと持ち上げることができます。</p>
+<p><code>Content</code>の新しい型引数を考慮するように、少し <code>Element</code>データ型を変更する必要があります。モナドの計算の戻り値の型が <code>Unit</code>であることだけが要求されます。</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">newtype</span> <span class="dt">Element</span> <span class="fu">=</span> <span class="dt">Element</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">  {<span class="ot"> name         ::</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">  ,<span class="ot"> attribs      ::</span> <span class="dt">Array</span> <span class="dt">Attribute</span></a>
+<a class="sourceLine" id="cb28-4" data-line-number="4">  ,<span class="ot"> content      ::</span> <span class="dt">Maybe</span> (<span class="dt">Content</span> <span class="dt">Unit</span>)</a>
+<a class="sourceLine" id="cb28-5" data-line-number="5">  }</a></code></pre></div>
+<p>また、 <code>Content</code>モナドについての新しいモナドのアクションになる <code>elem</code>と <code>text</code>関数を変更する必要があります。これを行うには、 <code>Control.Monad.Free</code>モジュールで提供されている <code>liftF</code>関数を使います。この関数の(簡略化された)型は次のようになっています。</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="ot">liftF ::</span> forall f a<span class="fu">.</span> (<span class="dt">Functor</span> f) <span class="ot">=&gt;</span> f a <span class="ot">-&gt;</span> <span class="dt">Free</span> f a</a></code></pre></div>
+<p><code>liftF</code>は、何らかの型 <code>a</code>について、型 <code>f a</code>の値からFreeモナドのアクションを構築できるようにします。今回の場合、 <code>ContentF</code>型構築子のデータ構築子を次のようにそのまま使うだけです。</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="ot">text ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Content</span> <span class="dt">Unit</span></a>
+<a class="sourceLine" id="cb30-2" data-line-number="2">text s <span class="fu">=</span> liftF <span class="fu">$</span> <span class="dt">TextContent</span> s unit</a>
+<a class="sourceLine" id="cb30-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb30-4" data-line-number="4">elem<span class="ot"> ::</span> <span class="dt">Element</span> <span class="ot">-&gt;</span> <span class="dt">Content</span> <span class="dt">Unit</span></a>
+<a class="sourceLine" id="cb30-5" data-line-number="5">elem e <span class="fu">=</span> liftF <span class="fu">$</span> <span class="dt">ElementContent</span> e unit</a></code></pre></div>
+<p>他にもコードの変更はありますが、興味深い変更は <code>render</code>関数に対してのものです。ここでは、このFreeモナドを<strong>解釈</strong>しなければいけません。</p>
 <h2 id="モナドの解釈"><span class="header-section-number">14.7</span> モナドの解釈</h2>
 <p><code>Control.Monad.Free</code>モジュールでは、Freeモナドで計算を解釈するための多数の関数が提供されています。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">go ::</span> forall f a<span class="fu">.</span> (<span class="dt">Functor</span> f) <span class="ot">=&gt;</span> 
-  (f (<span class="dt">Free</span> f a) <span class="ot">-&gt;</span> <span class="dt">Free</span> f a) <span class="ot">-&gt;</span> 
-  <span class="dt">Free</span> f a <span class="ot">-&gt;</span> 
-  a
-  
-<span class="ot">goM ::</span> forall f m a<span class="fu">.</span> (<span class="dt">Functor</span> f, <span class="dt">Monad</span> m) <span class="ot">=&gt;</span> 
-  (f (<span class="dt">Free</span> f a) <span class="ot">-&gt;</span> m (<span class="dt">Free</span> f a)) <span class="ot">-&gt;</span> 
-  <span class="dt">Free</span> f a <span class="ot">-&gt;</span> 
-  m a
-  
-<span class="ot">iterM ::</span> forall f m a<span class="fu">.</span> (<span class="dt">Functor</span> f, <span class="dt">Monad</span> m) <span class="ot">=&gt;</span> 
-  (forall a<span class="fu">.</span> f (m a) <span class="ot">-&gt;</span> m a) <span class="ot">-&gt;</span> 
-  <span class="dt">Free</span> f a <span class="ot">-&gt;</span> 
-  m a</code></pre>
-<p><strong>純粋な</strong>結果を計算するためにFreeモナドを使いたいなら、 <code>go</code>関数が便利です。<code>goM</code>関数と<code>iterM</code>関数は、モナドを使用してFreeモナドのアクションを解釈することができます。この2つの関数は解釈関数の型が若干異なりますが、ここでは<code>iterM</code>関数を使います。興味のある読者は、代わりに<code>goM</code>関数を使用してこのコードを再実装してみるといいでしょう。</p>
-<p>まず、アクションを解釈することができるモナドを選ばなければなりません。<code>Writer String</code>モナドを使って、結果のHTML文字列を累積することにします。</p>
-<p>新しい<code>render</code>メソッドは補助関数<code>renderElement</code>に移譲して開始し、<code>Writer</code>モナドで計算を実行するため<code>execWriter</code>を使用します。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">render ::</span> <span class="dt">Element</span> <span class="ot">-&gt;</span> <span class="dt">String</span>
-render e <span class="fu">=</span> execWriter <span class="fu">$</span> renderElement e</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb31-1" data-line-number="1">runFree</a>
+<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="ot">  ::</span> forall f a</a>
+<a class="sourceLine" id="cb31-3" data-line-number="3">   <span class="fu">.</span> <span class="dt">Functor</span> f</a>
+<a class="sourceLine" id="cb31-4" data-line-number="4">  <span class="ot">=&gt;</span> (f (<span class="dt">Free</span> f a) <span class="ot">-&gt;</span> <span class="dt">Free</span> f a)</a>
+<a class="sourceLine" id="cb31-5" data-line-number="5">  <span class="ot">-&gt;</span> <span class="dt">Free</span> f a</a>
+<a class="sourceLine" id="cb31-6" data-line-number="6">  <span class="ot">-&gt;</span> a</a>
+<a class="sourceLine" id="cb31-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb31-8" data-line-number="8">runFreeM</a>
+<a class="sourceLine" id="cb31-9" data-line-number="9"><span class="ot">  ::</span> forall f m a</a>
+<a class="sourceLine" id="cb31-10" data-line-number="10">   <span class="fu">.</span> (<span class="dt">Functor</span> f, <span class="dt">MonadRec</span> m)</a>
+<a class="sourceLine" id="cb31-11" data-line-number="11">  <span class="ot">=&gt;</span> (f (<span class="dt">Free</span> f a) <span class="ot">-&gt;</span> m (<span class="dt">Free</span> f a))</a>
+<a class="sourceLine" id="cb31-12" data-line-number="12">  <span class="ot">-&gt;</span> <span class="dt">Free</span> f a</a>
+<a class="sourceLine" id="cb31-13" data-line-number="13">  <span class="ot">-&gt;</span> m a</a></code></pre></div>
+<p><code>runFree</code>関数は、<strong>純粋な</strong>結果を計算するために使用されます。 <code>runFreeM</code>関数は、フリーモナドの動作を解釈するためにモナドを使用することを可能にします</p>
+<p>厳密には、 <code>MonadRec</code>のより強い制約を満たすモナド <code>m</code>を使用する制限がされています。これはスタックオーバーフローを心配する必要がないことを意味します。なぜなら <code>m</code>は安全な<strong>末尾再帰モナド</strong>(monadic tail recursion)をサポートするからです。</p>
+<p>まず、アクションを解釈することができるモナドを選ばなければなりません。 <code>Writer String</code>モナドを使って、結果のHTML文字列を累積することにします。</p>
+<p>新しい <code>render</code>メソッドは補助関数 <code>renderElement</code>に移譲して開始し、 <code>Writer</code>モナドで計算を実行するため <code>execWriter</code>を使用します。</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="ot">render ::</span> <span class="dt">Element</span> <span class="ot">-&gt;</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">render <span class="fu">=</span> execWriter <span class="fu">&lt;&lt;&lt;</span> renderElement</a></code></pre></div>
 <p><code>renderElement</code>はwhereブロックで定義されています。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell">  <span class="kw">where</span>
-<span class="ot">  renderElement ::</span> <span class="dt">Element</span> <span class="ot">-&gt;</span> <span class="dt">Writer</span> <span class="dt">String</span> <span class="dt">Unit</span>
-  renderElement (<span class="dt">Element</span> e) <span class="fu">=</span> <span class="kw">do</span></code></pre>
-<p><code>renderElement</code> の定義は簡単で、いくつかの小さな文字列を累積するために<code>Writer</code>モナドの<code>tell</code>アクションを使っています。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell">    tell <span class="st">&quot;&lt;&quot;</span>
-    tell e<span class="fu">.</span>name
-    for_ e<span class="fu">.</span>attribs <span class="fu">$</span> \a <span class="ot">-&gt;</span> <span class="kw">do</span>
-      tell <span class="st">&quot; &quot;</span>
-      renderAttribute a
-    renderContent e<span class="fu">.</span>content</code></pre>
-<p>次に、同じように簡単な<code>renderAttribute</code>関数を定義します。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell">    <span class="kw">where</span>
-<span class="ot">    renderAttribute ::</span> <span class="dt">Attribute</span> <span class="ot">-&gt;</span> <span class="dt">Writer</span> <span class="dt">String</span> <span class="dt">Unit</span>
-    renderAttribute (<span class="dt">Attribute</span> a) <span class="fu">=</span> <span class="kw">do</span>
-      tell a<span class="fu">.</span>key
-      tell <span class="st">&quot;=\&quot;&quot;</span>
-      tell a<span class="fu">.</span>value
-      tell <span class="st">&quot;\&quot;&quot;</span></code></pre>
-<p><code>renderContent</code>関数は、もっと興味深いものです。ここでは、<code>iterM</code>関数を使って、Freeモナドの内部で補助関数<code>renderContentItem</code>に移譲する計算を解釈しています。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">    renderContent ::</span> <span class="dt">Maybe</span> (<span class="dt">Content</span> <span class="dt">Unit</span>) <span class="ot">-&gt;</span> <span class="dt">Writer</span> <span class="dt">String</span> <span class="dt">Unit</span>
-    renderContent <span class="dt">Nothing</span> <span class="fu">=</span> tell <span class="st">&quot; /&gt;&quot;</span>
-    renderContent (<span class="dt">Just</span> (<span class="dt">Content</span> content)) <span class="fu">=</span> <span class="kw">do</span>
-      tell <span class="st">&quot;&gt;&quot;</span>
-      iterM renderContentItem content
-      tell <span class="st">&quot;&lt;/&quot;</span>
-      tell e<span class="fu">.</span>name
-      tell <span class="st">&quot;&gt;&quot;</span></code></pre>
-<p><code>renderContentItem</code>の型は<code>iterM</code>の型シグネチャから推測することができます。関手<code>f</code>は型構築子<code>ContentF</code>で、モナド<code>m</code>は解釈している計算のモナド、つまり<code>Writer String</code>です。これにより<code>renderContentItem</code> について次の型シグネチャがわかります。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">    renderContentItem ::</span> forall a<span class="fu">.</span> <span class="dt">ContentF</span> (<span class="dt">Writer</span> <span class="dt">String</span> a) <span class="ot">-&gt;</span> <span class="dt">Writer</span> <span class="dt">String</span> a</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb33-1" data-line-number="1">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="ot">    renderElement ::</span> <span class="dt">Element</span> <span class="ot">-&gt;</span> <span class="dt">Writer</span> <span class="dt">String</span> <span class="dt">Unit</span></a>
+<a class="sourceLine" id="cb33-3" data-line-number="3">    renderElement (<span class="dt">Element</span> e) <span class="fu">=</span> <span class="kw">do</span></a></code></pre></div>
+<p><code>renderElement</code>の定義は簡単で、いくつかの小さな文字列を累積するために <code>Writer</code>モナドの <code>tell</code>アクションを使っています。</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb34-1" data-line-number="1">      tell <span class="st">&quot;&lt;&quot;</span></a>
+<a class="sourceLine" id="cb34-2" data-line-number="2">      tell e<span class="fu">.</span>name</a>
+<a class="sourceLine" id="cb34-3" data-line-number="3">      for_ e<span class="fu">.</span>attribs <span class="fu">$</span> \x <span class="ot">-&gt;</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb34-4" data-line-number="4">        tell <span class="st">&quot; &quot;</span></a>
+<a class="sourceLine" id="cb34-5" data-line-number="5">        renderAttribute x</a>
+<a class="sourceLine" id="cb34-6" data-line-number="6">      renderContent e<span class="fu">.</span>content</a></code></pre></div>
+<p>次に、同じように簡単な <code>renderAttribute</code>関数を定義します。</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb35-1" data-line-number="1">    <span class="kw">where</span></a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="ot">      renderAttribute ::</span> <span class="dt">Attribute</span> <span class="ot">-&gt;</span> <span class="dt">Writer</span> <span class="dt">String</span> <span class="dt">Unit</span></a>
+<a class="sourceLine" id="cb35-3" data-line-number="3">      renderAttribute (<span class="dt">Attribute</span> x) <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb35-4" data-line-number="4">        tell x<span class="fu">.</span>key</a>
+<a class="sourceLine" id="cb35-5" data-line-number="5">        tell <span class="st">&quot;=\&quot;&quot;</span></a>
+<a class="sourceLine" id="cb35-6" data-line-number="6">        tell x<span class="fu">.</span>value</a>
+<a class="sourceLine" id="cb35-7" data-line-number="7">        tell <span class="st">&quot;\&quot;&quot;</span></a></code></pre></div>
+<p><code>renderContent</code>関数は、もっと興味深いものです。ここでは、 <code>runFreeM</code>関数を使って、Freeモナドの内部で補助関数 <code>renderContentItem</code>に移譲する計算を解釈しています。</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="ot">      renderContent ::</span> <span class="dt">Maybe</span> (<span class="dt">Content</span> <span class="dt">Unit</span>) <span class="ot">-&gt;</span> <span class="dt">Writer</span> <span class="dt">String</span> <span class="dt">Unit</span></a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">      renderContent <span class="dt">Nothing</span> <span class="fu">=</span> tell <span class="st">&quot; /&gt;&quot;</span></a>
+<a class="sourceLine" id="cb36-3" data-line-number="3">      renderContent (<span class="dt">Just</span> content) <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb36-4" data-line-number="4">        tell <span class="st">&quot;&gt;&quot;</span></a>
+<a class="sourceLine" id="cb36-5" data-line-number="5">        runFreeM renderContentItem content</a>
+<a class="sourceLine" id="cb36-6" data-line-number="6">        tell <span class="st">&quot;&lt;/&quot;</span></a>
+<a class="sourceLine" id="cb36-7" data-line-number="7">        tell e<span class="fu">.</span>name</a>
+<a class="sourceLine" id="cb36-8" data-line-number="8">        tell <span class="st">&quot;&gt;&quot;</span></a></code></pre></div>
+<p><code>renderContentItem</code>の型は <code>runFreeM</code>の型シグネチャから推測することができます。関手 <code>f</code>は型構築子 <code>ContentF</code>で、モナド <code>m</code>は解釈している計算のモナド、つまり <code>Writer String</code>です。これにより <code>renderContentItem</code>について次の型シグネチャがわかります。</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="ot">      renderContentItem ::</span> <span class="dt">ContentF</span> (<span class="dt">Content</span> <span class="dt">Unit</span>) <span class="ot">-&gt;</span> <span class="dt">Writer</span> <span class="dt">String</span> (<span class="dt">Content</span> <span class="dt">Unit</span>)</a></code></pre></div>
 <p><code>ContentF</code>の二つのデータ構築子でパターン照合するだけで、この関数を実装することができます。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell">    renderContentItem (<span class="dt">TextContent</span> s rest) <span class="fu">=</span> <span class="kw">do</span>
-      tell s
-      rest
-    renderContentItem (<span class="dt">ElementContent</span> e rest) <span class="fu">=</span> <span class="kw">do</span>
-      renderElement e
-      rest</code></pre>
-<p>それぞれの場合において、式<code>rest</code>は型<code>Writer String</code>を持っており、解釈計算の残りを表しています。<code>rest</code>アクションを呼び出すことによって、それぞれの場合を完了することができます。</p>
-<p>これで完了です！<code>psci</code>で、次のように新しいモナドのAPIを試してみましょう。</p>
-<pre class="text"><code>&gt; :i Data.DOM.Free
-&gt; render $ p [] $ do
-    elem $ img [ src := &quot;cat.jpg&quot; ]
-    text &quot;A cat&quot;
-  
-&quot;&lt;p&gt;&lt;img src=\&quot;cat.jpg\&quot; /&gt;A cat&lt;/p&gt;&quot;</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb38-1" data-line-number="1">      renderContentItem (<span class="dt">TextContent</span> s rest) <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb38-2" data-line-number="2">        tell s</a>
+<a class="sourceLine" id="cb38-3" data-line-number="3">        pure rest</a>
+<a class="sourceLine" id="cb38-4" data-line-number="4">      renderContentItem (<span class="dt">ElementContent</span> e rest) <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb38-5" data-line-number="5">        renderElement e</a>
+<a class="sourceLine" id="cb38-6" data-line-number="6">        pure rest</a></code></pre></div>
+<p>それぞれの場合において、式 <code>rest</code>は型 <code>Writer String</code>を持っており、解釈計算の残りを表しています。 <code>rest</code>アクションを呼び出すことによって、それぞれの場合を完了することができます。</p>
+<p>これで完了です！<code>PSCi</code>で、次のように新しいモナドのAPIを試してみましょう。</p>
+<pre class="text"><code>&gt; import Prelude
+&gt; import Data.DOM.Free
+&gt; import Control.Monad.Eff.Console
+
+&gt; :paste
+… log $ render $ p [] $ do
+…   elem $ img [ src := &quot;cat.jpg&quot; ]
+…   text &quot;A cat&quot;
+… ^D
+
+&lt;p&gt;&lt;img src=&quot;cat.jpg&quot; /&gt;A cat&lt;/p&gt;
+unit</code></pre>
 <blockquote>
 <h2 id="演習-2" class="unnumbered">演習</h2>
 <ol type="1">
-<li><p>(やや難しい) <code>ContentF</code>型に新しいデータ構築子を追加して、生成されたHTMLにコメントを出力する新しいアクション<code>comment</code>に対応してください。<code>liftF</code>を使ってこの新しいアクションを実装してください。新しい構築子を適切に解釈するように、解釈<code>renderContentItem</code>を更新してください。</p></li>
-<li><p>(難しい)　<code>goM</code>と<code>iterM</code>関数の問題のひとつに、<strong>スタック安全</strong>でないというものがあります。大きいモナドのアクションは、解釈したときにスタックオーバーフローを引き起こす可能性があるのです。しかしながら、<code>Control.Monad.Free</code>ライブラリは、スタック安全な <code>go</code>と<code>goEff</code>関数を提供しています。<code>Writer</code>モナドの代わりに<code>ST</code>作用を利用して、<code>goEff</code>関数を使って<code>Content</code>モナドを解釈してください。</p></li>
+<li>(やや難しい)<code>ContentF</code>型に新しいデータ構築子を追加して、生成されたHTMLにコメントを出力する新しいアクション <code>comment</code>に対応してください。 <code>liftF</code>を使ってこの新しいアクションを実装してください。新しい構築子を適切に解釈するように、解釈 <code>renderContentItem</code>を更新してください。</li>
 </ol>
 </blockquote>
 <h2 id="言語の拡張"><span class="header-section-number">14.8</span> 言語の拡張</h2>
-<p>すべてのアクションが型<code>Unit</code>の何かを返すようなモナドは、さほど興味深いものではありません。実際のところ、概ね良くなったと思われる構文は別として、このモナドは<code>Monoid</code>以上の機能は何の追加していません。</p>
+<p>すべてのアクションが型 <code>Unit</code>の何かを返すようなモナドは、さほど興味深いものではありません。実際のところ、概ね良くなったと思われる構文は別として、このモナドは <code>Monoid</code>以上の機能は何の追加していません。</p>
 <p>意味のある結果を返す新しいモナドアクションでこの言語を拡張することで、Freeモナド構造の威力を説明しましょう​​。</p>
 <p><strong>アンカー</strong>を使用して文書のさまざまな節へのハイパーリンクが含まれているHTML文書を生成するとします。手作業でアンカーの名前を生成すればいいので、これは既に実現できています。文書中で少なくとも２回、ひとつはアンカーの定義自身に、もうひとつはハイパーリンクに、アンカーが含まれています。しかし、この方法には根本的な問題がいくつかあります。</p>
 <ul>
@@ -588,80 +641,88 @@ render e <span class="fu">=</span> execWriter <span class="fu">$</span> renderEl
 </ul>
 <p>自分の間違いから開発者を保護するために、アンカー名を表す新しい型を導入し、新しい一意な名前を生成するためのモナドアクションを提供することができます。</p>
 <p>最初の手順は、名前の型を新しく追加することです。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">Name</span> <span class="fu">=</span> <span class="dt">Name</span> <span class="dt">String</span>
+<div class="sourceCode" id="cb40"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">newtype</span> <span class="dt">Name</span> <span class="fu">=</span> <span class="dt">Name</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb40-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb40-3" data-line-number="3"><span class="ot">runName ::</span> <span class="dt">Name</span> <span class="ot">-&gt;</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb40-4" data-line-number="4">runName (<span class="dt">Name</span> n) <span class="fu">=</span> n</a></code></pre></div>
+<p>繰り返しになりますが、 <code>Name</code>は <code>String</code>のnewtypeとして定義しており、モジュールのエクスポートリスト内でデータ構築子をエクスポートしないように注意する必要があります。</p>
+<p>次に、属性値として <code>Name</code>を使うことができるように、新しい型 <code>IsValue</code>型クラスのインスタンスを定義します。</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">instance</span><span class="ot"> nameIsValue ::</span> <span class="dt">IsValue</span> <span class="dt">Name</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb41-2" data-line-number="2">  toValue (<span class="dt">Name</span> n) <span class="fu">=</span> n</a></code></pre></div>
+<p>また、次のように <code>a</code>要素に現れるハイパーリンクの新しいデータ型を定義します。</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Href</span></a>
+<a class="sourceLine" id="cb42-2" data-line-number="2">  <span class="fu">=</span> <span class="dt">URLHref</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb42-3" data-line-number="3">  <span class="fu">|</span> <span class="dt">AnchorHref</span> <span class="dt">Name</span></a>
+<a class="sourceLine" id="cb42-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb42-5" data-line-number="5"><span class="kw">instance</span><span class="ot"> hrefIsValue ::</span> <span class="dt">IsValue</span> <span class="dt">Href</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb42-6" data-line-number="6">  toValue (<span class="dt">URLHref</span> url) <span class="fu">=</span> url</a>
+<a class="sourceLine" id="cb42-7" data-line-number="7">  toValue (<span class="dt">AnchorHref</span> (<span class="dt">Name</span> nm)) <span class="fu">=</span> <span class="st">&quot;#&quot;</span> <span class="fu">&lt;&gt;</span> nm</a></code></pre></div>
+<p><code>href</code>属性の型の値を変更して、この新しい <code>Href</code>型の使用を強制します。また、要素をアンカーに変換するのに使う新しい <code>name</code>属性を作成します。</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="ot">href ::</span> <span class="dt">AttributeKey</span> <span class="dt">Href</span></a>
+<a class="sourceLine" id="cb43-2" data-line-number="2">href <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;href&quot;</span></a>
+<a class="sourceLine" id="cb43-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb43-4" data-line-number="4"><span class="ot">name ::</span> <span class="dt">AttributeKey</span> <span class="dt">Name</span></a>
+<a class="sourceLine" id="cb43-5" data-line-number="5">name <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;name&quot;</span></a></code></pre></div>
+<p>残りの問題は、現在モジュールの使用者が新しい名前を生成する方法がないということです。 <code>Content</code>モナドでこの機能を提供することができます。まず、 <code>ContentF</code>型構築子に新しいデータ構築子を追加する必要があります。</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">data</span> <span class="dt">ContentF</span> a</a>
+<a class="sourceLine" id="cb44-2" data-line-number="2">  <span class="fu">=</span> <span class="dt">TextContent</span> <span class="dt">String</span> a</a>
+<a class="sourceLine" id="cb44-3" data-line-number="3">  <span class="fu">|</span> <span class="dt">ElementContent</span> <span class="dt">Element</span> a</a>
+<a class="sourceLine" id="cb44-4" data-line-number="4">  <span class="fu">|</span> <span class="dt">NewName</span> (<span class="dt">Name</span> <span class="ot">-&gt;</span> a)</a></code></pre></div>
+<p><code>NewName</code>データ構築子は型 <code>Name</code>の値を返すアクションに対応しています。データ構築子の引数として <code>Name</code>を要求するのではなく、型 <code>Name -&gt; a</code>の<strong>関数</strong>を提供するように使用者に要求していることに注意してください。型 <code>a</code>は<strong>計算の残り</strong>を表していることを思い出すと、この関数は、型 <code>Name</code>の値が返されたあとで、計算を継続する方法を提供するというように直感的に理解することができます。</p>
+<p>新しいデータ構築子を考慮するように、 <code>ContentF</code>についての <code>Functor</code>インスタンスを更新する必要があります。</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">instance</span><span class="ot"> functorContentF ::</span> <span class="dt">Functor</span> <span class="dt">ContentF</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb45-2" data-line-number="2">  map f (<span class="dt">TextContent</span> s x) <span class="fu">=</span> <span class="dt">TextContent</span> s (f x)</a>
+<a class="sourceLine" id="cb45-3" data-line-number="3">  map f (<span class="dt">ElementContent</span> e x) <span class="fu">=</span> <span class="dt">ElementContent</span> e (f x)</a>
+<a class="sourceLine" id="cb45-4" data-line-number="4">  map f (<span class="dt">NewName</span> k) <span class="fu">=</span> <span class="dt">NewName</span> (f <span class="fu">&lt;&lt;&lt;</span> k)</a></code></pre></div>
+<p>そして、先ほど述べたように、 <code>liftF</code>関数を使うと新しいアクションを構築することができます。</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="ot">newName ::</span> <span class="dt">Content</span> <span class="dt">Name</span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2">newName <span class="fu">=</span> liftF <span class="fu">$</span> <span class="dt">NewName</span> id</a></code></pre></div>
+<p><code>id</code>関数を継続として提供していることに注意してください。型 <code>Name</code>の結果を変更せずに返すということを意味しています。</p>
+<p>最後に、新しいアクションを解釈するために、解釈関数を更新する必要があります。以前は計算を解釈するために <code>Writer String</code>モナドを使っていましたが、このモナドは新しい名前を生成する能力を持っていないので、何か他のものに切り替えなければなりません。</p>
+<p><code>WriterT</code>モナド変換子は <code>State</code>モナドと共に使用して、必要な効果を組み合わせることができます。型シグネチャを短く保てるように、この解釈モナドを型同義語としての定義しておきます。</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw">type</span> <span class="dt">Interp</span> <span class="fu">=</span> <span class="dt">WriterT</span> <span class="dt">String</span> (<span class="dt">State</span> <span class="dt">Int</span>)</a></code></pre></div>
+<p>Int型の引数は状態の型で、この場合は増加していくカウンタとして振る舞う数で、一意な名前を生成するのに使われます。</p>
+<p><code>Writer</code>と <code>WriterT</code>モナドはそれらのアクションを抽象化するのに同じ型クラスメンバを使うので、どのアクションも変更する必要がありません。必要なのは、 <code>Writer String</code>への参照すべてを <code>Interp</code>で置き換えることだけです。しかし、この計算を実行するために使われるハンドラを変更しなければいけません。 <code>execWriter</code>の代わりに、 <code>evalState</code>を使います。</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="ot">render ::</span> <span class="dt">Element</span> <span class="ot">-&gt;</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb48-2" data-line-number="2">render e <span class="fu">=</span> evalState (execWriterT (renderElement e)) <span class="dv">0</span></a></code></pre></div>
+<p>新しい <code>NewName</code>データ構築子を解釈するために、 <code>renderContentItem</code>に新しい場合分けを追加しなければいけません。</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb49-1" data-line-number="1">renderContentItem (<span class="dt">NewName</span> k) <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb49-2" data-line-number="2">  n <span class="ot">&lt;-</span> get</a>
+<a class="sourceLine" id="cb49-3" data-line-number="3">  <span class="kw">let</span> fresh <span class="fu">=</span> <span class="dt">Name</span> <span class="fu">$</span> <span class="st">&quot;name&quot;</span> <span class="fu">&lt;&gt;</span> show n</a>
+<a class="sourceLine" id="cb49-4" data-line-number="4">  put <span class="fu">$</span> n <span class="fu">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb49-5" data-line-number="5">  pure (k fresh)</a></code></pre></div>
+<p>ここで、型 <code>Name -&gt; Interp a</code>の継続 <code>k</code>が与えられているので、型 <code>Interp a</code>の解釈を構築しなければいけません。この解釈は単純です。 <code>get</code>を使って状態を読み、その状態を使って一意な名前を生成し、それから <code>put</code>で状態をインクリメントしています。最後に、継続にこの新しい名前を渡して、計算を完了します。</p>
+<p>これにより、 <code>PSCi</code>で、 <code>Content</code>モナドの内部で一意な名前を生成し、要素の名前とハイパーリンクのリンク先の両方を使って、この新しい機能を試してみましょう。</p>
+<pre class="text"><code>&gt; import Prelude
+&gt; import Data.DOM.Name
+&gt; import Control.Monad.Eff.Console
 
-<span class="ot">runName ::</span> <span class="dt">Name</span> <span class="ot">-&gt;</span> <span class="dt">String</span>
-runName (<span class="dt">Name</span> n) <span class="fu">=</span> n</code></pre>
-<p>繰り返しになりますが、<code>Name</code>は<code>String</code>のnewtypeとして定義しており、モジュールのエクスポートリスト内でデータ構築子をエクスポートしないように注意する必要があります。</p>
-<p>次に、属性値として<code>Name</code>を使うことができるように、新しい型<code>IsValue</code>型クラスのインスタンスを定義します。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> nameIsValue ::</span> <span class="dt">IsValue</span> <span class="dt">Name</span> <span class="kw">where</span>
-  toValue (<span class="dt">Name</span> n) <span class="fu">=</span> n</code></pre>
-<p>また、次のように<code>a</code>要素に現れるハイパーリンクの新しいデータ型を定義します。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Href</span>
-  <span class="fu">=</span> <span class="dt">URLHref</span> <span class="dt">String</span>
-  <span class="fu">|</span> <span class="dt">AnchorHref</span> <span class="dt">Name</span>
+&gt; :paste
+… render $ p [ ] $ do
+…   top &lt;- newName
+…   elem $ a [ name := top ] $
+…     text &quot;Top&quot;
+…   elem $ a [ href := AnchorHref top ] $
+…     text &quot;Back to top&quot;
+… ^D
 
-<span class="kw">instance</span><span class="ot"> hrefIsValue ::</span> <span class="dt">IsValue</span> <span class="dt">Href</span> <span class="kw">where</span>
-  toValue (<span class="dt">URLHref</span> url) <span class="fu">=</span> url
-  toValue (<span class="dt">AnchorHref</span> (<span class="dt">Name</span> nm)) <span class="fu">=</span> <span class="st">&quot;#&quot;</span> <span class="fu">++</span> nm</code></pre>
-<p><code>href</code>属性の型の値を変更して、この新しい<code>Href</code>型の使用を強制します。また、要素をアンカーに変換するのに使う新しい<code>name</code>属性を作成します。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">href ::</span> <span class="dt">AttributeKey</span> <span class="dt">Href</span>
-href <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;href&quot;</span>
-
-<span class="ot">name ::</span> <span class="dt">AttributeKey</span> <span class="dt">Name</span>
-name <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class="st">&quot;name&quot;</span></code></pre>
-<p>残りの問題は、現在モジュールの使用者が新しい名前を生成する方法がないということです。<code>Content</code>モナドでこの機能を提供することができます。まず、<code>ContentF</code>型構築子に新しいデータ構築子を追加する必要があります。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">ContentF</span> a
-  <span class="fu">=</span> <span class="dt">TextContent</span> <span class="dt">String</span> a
-  <span class="fu">|</span> <span class="dt">ElementContent</span> <span class="dt">Element</span> a
-  <span class="fu">|</span> <span class="dt">NewName</span> (<span class="dt">Name</span> <span class="ot">-&gt;</span> a)</code></pre>
-<p><code>NewName</code>データ構築子は型<code>Name</code>の値を返すアクションに対応しています。データ構築子の引数として<code>Name</code>を要求するのではなく、型<code>Name -&gt; a</code>の<strong>関数</strong>を提供するように使用者に要求していることに注意してください。型<code>a</code>は<strong>計算の残り</strong>を表していることを思い出すと、この関数は、型<code>Name</code>の値が返されたあとで、計算を継続する方法を提供するというように直感的に理解することができます。</p>
-<p>新しいデータ構築子を考慮するように、<code>ContentF</code>についての<code>Functor</code>インスタンスを更新する必要があります。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> functorContentF ::</span> <span class="dt">Functor</span> <span class="dt">ContentF</span> <span class="kw">where</span>
-  (<span class="fu">&lt;$&gt;</span>) f (<span class="dt">TextContent</span> s a) <span class="fu">=</span> <span class="dt">TextContent</span> s (f a)
-  (<span class="fu">&lt;$&gt;</span>) f (<span class="dt">ElementContent</span> e a) <span class="fu">=</span> <span class="dt">ElementContent</span> e (f a)
-  (<span class="fu">&lt;$&gt;</span>) f (<span class="dt">NewName</span> k) <span class="fu">=</span> <span class="dt">NewName</span> (f <span class="fu">&lt;&lt;&lt;</span> k)</code></pre>
-<p>そして、先ほど述べたように、<code>liftF</code>関数を使うと新しいアクションを構築することができます。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">newName ::</span> <span class="dt">Content</span> <span class="dt">Name</span>
-newName <span class="fu">=</span> <span class="dt">Content</span> <span class="fu">$</span> liftF <span class="fu">$</span> <span class="dt">NewName</span> id</code></pre>
-<p><code>id</code>関数を継続として提供していることに注意してください。型<code>Name</code>の結果を変更せずに返すということを意味しています。</p>
-<p>最後に、新しいアクションを解釈するために、解釈関数を更新する必要があります。以前は計算を解釈するために<code>Writer String</code>モナドを使っていましたが、このモナドは新しい名前を生成する能力を持っていないので、何か他のものに切り替えなければなりません。<code>RWS</code>モナドなら、<code>Writer</code>の機能を提供するだけでなく、純粋な状態を扱うことができます。型シグネチャを短く保てるように、この解釈モナドを型同義語としての定義しておきます。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Interp</span> <span class="fu">=</span> <span class="dt">RWS</span> <span class="dt">Unit</span> <span class="dt">String</span> <span class="dt">Number</span></code></pre>
-<p><code>RWS</code>モナドは3つの型引数を取ることを思い出してください。 最初は大域的な設定で、今回は単なる<code>Unit</code>です。２つめは「ログ」型で、累積するH TML文字列です。最後の引数は状態の型で、この場合は増加していくカウンタとして振る舞う数で、一意な名前を生成するのに使われます。</p>
-<p><code>Writer</code>と<code>RWS</code>モナドはそれらのアクションを抽象化するのに同じ型クラスメンバを使うので、どのアクションも変更する必要がありません。必要なのは、<code>Writer String</code>への参照すべてを<code>Interp</code>で置き換えることだけです。しかし、この計算を実行するために使われるハンドラを変更しなければいけません。<code>execWriter</code>の代わりに、<code>evalRWS</code>を使います。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">render ::</span> <span class="dt">Element</span> <span class="ot">-&gt;</span> <span class="dt">String</span>
-render e <span class="fu">=</span> snd <span class="fu">$</span> evalRWS (renderElement e) unit <span class="dv">0</span></code></pre>
-<p><code>snd</code>の呼び出しは<code>evalRWS</code>から返された<code>Tuple</code>の<strong>２番めの要素</strong>だけを返すようにします。この場合は、累積されたHTML文字列を表しています。</p>
-<p>新しい<code>NewName</code>データ構築子を解釈するために、<code>renderContentItem</code>に新しい場合分けを追加しなければいけません。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell">    renderContentItem (<span class="dt">NewName</span> k) <span class="fu">=</span> <span class="kw">do</span>
-      n <span class="ot">&lt;-</span> get
-      <span class="kw">let</span> name <span class="fu">=</span> <span class="dt">Name</span> <span class="fu">$</span> <span class="st">&quot;name&quot;</span> <span class="fu">++</span> show n
-      put <span class="fu">$</span> n <span class="fu">+</span> <span class="dv">1</span>
-      k name</code></pre>
-<p>ここで、型<code>Name -&gt; Interp a</code>の継続<code>k</code>が与えられているので、型<code>Interp a</code>の解釈を構築しなければいけません。この解釈は単純です。<code>get</code>を使って状態を読み、その状態を使って一意な名前を生成し、それから<code>put</code>で状態をインクリメントしています。最後に、継続にこの新しい名前を渡して、計算を完了します。</p>
-<p>これにより、<code>psci</code>で、<code>Content</code>モナドの内部で一意な名前を生成し、要素の名前とハイパーリンクのリンク先の両方を使って、この新しい機能を試してみましょう。</p>
-<pre class="text"><code>&gt; :i Data.DOM.Name
-&gt; render $ p [ ] $ do
-    top &lt;- newName
-    elem $ a [ name := top ] $ 
-      text &quot;Top&quot;
-    elem $ a [ href := AnchorHref top1 ] $ 
-      text &quot;Back to top&quot;
-  
-&quot;&lt;p&gt;&lt;a name=\&quot;name0\&quot;&gt;Top&lt;/a&gt;&lt;a href=\&quot;#name0\&quot;&gt;Back to top&lt;/a&gt;&lt;/p&gt;&quot;</code></pre>
-<p>複数回の<code>newName</code>呼び出しの結果が、実際に一意な名前になっていることを確かめてみてください。</p>
+&lt;p&gt;&lt;a name=&quot;name0&quot;&gt;Top&lt;/a&gt;&lt;a href=&quot;#name0&quot;&gt;Back to top&lt;/a&gt;&lt;/p&gt;
+unit</code></pre>
+<p>複数回の <code>newName</code>呼び出しの結果が、実際に一意な名前になっていることを確かめてみてください。</p>
 <blockquote>
 <h2 id="演習-3" class="unnumbered">演習</h2>
 <ol type="1">
-<li><p>(やや難しい) 使用者から<code>Element</code>型を隠蔽すると、さらにAPIを簡素化することができます。次の手順に従って、これらの変更を行ってください。</p>
+<li><p>(やや難しい) 使用者から <code>Element</code>型を隠蔽すると、さらにAPIを簡素化することができます。次の手順に従って、これらの変更を行ってください。</p>
 <ul>
-<li><code>p</code>や<code>img</code>のような(返り値が<code>Element</code>の)関数を<code>elem</code>アクションと結合して、型<code>Content Unit</code>を返す新しいアクションを作ってください。</li>
-<li>型<code>Content a</code>の引数を許容し、結果の型<code>Tuple String</code>を返すように、<code>render</code>関数を変更してください。</li>
+<li><code>p</code>や <code>img</code>のような(返り値が <code>Element</code>の)関数を <code>elem</code>アクションと結合して、型 <code>Content Unit</code>を返す新しいアクションを作ってください。</li>
+<li>型 <code>Content a</code>の引数を許容し、結果の型 <code>Tuple String</code>を返すように、 <code>render</code>関数を変更してください。</li>
 </ul></li>
-<li><p>(難しい) 次の新しいアクションをサポートするように、<code>ContentF</code>タイプを変更してください。</p>
-<pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">isMobile ::</span> <span class="dt">Content</span> <span class="dt">Boolean</span></code></pre></li>
+<li><p>(やや難しい) 型同義語の代わりに <code>newtype</code>を使って <code>Content</code>モナドの実装を隠し、 <code>newtype</code>のためにデータ構築子をエクスポートしないでください。</p></li>
+<li><p>(難しい) 次の新しいアクションをサポートするように、 <code>ContentF</code>タイプを変更してください。</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="ot">isMobile ::</span> <span class="dt">Content</span> <span class="dt">Boolean</span></a></code></pre></div></li>
 </ol>
-<p>　 このアクションは、この文書がモバイルデバイス上での表示のためにレンダリングされているかどうかを示す真偽値を返します。 　<br />　 <strong>ヒント</strong>： <code>RWS</code>モナドの<code>ask</code>アクションと <code>Reader</code>コンポーネントを使って、このアクションを解釈してください。</p>
+<p>　 このアクションは、この文書がモバイルデバイス上での表示のためにレンダリングされているかどうかを示す真偽値を返します。 　<br />
+　 <strong>ヒント</strong>：<code>ask</code>アクションと <code>ReaderT</code>型変換子を使って、このアクションを解釈してください。あるいは、 <code>RWS</code>モナドを使うことを検討してみてください。</p>
 </blockquote>
 <h2 id="まとめ"><span class="header-section-number">14.9</span> まとめ</h2>
 <p>この章では、いくつかの標準的な技術を使って、単純な実装を段階的に改善することにより、HTML文書を作成するための領域特化言語を開発しました。</p>
@@ -669,7 +730,7 @@ render e <span class="fu">=</span> snd <span class="fu">$</span> evalRWS (render
 <li>データ表現の詳細を隠蔽し、<strong>構築方法により正しい</strong>文書を作ることだけを許可するために、<strong>スマート構築子</strong>を使いました。</li>
 <li>言語の構文を改善するために、<strong>ユーザ定義の中置２項演算子</strong>を使用しました。</li>
 <li>使用者が間違った型の属性値を提供するのを防ぐために、データの型に追加の情報を符号化する<strong>幻影型</strong>を使用しました。</li>
-<li>Freeモナドを使って、内容の集まりの配列内包表記をdo表記を提供するモナド表現に変換しました。モナドの新しいアクションをサポートするためにこの表現を拡張し、<code>Writer</code>と<code>RWS</code>モナドでモナド計算を解釈しました。</li>
+<li><strong>Freeモナド</strong>を使って、内容の集まりの配列内包表記をdo表記で提供するモナド表現に変換しました。モナドの新しいアクションをサポートするためにこの表現を拡張し、標準のモナド型変換子でモナド計算を解釈しました。</li>
 </ul>
 <p>使用者が間違いを犯すのを防ぎ、領域特化言語の構文を改良するために、これらの手法はすべてPureScriptのモジュールと型システムを活用しています。</p>
 <p>関数型プログラミング言語による領域特化言語の実装は活発に研究されている分野ですが、いくつかの簡単なテクニックに対して役に立つ導入を提供し、表現力豊かな型を持つ言語で作業すること威力を示すことができていれば幸いです。</p>
