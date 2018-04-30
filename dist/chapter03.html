@@ -130,17 +130,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       letter-spacing: 0.12em;
     }
 
-    .columns2 {
-      -webkit-column-count: 2; /* Chrome, Safari, Opera */
-      -moz-column-count: 2; /* Firefox */
-      column-count: 2;
+    .markdown-body.content h2 {
+      margin-top: 4em;
     }
-
-    .columns3 {
-      -webkit-column-count: 3; /* Chrome, Safari, Opera */
-      -moz-column-count: 3; /* Firefox */
-      column-count: 3;
-    }    
 
     table.sourceCode tr {
       padding: 0;
@@ -214,7 +206,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2 id="この章の目標"><span class="header-section-number">3.1</span> この章の目標</h2>
 <p>この章では、関数およびレコードというPureScriptプログラムのふたつの構成要素を導入します。さらに、どのようにPureScriptプログラムを構造化するのか、どのように型をプログラム開発に役立てるかを見ていきます。　</p>
 <p>連絡先のリストを管理する簡単​​な住所録アプリケーションを作成していきます。このコード例により、PureScriptの構文からいくつかの新しい概念を導入します。</p>
-<p>このアプリケーションのフロントエンドは対話式処理系 <code>PSCi</code>を使うようにしますが、JavaScriptでフロントエンドを書くこともできるでしょう。実際に後の章で、フォームの検証と保存/復元の機能追加を詳しく説明します。</p>
+<p>このアプリケーションのフロントエンドは対話式処理系 <code>PSCi</code>を使うようにしていますが、JavaScriptでフロントエンドを書くこともできるでしょう。実際に後の章で、フォームの検証と保存および復元の機能追加について詳しく説明します。</p>
 <h2 id="プロジェクトの準備"><span class="header-section-number">3.2</span> プロジェクトの準備</h2>
 <p>この章のソースコードは <code>src/Data/AddressBook.purs</code>というファイルに含まれています。このファイルは次のようなモジュール宣言とインポート一覧から始まります。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">module</span> <span class="dt">Data.AddressBook</span> <span class="kw">where</span>
@@ -231,13 +223,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>Data.Maybe</code>モジュールは、値が存在したりしなかったりするような、オプショナルな値を扱うためのデータ型と関数を定義しています。</li>
 <li>ダブルドット(..)を使用すると、指定された型コンストラクタのすべてのデータコンストラクタをインポートできます。</li>
 </ul>
-<p>このモジュールのインポート内容は括弧内で明示的に列挙されていることに注意してください。明示的な列挙はインポート内容の衝突を避けるのに役に立つので、一般に良い習慣です。</p>
-<p>ソースコードリポジトリを複製したと仮定すると、この章のプロジェクトは、次のコマンドを使用してPulpを使用して構築できます。</p>
+<p>このモジュールのインポート内容が括弧内で明示的に列挙されていることに注目してください。明示的な列挙はインポート内容の衝突を避けるのに役に立つので、一般に良い習慣です。</p>
+<p>ソースコードリポジトリを複製したと仮定すると、この章のプロジェクトは次のコマンドを使用してPulpを使用して構築できます。</p>
 <pre class="text"><code>$ cd chapter3
 $ bower update
 $ pulp build</code></pre>
 <h2 id="単純な型"><span class="header-section-number">3.3</span> 単純な型</h2>
-<p>JavaScriptのプリミティブ型に対応する組み込みデータ型として、PureScriptでは数値型と文字列型、真偽型の３つが定義されています。すべてのモジュールに暗黙にインポートされる <code>Prim</code>モジュールでこれらの型は定義されています。これらの型はそれぞれ <code>Number</code>、 <code>String</code>、 <code>Boolean</code>と呼ばれ、 <code>pulp repl</code>の <code>:type</code>コマンドを使用すると簡単な値の型を確認できます。</p>
+<p>JavaScriptのプリミティブ型に対応する組み込みデータ型として、PureScriptでは数値型と文字列型、真偽型の３つが定義されており、それぞれ <code>Number</code>、 <code>String</code>、 <code>Boolean</code>と呼ばれています。これらの型はすべてのモジュールに暗黙にインポートされる <code>Prim</code>モジュールで定義されています。<code>pulp repl</code>の <code>:type</code>コマンドを使用すると、簡単な値の型を確認できます。</p>
 <pre class="text"><code>$ pulp repl
 
 &gt; :type 1.0
@@ -248,11 +240,11 @@ String
 
 &gt; :type true
 Boolean</code></pre>
-<p>PureScriptには他にも配列とレコード、関数などの組み込み型が定義されています。</p>
-<p>整数は、小数点の欠如によって、型 <code>Number</code>の浮動小数点の値と区別されます。</p>
+<p>PureScriptには他にも、配列とレコード、関数などの組み込み型が定義されています。</p>
+<p>整数は、小数点以下を省くことによって、型 <code>Number</code>の浮動小数点数の値と区別されます。</p>
 <pre class="text"><code>&gt; :type 1
 Int</code></pre>
-<p>文字リテラルは二重引用符を使用する文字列リテラルとは異なり、一重引用符で囲みます。</p>
+<p>二重引用符を使用する文字列リテラルとは異なり、文字リテラルは一重引用符で囲みます。</p>
 <pre class="text"><code>&gt; :type &#39;a&#39;
 Char</code></pre>
 <p>配列はJavaScriptの配列に対応していますが、JavaScriptの配列とは異なり、PureScriptの配列のすべての要素は同じ型を持つ必要があります。</p>
@@ -294,7 +286,7 @@ forall a b. a -&gt; b -&gt; a</code></pre>
 <p>ファイルのトップレベルでは、等号の直前に引数を指定することで関数を定義することができます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">add ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span>
 add x y <span class="fu">=</span> x <span class="fu">+</span> y</code></pre></div>
-<p>バックスラッシュに続けて空白文字で区切られた引数名のリストを書くと、関数をインラインで定義することもできます。PSCiで複数行の宣言を入力するには、 <code>：paste</code>コマンドを使用して&quot;paste mode&quot;に入ります。このモードでは、<strong>Control-D</strong>キーシーケンスを使用して宣言を終了します。</p>
+<p>バックスラッシュに続けて空白文字で区切られた引数名のリストを書くことで、関数をインラインで定義することもできます。PSCiで複数行の宣言を入力するには、 <code>：paste</code>コマンドを使用して&quot;paste mode&quot;に入ります。このモードでは、<strong>Control-D</strong>キーシーケンスを使用して宣言を終了します。</p>
 <pre class="text"><code>&gt; :paste
 … add :: Int -&gt; Int -&gt; Int
 … add = \x y -&gt; x + y
@@ -306,7 +298,7 @@ add x y <span class="fu">=</span> x <span class="fu">+</span> y</code></pre></di
 <p>前の節ではPreludeで定義された関数の型をいくつか見てきました。たとえば <code>flip</code>関数は次のような型を持っていました。</p>
 <pre class="text"><code>&gt; :type flip
 forall a b c. (a -&gt; b -&gt; c) -&gt; b -&gt; a -&gt; c</code></pre>
-<p>この <code>forall</code>キーワードは <code>flip</code>が<strong>全称量化された型</strong>(universally quantified type)を持っていることを示しています。これは、 <code>a</code>や <code>b</code>、 <code>c</code>をどの型に置き換えても、 <code>flip</code>はその型でうまく動作するという意味です。</p>
+<p>この <code>forall</code>キーワードは、 <code>flip</code>が<strong>全称量化された型</strong>(universally quantified type)を持っていることを示しています。これは、 <code>a</code>や <code>b</code>、 <code>c</code>をどの型に置き換えても、 <code>flip</code>はその型でうまく動作するという意味です。</p>
 <p>例えば、 <code>a</code>を <code>Int</code>、 <code>b</code>を <code>String</code>、 <code>c</code>を <code>String</code>というように選んでみたとします。この場合、 <code>flip</code>の型を次のように<strong>特殊化</strong>(specialize)することができます。</p>
 <pre class="text"><code>(Int -&gt; String -&gt; String) -&gt; String -&gt; Int -&gt; String</code></pre>
 <p>量化された型を特殊化したいということをコードで示す必要はありません。特殊化は自動的に行われます。たとえば、すでにその型の <code>flip</code>を持っていたかのように、次のように単に <code>flip</code>を使用することができます。</p>
@@ -347,9 +339,9 @@ y <span class="fu">+</span> z</code></pre></div>
 <h2 id="独自の型の定義"><span class="header-section-number">3.6</span> 独自の型の定義</h2>
 <p>PureScriptで新たな問題に取り組むときは、まずはこれから扱おうとする値の型の定義を書くことから始めるのがよいでしょう。最初に、住所録に含まれるレコードの型を定義してみます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Entry</span> <span class="fu">=</span> {<span class="ot"> firstName ::</span> <span class="dt">String</span>,<span class="ot"> lastName ::</span> <span class="dt">String</span>,<span class="ot"> address ::</span> <span class="dt">Address</span> }</code></pre></div>
-<p>これは <code>Entry</code>という<strong>型同義語</strong>(type synonym、型シノニム)を定義しています。 型 <code>Entry</code>は等号の右辺と同じ型ということです。レコードの型はいずれも文字列である <code>firstName</code>、 <code>lastName</code>、 <code>phone</code>という３つのフィールドからなります。前者２つのフィールドは型 <code>String</code>を持ち、 <code>address</code>は型 <code>Address</code>を持ち以下の用に定義されています。</p>
+<p>これは <code>Entry</code>という<strong>型同義語</strong>(type synonym、型シノニム)を定義しています。 型 <code>Entry</code>は等号の右辺と同じ型ということです。レコードの型はいずれも文字列である <code>firstName</code>、 <code>lastName</code>、 <code>phone</code>という３つのフィールドからなります。前者の２つのフィールドは型 <code>String</code>を持ち、 <code>address</code>は以下のように定義された型 <code>Address</code>を持っています。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Address</span> <span class="fu">=</span> {<span class="ot"> street ::</span> <span class="dt">String</span>,<span class="ot"> city ::</span> <span class="dt">String</span>,<span class="ot"> state ::</span> <span class="dt">String</span> }</code></pre></div>
-<p>それでは、２つめの型別名も定義してみましょう。住所録のデータ構造として、単に項目の連結リストとして格納することにします。</p>
+<p>それでは、２つめの型同義語も定義してみましょう。住所録のデータ構造としては、単に項目の連結リストとして格納することにします。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">AddressBook</span> <span class="fu">=</span> <span class="dt">List</span> <span class="dt">Entry</span></code></pre></div>
 <p><code>List Entry</code>は <code>Array Entry</code>とは同じではないということに注意してください。 <code>Array Entry</code>は住所録の項目の<strong>配列</strong>を意味しています。</p>
 <h2 id="型構築子と種"><span class="header-section-number">3.7</span> 型構築子と種</h2>
@@ -500,8 +492,8 @@ head<span class="ot"> ::</span> <span class="dt">AddressBook</span> <span class=
 apply f x <span class="fu">=</span> f x
 
 <span class="kw">infixr</span> <span class="dv">0</span> apply as <span class="fu">$</span></code></pre></div>
-<p>ここで、 <code>apply</code>は関数と値をとり、その値にその関数を適用します。 <code>infixr</code>キーワードは <code>($)</code>を <code>apply</code>のエイリアスとして定義します。</p>
-<p>しかし、なぜ通常の関数適用の代わりに <code>$</code>を使ったのでしょうか？その理由は <code>$</code>は右結合で優先順位の低い演算子だということにあります。これは、深い入れ子になった関数適用のための括弧を、 <code>$</code>を使うと取り除くことができることを意味します。</p>
+<p>ここで、 <code>apply</code>は関数と値をとり、その値にその関数を適用します。 <code>infixr</code>キーワードは <code>($)</code>を <code>apply</code>の別名として定義します。</p>
+<p>しかし、なぜ通常の関数適用の代わりに <code>$</code>を使ったのでしょうか？　その理由は <code>$</code>は右結合で優先順位の低い演算子だということにあります。これは、深い入れ子になった関数適用のための括弧を、 <code>$</code>を使うと取り除くことができることを意味します。</p>
 <p>たとえば、ある従業員の上司の住所がある道路を見つける、次の入れ子になった関数適用を考えてみましょう。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">street (address (boss employee))</code></pre></div>
 <p>これは <code>$</code>を使用して表現すればずっと簡単になります。</p>
@@ -568,7 +560,6 @@ Just (&quot;Smith, John: 123 Fake St., Faketown, CA&quot;)</code></pre>
 <h2 id="まとめ"><span class="header-section-number">3.16</span> まとめ</h2>
 <p>この章では、関数型プログラミングの新しい概念をいくつか導入しました。</p>
 <ul>
-<li>不変データ型と純粋な関数の重要性</li>
 <li>対話的モード <code>PSCi</code>を使用して関数を調べるなど思いついたことを試す方法</li>
 <li>検証や実装の道具としての型の役割</li>
 <li>多引数関数を表現する、カリー化された関数の使用</li>

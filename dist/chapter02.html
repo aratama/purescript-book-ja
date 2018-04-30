@@ -130,17 +130,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       letter-spacing: 0.12em;
     }
 
-    .columns2 {
-      -webkit-column-count: 2; /* Chrome, Safari, Opera */
-      -moz-column-count: 2; /* Firefox */
-      column-count: 2;
+    .markdown-body.content h2 {
+      margin-top: 4em;
     }
-
-    .columns3 {
-      -webkit-column-count: 3; /* Chrome, Safari, Opera */
-      -moz-column-count: 3; /* Firefox */
-      column-count: 3;
-    }    
 
     table.sourceCode tr {
       padding: 0;
@@ -213,19 +205,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1 id="開発環境の準備"><span class="header-section-number">2</span> 開発環境の準備</h1>
 <h2 id="この章の目標"><span class="header-section-number">2.1</span> この章の目標</h2>
 <p>この章の目標は、作業用のPureScript開発環境を準備し、最初のPureScriptプログラムを書くことです。</p>
-<p>これから書く最初のコードは、非常に単純なPureScriptライブラリで、直角三角形の対角線の長さを計算する関数ひとつだけを提供します。</p>
+<p>これから書く最初のコードはごく単純なPureScriptライブラリで、直角三角形の対角線の長さを計算する関数ひとつだけを提供します。</p>
 <h2 id="導入"><span class="header-section-number">2.2</span> 導入</h2>
 <p>PureScript開発環境を準備するために、次のツールを使います。</p>
 <ul>
 <li><a href="http://purescript.org"><code>purs</code></a> - PureScriptコンパイラ本体</li>
 <li><a href="http://npmjs.org"><code>npm</code></a> - 残りの開発ツールをインストールできるようにする、Nodeパッケージマネージャ</li>
-<li><a href="https://github.com/purescript-contrib/pulp"><code>Pulp</code></a> ​​- 様々作業をパッケージマネージャと連動して自動化するコマンドラインツール</li>
+<li><a href="https://github.com/purescript-contrib/pulp"><code>Pulp</code></a> ​​- さまざまな作業をパッケージマネージャと連動して自動化するコマンドラインツール</li>
 </ul>
 <p>この章ではこれらのツールのインストール方法と設定を説明します。</p>
 <h2 id="purescriptのインストール"><span class="header-section-number">2.3</span> PureScriptのインストール</h2>
-<p>PureScriptコンパイラをインストールするときの推奨は、<a href="http://purescript.org">PureScriptのウェブサイト</a>からバイナリディストリビューションとしてダウンロードする方法です。 PureScriptコンパイラおよび関連する実行ファイルがあなたのパス上で利用できる確認をしてください。確認のために、コマンドラインでPureScriptコンパイラを実行してみましょう。</p>
+<p>PureScriptコンパイラをインストールするときにお勧めなのは、<a href="http://purescript.org">PureScriptのウェブサイト</a>からバイナリディストリビューションとしてダウンロードする方法です。 PureScriptコンパイラおよび関連する実行ファイルがパス上で利用できるかどうか確認をしてください。確認のために、コマンドラインでPureScriptコンパイラを実行してみましょう。</p>
 <pre class="text"><code>$ purs</code></pre>
-<p>PureScriptコンパイラをインストールする他の選択肢として - NPMを使用:<code>npm install -g purescript</code> - ソースコードからコンパイルを行う。この方法についてPureScriptのWebサイトが参考になります。</p>
+<p>PureScriptコンパイラをインストールする他の選択肢としては、次のようなものがあります。</p>
+<ul>
+<li>NPMを使用する: <code>npm install -g purescript</code></li>
+<li>ソースコードからコンパイルを行う。この方法については、PureScriptのWebサイトが参考になります</li>
+</ul>
 <h2 id="各ツールのインストール"><span class="header-section-number">2.4</span> 各ツールのインストール</h2>
 <p>もし<a href="http://nodejs.org/">NodeJS</a>がインストールされていないなら、NodeJSをインストールする必要があります。そうするとシステムに <code>npm</code>パッケージマネージャもインストールされるはずです。 <code>npm</code>がインストールされ、パス上で利用可能であることを確認してください。</p>
 <p><code>npm</code>がインストールされたら、 <code>pulp</code>と <code>bower</code>もインストールする必要があります。プロジェクトがどこで作業しているかにかかわらずこれらのコマンドラインツールを利用可能にするため、通常はグローバルにインストールしておくのがいいでしょう。</p>
@@ -242,7 +238,8 @@ $ pulp init
 $ ls
 
 bower.json  src     test</code></pre>
-<p>Pulpは2つのディレクトリ <code>src</code>、 <code>test</code>を作成し、設定ファイル <code>bower.json</code>を作成してくれます。 <code>src</code>ディレクトリにはソースコードファイルを保存し、 <code>test</code>ディレクトリにはテストコードファイルを保存します。 <code>test</code>ディレクトリについては、この本の後半で使用します。 <code>src/Main.purs</code>という名前のファイルに以下のコードを貼り付けます。</p>
+<p>Pulpは2つのディレクトリ <code>src</code>、 <code>test</code>と設定ファイル <code>bower.json</code>を作成してくれます。 <code>src</code>ディレクトリにはソースコードファイルを保存し、 <code>test</code>ディレクトリにはテストコードファイルを保存します。 <code>test</code>ディレクトリについては、この本の後半で使用します。</p>
+<p><code>src/Main.purs</code>という名前のファイルに、以下のコードを貼り付けます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">module</span> <span class="dt">Main</span> <span class="kw">where</span>
 
 <span class="kw">import </span><span class="dt">Control.Monad.Eff.Console</span>
@@ -252,7 +249,7 @@ main <span class="fu">=</span> log <span class="st">&quot;Hello, World!&quot;</s
 <ul>
 <li>すべてのソースファイルはモジュールヘッダから始まります。モジュール名は、ドットで区切られた大文字で始まる1つ以上の単語から構成されています。ここではモジュール名としてひとつの単語だけが使用されていますが、 <code>My.First.Module</code>というようなモジュール名も有効です。</li>
 <li>モジュールは、モジュール名の各部分を区切るためのドットを含めた、完全な名前を使用してインポートされます。ここでは <code>log</code>関数を提供する <code>Control.Monad.Eff.Console</code>モジュールをインポートしています。</li>
-<li>この <code>main</code>プログラムの定義本体は、関数適用の式になっています。PureScriptでは、関数適用は関数名の後に引数を空白で区切って書くことで示されます。</li>
+<li>この <code>main</code>プログラムの定義本体は、関数適用の式になっています。PureScriptでは、関数適用は関数名のあとに引数を空白で区切って書くことで表します。</li>
 </ul>
 <p>それではこのコードをビルドして実行してみましょう。次のコマンドを実行します。</p>
 <pre class="text"><code>$ pulp run
@@ -260,7 +257,7 @@ main <span class="fu">=</span> log <span class="st">&quot;Hello, World!&quot;</s
 * Building project in ~/my-project
 * Build successful.
 Hello, World!</code></pre>
-<p>おめでとう!はじめてPureScriptで作成されたプログラムのコンパイルと実行ができました。</p>
+<p>おめでとうございます!　はじめてPureScriptで作成されたプログラムのコンパイルと実行ができました。</p>
 <h2 id="ブラウザ向けのコンパイル"><span class="header-section-number">2.6</span> ブラウザ向けのコンパイル</h2>
 <p>Pulpは <code>pulp browserify</code>を実行して、PureScriptコードをブラウザで使うことに適したJavaScriptに変換することができます。</p>
 <pre class="text"><code>$ pulp browserify
@@ -269,7 +266,7 @@ Hello, World!</code></pre>
 * Building project in ~/my-project
 * Build successful.
 * Browserifying...</code></pre>
-<p>これに続いて、大量のJavaScriptコードがコンソールに表示されます。 これは、<a href="http://browserify.org/">Browserify</a>ツールの出力で、<strong>Prelude</strong>と呼ばれる標準のPureScriptライブラリに加えて、 <code>src</code>ディレクトリのコードにも適用されます。 このJavaScriptコードをファイルに保存し、HTML文書に含めることができます。 これを試してみると、 &quot;Hello、World！&quot;という単語が表示されます。 ブラウザのコンソールに出力されます。</p>
+<p>これに続いて、大量のJavaScriptコードがコンソールに表示されます。 これは<a href="http://browserify.org/">Browserify</a>ツールの出力で、<strong>Prelude</strong>と呼ばれる標準のPureScriptライブラリに加えて、 <code>src</code>ディレクトリのコードにも適用されます。 このJavaScriptコードをファイルに保存し、HTML文書に含めることもできます。 これを試しに実行してみると、ブラウザのコンソールに&quot;Hello、World！&quot;という文章が出力されます。</p>
 <h2 id="使用されていないコードを取り除く"><span class="header-section-number">2.7</span> 使用されていないコードを取り除く</h2>
 <p>Pulpは代替コマンド <code>pulp build</code>を提供しています。 <code>-O</code>オプションで<strong>未使用コードの削除</strong>を適用すると、不要なJavaScriptを出力から取り除くことができます。</p>
 <pre class="text"><code>$ pulp build -O --to output.js
@@ -313,11 +310,11 @@ Hello, World!</code></pre>
 <p>それでは外部ライブラリの関数を使用する例として <code>diagonal</code>関数を書いてみましょう。</p>
 <p>まず、 <code>src/Main.purs</code>ファイルの先頭に次の行を追加し、 <code>Math</code>モジュールをインポートします。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Math</span> (sqrt)</code></pre></div>
-<p>また、数値の加算や乗算のような非常に基本的な演算を定義する <code>Prelude</code>モジュールをインポートすることも必要です。</p>
+<p>また、数値の加算や乗算のようなごく基本的な演算を定義する <code>Prelude</code>モジュールをインポートすることも必要です。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Prelude</span></code></pre></div>
 <p>そして、次のように <code>diagonal</code>関数を定義します。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">diagonal w h <span class="fu">=</span> sqrt (w <span class="fu">*</span> w <span class="fu">+</span> h <span class="fu">*</span> h)</code></pre></div>
-<p>この関数の型を定義する必要はないことに注意してください。 <code>diagonal</code>は2つの数値を取り、数を返す関数であるとコンパイラは推論することができます。しかし、ドキュメントとしても役立つので、通常は型注釈を提供しておくことをお勧めします。</p>
+<p>この関数の型を定義する必要はないことに注意してください。 <code>diagonal</code>は2つの数を取り数を返す関数である、とコンパイラは推論することができます。しかし、ドキュメントとしても役立つので、通常は型注釈を提供しておくことをお勧めします。</p>
 <p>それでは、新しい <code>diagonal</code>関数を使うように <code>main</code>関数も変更してみましょう。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">main <span class="fu">=</span> logShow (diagonal <span class="fl">3.0</span> <span class="fl">4.0</span>)</code></pre></div>
 <p><code>pulp run</code>を使用して、モジュールを再コンパイルします。</p>
@@ -374,13 +371,13 @@ Array Int</code></pre>
 <blockquote>
 <h2 id="演習" class="unnumbered">演習</h2>
 <ol type="1">
-<li><p>(簡単） <code>Math</code>モジュールで定義されている <code>pi</code>定数を使用し、指定された半径の円の面積を計算する関数 <code>circleArea</code>を書いてみましょう。また、 <code>PSCi</code>を使用してその関数をテストしてください。<strong>ヒント</strong>： <code>import math</code>文を修正して <code>pi</code>をインポートすることを忘れないでください）</p></li>
-<li><p>（やや難しい） <code>purecript-globals</code>パッケージを依存関係としてインストールするには <code>bower install</code>を使います。PSCiでその機能をテストしてください。<strong>ヒント</strong>： PSCiの <code>：browse</code>コマンドを使ってモジュールの内容を閲覧することができます。</p></li>
+<li><p>(簡単） <code>Math</code>モジュールで定義されている <code>pi</code>定数を使用し、指定された半径の円の面積を計算する関数 <code>circleArea</code>を書いてみましょう。また、 <code>PSCi</code>を使用してその関数をテストしてください。 (<strong>ヒント</strong>： <code>import math</code>文を修正して、 <code>pi</code>をインポートすることを忘れないようにしましょう)</p></li>
+<li><p>（やや難しい） <code>purecript-globals</code>パッケージを依存関係としてインストールするには、<code>bower install</code>を使います。PSCiでその機能を試してみてください。 (<strong>ヒント</strong>： PSCiの <code>：browse</code>コマンドを使うと、モジュールの内容を閲覧することができます)</p></li>
 </ol>
 </blockquote>
 <h2 id="まとめ"><span class="header-section-number">2.12</span> まとめ</h2>
-<p>この章では、Pulpツールを使用して簡単なPureScriptプロジェクトを設定します。</p>
-<p>また最初のPureScript関数を書き、コンパイルし、NodeJSを使用して実行することができました。</p>
+<p>この章では、Pulpツールを使用して簡単なPureScriptプロジェクトを設定しました。</p>
+<p>また、最初のPureScript関数を書き、コンパイルし、NodeJSを使用して実行することができました。</p>
 <p>以降の章では、コードをコンパイルやデバッグ、テストするためにこの開発設定を使用しますので、これらのツールや使用手順に十分習熟しておくとよいでしょう。</p>
       <p class="previous" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
     </div>

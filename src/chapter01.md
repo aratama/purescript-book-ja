@@ -136,7 +136,7 @@ $ pulp build
 - [PureScriptのウェブサイト](http://purescript.org)にはPureScriptの開発者によって書かれたブログ記事や、初心者向けの動画、その他のリソースへのリンクがあります。
 - [PureScriptコンパイラのドキュメント](https://github.com/purescript/documentation)は、言語の主要な機能についての簡単​​なコード例があります。
 - [Try PureScript!](http://try.purescript.org)ではユーザーがWebブラウザでPureScriptコードをコンパイルすることができます。また、ウェブサイトにはコードの簡単な例がいくつか含まれています。
-- [Pursuit](http://pursuit.purescript.org)は、PureScriptの型と機能の検索可能なデータベースです。
+- [Pursuit](http://pursuit.purescript.org)は、PureScriptの型や関数を検索することができるデータベースです。
 
 もしあなたが例を読んで学ぶことを好むなら、GitHubの `purescript`組織、 `purescript-node`組織および `purescript-contrib`組織にはPureScriptコードの例がたくさんあります。
 

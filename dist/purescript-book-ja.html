@@ -130,17 +130,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       letter-spacing: 0.12em;
     }
 
-    .columns2 {
-      -webkit-column-count: 2; /* Chrome, Safari, Opera */
-      -moz-column-count: 2; /* Firefox */
-      column-count: 2;
+    .markdown-body.content h2 {
+      margin-top: 4em;
     }
-
-    .columns3 {
-      -webkit-column-count: 3; /* Chrome, Safari, Opera */
-      -moz-column-count: 3; /* Firefox */
-      column-count: 3;
-    }    
 
     table.sourceCode tr {
       padding: 0;
@@ -295,7 +287,7 @@ main <span class="fu">=</span> log <span class="st">&quot;Hello, World!&quot;</s
 <li><a href="http://purescript.org">PureScriptのウェブサイト</a>にはPureScriptの開発者によって書かれたブログ記事や、初心者向けの動画、その他のリソースへのリンクがあります。</li>
 <li><a href="https://github.com/purescript/documentation">PureScriptコンパイラのドキュメント</a>は、言語の主要な機能についての簡単​​なコード例があります。</li>
 <li><a href="http://try.purescript.org">Try PureScript!</a>ではユーザーがWebブラウザでPureScriptコードをコンパイルすることができます。また、ウェブサイトにはコードの簡単な例がいくつか含まれています。</li>
-<li><a href="http://pursuit.purescript.org">Pursuit</a>は、PureScriptの型と機能の検索可能なデータベースです。</li>
+<li><a href="http://pursuit.purescript.org">Pursuit</a>は、PureScriptの型や関数を検索することができるデータベースです。</li>
 </ul>
 <p>もしあなたが例を読んで学ぶことを好むなら、GitHubの <code>purescript</code>組織、 <code>purescript-node</code>組織および <code>purescript-contrib</code>組織にはPureScriptコードの例がたくさんあります。</p>
 <h2 id="著者について">著者について</h2>
@@ -310,19 +302,23 @@ main <span class="fu">=</span> log <span class="st">&quot;Hello, World!&quot;</s
 <h1 id="開発環境の準備">開発環境の準備</h1>
 <h2 id="この章の目標">この章の目標</h2>
 <p>この章の目標は、作業用のPureScript開発環境を準備し、最初のPureScriptプログラムを書くことです。</p>
-<p>これから書く最初のコードは、非常に単純なPureScriptライブラリで、直角三角形の対角線の長さを計算する関数ひとつだけを提供します。</p>
+<p>これから書く最初のコードはごく単純なPureScriptライブラリで、直角三角形の対角線の長さを計算する関数ひとつだけを提供します。</p>
 <h2 id="導入">導入</h2>
 <p>PureScript開発環境を準備するために、次のツールを使います。</p>
 <ul>
 <li><a href="http://purescript.org"><code>purs</code></a> - PureScriptコンパイラ本体</li>
 <li><a href="http://npmjs.org"><code>npm</code></a> - 残りの開発ツールをインストールできるようにする、Nodeパッケージマネージャ</li>
-<li><a href="https://github.com/purescript-contrib/pulp"><code>Pulp</code></a> ​​- 様々作業をパッケージマネージャと連動して自動化するコマンドラインツール</li>
+<li><a href="https://github.com/purescript-contrib/pulp"><code>Pulp</code></a> ​​- さまざまな作業をパッケージマネージャと連動して自動化するコマンドラインツール</li>
 </ul>
 <p>この章ではこれらのツールのインストール方法と設定を説明します。</p>
 <h2 id="purescriptのインストール">PureScriptのインストール</h2>
-<p>PureScriptコンパイラをインストールするときの推奨は、<a href="http://purescript.org">PureScriptのウェブサイト</a>からバイナリディストリビューションとしてダウンロードする方法です。 PureScriptコンパイラおよび関連する実行ファイルがあなたのパス上で利用できる確認をしてください。確認のために、コマンドラインでPureScriptコンパイラを実行してみましょう。</p>
+<p>PureScriptコンパイラをインストールするときにお勧めなのは、<a href="http://purescript.org">PureScriptのウェブサイト</a>からバイナリディストリビューションとしてダウンロードする方法です。 PureScriptコンパイラおよび関連する実行ファイルがパス上で利用できるかどうか確認をしてください。確認のために、コマンドラインでPureScriptコンパイラを実行してみましょう。</p>
 <pre class="text"><code>$ purs</code></pre>
-<p>PureScriptコンパイラをインストールする他の選択肢として - NPMを使用:<code>npm install -g purescript</code> - ソースコードからコンパイルを行う。この方法についてPureScriptのWebサイトが参考になります。</p>
+<p>PureScriptコンパイラをインストールする他の選択肢としては、次のようなものがあります。</p>
+<ul>
+<li>NPMを使用する: <code>npm install -g purescript</code></li>
+<li>ソースコードからコンパイルを行う。この方法については、PureScriptのWebサイトが参考になります</li>
+</ul>
 <h2 id="各ツールのインストール">各ツールのインストール</h2>
 <p>もし<a href="http://nodejs.org/">NodeJS</a>がインストールされていないなら、NodeJSをインストールする必要があります。そうするとシステムに <code>npm</code>パッケージマネージャもインストールされるはずです。 <code>npm</code>がインストールされ、パス上で利用可能であることを確認してください。</p>
 <p><code>npm</code>がインストールされたら、 <code>pulp</code>と <code>bower</code>もインストールする必要があります。プロジェクトがどこで作業しているかにかかわらずこれらのコマンドラインツールを利用可能にするため、通常はグローバルにインストールしておくのがいいでしょう。</p>
@@ -339,7 +335,8 @@ $ pulp init
 $ ls
 
 bower.json  src     test</code></pre>
-<p>Pulpは2つのディレクトリ <code>src</code>、 <code>test</code>を作成し、設定ファイル <code>bower.json</code>を作成してくれます。 <code>src</code>ディレクトリにはソースコードファイルを保存し、 <code>test</code>ディレクトリにはテストコードファイルを保存します。 <code>test</code>ディレクトリについては、この本の後半で使用します。 <code>src/Main.purs</code>という名前のファイルに以下のコードを貼り付けます。</p>
+<p>Pulpは2つのディレクトリ <code>src</code>、 <code>test</code>と設定ファイル <code>bower.json</code>を作成してくれます。 <code>src</code>ディレクトリにはソースコードファイルを保存し、 <code>test</code>ディレクトリにはテストコードファイルを保存します。 <code>test</code>ディレクトリについては、この本の後半で使用します。</p>
+<p><code>src/Main.purs</code>という名前のファイルに、以下のコードを貼り付けます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">module</span> <span class="dt">Main</span> <span class="kw">where</span>
 
 <span class="kw">import </span><span class="dt">Control.Monad.Eff.Console</span>
@@ -349,7 +346,7 @@ main <span class="fu">=</span> log <span class="st">&quot;Hello, World!&quot;</s
 <ul>
 <li>すべてのソースファイルはモジュールヘッダから始まります。モジュール名は、ドットで区切られた大文字で始まる1つ以上の単語から構成されています。ここではモジュール名としてひとつの単語だけが使用されていますが、 <code>My.First.Module</code>というようなモジュール名も有効です。</li>
 <li>モジュールは、モジュール名の各部分を区切るためのドットを含めた、完全な名前を使用してインポートされます。ここでは <code>log</code>関数を提供する <code>Control.Monad.Eff.Console</code>モジュールをインポートしています。</li>
-<li>この <code>main</code>プログラムの定義本体は、関数適用の式になっています。PureScriptでは、関数適用は関数名の後に引数を空白で区切って書くことで示されます。</li>
+<li>この <code>main</code>プログラムの定義本体は、関数適用の式になっています。PureScriptでは、関数適用は関数名のあとに引数を空白で区切って書くことで表します。</li>
 </ul>
 <p>それではこのコードをビルドして実行してみましょう。次のコマンドを実行します。</p>
 <pre class="text"><code>$ pulp run
@@ -357,7 +354,7 @@ main <span class="fu">=</span> log <span class="st">&quot;Hello, World!&quot;</s
 * Building project in ~/my-project
 * Build successful.
 Hello, World!</code></pre>
-<p>おめでとう!はじめてPureScriptで作成されたプログラムのコンパイルと実行ができました。</p>
+<p>おめでとうございます!　はじめてPureScriptで作成されたプログラムのコンパイルと実行ができました。</p>
 <h2 id="ブラウザ向けのコンパイル">ブラウザ向けのコンパイル</h2>
 <p>Pulpは <code>pulp browserify</code>を実行して、PureScriptコードをブラウザで使うことに適したJavaScriptに変換することができます。</p>
 <pre class="text"><code>$ pulp browserify
@@ -366,7 +363,7 @@ Hello, World!</code></pre>
 * Building project in ~/my-project
 * Build successful.
 * Browserifying...</code></pre>
-<p>これに続いて、大量のJavaScriptコードがコンソールに表示されます。 これは、<a href="http://browserify.org/">Browserify</a>ツールの出力で、<strong>Prelude</strong>と呼ばれる標準のPureScriptライブラリに加えて、 <code>src</code>ディレクトリのコードにも適用されます。 このJavaScriptコードをファイルに保存し、HTML文書に含めることができます。 これを試してみると、 &quot;Hello、World！&quot;という単語が表示されます。 ブラウザのコンソールに出力されます。</p>
+<p>これに続いて、大量のJavaScriptコードがコンソールに表示されます。 これは<a href="http://browserify.org/">Browserify</a>ツールの出力で、<strong>Prelude</strong>と呼ばれる標準のPureScriptライブラリに加えて、 <code>src</code>ディレクトリのコードにも適用されます。 このJavaScriptコードをファイルに保存し、HTML文書に含めることもできます。 これを試しに実行してみると、ブラウザのコンソールに&quot;Hello、World！&quot;という文章が出力されます。</p>
 <h2 id="使用されていないコードを取り除く">使用されていないコードを取り除く</h2>
 <p>Pulpは代替コマンド <code>pulp build</code>を提供しています。 <code>-O</code>オプションで<strong>未使用コードの削除</strong>を適用すると、不要なJavaScriptを出力から取り除くことができます。</p>
 <pre class="text"><code>$ pulp build -O --to output.js
@@ -410,11 +407,11 @@ Hello, World!</code></pre>
 <p>それでは外部ライブラリの関数を使用する例として <code>diagonal</code>関数を書いてみましょう。</p>
 <p>まず、 <code>src/Main.purs</code>ファイルの先頭に次の行を追加し、 <code>Math</code>モジュールをインポートします。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Math</span> (sqrt)</code></pre></div>
-<p>また、数値の加算や乗算のような非常に基本的な演算を定義する <code>Prelude</code>モジュールをインポートすることも必要です。</p>
+<p>また、数値の加算や乗算のようなごく基本的な演算を定義する <code>Prelude</code>モジュールをインポートすることも必要です。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Prelude</span></code></pre></div>
 <p>そして、次のように <code>diagonal</code>関数を定義します。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">diagonal w h <span class="fu">=</span> sqrt (w <span class="fu">*</span> w <span class="fu">+</span> h <span class="fu">*</span> h)</code></pre></div>
-<p>この関数の型を定義する必要はないことに注意してください。 <code>diagonal</code>は2つの数値を取り、数を返す関数であるとコンパイラは推論することができます。しかし、ドキュメントとしても役立つので、通常は型注釈を提供しておくことをお勧めします。</p>
+<p>この関数の型を定義する必要はないことに注意してください。 <code>diagonal</code>は2つの数を取り数を返す関数である、とコンパイラは推論することができます。しかし、ドキュメントとしても役立つので、通常は型注釈を提供しておくことをお勧めします。</p>
 <p>それでは、新しい <code>diagonal</code>関数を使うように <code>main</code>関数も変更してみましょう。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">main <span class="fu">=</span> logShow (diagonal <span class="fl">3.0</span> <span class="fl">4.0</span>)</code></pre></div>
 <p><code>pulp run</code>を使用して、モジュールを再コンパイルします。</p>
@@ -471,19 +468,19 @@ Array Int</code></pre>
 <blockquote>
 <h2 id="演習" class="unnumbered">演習</h2>
 <ol type="1">
-<li><p>(簡単） <code>Math</code>モジュールで定義されている <code>pi</code>定数を使用し、指定された半径の円の面積を計算する関数 <code>circleArea</code>を書いてみましょう。また、 <code>PSCi</code>を使用してその関数をテストしてください。<strong>ヒント</strong>： <code>import math</code>文を修正して <code>pi</code>をインポートすることを忘れないでください）</p></li>
-<li><p>（やや難しい） <code>purecript-globals</code>パッケージを依存関係としてインストールするには <code>bower install</code>を使います。PSCiでその機能をテストしてください。<strong>ヒント</strong>： PSCiの <code>：browse</code>コマンドを使ってモジュールの内容を閲覧することができます。</p></li>
+<li><p>(簡単） <code>Math</code>モジュールで定義されている <code>pi</code>定数を使用し、指定された半径の円の面積を計算する関数 <code>circleArea</code>を書いてみましょう。また、 <code>PSCi</code>を使用してその関数をテストしてください。 (<strong>ヒント</strong>： <code>import math</code>文を修正して、 <code>pi</code>をインポートすることを忘れないようにしましょう)</p></li>
+<li><p>（やや難しい） <code>purecript-globals</code>パッケージを依存関係としてインストールするには、<code>bower install</code>を使います。PSCiでその機能を試してみてください。 (<strong>ヒント</strong>： PSCiの <code>：browse</code>コマンドを使うと、モジュールの内容を閲覧することができます)</p></li>
 </ol>
 </blockquote>
 <h2 id="まとめ">まとめ</h2>
-<p>この章では、Pulpツールを使用して簡単なPureScriptプロジェクトを設定します。</p>
-<p>また最初のPureScript関数を書き、コンパイルし、NodeJSを使用して実行することができました。</p>
+<p>この章では、Pulpツールを使用して簡単なPureScriptプロジェクトを設定しました。</p>
+<p>また、最初のPureScript関数を書き、コンパイルし、NodeJSを使用して実行することができました。</p>
 <p>以降の章では、コードをコンパイルやデバッグ、テストするためにこの開発設定を使用しますので、これらのツールや使用手順に十分習熟しておくとよいでしょう。</p>
 <h1 id="関数とレコード">関数とレコード</h1>
 <h2 id="この章の目標-1">この章の目標</h2>
 <p>この章では、関数およびレコードというPureScriptプログラムのふたつの構成要素を導入します。さらに、どのようにPureScriptプログラムを構造化するのか、どのように型をプログラム開発に役立てるかを見ていきます。　</p>
 <p>連絡先のリストを管理する簡単​​な住所録アプリケーションを作成していきます。このコード例により、PureScriptの構文からいくつかの新しい概念を導入します。</p>
-<p>このアプリケーションのフロントエンドは対話式処理系 <code>PSCi</code>を使うようにしますが、JavaScriptでフロントエンドを書くこともできるでしょう。実際に後の章で、フォームの検証と保存/復元の機能追加を詳しく説明します。</p>
+<p>このアプリケーションのフロントエンドは対話式処理系 <code>PSCi</code>を使うようにしていますが、JavaScriptでフロントエンドを書くこともできるでしょう。実際に後の章で、フォームの検証と保存および復元の機能追加について詳しく説明します。</p>
 <h2 id="プロジェクトの準備">プロジェクトの準備</h2>
 <p>この章のソースコードは <code>src/Data/AddressBook.purs</code>というファイルに含まれています。このファイルは次のようなモジュール宣言とインポート一覧から始まります。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">module</span> <span class="dt">Data.AddressBook</span> <span class="kw">where</span>
@@ -500,13 +497,13 @@ Array Int</code></pre>
 <li><code>Data.Maybe</code>モジュールは、値が存在したりしなかったりするような、オプショナルな値を扱うためのデータ型と関数を定義しています。</li>
 <li>ダブルドット(..)を使用すると、指定された型コンストラクタのすべてのデータコンストラクタをインポートできます。</li>
 </ul>
-<p>このモジュールのインポート内容は括弧内で明示的に列挙されていることに注意してください。明示的な列挙はインポート内容の衝突を避けるのに役に立つので、一般に良い習慣です。</p>
-<p>ソースコードリポジトリを複製したと仮定すると、この章のプロジェクトは、次のコマンドを使用してPulpを使用して構築できます。</p>
+<p>このモジュールのインポート内容が括弧内で明示的に列挙されていることに注目してください。明示的な列挙はインポート内容の衝突を避けるのに役に立つので、一般に良い習慣です。</p>
+<p>ソースコードリポジトリを複製したと仮定すると、この章のプロジェクトは次のコマンドを使用してPulpを使用して構築できます。</p>
 <pre class="text"><code>$ cd chapter3
 $ bower update
 $ pulp build</code></pre>
 <h2 id="単純な型">単純な型</h2>
-<p>JavaScriptのプリミティブ型に対応する組み込みデータ型として、PureScriptでは数値型と文字列型、真偽型の３つが定義されています。すべてのモジュールに暗黙にインポートされる <code>Prim</code>モジュールでこれらの型は定義されています。これらの型はそれぞれ <code>Number</code>、 <code>String</code>、 <code>Boolean</code>と呼ばれ、 <code>pulp repl</code>の <code>:type</code>コマンドを使用すると簡単な値の型を確認できます。</p>
+<p>JavaScriptのプリミティブ型に対応する組み込みデータ型として、PureScriptでは数値型と文字列型、真偽型の３つが定義されており、それぞれ <code>Number</code>、 <code>String</code>、 <code>Boolean</code>と呼ばれています。これらの型はすべてのモジュールに暗黙にインポートされる <code>Prim</code>モジュールで定義されています。<code>pulp repl</code>の <code>:type</code>コマンドを使用すると、簡単な値の型を確認できます。</p>
 <pre class="text"><code>$ pulp repl
 
 &gt; :type 1.0
@@ -517,11 +514,11 @@ String
 
 &gt; :type true
 Boolean</code></pre>
-<p>PureScriptには他にも配列とレコード、関数などの組み込み型が定義されています。</p>
-<p>整数は、小数点の欠如によって、型 <code>Number</code>の浮動小数点の値と区別されます。</p>
+<p>PureScriptには他にも、配列とレコード、関数などの組み込み型が定義されています。</p>
+<p>整数は、小数点以下を省くことによって、型 <code>Number</code>の浮動小数点数の値と区別されます。</p>
 <pre class="text"><code>&gt; :type 1
 Int</code></pre>
-<p>文字リテラルは二重引用符を使用する文字列リテラルとは異なり、一重引用符で囲みます。</p>
+<p>二重引用符を使用する文字列リテラルとは異なり、文字リテラルは一重引用符で囲みます。</p>
 <pre class="text"><code>&gt; :type &#39;a&#39;
 Char</code></pre>
 <p>配列はJavaScriptの配列に対応していますが、JavaScriptの配列とは異なり、PureScriptの配列のすべての要素は同じ型を持つ必要があります。</p>
@@ -563,7 +560,7 @@ forall a b. a -&gt; b -&gt; a</code></pre>
 <p>ファイルのトップレベルでは、等号の直前に引数を指定することで関数を定義することができます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">add ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span>
 add x y <span class="fu">=</span> x <span class="fu">+</span> y</code></pre></div>
-<p>バックスラッシュに続けて空白文字で区切られた引数名のリストを書くと、関数をインラインで定義することもできます。PSCiで複数行の宣言を入力するには、 <code>：paste</code>コマンドを使用して&quot;paste mode&quot;に入ります。このモードでは、<strong>Control-D</strong>キーシーケンスを使用して宣言を終了します。</p>
+<p>バックスラッシュに続けて空白文字で区切られた引数名のリストを書くことで、関数をインラインで定義することもできます。PSCiで複数行の宣言を入力するには、 <code>：paste</code>コマンドを使用して&quot;paste mode&quot;に入ります。このモードでは、<strong>Control-D</strong>キーシーケンスを使用して宣言を終了します。</p>
 <pre class="text"><code>&gt; :paste
 … add :: Int -&gt; Int -&gt; Int
 … add = \x y -&gt; x + y
@@ -575,7 +572,7 @@ add x y <span class="fu">=</span> x <span class="fu">+</span> y</code></pre></di
 <p>前の節ではPreludeで定義された関数の型をいくつか見てきました。たとえば <code>flip</code>関数は次のような型を持っていました。</p>
 <pre class="text"><code>&gt; :type flip
 forall a b c. (a -&gt; b -&gt; c) -&gt; b -&gt; a -&gt; c</code></pre>
-<p>この <code>forall</code>キーワードは <code>flip</code>が<strong>全称量化された型</strong>(universally quantified type)を持っていることを示しています。これは、 <code>a</code>や <code>b</code>、 <code>c</code>をどの型に置き換えても、 <code>flip</code>はその型でうまく動作するという意味です。</p>
+<p>この <code>forall</code>キーワードは、 <code>flip</code>が<strong>全称量化された型</strong>(universally quantified type)を持っていることを示しています。これは、 <code>a</code>や <code>b</code>、 <code>c</code>をどの型に置き換えても、 <code>flip</code>はその型でうまく動作するという意味です。</p>
 <p>例えば、 <code>a</code>を <code>Int</code>、 <code>b</code>を <code>String</code>、 <code>c</code>を <code>String</code>というように選んでみたとします。この場合、 <code>flip</code>の型を次のように<strong>特殊化</strong>(specialize)することができます。</p>
 <pre class="text"><code>(Int -&gt; String -&gt; String) -&gt; String -&gt; Int -&gt; String</code></pre>
 <p>量化された型を特殊化したいということをコードで示す必要はありません。特殊化は自動的に行われます。たとえば、すでにその型の <code>flip</code>を持っていたかのように、次のように単に <code>flip</code>を使用することができます。</p>
@@ -616,9 +613,9 @@ y <span class="fu">+</span> z</code></pre></div>
 <h2 id="独自の型の定義">独自の型の定義</h2>
 <p>PureScriptで新たな問題に取り組むときは、まずはこれから扱おうとする値の型の定義を書くことから始めるのがよいでしょう。最初に、住所録に含まれるレコードの型を定義してみます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Entry</span> <span class="fu">=</span> {<span class="ot"> firstName ::</span> <span class="dt">String</span>,<span class="ot"> lastName ::</span> <span class="dt">String</span>,<span class="ot"> address ::</span> <span class="dt">Address</span> }</code></pre></div>
-<p>これは <code>Entry</code>という<strong>型同義語</strong>(type synonym、型シノニム)を定義しています。 型 <code>Entry</code>は等号の右辺と同じ型ということです。レコードの型はいずれも文字列である <code>firstName</code>、 <code>lastName</code>、 <code>phone</code>という３つのフィールドからなります。前者２つのフィールドは型 <code>String</code>を持ち、 <code>address</code>は型 <code>Address</code>を持ち以下の用に定義されています。</p>
+<p>これは <code>Entry</code>という<strong>型同義語</strong>(type synonym、型シノニム)を定義しています。 型 <code>Entry</code>は等号の右辺と同じ型ということです。レコードの型はいずれも文字列である <code>firstName</code>、 <code>lastName</code>、 <code>phone</code>という３つのフィールドからなります。前者の２つのフィールドは型 <code>String</code>を持ち、 <code>address</code>は以下のように定義された型 <code>Address</code>を持っています。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Address</span> <span class="fu">=</span> {<span class="ot"> street ::</span> <span class="dt">String</span>,<span class="ot"> city ::</span> <span class="dt">String</span>,<span class="ot"> state ::</span> <span class="dt">String</span> }</code></pre></div>
-<p>それでは、２つめの型別名も定義してみましょう。住所録のデータ構造として、単に項目の連結リストとして格納することにします。</p>
+<p>それでは、２つめの型同義語も定義してみましょう。住所録のデータ構造としては、単に項目の連結リストとして格納することにします。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">AddressBook</span> <span class="fu">=</span> <span class="dt">List</span> <span class="dt">Entry</span></code></pre></div>
 <p><code>List Entry</code>は <code>Array Entry</code>とは同じではないということに注意してください。 <code>Array Entry</code>は住所録の項目の<strong>配列</strong>を意味しています。</p>
 <h2 id="型構築子と種">型構築子と種</h2>
@@ -769,8 +766,8 @@ head<span class="ot"> ::</span> <span class="dt">AddressBook</span> <span class=
 apply f x <span class="fu">=</span> f x
 
 <span class="kw">infixr</span> <span class="dv">0</span> apply as <span class="fu">$</span></code></pre></div>
-<p>ここで、 <code>apply</code>は関数と値をとり、その値にその関数を適用します。 <code>infixr</code>キーワードは <code>($)</code>を <code>apply</code>のエイリアスとして定義します。</p>
-<p>しかし、なぜ通常の関数適用の代わりに <code>$</code>を使ったのでしょうか？その理由は <code>$</code>は右結合で優先順位の低い演算子だということにあります。これは、深い入れ子になった関数適用のための括弧を、 <code>$</code>を使うと取り除くことができることを意味します。</p>
+<p>ここで、 <code>apply</code>は関数と値をとり、その値にその関数を適用します。 <code>infixr</code>キーワードは <code>($)</code>を <code>apply</code>の別名として定義します。</p>
+<p>しかし、なぜ通常の関数適用の代わりに <code>$</code>を使ったのでしょうか？　その理由は <code>$</code>は右結合で優先順位の低い演算子だということにあります。これは、深い入れ子になった関数適用のための括弧を、 <code>$</code>を使うと取り除くことができることを意味します。</p>
 <p>たとえば、ある従業員の上司の住所がある道路を見つける、次の入れ子になった関数適用を考えてみましょう。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">street (address (boss employee))</code></pre></div>
 <p>これは <code>$</code>を使用して表現すればずっと簡単になります。</p>
@@ -837,7 +834,6 @@ Just (&quot;Smith, John: 123 Fake St., Faketown, CA&quot;)</code></pre>
 <h2 id="まとめ-1">まとめ</h2>
 <p>この章では、関数型プログラミングの新しい概念をいくつか導入しました。</p>
 <ul>
-<li>不変データ型と純粋な関数の重要性</li>
 <li>対話的モード <code>PSCi</code>を使用して関数を調べるなど思いついたことを試す方法</li>
 <li>検証や実装の道具としての型の役割</li>
 <li>多引数関数を表現する、カリー化された関数の使用</li>
