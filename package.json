@@ -4,7 +4,10 @@
   "description": "",
   "main": " ",
   "scripts": {
-    "test": " "
+    "test": " ",
+    "clean": "node --experimental-modules script/clean.mjs",
+    "html": "npm run clean && node --experimental-modules script/html.mjs",
+    "epub": "npm run html && node --experimental-modules script/epub.mjs"
   },
   "repository": {
     "type": "git",
@@ -15,12 +18,9 @@
   "license": " ",
   "dependencies": {},
   "devDependencies": {
-    "gulp": "^3.8.11",
-    "gulp-concat": "^2.5.2",
-    "gulp-foreach": "^0.1.0",
-    "gulp-pandoc": "^0.2.1",
-    "gulp-print": "^1.1.0",
-    "gulp-watch": "^4.2.0",
-    "rimraf": "^2.3.2"
+    "fs-extra": "^5.0.0",
+    "glob": "^7.1.2",
+    "rimraf": "^2.3.2",
+    "github-markdown-css": "^2.10.0"
   }
 }

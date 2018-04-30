@@ -5,69 +5,41 @@
   <meta name="generator" content="pandoc">
   <title>実例によるPureScript</title>
   <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
   </style>
   <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
   <link rel="stylesheet" href="github-markdown.css" type="text/css"/>
@@ -302,21 +274,21 @@ You win!</code></pre>
 <p>最初の例は、<strong>純粋な変更可能状態</strong>を提供する <code>State</code>モナドです。すでに <code>Eff</code>モナド、すなわち <code>REF</code>作用と <code>ST</code>作用によって提供された変更可能な状態という2つのアプローチについては見てきました。 <code>State</code>は第3の選択肢を提供しますが、これは <code>Eff</code>モナドを使用して実装されているわけではありません。</p>
 <p><code>State</code>型構築子は、状態の型 <code>s</code>、および返り値の型 <code>a</code>という2種類の引数を取ります。「 <code>State</code>モナド」というように説明はしていますが、実際には <code>Monad</code>型クラスのインスタンスが用意されているのは <code>State</code>に対してではなく、任意の型 <code>s</code>についての <code>State s</code>型構築子に対してです。</p>
 <p><code>Control.Monad.State</code>モジュールは以下のAPIを提供しています。</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="ot">get    ::</span> forall s<span class="fu">.</span>             <span class="dt">State</span> s s</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="ot">put    ::</span> forall s<span class="fu">.</span> s        <span class="ot">-&gt;</span> <span class="dt">State</span> s <span class="dt">Unit</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="ot">modify ::</span> forall s<span class="fu">.</span> (s <span class="ot">-&gt;</span> s) <span class="ot">-&gt;</span> <span class="dt">State</span> s <span class="dt">Unit</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">get    ::</span> forall s<span class="fu">.</span>             <span class="dt">State</span> s s
+<span class="ot">put    ::</span> forall s<span class="fu">.</span> s        <span class="ot">-&gt;</span> <span class="dt">State</span> s <span class="dt">Unit</span>
+<span class="ot">modify ::</span> forall s<span class="fu">.</span> (s <span class="ot">-&gt;</span> s) <span class="ot">-&gt;</span> <span class="dt">State</span> s <span class="dt">Unit</span></code></pre></div>
 <p>これは <code>REF</code>作用や <code>ST</code>作用が提供するAPIととてもよく似ています。しかし、これらのアクションに <code>Ref</code>や <code>STRef</code>に渡しているような、可変領域への参照を引数に渡さないことに注意してください。 <code>State</code>と <code>Eff</code>モナドが提供する解決策の違いは、 <code>State</code>モナドは暗黙的な単一の状態だけを提供していることです。この状態は <code>State</code>モナドの型構築子によって隠された関数の引数として実装されており、参照は明示的には渡されないのです。</p>
 <p>例を見てみましょう。 <code>State</code>モナドの使いかたのひとつとしては、状態を数として、現在の状態に配列の値を加算していくようなものかもしれません。状態の型 <code>s</code>として <code>Number</code>を選択し、配列の走査に <code>traverse_</code>を使って、配列の要素それぞれについて <code>modify</code>を呼び出すと、これを実現することができます。</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Data.Foldable</span> (traverse_)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">import</span> <span class="dt">Control.Monad.State</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Control.Monad.State.Class</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="ot">sumArray ::</span> <span class="dt">Array</span> <span class="dt">Number</span> <span class="ot">-&gt;</span> <span class="dt">State</span> <span class="dt">Number</span> <span class="dt">Unit</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6">sumArray <span class="fu">=</span> traverse_ \n <span class="ot">-&gt;</span> modify \sum <span class="ot">-&gt;</span> sum <span class="fu">+</span> n</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Data.Foldable</span> (traverse_)
+<span class="kw">import </span><span class="dt">Control.Monad.State</span>
+<span class="kw">import </span><span class="dt">Control.Monad.State.Class</span>
+
+<span class="ot">sumArray ::</span> <span class="dt">Array</span> <span class="dt">Number</span> <span class="ot">-&gt;</span> <span class="dt">State</span> <span class="dt">Number</span> <span class="dt">Unit</span>
+sumArray <span class="fu">=</span> traverse_ \n <span class="ot">-&gt;</span> modify \sum <span class="ot">-&gt;</span> sum <span class="fu">+</span> n</code></pre></div>
 <p><code>Control.Monad.State</code>モジュールは <code>State</code>モナドでの計算を実行するための次の3つの関数を提供します。</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="ot">evalState ::</span> forall s a<span class="fu">.</span> <span class="dt">State</span> s a <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> a</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="ot">execState ::</span> forall s a<span class="fu">.</span> <span class="dt">State</span> s a <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> s</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="ot">runState  ::</span> forall s a<span class="fu">.</span> <span class="dt">State</span> s a <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> <span class="dt">Tuple</span> a s</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">evalState ::</span> forall s a<span class="fu">.</span> <span class="dt">State</span> s a <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> a
+<span class="ot">execState ::</span> forall s a<span class="fu">.</span> <span class="dt">State</span> s a <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> s
+<span class="ot">runState  ::</span> forall s a<span class="fu">.</span> <span class="dt">State</span> s a <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> <span class="dt">Tuple</span> a s</code></pre></div>
 <p>３つの関数はそれぞれ初期値の型 <code>s</code>と計算の型 <code>State s a</code>を引数にとります。 <code>evalState</code>は返り値だけを返し、 <code>execState</code>は最終的な状態だけを返し、 <code>runState</code>は <code>Tuple a s</code>型の値として表現された返り値と状態の両方を返します。</p>
 <p>先ほどの <code>sumArray</code>関数が与えられたとすると、 <code>PSCi</code>で次のように <code>execState</code>を使うと複数の配列内の数字を合計することができます。</p>
 <pre class="text"><code>&gt; :paste
@@ -331,7 +303,7 @@ You win!</code></pre>
 <ol type="1">
 <li><p>(簡単) 上の例で、 <code>execState</code>を <code>runState</code>や <code>evalState</code>で 置き換えると結果はどうなるでしょうか。</p></li>
 <li><p>(やや難しい)<code>State</code>モナドと <code>traverse_</code>関数を使用して、次のような関数を書いてください。</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="ot">testParens ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">testParens ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Boolean</span></code></pre></div>
 <p>これは <code>String</code>が括弧の対応が正しく付けられているかどうかを調べる関数です。この関数は次のように動作しなくてはなりません。</p>
 <pre class="text"><code>&gt; testParens &quot;&quot;
 true
@@ -351,52 +323,52 @@ false</code></pre>
 <p><code>purescript-transformers</code>パッケージでは <code>Reader</code>というモナドも提供されています。このモナドは大域的な設定を読み取る機能を提供します。 <code>State</code>モナドがひとつの可変状態を読み書きする機能を提供するのに対し、 <code>Reader</code>モナドはデータの読み取りの機能だけを提供します。</p>
 <p><code>Reader</code>型構築子は、構成の型を表す型 <code>r</code>、および戻り値の型 <code>a</code>の2つの型引数を取ります。</p>
 <p><code>Contro.Monad.Reader</code>モジュールは以下のAPIを提供します。</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="ot">ask   ::</span> forall r<span class="fu">.</span> <span class="dt">Reader</span> r r</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="ot">local ::</span> forall r a<span class="fu">.</span> (r <span class="ot">-&gt;</span> r) <span class="ot">-&gt;</span> <span class="dt">Reader</span> r a <span class="ot">-&gt;</span> <span class="dt">Reader</span> r a</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">ask   ::</span> forall r<span class="fu">.</span> <span class="dt">Reader</span> r r
+<span class="ot">local ::</span> forall r a<span class="fu">.</span> (r <span class="ot">-&gt;</span> r) <span class="ot">-&gt;</span> <span class="dt">Reader</span> r a <span class="ot">-&gt;</span> <span class="dt">Reader</span> r a</code></pre></div>
 <p><code>ask</code>アクションは現在の設定を読み取るために使い、 <code>local</code>アクションは局所的に設定を変更して計算を実行するために使います。</p>
 <p>たとえば、権限で制御されたアプリケーションを開発しており、現在の利用者の権限オブジェクトを保持するのに <code>Reader</code>モナドを使いたいとしましょう。型 <code>r</code>を次のようなAPIを備えた型 <code>Permission</code>として選択します。</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="ot">hasPermission ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Permissions</span> <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="ot">addPermission ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Permissions</span> <span class="ot">-&gt;</span> <span class="dt">Permissions</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">hasPermission ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Permissions</span> <span class="ot">-&gt;</span> <span class="dt">Boolean</span>
+<span class="ot">addPermission ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Permissions</span> <span class="ot">-&gt;</span> <span class="dt">Permissions</span></code></pre></div>
 <p>利用者が特定の権限を持っているかどうかを確認したいときは、 <code>ask</code>を使って現在の権限オブジェクトを取得すればいつでも調べることができます。たとえば、管理者だけが新しい利用者の作成を許可されているとしましょう。</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="ot">createUser ::</span> <span class="dt">Reader</span> <span class="dt">Permissions</span> (<span class="dt">Maybe</span> <span class="dt">User</span>)</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">createUser <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3">  permissions <span class="ot">&lt;-</span> ask</a>
-<a class="sourceLine" id="cb13-4" data-line-number="4">  <span class="kw">if</span> hasPermission <span class="st">&quot;admin&quot;</span> permissions</a>
-<a class="sourceLine" id="cb13-5" data-line-number="5">    <span class="kw">then</span> map <span class="dt">Just</span> newUser</a>
-<a class="sourceLine" id="cb13-6" data-line-number="6">    <span class="kw">else</span> pure <span class="dt">Nothing</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">createUser ::</span> <span class="dt">Reader</span> <span class="dt">Permissions</span> (<span class="dt">Maybe</span> <span class="dt">User</span>)
+createUser <span class="fu">=</span> <span class="kw">do</span>
+  permissions <span class="ot">&lt;-</span> ask
+  <span class="kw">if</span> hasPermission <span class="st">&quot;admin&quot;</span> permissions
+    <span class="kw">then</span> map <span class="dt">Just</span> newUser
+    <span class="kw">else</span> pure <span class="dt">Nothing</span></code></pre></div>
 <p><code>local</code>アクションを使うと、計算の実行中に <code>Permissions</code>オブジェクトを局所的に変更し、ユーザーの権限を昇格させることもできます。</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="ot">runAsAdmin ::</span> forall a<span class="fu">.</span> <span class="dt">Reader</span> <span class="dt">Permissions</span> a <span class="ot">-&gt;</span> <span class="dt">Reader</span> <span class="dt">Permissions</span> a</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">runAsAdmin <span class="fu">=</span> local (addPermission <span class="st">&quot;admin&quot;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">runAsAdmin ::</span> forall a<span class="fu">.</span> <span class="dt">Reader</span> <span class="dt">Permissions</span> a <span class="ot">-&gt;</span> <span class="dt">Reader</span> <span class="dt">Permissions</span> a
+runAsAdmin <span class="fu">=</span> local (addPermission <span class="st">&quot;admin&quot;</span>)</code></pre></div>
 <p>こうすると、利用者が <code>admin</code>権限を持っていなかった場合であっても、新しい利用者を作成する関数を書くことができます。</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="ot">createUserAsAdmin ::</span> <span class="dt">Reader</span> <span class="dt">Permissions</span> (<span class="dt">Maybe</span> <span class="dt">User</span>)</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2">createUserAsAdmin <span class="fu">=</span> runAsAdmin createUser</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">createUserAsAdmin ::</span> <span class="dt">Reader</span> <span class="dt">Permissions</span> (<span class="dt">Maybe</span> <span class="dt">User</span>)
+createUserAsAdmin <span class="fu">=</span> runAsAdmin createUser</code></pre></div>
 <p><code>Reader</code>モナドの計算を実行するには、大域的な設定を与える <code>runReader</code>関数を使います。</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="ot">runReader ::</span> forall r a<span class="fu">.</span> <span class="dt">Reader</span> r a <span class="ot">-&gt;</span> r <span class="ot">-&gt;</span> a</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">runReader ::</span> forall r a<span class="fu">.</span> <span class="dt">Reader</span> r a <span class="ot">-&gt;</span> r <span class="ot">-&gt;</span> a</code></pre></div>
 <blockquote>
 <h2 id="演習-1" class="unnumbered">演習</h2>
 <p>以下の演習では、 <code>Reader</code>モナドを使って、字下げのついた文書を出力するための小さなライブラリを作っていきます。「大域的な設定」は、現在の字下げの深さを示す数になります。</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">type</span> <span class="dt">Level</span> <span class="fu">=</span> <span class="dt">Number</span></a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="kw">type</span> <span class="dt">Doc</span> <span class="fu">=</span> <span class="dt">Reader</span> <span class="dt">Level</span> <span class="dt">String</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Level</span> <span class="fu">=</span> <span class="dt">Number</span>
+
+<span class="kw">type</span> <span class="dt">Doc</span> <span class="fu">=</span> <span class="dt">Reader</span> <span class="dt">Level</span> <span class="dt">String</span></code></pre></div>
 <ol type="1">
 <li><p>(簡単)　現在の字下げの深さで文字列を出力する関数 <code>line</code>を書いてください。その関数は、以下の型を持っている必要があります。</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="ot">line ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Doc</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">line ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Doc</span></code></pre></div>
 <p><strong>ヒント</strong>：現在の字下げの深さを読み取るためには <code>ask</code>関数を使用します。</p></li>
 <li><p>(やや難しい)<code>local</code>関数を使用して、コードブロックの字下げの深さを大きくする次のような関数を書いてください。</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="ot">indent ::</span> <span class="dt">Doc</span> <span class="ot">-&gt;</span> <span class="dt">Doc</span></a></code></pre></div></li>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">indent ::</span> <span class="dt">Doc</span> <span class="ot">-&gt;</span> <span class="dt">Doc</span></code></pre></div></li>
 <li><p>(やや難しい)<code>Data.Traversable</code>で定義された <code>sequence</code>関数を使用して、文書のリストを改行で区切って連結する次のような関数を書いてください。</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="ot">cat ::</span> <span class="dt">Array</span> <span class="dt">Doc</span> <span class="ot">-&gt;</span> <span class="dt">Doc</span></a></code></pre></div></li>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">cat ::</span> <span class="dt">Array</span> <span class="dt">Doc</span> <span class="ot">-&gt;</span> <span class="dt">Doc</span></code></pre></div></li>
 <li><p>(やや難しい)<code>runReader</code>関数を使用して、文書を文字列として出力する次のような関数を書いてください。</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="ot">render ::</span> <span class="dt">Doc</span> <span class="ot">-&gt;</span> <span class="dt">String</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">render ::</span> <span class="dt">Doc</span> <span class="ot">-&gt;</span> <span class="dt">String</span></code></pre></div>
 <p>これで、このライブラリを次のように使うと、簡単な文書を書くことができるはずです。</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb22-1" data-line-number="1">render <span class="fu">$</span> cat</a>
-<a class="sourceLine" id="cb22-2" data-line-number="2">  [ line <span class="st">&quot;Here is some indented text:&quot;</span></a>
-<a class="sourceLine" id="cb22-3" data-line-number="3">  , indent <span class="fu">$</span> cat</a>
-<a class="sourceLine" id="cb22-4" data-line-number="4">      [ line <span class="st">&quot;I am indented&quot;</span></a>
-<a class="sourceLine" id="cb22-5" data-line-number="5">      , line <span class="st">&quot;So am I&quot;</span></a>
-<a class="sourceLine" id="cb22-6" data-line-number="6">      , indent <span class="fu">$</span> line <span class="st">&quot;I am even more indented&quot;</span></a>
-<a class="sourceLine" id="cb22-7" data-line-number="7">      ]</a>
-<a class="sourceLine" id="cb22-8" data-line-number="8">  ]</a></code></pre></div></li>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">render <span class="fu">$</span> cat
+  [ line <span class="st">&quot;Here is some indented text:&quot;</span>
+  , indent <span class="fu">$</span> cat
+      [ line <span class="st">&quot;I am indented&quot;</span>
+      , line <span class="st">&quot;So am I&quot;</span>
+      , indent <span class="fu">$</span> line <span class="st">&quot;I am even more indented&quot;</span>
+      ]
+  ]</code></pre></div></li>
 </ol>
 </blockquote>
 <h2 id="writerモナド"><span class="header-section-number">11.6</span> Writerモナド</h2>
@@ -404,31 +376,31 @@ false</code></pre>
 <p>よくある使い方としては型 <code>String</code>もしくは <code>Array String</code>でログを累積していくというものなどがありますが、 <code>Writer</code>モナドはこれよりもっと一般的なものです。これは累積するのに任意のモノイドの値を使うことができ、 <code>Sum</code>モノイドを使って、合計を追跡し続けるのに使ったり、 <code>Any</code>モノイドを使って途中の <code>Boolean</code>値がすべて真であるかどうかを追跡するのに使うことができます。</p>
 <p><code>Writer</code>型の構築子は、 <code>Monoid</code>型クラスのインスタンスである型 <code>w</code>、および返り値の型 <code>a</code>という2つの型引数を取ります。</p>
 <p><code>Writer</code>のAPIで重要なのは <code>tell</code>関数です。</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="ot">tell ::</span> forall w a<span class="fu">.</span> <span class="dt">Monoid</span> w <span class="ot">=&gt;</span> w <span class="ot">-&gt;</span> <span class="dt">Writer</span> w <span class="dt">Unit</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">tell ::</span> forall w a<span class="fu">.</span> <span class="dt">Monoid</span> w <span class="ot">=&gt;</span> w <span class="ot">-&gt;</span> <span class="dt">Writer</span> w <span class="dt">Unit</span></code></pre></div>
 <p><code>tell</code>アクションは、与えられた値を現在の累積結果に加算します。</p>
 <p>例として、 <code>Array String</code>モノイドを使用して、既存の関数にログ機能を追加してみましょう。<strong>最大公約数</strong>関数の以前の実装を考えてみます。</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb24-1" data-line-number="1">gcd<span class="ot"> ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb24-2" data-line-number="2">gcd n <span class="dv">0</span> <span class="fu">=</span> n</a>
-<a class="sourceLine" id="cb24-3" data-line-number="3">gcd <span class="dv">0</span> m <span class="fu">=</span> m</a>
-<a class="sourceLine" id="cb24-4" data-line-number="4">gcd n m <span class="fu">=</span> <span class="kw">if</span> n <span class="fu">&gt;</span> m</a>
-<a class="sourceLine" id="cb24-5" data-line-number="5">            <span class="kw">then</span> gcd (n <span class="fu">-</span> m) m</a>
-<a class="sourceLine" id="cb24-6" data-line-number="6">            <span class="kw">else</span> gcd n (m <span class="fu">-</span> n)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">gcd<span class="ot"> ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span>
+gcd n <span class="dv">0</span> <span class="fu">=</span> n
+gcd <span class="dv">0</span> m <span class="fu">=</span> m
+gcd n m <span class="fu">=</span> <span class="kw">if</span> n <span class="fu">&gt;</span> m
+            <span class="kw">then</span> gcd (n <span class="fu">-</span> m) m
+            <span class="kw">else</span> gcd n (m <span class="fu">-</span> n)</code></pre></div>
 <p><code>Writer (Array String) Int</code>に返り値の型を変更することで、この関数にログ機能を追加することができます。</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Control.Monad.Writer</span></a>
-<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="kw">import</span> <span class="dt">Control.Monad.Writer.Class</span></a>
-<a class="sourceLine" id="cb25-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb25-4" data-line-number="4"><span class="ot">gcdLog ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Writer</span> (<span class="dt">Array</span> <span class="dt">String</span>) <span class="dt">Int</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Control.Monad.Writer</span>
+<span class="kw">import </span><span class="dt">Control.Monad.Writer.Class</span>
+
+<span class="ot">gcdLog ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Writer</span> (<span class="dt">Array</span> <span class="dt">String</span>) <span class="dt">Int</span></code></pre></div>
 <p>各手順で二つの入力を記録するために、少し関数を変更する必要があります。</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb26-1" data-line-number="1">gcdLog n <span class="dv">0</span> <span class="fu">=</span> pure n</a>
-<a class="sourceLine" id="cb26-2" data-line-number="2">gcdLog <span class="dv">0</span> m <span class="fu">=</span> pure m</a>
-<a class="sourceLine" id="cb26-3" data-line-number="3">gcdLog n m <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb26-4" data-line-number="4">  tell [<span class="st">&quot;gcdLog &quot;</span> <span class="fu">&lt;&gt;</span> show n <span class="fu">&lt;&gt;</span> <span class="st">&quot; &quot;</span> <span class="fu">&lt;&gt;</span> show m]</a>
-<a class="sourceLine" id="cb26-5" data-line-number="5">  <span class="kw">if</span> n <span class="fu">&gt;</span> m</a>
-<a class="sourceLine" id="cb26-6" data-line-number="6">    <span class="kw">then</span> gcdLog (n <span class="fu">-</span> m) m</a>
-<a class="sourceLine" id="cb26-7" data-line-number="7">    <span class="kw">else</span> gcdLog n (m <span class="fu">-</span> n)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">gcdLog n <span class="dv">0</span> <span class="fu">=</span> pure n
+gcdLog <span class="dv">0</span> m <span class="fu">=</span> pure m
+gcdLog n m <span class="fu">=</span> <span class="kw">do</span>
+  tell [<span class="st">&quot;gcdLog &quot;</span> <span class="fu">&lt;&gt;</span> show n <span class="fu">&lt;&gt;</span> <span class="st">&quot; &quot;</span> <span class="fu">&lt;&gt;</span> show m]
+  <span class="kw">if</span> n <span class="fu">&gt;</span> m
+    <span class="kw">then</span> gcdLog (n <span class="fu">-</span> m) m
+    <span class="kw">else</span> gcdLog n (m <span class="fu">-</span> n)</code></pre></div>
 <p><code>Writer</code>モナドの計算を実行するには、 <code>execWriter</code>関数と <code>runWriter</code>関数のいずれかを使います。</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="ot">execWriter ::</span> forall w a<span class="fu">.</span> <span class="dt">Writer</span> w a <span class="ot">-&gt;</span> w</a>
-<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="ot">runWriter  ::</span> forall w a<span class="fu">.</span> <span class="dt">Writer</span> w a <span class="ot">-&gt;</span> <span class="dt">Tuple</span> a w</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">execWriter ::</span> forall w a<span class="fu">.</span> <span class="dt">Writer</span> w a <span class="ot">-&gt;</span> w
+<span class="ot">runWriter  ::</span> forall w a<span class="fu">.</span> <span class="dt">Writer</span> w a <span class="ot">-&gt;</span> <span class="dt">Tuple</span> a w</code></pre></div>
 <p>ちょうど <code>State</code>モナドの場合と同じように、 <code>execWriter</code>が累積されたログだけを返すのに対して、 <code>runWriter</code>は累積されたログと結果の両方を返します。</p>
 <p><code>PSCi</code>で修正された関数を試してみましょう。</p>
 <pre class="text"><code>&gt; import Control.Monad.Writer
@@ -469,20 +441,20 @@ Type</code></pre>
 <p>最後に、種 <code>Type</code>の何かが残りましたが、この型の値を探してみましょう。</p>
 <p>構築したモナド <code>StateT String (Either String)</code>は、エラーで失敗する可能性があり、変更可能な状態を使える計算を表しています。</p>
 <p>外側の <code>StateT String (Either String)</code>モナドのアクション(<code>get</code>、 <code>put</code>、 <code>modify</code>)は直接使うことができますが、ラップされている内側のモナド(<code>Either String</code>)の作用を使うためには、これらの関数をモナド変換子まで「持ち上げ」なくてはいけません。 <code>Control.MonadTrans</code>モジュールでは、モナド変換子であるような型構築子を捕捉する <code>MonadTrans</code>型クラスを次のように定義しています。</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">class</span> <span class="dt">MonadTrans</span> t <span class="kw">where</span></a>
-<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="ot">  lift ::</span> forall m a<span class="fu">.</span> <span class="dt">Monad</span> m <span class="ot">=&gt;</span> m a <span class="ot">-&gt;</span> t m a</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">MonadTrans</span> t <span class="kw">where</span>
+<span class="ot">  lift ::</span> forall m a<span class="fu">.</span> <span class="dt">Monad</span> m <span class="ot">=&gt;</span> m a <span class="ot">-&gt;</span> t m a</code></pre></div>
 <p>このクラスは、基礎となる任意のモナド <code>m</code>の計算をとり、それをラップされたモナド <code>t m</code>へと持ち上げる、 <code>lift</code>というひとつの関数だけを持っています。今回の場合、型構築子 <code>t</code>は <code>StateT String</code>で、 <code>m</code>は <code>Either String</code>モナドとなり、 <code>lift</code>は型 <code>Either String a</code>の計算を、型 <code>State String (Either String) a</code>の計算へと持ち上げる方法を提供することになります。これは、型 <code>Either String a</code>の計算を使うときは、 <code>lfft</code>を使えばいつでも作用 <code>StateT String</code>と <code>Either String</code>を隣り合わせに使うことができることを意味します。</p>
 <p>たとえば、次の計算は <code>StateT</code>モナド変換子で導入されている状態を読み込み、状態が空の文字列である場合はエラーを投げます。</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Data.String</span> (drop, take)</a>
-<a class="sourceLine" id="cb35-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb35-3" data-line-number="3"><span class="ot">split ::</span> <span class="dt">StateT</span> <span class="dt">String</span> (<span class="dt">Either</span> <span class="dt">String</span>) <span class="dt">String</span></a>
-<a class="sourceLine" id="cb35-4" data-line-number="4">split <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb35-5" data-line-number="5">  s <span class="ot">&lt;-</span> get</a>
-<a class="sourceLine" id="cb35-6" data-line-number="6">  <span class="kw">case</span> s <span class="kw">of</span></a>
-<a class="sourceLine" id="cb35-7" data-line-number="7">    <span class="st">&quot;&quot;</span> <span class="ot">-&gt;</span> lift <span class="fu">$</span> <span class="dt">Left</span> <span class="st">&quot;Empty string&quot;</span></a>
-<a class="sourceLine" id="cb35-8" data-line-number="8">    _ <span class="ot">-&gt;</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb35-9" data-line-number="9">      put (drop <span class="dv">1</span> s)</a>
-<a class="sourceLine" id="cb35-10" data-line-number="10">      pure (take <span class="dv">1</span> s)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Data.String</span> (drop, take)
+
+<span class="ot">split ::</span> <span class="dt">StateT</span> <span class="dt">String</span> (<span class="dt">Either</span> <span class="dt">String</span>) <span class="dt">String</span>
+split <span class="fu">=</span> <span class="kw">do</span>
+  s <span class="ot">&lt;-</span> get
+  <span class="kw">case</span> s <span class="kw">of</span>
+    <span class="st">&quot;&quot;</span> <span class="ot">-&gt;</span> lift <span class="fu">$</span> <span class="dt">Left</span> <span class="st">&quot;Empty string&quot;</span>
+    _ <span class="ot">-&gt;</span> <span class="kw">do</span>
+      put (drop <span class="dv">1</span> s)
+      pure (take <span class="dv">1</span> s)</code></pre></div>
 <p>状態が空でなければ、この計算は <code>put</code>を使って状態を <code>drop 1 s</code>(最初の文字を取り除いた <code>s</code>)へと更新し、 <code>take 1 s</code>(<code>s</code>の最初の文字)を返します。</p>
 <p>それでは <code>PSCi</code>でこれを試してみましょう。</p>
 <pre class="text"><code>&gt; runStateT split &quot;test&quot;
@@ -496,13 +468,13 @@ Left &quot;Empty string&quot;</code></pre>
 <p>他にもアクションを幾つか用意すれば、 <code>split</code>関数を使って、基本的な構文解析ライブラリを構築することができます。これは実際に <code>purescript-parsing</code>ライブラリで採用されている手法です。これがモナド変換子の力なのです。必要な副作用を選択して、do記法とApplicativeコンビネータで表現力を維持しながら、様々な問題のための特注のモナドを作成することができるのです。</p>
 <h2 id="excepttモナド変換子"><span class="header-section-number">11.8</span> ExceptTモナド変換子</h2>
 <p><code>purescript-transformers</code>パッケージでは、 <code>Either e</code>モナドに対応する変換子である <code>ExceptT e</code>モナド変換子も定義されています。これは次のAPIを提供します。</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">class</span> <span class="dt">MonadError</span> e m <span class="kw">where</span></a>
-<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="ot">  throwError ::</span> forall a<span class="fu">.</span> e <span class="ot">-&gt;</span> m a</a>
-<a class="sourceLine" id="cb38-3" data-line-number="3"><span class="ot">  catchError ::</span> forall a<span class="fu">.</span> m a <span class="ot">-&gt;</span> (e <span class="ot">-&gt;</span> m a) <span class="ot">-&gt;</span> m a</a>
-<a class="sourceLine" id="cb38-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb38-5" data-line-number="5"><span class="kw">instance</span><span class="ot"> monadErrorExceptT ::</span> <span class="dt">Monad</span> m <span class="ot">=&gt;</span> <span class="dt">MonadError</span> e (<span class="dt">ExceptT</span> e m)</a>
-<a class="sourceLine" id="cb38-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb38-7" data-line-number="7"><span class="ot">runExceptT ::</span> forall e m a<span class="fu">.</span> <span class="dt">ExceptT</span> e m a <span class="ot">-&gt;</span> m (<span class="dt">Either</span> e a)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">MonadError</span> e m <span class="kw">where</span>
+<span class="ot">  throwError ::</span> forall a<span class="fu">.</span> e <span class="ot">-&gt;</span> m a
+<span class="ot">  catchError ::</span> forall a<span class="fu">.</span> m a <span class="ot">-&gt;</span> (e <span class="ot">-&gt;</span> m a) <span class="ot">-&gt;</span> m a
+
+<span class="kw">instance</span><span class="ot"> monadErrorExceptT ::</span> <span class="dt">Monad</span> m <span class="ot">=&gt;</span> <span class="dt">MonadError</span> e (<span class="dt">ExceptT</span> e m)
+
+<span class="ot">runExceptT ::</span> forall e m a<span class="fu">.</span> <span class="dt">ExceptT</span> e m a <span class="ot">-&gt;</span> m (<span class="dt">Either</span> e a)</code></pre></div>
 <p><code>MonadError</code>クラスは <code>e</code>型のエラーのスローとキャッチをサポートするモナドを取得し、 <code>ExceptT e</code>モナド変換子のインスタンスが提供されます。 <code>Either e</code>モナドの <code>Left</code>と同じように、 <code>throwError</code>アクションは失敗を示すために使われます。 <code>catchError</code>アクションを使うと、 <code>throwError</code>でエラーが投げられたあとでも処理を継続することができるようになります。</p>
 <p><code>runExceptT</code>ハンドラを使うと、型 <code>ExceptT e m a</code>の計算を実行することができます。</p>
 <p>このAPIは <code>purescript-exceptions</code>パッケージの <code>Exception</code>作用によって提供されているものと似ています。しかし、いくつかの重要な違いがあります。</p>
@@ -511,18 +483,18 @@ Left &quot;Empty string&quot;</code></pre>
 <li><code>ExceptT</code>が <code>Error</code>型クラスのどんな型のエラーでも扱うのに対して、 <code>Exception</code>作用はJavaScriptの <code>Error</code>型というひとつ例外の型だけを扱います。つまり、 <code>ExceptT</code>では新たなエラー型を自由に定義できます。</li>
 </ul>
 <p>試しに <code>ExceptT</code>を使って <code>Writer</code>モナドを包んでみましょう。ここでもモナド変換子 <code>ExceptT e</code>のアクションは自由に使えますが、 <code>Writer</code>モナドの計算は <code>lift</code>を使って持ちあげなければなりません。　　</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Control.Monad.Trans</span></a>
-<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="kw">import</span> <span class="dt">Control.Monad.Writer</span></a>
-<a class="sourceLine" id="cb39-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Control.Monad.Writer.Class</span></a>
-<a class="sourceLine" id="cb39-4" data-line-number="4"><span class="kw">import</span> <span class="dt">Control.Monad.Error.Class</span></a>
-<a class="sourceLine" id="cb39-5" data-line-number="5"><span class="kw">import</span> <span class="dt">Control.Monad.Except.Trans</span></a>
-<a class="sourceLine" id="cb39-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb39-7" data-line-number="7"><span class="ot">writerAndExceptT ::</span> <span class="dt">ExceptT</span> <span class="dt">String</span> (<span class="dt">Writer</span> (<span class="dt">Array</span> <span class="dt">String</span>)) <span class="dt">String</span></a>
-<a class="sourceLine" id="cb39-8" data-line-number="8">writerAndExceptT <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb39-9" data-line-number="9">  lift <span class="fu">$</span> tell [<span class="st">&quot;Before the error&quot;</span>]</a>
-<a class="sourceLine" id="cb39-10" data-line-number="10">  throwError <span class="st">&quot;Error!&quot;</span></a>
-<a class="sourceLine" id="cb39-11" data-line-number="11">  lift <span class="fu">$</span> tell [<span class="st">&quot;After the error&quot;</span>]</a>
-<a class="sourceLine" id="cb39-12" data-line-number="12">  pure <span class="st">&quot;Return value&quot;</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Control.Monad.Trans</span>
+<span class="kw">import </span><span class="dt">Control.Monad.Writer</span>
+<span class="kw">import </span><span class="dt">Control.Monad.Writer.Class</span>
+<span class="kw">import </span><span class="dt">Control.Monad.Error.Class</span>
+<span class="kw">import </span><span class="dt">Control.Monad.Except.Trans</span>
+
+<span class="ot">writerAndExceptT ::</span> <span class="dt">ExceptT</span> <span class="dt">String</span> (<span class="dt">Writer</span> (<span class="dt">Array</span> <span class="dt">String</span>)) <span class="dt">String</span>
+writerAndExceptT <span class="fu">=</span> <span class="kw">do</span>
+  lift <span class="fu">$</span> tell [<span class="st">&quot;Before the error&quot;</span>]
+  throwError <span class="st">&quot;Error!&quot;</span>
+  lift <span class="fu">$</span> tell [<span class="st">&quot;After the error&quot;</span>]
+  pure <span class="st">&quot;Return value&quot;</span></code></pre></div>
 <p><code>PSCi</code>でこの関数を試すと、ログの蓄積とエラーの送出という２つの作用がどのように相互作用しているのかを見ることができます。まず、 <code>runExceptT</code>を使って外側の <code>ExceptT</code>計算を実行し、型 <code>Write String (Either String String)</code>の結果を残します。それから、 <code>runWriter</code>で内側の <code>Writer</code>計算を実行します。</p>
 <pre class="text"><code>&gt; runWriter $ runExceptT writerAndExceptT
 Tuple (Left &quot;Error!&quot;) [&quot;Before the error&quot;]</code></pre>
@@ -532,21 +504,21 @@ Tuple (Left &quot;Error!&quot;) [&quot;Before the error&quot;]</code></pre>
 <p>実際には、基本となるモナド <code>m</code>は、ネイティブの副作用が必要なら <code>Eff</code>モナド、さもなくば <code>Control.Monad.Identity</code>モジュールで定義されている <code>Identity</code>モナドになります。 <code>Identity</code>モナドは何の新しい副作用も追加しませんから、 <code>Identity</code>モナドの変換は、モナド変換子の作用だけを提供します。実際に、 <code>State</code>モナド、 <code>Reader</code>モナド、 <code>Writer</code>モナドは、 <code>Identity</code>モナドをそれぞれ <code>StateT</code>、 <code>ReaderT</code>、 <code>WriterT</code>で変換することによって実装されています。</p>
 <p>それでは3つの副作用が組み合わされている例を見てみましょう。 <code>Identity</code>モナドをスタックの底にして、 <code>StateT</code>作用、 <code>WriterT</code>作用、 <code>ExceptT</code>作用を使います。このモナド変換子スタックは、ログの蓄積し、純粋なエラー、可変状態の副作用を提供します。</p>
 <p>このモナド変換子スタックを使うと、ロギングの機能が追加された <code>split</code>アクションを作ることができます。</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">type</span> <span class="dt">Errors</span> <span class="fu">=</span> <span class="dt">Array</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb41-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb41-3" data-line-number="3"><span class="kw">type</span> <span class="dt">Log</span> <span class="fu">=</span> <span class="dt">Array</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb41-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb41-5" data-line-number="5"><span class="kw">type</span> <span class="dt">Parser</span> <span class="fu">=</span> <span class="dt">StateT</span> <span class="dt">String</span> (<span class="dt">WriterT</span> <span class="dt">Log</span> (<span class="dt">ExceptT</span> <span class="dt">Errors</span> <span class="dt">Identity</span>))</a>
-<a class="sourceLine" id="cb41-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb41-7" data-line-number="7"><span class="ot">split ::</span> <span class="dt">Parser</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb41-8" data-line-number="8">split <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb41-9" data-line-number="9">  s <span class="ot">&lt;-</span> get</a>
-<a class="sourceLine" id="cb41-10" data-line-number="10">  lift <span class="fu">$</span> tell [<span class="st">&quot;The state is &quot;</span> <span class="fu">&lt;&gt;</span> show s]</a>
-<a class="sourceLine" id="cb41-11" data-line-number="11">  <span class="kw">case</span> s <span class="kw">of</span></a>
-<a class="sourceLine" id="cb41-12" data-line-number="12">    <span class="st">&quot;&quot;</span> <span class="ot">-&gt;</span> lift <span class="fu">$</span> lift <span class="fu">$</span> throwError [<span class="st">&quot;Empty string&quot;</span>]</a>
-<a class="sourceLine" id="cb41-13" data-line-number="13">    _ <span class="ot">-&gt;</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb41-14" data-line-number="14">      put (drop <span class="dv">1</span> s)</a>
-<a class="sourceLine" id="cb41-15" data-line-number="15">      pure (take <span class="dv">1</span> s)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Errors</span> <span class="fu">=</span> <span class="dt">Array</span> <span class="dt">String</span>
+
+<span class="kw">type</span> <span class="dt">Log</span> <span class="fu">=</span> <span class="dt">Array</span> <span class="dt">String</span>
+
+<span class="kw">type</span> <span class="dt">Parser</span> <span class="fu">=</span> <span class="dt">StateT</span> <span class="dt">String</span> (<span class="dt">WriterT</span> <span class="dt">Log</span> (<span class="dt">ExceptT</span> <span class="dt">Errors</span> <span class="dt">Identity</span>))
+
+<span class="ot">split ::</span> <span class="dt">Parser</span> <span class="dt">String</span>
+split <span class="fu">=</span> <span class="kw">do</span>
+  s <span class="ot">&lt;-</span> get
+  lift <span class="fu">$</span> tell [<span class="st">&quot;The state is &quot;</span> <span class="fu">&lt;&gt;</span> show s]
+  <span class="kw">case</span> s <span class="kw">of</span>
+    <span class="st">&quot;&quot;</span> <span class="ot">-&gt;</span> lift <span class="fu">$</span> lift <span class="fu">$</span> throwError [<span class="st">&quot;Empty string&quot;</span>]
+    _ <span class="ot">-&gt;</span> <span class="kw">do</span>
+      put (drop <span class="dv">1</span> s)
+      pure (take <span class="dv">1</span> s)</code></pre></div>
 <p>この計算を <code>PSCi</code>で試してみると、 <code>split</code>が実行されるたびに状態がログに追加されることがわかります。</p>
 <p>モナド変換子スタックに現れる順序に従って、副作用を取り除いていかなければならないことに注意してください。最初に <code>StateT</code>型構築子を取り除くために <code>runStateT</code>を使い、それから <code>runtWriteT</code>を使い、その後 <code>runExceptT</code>を使います。最後に <code>runIdentity</code>を使用して <code>Identity</code>モナドの演算を実行します。</p>
 <pre class="text"><code>&gt; runParser p s = runIdentity $ runExceptT $ runWriterT $ runStateT p s
@@ -567,7 +539,7 @@ Tuple (Left &quot;Error!&quot;) [&quot;Before the error&quot;]</code></pre>
 <ol type="1">
 <li><p>(簡単)　<code>Identity</code>関手の上の <code>ExceptT</code>モナド変換子を使って、分母がゼロの場合はエラーを投​​げる、2つの数の商を求める関数 <code>safeDivide</code>を書いてください。</p></li>
 <li><p>(やや難しい) 現在の状態が接頭辞に適合するか、エラーメッセージとともに失敗する、次のような構文解析関数を書いてください。</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="ot">string ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Parser</span> <span class="dt">String</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">string ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Parser</span> <span class="dt">String</span></code></pre></div>
 <p>この構文解析器は次のように動作しなくてはなりません。</p>
 <pre class="text"><code>&gt; runParser (string &quot;abc&quot;) &quot;abcdef&quot;
 (Right (Tuple (Tuple &quot;abc&quot; &quot;def&quot;) [&quot;The state is abcdef&quot;]))</code></pre>
@@ -578,40 +550,40 @@ Tuple (Left &quot;Error!&quot;) [&quot;Before the error&quot;]</code></pre>
 </blockquote>
 <h2 id="救済のための型クラス"><span class="header-section-number">11.10</span> 救済のための型クラス</h2>
 <p>章の最初で扱った <code>State</code>モナドを見てみると、 <code>State</code>モナドのアクションには次のような型が与えられていました。</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="ot">get    ::</span> forall s<span class="fu">.</span>             <span class="dt">State</span> s s</a>
-<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="ot">put    ::</span> forall s<span class="fu">.</span> s        <span class="ot">-&gt;</span> <span class="dt">State</span> s <span class="dt">Unit</span></a>
-<a class="sourceLine" id="cb46-3" data-line-number="3"><span class="ot">modify ::</span> forall s<span class="fu">.</span> (s <span class="ot">-&gt;</span> s) <span class="ot">-&gt;</span> <span class="dt">State</span> s <span class="dt">Unit</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">get    ::</span> forall s<span class="fu">.</span>             <span class="dt">State</span> s s
+<span class="ot">put    ::</span> forall s<span class="fu">.</span> s        <span class="ot">-&gt;</span> <span class="dt">State</span> s <span class="dt">Unit</span>
+<span class="ot">modify ::</span> forall s<span class="fu">.</span> (s <span class="ot">-&gt;</span> s) <span class="ot">-&gt;</span> <span class="dt">State</span> s <span class="dt">Unit</span></code></pre></div>
 <p><code>Control.Monad.State.Class</code>モジュールで与えられている型は、実際には次のようにもっと一般的です。</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="ot">get    ::</span> forall m s<span class="fu">.</span> <span class="dt">MonadState</span> s m <span class="ot">=&gt;</span>             m s</a>
-<a class="sourceLine" id="cb47-2" data-line-number="2"><span class="ot">put    ::</span> forall m s<span class="fu">.</span> <span class="dt">MonadState</span> s m <span class="ot">=&gt;</span> s        <span class="ot">-&gt;</span> m <span class="dt">Unit</span></a>
-<a class="sourceLine" id="cb47-3" data-line-number="3"><span class="ot">modify ::</span> forall m s<span class="fu">.</span> <span class="dt">MonadState</span> s m <span class="ot">=&gt;</span> (s <span class="ot">-&gt;</span> s) <span class="ot">-&gt;</span> m <span class="dt">Unit</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">get    ::</span> forall m s<span class="fu">.</span> <span class="dt">MonadState</span> s m <span class="ot">=&gt;</span>             m s
+<span class="ot">put    ::</span> forall m s<span class="fu">.</span> <span class="dt">MonadState</span> s m <span class="ot">=&gt;</span> s        <span class="ot">-&gt;</span> m <span class="dt">Unit</span>
+<span class="ot">modify ::</span> forall m s<span class="fu">.</span> <span class="dt">MonadState</span> s m <span class="ot">=&gt;</span> (s <span class="ot">-&gt;</span> s) <span class="ot">-&gt;</span> m <span class="dt">Unit</span></code></pre></div>
 <p><code>Control.Monad.State.Class</code>モジュールには「純粋な変更可能な状態を提供するモナド」への抽象化を可能にする <code>MonadState</code>(多変数)型クラスが定義されています。予想できると思いますが、 <code>State s</code>型構築子は <code>MonadState s</code>型クラスのインスタンスになっており、このクラスには他にも興味深いインスタンスが数多くあります。</p>
 <p>特に、 <code>purescript-transformers</code>パッケージではモナド変換子 <code>WriterT</code>、 <code>ReaderT</code>、 <code>ExceptT</code>についての <code>MonadState</code>のインスタンスが提供されています。実際に、 <code>StateT</code>がモナド変換子スタックのどこかに現れ、 <code>StateT</code>より上のすべてが <code>MonadState</code>のインスタンスであれば、 <code>get</code>、 <code>put</code>、 <code>modify</code>を直接自由に使用することができます。</p>
 <p>実は、これまで扱ってきた <code>ReaderT</code>、 <code>WriterT</code>、 <code>ExceptT</code>変換子についても、同じことが成り立っています。 <code>purescript-transformers</code>では、それらの操作をサポートするモナドの上に抽象化することを可能にする、主な変換子それぞれについての型クラスが定義されています。</p>
 <p>上の <code>split</code>関数の場合、構築されたこのモナドスタックは型クラス <code>MonadState</code>、 <code>MonadWriter</code>、 <code>MonadError</code>それぞれのインスタンスです。これはつまり、 <code>lift</code>をまったく呼び出す必要がないことを意味します！まるでモナドスタック自体に定義されていたかのように、アクション <code>get</code>、 <code>put</code>、 <code>tell</code>、 <code>throwError</code>をそのまま使用することができます。</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="ot">split ::</span> <span class="dt">Parser</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb48-2" data-line-number="2">split <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb48-3" data-line-number="3">  s <span class="ot">&lt;-</span> get</a>
-<a class="sourceLine" id="cb48-4" data-line-number="4">  tell [<span class="st">&quot;The state is &quot;</span> <span class="fu">&lt;&gt;</span> show s]</a>
-<a class="sourceLine" id="cb48-5" data-line-number="5">  <span class="kw">case</span> s <span class="kw">of</span></a>
-<a class="sourceLine" id="cb48-6" data-line-number="6">    <span class="st">&quot;&quot;</span> <span class="ot">-&gt;</span> throwError <span class="st">&quot;Empty string&quot;</span></a>
-<a class="sourceLine" id="cb48-7" data-line-number="7">    _ <span class="ot">-&gt;</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb48-8" data-line-number="8">      put (drop <span class="dv">1</span> s)</a>
-<a class="sourceLine" id="cb48-9" data-line-number="9">      pure (take <span class="dv">1</span> s)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">split ::</span> <span class="dt">Parser</span> <span class="dt">String</span>
+split <span class="fu">=</span> <span class="kw">do</span>
+  s <span class="ot">&lt;-</span> get
+  tell [<span class="st">&quot;The state is &quot;</span> <span class="fu">&lt;&gt;</span> show s]
+  <span class="kw">case</span> s <span class="kw">of</span>
+    <span class="st">&quot;&quot;</span> <span class="ot">-&gt;</span> throwError <span class="st">&quot;Empty string&quot;</span>
+    _ <span class="ot">-&gt;</span> <span class="kw">do</span>
+      put (drop <span class="dv">1</span> s)
+      pure (take <span class="dv">1</span> s)</code></pre></div>
 <p>この計算はまるで、可変状態、ロギング、エラー処理という３つの副作用に対応した、独自のプログラミング言語を拡張したかのようにみえます。しかしながら、内部的にはすべてはあくまで純粋な関数と普通のデータを使って実装されているのです。</p>
 <h2 id="alternative型クラス"><span class="header-section-number">11.11</span> Alternative型クラス</h2>
 <p><code>purescript-control</code>パッケージでは失敗しうる計算を操作するための抽象化がいくつか定義されています。そのひとつは <code>Alternative</code>型クラスです。</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">class</span> <span class="dt">Functor</span> f <span class="fu">&lt;=</span> <span class="dt">Alt</span> f <span class="kw">where</span></a>
-<a class="sourceLine" id="cb49-2" data-line-number="2"><span class="ot">  alt ::</span> forall a<span class="fu">.</span> f a <span class="ot">-&gt;</span> f a <span class="ot">-&gt;</span> f a</a>
-<a class="sourceLine" id="cb49-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb49-4" data-line-number="4"><span class="kw">class</span> <span class="dt">Alt</span> f <span class="fu">&lt;=</span> <span class="dt">Plus</span> f <span class="kw">where</span></a>
-<a class="sourceLine" id="cb49-5" data-line-number="5"><span class="ot">  empty ::</span> forall a<span class="fu">.</span> f a</a>
-<a class="sourceLine" id="cb49-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb49-7" data-line-number="7"><span class="kw">class</span> (<span class="dt">Applicative</span> f, <span class="dt">Plus</span> f) <span class="fu">&lt;=</span> <span class="dt">Alternative</span> f</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Functor</span> f <span class="fu">&lt;=</span> <span class="dt">Alt</span> f <span class="kw">where</span>
+<span class="ot">  alt ::</span> forall a<span class="fu">.</span> f a <span class="ot">-&gt;</span> f a <span class="ot">-&gt;</span> f a
+
+<span class="kw">class</span> <span class="dt">Alt</span> f <span class="fu">&lt;=</span> <span class="dt">Plus</span> f <span class="kw">where</span>
+<span class="ot">  empty ::</span> forall a<span class="fu">.</span> f a
+
+<span class="kw">class</span> (<span class="dt">Applicative</span> f, <span class="dt">Plus</span> f) <span class="fu">&lt;=</span> <span class="dt">Alternative</span> f</code></pre></div>
 <p><code>Alternative</code>は、失敗しうる計算のプロトタイプを提供する <code>empty</code>値、 エラーが起きたときに<strong>代替</strong>(Alternative)計算へ戻ってやり直す機能を提供する <code>&lt;|&gt;</code>演算子 という、2つの新しいコンビネータを提供しています。</p>
 <p><code>Data.List</code>モジュールでは <code>Alternative</code>型クラスで型構築子を操作する2つの便利な関数を提供します。</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="ot">many ::</span> forall f a<span class="fu">.</span> <span class="dt">Alternative</span> f <span class="ot">=&gt;</span> <span class="dt">Lazy</span> (f (<span class="dt">List</span> a)) <span class="ot">=&gt;</span> f a <span class="ot">-&gt;</span> f (<span class="dt">List</span> a)</a>
-<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="ot">some ::</span> forall f a<span class="fu">.</span> <span class="dt">Alternative</span> f <span class="ot">=&gt;</span> <span class="dt">Lazy</span> (f (<span class="dt">List</span> a)) <span class="ot">=&gt;</span> f a <span class="ot">-&gt;</span> f (<span class="dt">List</span> a)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">many ::</span> forall f a<span class="fu">.</span> <span class="dt">Alternative</span> f <span class="ot">=&gt;</span> <span class="dt">Lazy</span> (f (<span class="dt">List</span> a)) <span class="ot">=&gt;</span> f a <span class="ot">-&gt;</span> f (<span class="dt">List</span> a)
+<span class="ot">some ::</span> forall f a<span class="fu">.</span> <span class="dt">Alternative</span> f <span class="ot">=&gt;</span> <span class="dt">Lazy</span> (f (<span class="dt">List</span> a)) <span class="ot">=&gt;</span> f a <span class="ot">-&gt;</span> f (<span class="dt">List</span> a)</code></pre></div>
 <p><code>many</code>コンビネータは計算を<strong>ゼロ回以上</strong>繰り返し実行するために <code>Alternative</code>型クラスを使用しています。 <code>some</code>コンビネータも似ていますが、成功するために少なくとも１回の計算を必要とします。</p>
 <p>今回の <code>Parser</code>モナド変換子スタックの場合は、 <code>ExceptT</code>コンポーネントから導かれた、明らかな方法で失敗をサポートする、 <code>Alternative</code>のインスタンスが存在します。これは、構文解析器を複数回実行するために <code>many</code>関数と <code>some</code>関数を使うことができることを意味します。</p>
 <pre class="text"><code>&gt; import Split
@@ -628,26 +600,26 @@ Tuple (Left &quot;Error!&quot;) [&quot;Before the error&quot;]</code></pre>
 <p><code>Alternative</code>型構築子の他の例としては、 <code>Maybe</code>や、 <code>Array</code>つまり配列の型構築子があります。</p>
 <h2 id="モナド内包表記"><span class="header-section-number">11.12</span> モナド内包表記</h2>
 <p><code>Control.MonadPlus</code>モジュールには <code>MonadPlus</code>と呼ばれる <code>Alternative</code>型クラスの若干の変形が定義されています。 <code>MonadPlus</code>はモナドと <code>Alternative</code>のインスタンスの両方である型構築子を補足します。</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw">class</span> (<span class="dt">Monad</span> m, <span class="dt">Alternative</span> m) <span class="fu">&lt;=</span> <span class="dt">MonadZero</span> m</a>
-<a class="sourceLine" id="cb52-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb52-3" data-line-number="3"><span class="kw">class</span> <span class="dt">MonadZero</span> m <span class="fu">&lt;=</span> <span class="dt">MonadPlus</span> m</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> (<span class="dt">Monad</span> m, <span class="dt">Alternative</span> m) <span class="fu">&lt;=</span> <span class="dt">MonadZero</span> m
+
+<span class="kw">class</span> <span class="dt">MonadZero</span> m <span class="fu">&lt;=</span> <span class="dt">MonadPlus</span> m</code></pre></div>
 <p>実際、 <code>Parser</code>モナドは <code>MonadPlus</code>のインスタンスです。</p>
 <p>以前に本書中で配列内包表記を扱ったとき、不要な結果をフィルタリングするため使われる <code>guard</code>関数を導入しました。実際は <code>guard</code>関数はもっと一般的で、 <code>MonadPlus</code>のインスタンスであるすべてのモナドに対して使うことができます。</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="ot">guard ::</span> forall m<span class="fu">.</span> <span class="dt">MonadZero</span> m <span class="ot">=&gt;</span> <span class="dt">Boolean</span> <span class="ot">-&gt;</span> m <span class="dt">Unit</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">guard ::</span> forall m<span class="fu">.</span> <span class="dt">MonadZero</span> m <span class="ot">=&gt;</span> <span class="dt">Boolean</span> <span class="ot">-&gt;</span> m <span class="dt">Unit</span></code></pre></div>
 <p><code>&lt;|&gt;</code>演算子は失敗時のバックトラッキングをできるようにします。これがどのように役立つかを見るために、大文字だけに適合する <code>split</code>コンビネータの亜種を定義してみましょう。</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="ot">upper ::</span> <span class="dt">Parser</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb54-2" data-line-number="2">upper <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb54-3" data-line-number="3">  s <span class="ot">&lt;-</span> split</a>
-<a class="sourceLine" id="cb54-4" data-line-number="4">  guard <span class="fu">$</span> toUpper s <span class="fu">==</span> s</a>
-<a class="sourceLine" id="cb54-5" data-line-number="5">  pure s</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">upper ::</span> <span class="dt">Parser</span> <span class="dt">String</span>
+upper <span class="fu">=</span> <span class="kw">do</span>
+  s <span class="ot">&lt;-</span> split
+  guard <span class="fu">$</span> toUpper s <span class="fu">==</span> s
+  pure s</code></pre></div>
 <p>ここで、文字列が大文字でない場合に失敗するよう <code>guard</code>を使用しています。このコードは前に見た配列内包表記とよく似ていることに注目してください。このように <code>MonadPlus</code>が使われており<strong>モナド内包表記</strong>(monad comprehensions)を構築するために参照することがあります。</p>
 <h2 id="バックトラッキング"><span class="header-section-number">11.13</span> バックトラッキング</h2>
 <p><code>&lt;|&gt;</code>演算子を使うと、失敗したときに別の代替計算へとバックトラックすることができます。これを確かめるために、小文字に一致するもう一つの構文解析器を定義してみましょう。</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="ot">lower ::</span> <span class="dt">Parser</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb55-2" data-line-number="2">lower <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb55-3" data-line-number="3">  s <span class="ot">&lt;-</span> split</a>
-<a class="sourceLine" id="cb55-4" data-line-number="4">  guard <span class="fu">$</span> toLower s <span class="fu">==</span> s</a>
-<a class="sourceLine" id="cb55-5" data-line-number="5">  pure s</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">lower ::</span> <span class="dt">Parser</span> <span class="dt">String</span>
+lower <span class="fu">=</span> <span class="kw">do</span>
+  s <span class="ot">&lt;-</span> split
+  guard <span class="fu">$</span> toLower s <span class="fu">==</span> s
+  pure s</code></pre></div>
 <p>これにより、まずもし最初の文字が大文字なら複数の大文字に適合し、さもなくばもし最初の文字が小文字なら複数の小文字に適合する、という構文解析器を定義することができます。</p>
 <pre class="text"><code>&gt; upperOrLower = some upper &lt;|&gt; some lower</code></pre>
 <p>この構文解析器は、大文字と小文字が切り替わるまで、文字に適合し続けます。</p>
@@ -679,7 +651,7 @@ Tuple (Left &quot;Error!&quot;) [&quot;Before the error&quot;]</code></pre>
 <li><p>(やや難しい)<code>string</code>構文解析器と <code>many</code>コンビネータを使って、文字列 <code>&quot;a&quot;</code>の連続と、それに続く文字列 <code>&quot;b&quot;</code>の連続からなる文字列を認識する構文解析器を書いてください。</p></li>
 <li><p>(やや難しい)<code>&lt;|&gt;</code>演算子を使って、文字 <code>a</code>と文字 <code>b</code>が任意の順序で現れるような文字列を認識する構文解析器を書いてください。</p></li>
 <li><p>(難しい)<code>Parser</code>モナドは次のように定義されるかもしれません。</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="kw">type</span> <span class="dt">Parser</span> <span class="fu">=</span> <span class="dt">ExceptT</span> <span class="dt">Errors</span> (<span class="dt">StateT</span> <span class="dt">String</span> (<span class="dt">WriterT</span> <span class="dt">Log</span> <span class="dt">Identity</span>))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Parser</span> <span class="fu">=</span> <span class="dt">ExceptT</span> <span class="dt">Errors</span> (<span class="dt">StateT</span> <span class="dt">String</span> (<span class="dt">WriterT</span> <span class="dt">Log</span> <span class="dt">Identity</span>))</code></pre></div>
 <p>このように変更すると、構文解析関数にどのような影響を与えるでしょうか。</p></li>
 </ol>
 </blockquote>
@@ -687,70 +659,70 @@ Tuple (Left &quot;Error!&quot;) [&quot;Before the error&quot;]</code></pre>
 <p>モナド変換子のある特定の組み合わせは、 <code>purescript-transformers</code>パッケージ内の単一のモナド変換子として提供されるのが一般的です。 <code>Reader</code>、 <code>Writer</code>、 <code>State</code>のモナドは、<strong>Reader-Writer-State</strong>モナド(<code>RWS</code>モナド)へと結合されます。このモナドは <code>RWST</code>モナド変換子と呼ばれる、対応するモナド変換子を持っています。</p>
 <p>ここでは <code>RWS</code>モナドを使ってテキストアドベンチャーゲームの処理を設計していきます。</p>
 <p><code>RWS</code>モナドは(戻り値の型に加えて)3つの型変数で定義されています。</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">type</span> <span class="dt">RWS</span> r w s <span class="fu">=</span> <span class="dt">RWST</span> r w s <span class="dt">Identity</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">RWS</span> r w s <span class="fu">=</span> <span class="dt">RWST</span> r w s <span class="dt">Identity</span></code></pre></div>
 <p>副作用を提供しない <code>Identity</code>にベースモナドを設定することで、 <code>RWS</code>モナドが独自のモナド変換子の観点から定義されていることに注意してください。</p>
 <p>第1型引数 <code>r</code>は大域的な設定の型を表します。第2型引数 <code>w</code>はログを蓄積するために使用するモノイド、第3型引数 <code>s</code>は可変状態の型を表しています。</p>
 <p>このゲームの場合には、大域的な設定は <code>Data.GameEnvironment</code>モジュールの <code>GameEnvironment</code>と呼ばれる型で定義されています。</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="kw">type</span> <span class="dt">PlayerName</span> <span class="fu">=</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb61-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb61-3" data-line-number="3"><span class="kw">newtype</span> <span class="dt">GameEnvironment</span> <span class="fu">=</span> <span class="dt">GameEnvironment</span></a>
-<a class="sourceLine" id="cb61-4" data-line-number="4">  {<span class="ot"> playerName    ::</span> <span class="dt">PlayerName</span></a>
-<a class="sourceLine" id="cb61-5" data-line-number="5">  ,<span class="ot"> debugMode     ::</span> <span class="dt">Boolean</span></a>
-<a class="sourceLine" id="cb61-6" data-line-number="6">  }</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">PlayerName</span> <span class="fu">=</span> <span class="dt">String</span>
+
+<span class="kw">newtype</span> <span class="dt">GameEnvironment</span> <span class="fu">=</span> <span class="dt">GameEnvironment</span>
+  {<span class="ot"> playerName    ::</span> <span class="dt">PlayerName</span>
+  ,<span class="ot"> debugMode     ::</span> <span class="dt">Boolean</span>
+  }</code></pre></div>
 <p><code>GameEnvironment</code>では、プレイヤー名と、ゲームがデバッグモードで動作しているか否かを示すフラグが定義されています。これらのオプションは、モナド変換子を実行するときにコマンドラインから設定されます。</p>
 <p>可変状態は <code>Data.GameState</code>モジュールの <code>GameState</code>と呼ばれる型で定義されています。</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Map</span> <span class="kw">as</span> <span class="dt">M</span></a>
-<a class="sourceLine" id="cb62-2" data-line-number="2"><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Set</span> <span class="kw">as</span> <span class="dt">S</span></a>
-<a class="sourceLine" id="cb62-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb62-4" data-line-number="4"><span class="kw">newtype</span> <span class="dt">GameState</span> <span class="fu">=</span> <span class="dt">GameState</span></a>
-<a class="sourceLine" id="cb62-5" data-line-number="5">  {<span class="ot"> items       ::</span> <span class="dt">M.Map</span> <span class="dt">Coords</span> (<span class="dt">S.Set</span> <span class="dt">GameItem</span>)</a>
-<a class="sourceLine" id="cb62-6" data-line-number="6">  ,<span class="ot"> player      ::</span> <span class="dt">Coords</span></a>
-<a class="sourceLine" id="cb62-7" data-line-number="7">  ,<span class="ot"> inventory   ::</span> <span class="dt">S.Set</span> <span class="dt">GameItem</span></a>
-<a class="sourceLine" id="cb62-8" data-line-number="8">  }</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import qualified</span> <span class="dt">Data.Map</span> <span class="kw">as</span> <span class="dt">M</span>
+<span class="kw">import qualified</span> <span class="dt">Data.Set</span> <span class="kw">as</span> <span class="dt">S</span>
+
+<span class="kw">newtype</span> <span class="dt">GameState</span> <span class="fu">=</span> <span class="dt">GameState</span>
+  {<span class="ot"> items       ::</span> <span class="dt">M.Map</span> <span class="dt">Coords</span> (<span class="dt">S.Set</span> <span class="dt">GameItem</span>)
+  ,<span class="ot"> player      ::</span> <span class="dt">Coords</span>
+  ,<span class="ot"> inventory   ::</span> <span class="dt">S.Set</span> <span class="dt">GameItem</span>
+  }</code></pre></div>
 <p><code>Coords</code>データ型は2次元平面の点を表し、 <code>GameItem</code>データ型はゲーム内のアイテムです。</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="kw">data</span> <span class="dt">GameItem</span> <span class="fu">=</span> <span class="dt">Candle</span> <span class="fu">|</span> <span class="dt">Matches</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">GameItem</span> <span class="fu">=</span> <span class="dt">Candle</span> <span class="fu">|</span> <span class="dt">Matches</span></code></pre></div>
 <p><code>GameState</code>型はソートされたマップを表す <code>Map</code>とソートされた集合を表す <code>Set</code>という2つの新しいデータ構造を使っています。 <code>items</code>プロパティは、そのゲーム平面上の座標と、ゲームアイテムの集合へのマッピングになっています。 <code>player</code>プロパティはプレイヤーの現在の座標を格納しており、 <code>inventory</code>プロパティは現在プレイヤーが保有するゲームアイテムの集合です。</p>
 <p><code>Map</code>と <code>Set</code>のデータ構造はキーによってソートされ、 <code>Ord</code>型クラスの任意の型をキーとして使用することができます。これは今回のデータ構造のキーが完全に順序付けできることを意味します。</p>
 <p>ゲームのアクションを書くために、 <code>Map</code>と <code>Set</code>構造がどのように使っていくのかを見ていきましょう。</p>
 <p>ログとしては <code>List String</code>モノイドを使います。 <code>RWS</code>を使って <code>Game</code>モナドのための型同義語を定義しておきます。</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">type</span> <span class="dt">Log</span> <span class="fu">=</span> <span class="dt">L.List</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb64-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb64-3" data-line-number="3"><span class="kw">type</span> <span class="dt">Game</span> <span class="fu">=</span> <span class="dt">RWS</span> <span class="dt">GameEnvironment</span> <span class="dt">Log</span> <span class="dt">GameState</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Log</span> <span class="fu">=</span> <span class="dt">L.List</span> <span class="dt">String</span>
+
+<span class="kw">type</span> <span class="dt">Game</span> <span class="fu">=</span> <span class="dt">RWS</span> <span class="dt">GameEnvironment</span> <span class="dt">Log</span> <span class="dt">GameState</span></code></pre></div>
 <h2 id="ゲームロジックの実装"><span class="header-section-number">11.15</span> ゲームロジックの実装</h2>
 <p>今回は、 <code>Reader</code>モナド、 <code>Writer</code>モナド、 <code>State</code>モナドのアクションを再利用し、 <code>Game</code>モナドで定義されている単純なアクションを組み合わせてゲームを構築していきます。このアプリケーションの最上位では、 <code>Game</code>モナドで純粋な計算を実行しており、 <code>Eff</code>モナドはコンソールにテキストを出力するような追跡可能な副作用へと結果を変換するために使っています。</p>
 <p>このゲームで最も簡単なアクションのひとつは <code>has</code>アクションです。このアクションはプレイヤーの持ち物に特定のゲームアイテムが含まれているかどうかを調べます。これは次のように定義されます。</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="ot">has ::</span> <span class="dt">GameItem</span> <span class="ot">-&gt;</span> <span class="dt">Game</span> <span class="dt">Boolean</span></a>
-<a class="sourceLine" id="cb65-2" data-line-number="2">has item <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb65-3" data-line-number="3">  <span class="dt">GameState</span> state <span class="ot">&lt;-</span> get</a>
-<a class="sourceLine" id="cb65-4" data-line-number="4">  pure <span class="fu">$</span> item <span class="ot">`S.member`</span> state<span class="fu">.</span>inventory</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">has ::</span> <span class="dt">GameItem</span> <span class="ot">-&gt;</span> <span class="dt">Game</span> <span class="dt">Boolean</span>
+has item <span class="fu">=</span> <span class="kw">do</span>
+  <span class="dt">GameState</span> state <span class="ot">&lt;-</span> get
+  pure <span class="fu">$</span> item <span class="ot">`S.member`</span> state<span class="fu">.</span>inventory</code></pre></div>
 <p>この関数は、現在のゲームの状態を読み取るために <code>Monad.State</code>型クラスで定義されている <code>get</code>アクションを使っており、指定した <code>GameItem</code>が持ち物の <code>Set</code>のなかに出現するかどうかを調べるために <code>Data.Set</code>で定義されている <code>member</code>関数を使っています。</p>
 <p>他にも <code>pickUp</code>アクションがあります。現在の位置にゲームアイテムがある場合、プレイヤーの持ち物にそのアイテムを追加します。これには <code>MonadWriter</code>と <code>MonadState</code>型クラスのアクションを使っています。まず、現在のゲームの状態を読み取ります。</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="ot">pickUp ::</span> <span class="dt">GameItem</span> <span class="ot">-&gt;</span> <span class="dt">Game</span> <span class="dt">Unit</span></a>
-<a class="sourceLine" id="cb66-2" data-line-number="2">pickUp item <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb66-3" data-line-number="3">  <span class="dt">GameState</span> state <span class="ot">&lt;-</span> get</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">pickUp ::</span> <span class="dt">GameItem</span> <span class="ot">-&gt;</span> <span class="dt">Game</span> <span class="dt">Unit</span>
+pickUp item <span class="fu">=</span> <span class="kw">do</span>
+  <span class="dt">GameState</span> state <span class="ot">&lt;-</span> get</code></pre></div>
 <p>次に <code>pickUp</code>は現在の位置にあるアイテムの集合を検索します。これは <code>Data.Map</code>で定義された <code>lookup</code>関数を使って行います。</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb67-1" data-line-number="1">  <span class="kw">case</span> state<span class="fu">.</span>player <span class="ot">`M.lookup`</span> state<span class="fu">.</span>items <span class="kw">of</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  <span class="kw">case</span> state<span class="fu">.</span>player <span class="ot">`M.lookup`</span> state<span class="fu">.</span>items <span class="kw">of</span></code></pre></div>
 <p><code>lookup</code>関数は <code>Maybe</code>型構築子で示されたオプショナルな結果を返します。 <code>lookup</code>関数は、キーがマップにない場合は <code>Nothing</code>を返し、それ以外の場合は <code>Just</code>構築子で対応する値を返します。</p>
 <p>関心があるのは、指定されたゲームアイテムが対応するアイテムの集合に含まれている場合です。 <code>member</code>関数を使うとこれを調べることができます。</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb68-1" data-line-number="1">    <span class="dt">Just</span> items <span class="fu">|</span> item <span class="ot">`S.member`</span> items <span class="ot">-&gt;</span> <span class="kw">do</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">    <span class="dt">Just</span> items <span class="fu">|</span> item <span class="ot">`S.member`</span> items <span class="ot">-&gt;</span> <span class="kw">do</span></code></pre></div>
 <p>この場合、 <code>put</code>を使ってゲームの状態を更新し、 <code>tell</code>を使ってログにメッセージを追加します。</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb69-1" data-line-number="1">      <span class="kw">let</span> newItems <span class="fu">=</span> M.update (<span class="dt">Just</span> <span class="fu">&lt;&lt;&lt;</span> S.delete item) state<span class="fu">.</span>player state<span class="fu">.</span>items</a>
-<a class="sourceLine" id="cb69-2" data-line-number="2">          newInventory <span class="fu">=</span> S.insert item state<span class="fu">.</span>inventory</a>
-<a class="sourceLine" id="cb69-3" data-line-number="3">      put <span class="fu">$</span> <span class="dt">GameState</span> state { items     <span class="fu">=</span> newItems</a>
-<a class="sourceLine" id="cb69-4" data-line-number="4">                            , inventory <span class="fu">=</span> newInventory</a>
-<a class="sourceLine" id="cb69-5" data-line-number="5">                            }</a>
-<a class="sourceLine" id="cb69-6" data-line-number="6">      tell (L.singleton (<span class="st">&quot;You now have the &quot;</span> <span class="fu">&lt;&gt;</span> show item))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">      <span class="kw">let</span> newItems <span class="fu">=</span> M.update (<span class="dt">Just</span> <span class="fu">&lt;&lt;&lt;</span> S.delete item) state<span class="fu">.</span>player state<span class="fu">.</span>items
+          newInventory <span class="fu">=</span> S.insert item state<span class="fu">.</span>inventory
+      put <span class="fu">$</span> <span class="dt">GameState</span> state { items     <span class="fu">=</span> newItems
+                            , inventory <span class="fu">=</span> newInventory
+                            }
+      tell (L.singleton (<span class="st">&quot;You now have the &quot;</span> <span class="fu">&lt;&gt;</span> show item))</code></pre></div>
 <p>ここで、 <code>MonadState</code>と <code>MonadWriter</code>の両方について <code>Game</code>モナド変換子スタックについての適切なインスタンスが存在するので、２つの計算はどちらも <code>lift</code>は必要ないことに注意してください。</p>
 <p><code>put</code>の引数では、レコード更新を使ってゲームの状態の <code>items</code>と <code>inventory</code>フィールドを変更しています。特定のキーの値を変更するには <code>Data.Map</code>の <code>update</code>関数を使います。このとき、 <code>delete</code>関数を使い指定したアイテムを集合から取り除くことで、プレイヤーの現在の位置にあるアイテムの集合を変更します。</p>
 <p>最後に、 <code>pickUp</code>関数は <code>tell</code>を使ってユーザに次のように通知することにより、残りの場合を処理します。</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb70-1" data-line-number="1">    _ <span class="ot">-&gt;</span> tell (L.singleton <span class="st">&quot;I don&#39;t see that item here.&quot;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">    _ <span class="ot">-&gt;</span> tell (L.singleton <span class="st">&quot;I don&#39;t see that item here.&quot;</span>)</code></pre></div>
 <p><code>Reader</code>モナドを使う例として、 <code>debug</code>コマンドのコードを見てみましょう。ゲームがデバッグモードで実行されている場合、このコマンドを使うとユーザは実行時にゲームの状態を調べることができます。</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb71-1" data-line-number="1">  <span class="dt">GameEnvironment</span> env <span class="ot">&lt;-</span> ask</a>
-<a class="sourceLine" id="cb71-2" data-line-number="2">  <span class="kw">if</span> env<span class="fu">.</span>debugMode</a>
-<a class="sourceLine" id="cb71-3" data-line-number="3">    <span class="kw">then</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb71-4" data-line-number="4">      state <span class="ot">&lt;-</span> get</a>
-<a class="sourceLine" id="cb71-5" data-line-number="5">      tell (L.singleton (show state))</a>
-<a class="sourceLine" id="cb71-6" data-line-number="6">    <span class="kw">else</span> tell (L.singleton <span class="st">&quot;Not running in debug mode.&quot;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  <span class="dt">GameEnvironment</span> env <span class="ot">&lt;-</span> ask
+  <span class="kw">if</span> env<span class="fu">.</span>debugMode
+    <span class="kw">then</span> <span class="kw">do</span>
+      state <span class="ot">&lt;-</span> get
+      tell (L.singleton (show state))
+    <span class="kw">else</span> tell (L.singleton <span class="st">&quot;Not running in debug mode.&quot;</span>)</code></pre></div>
 <p>ここでは、ゲームの設定を読み込むために <code>ask</code>アクションを使用しています。繰り返しますが、どんな計算の <code>lift</code>も必要なく、同じdo記法ブロック内で <code>MonadState</code>、 <code>MonadReader</code>、 <code>MonadWriter</code>型クラスで定義されているアクションを使うことができることに注意してください。</p>
 <p><code>debugMode</code>フラグが設定されている場合、 <code>tell</code>アクションを使ってログに状態が追加されます。そうでなければ、エラーメッセージが追加されます。</p>
 <p><code>Game.purs</code>モジュールでは、 <code>MonadState</code>型クラス、 <code>MonadReader</code>型クラス、 <code>MonadWriter</code>型クラスでそれぞれ定義されたアクションだけを使って、同様のアクションが定義されています。</p>
@@ -758,52 +730,52 @@ Tuple (Left &quot;Error!&quot;) [&quot;Before the error&quot;]</code></pre>
 <p>このゲームロジックは <code>RWS</code>モナドで動くため、ユーザのコマンドに応答するためには計算を実行する必要があります。</p>
 <p>このゲームのフロントエンドは、 <code>yargs</code>コマンドライン構文解析ライブラリへのApplicativeなインターフェイスを提供する <code>purescript-yargs</code>パッケージと、対話的なコンソールベースのアプリケーションを書くことを可能にするNodeJSの <code>readline</code>モジュールをラップする <code>purescript-node-readline</code>パッケージという２つのパッケージで構成されています。</p>
 <p>このゲームロジックへのインタフェースは <code>Game</code>モジュール内の関数 <code>game</code>によって提供されます。</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb72-1" data-line-number="1"><span class="ot">game ::</span> <span class="dt">Array</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Game</span> <span class="dt">Unit</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">game ::</span> <span class="dt">Array</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Game</span> <span class="dt">Unit</span></code></pre></div>
 <p>この計算を実行するには、ユーザが入力した単語のリストを文字列の配列として渡してから、 <code>runRWS</code>を使って <code>RWS</code>の計算を実行します。</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="kw">data</span> <span class="dt">RWSResult</span> state result writer <span class="fu">=</span> <span class="dt">RWSResult</span> state result writer</a>
-<a class="sourceLine" id="cb73-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb73-3" data-line-number="3"><span class="ot">runRWS ::</span> forall r w s a<span class="fu">.</span> <span class="dt">RWS</span> r w s a <span class="ot">-&gt;</span> r <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> <span class="dt">RWSResult</span> s a w</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">RWSResult</span> state result writer <span class="fu">=</span> <span class="dt">RWSResult</span> state result writer
+
+<span class="ot">runRWS ::</span> forall r w s a<span class="fu">.</span> <span class="dt">RWS</span> r w s a <span class="ot">-&gt;</span> r <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> <span class="dt">RWSResult</span> s a w</code></pre></div>
 <p><code>runRWS</code>は <code>runReader</code>、 <code>runWriter</code>、 <code>runState</code>を組み合わせたように見えます。これは、引数として大域的な設定および初期状態をとり、ログ、結果、最的な終状態を含むレコードを返します。</p>
 <p>このアプリケーションのフロントエンドは、次の型シグネチャを持つ関数 <code>runGame</code>によって定義されます。</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="ot">runGame ::</span> forall eff <span class="fu">.</span> <span class="dt">GameEnvironment</span></a>
-<a class="sourceLine" id="cb74-2" data-line-number="2">  <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot"> exception ::</span> <span class="dt">EXCEPTION</span></a>
-<a class="sourceLine" id="cb74-3" data-line-number="3">         ,<span class="ot"> readline ::</span> <span class="dt">RL.READLINE</span></a>
-<a class="sourceLine" id="cb74-4" data-line-number="4">         ,<span class="ot"> console ::</span> <span class="dt">CONSOLE</span></a>
-<a class="sourceLine" id="cb74-5" data-line-number="5">         <span class="fu">|</span> eff</a>
-<a class="sourceLine" id="cb74-6" data-line-number="6">         ) <span class="dt">Unit</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">runGame ::</span> forall eff <span class="fu">.</span> <span class="dt">GameEnvironment</span>
+  <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot"> exception ::</span> <span class="dt">EXCEPTION</span>
+         ,<span class="ot"> readline ::</span> <span class="dt">RL.READLINE</span>
+         ,<span class="ot"> console ::</span> <span class="dt">CONSOLE</span>
+         <span class="fu">|</span> eff
+         ) <span class="dt">Unit</span></code></pre></div>
 <p><code>Console</code>作用は、この関数が <code>purescript-node-readline</code>パッケージを使ってコンソールを介してユーザと対話することを示しています。 <code>runGame</code>は関数の引数としてのゲームの設定とります。</p>
 <p><code>purescript-node-readline</code>パッケージでは、端末からのユーザ入力を扱う <code>Eff</code>モナドのアクションを表す <code>LineHandler</code>型が提供されています。対応するAPIは次のとおりです。</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="kw">type</span> <span class="dt">LineHandler</span> eff a <span class="fu">=</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> eff a</a>
-<a class="sourceLine" id="cb75-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb75-3" data-line-number="3"><span class="ot">setLineHandler ::</span> forall eff a<span class="fu">.</span> <span class="dt">Interface</span></a>
-<a class="sourceLine" id="cb75-4" data-line-number="4">                <span class="ot">-&gt;</span> <span class="dt">LineHandler</span> (<span class="ot">readline ::</span> <span class="dt">READLINE</span> <span class="fu">|</span> eff) a</a>
-<a class="sourceLine" id="cb75-5" data-line-number="5">                <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">readline ::</span> <span class="dt">READLINE</span> <span class="fu">|</span> eff) <span class="dt">Unit</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">LineHandler</span> eff a <span class="fu">=</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> eff a
+
+<span class="ot">setLineHandler ::</span> forall eff a<span class="fu">.</span> <span class="dt">Interface</span>
+                <span class="ot">-&gt;</span> <span class="dt">LineHandler</span> (<span class="ot">readline ::</span> <span class="dt">READLINE</span> <span class="fu">|</span> eff) a
+                <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">readline ::</span> <span class="dt">READLINE</span> <span class="fu">|</span> eff) <span class="dt">Unit</span></code></pre></div>
 <p><code>Interface</code>型はコンソールのハンドルを表しており、コンソールと対話する関数への引数として渡されます。 <code>createInterface</code>関数を使用すると <code>Interface</code>を作成することができます。</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb76-1" data-line-number="1">runGame env <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb76-2" data-line-number="2">  interface <span class="ot">&lt;-</span> createConsoleInterface noCompletion</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">runGame env <span class="fu">=</span> <span class="kw">do</span>
+  interface <span class="ot">&lt;-</span> createConsoleInterface noCompletion</code></pre></div>
 <p>最初の手順はコンソールにプロンプトを設定することです。 <code>interface</code>ハンドルを渡し、プロンプト文字列とインデントレベルを提供します。</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb77-1" data-line-number="1">setPrompt <span class="st">&quot;&gt; &quot;</span> <span class="dv">2</span> interface</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">setPrompt <span class="st">&quot;&gt; &quot;</span> <span class="dv">2</span> interface</code></pre></div>
 <p>今回は <code>lineHandler</code>関数を実装してみましょう。 <code>lineHandler</code>は <code>let</code>宣言内の補助関数を使って次のように定義されています。</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="ot">lineHandler ::</span> <span class="dt">GameState</span> <span class="ot">-&gt;</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb78-2" data-line-number="2">             <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot"> exception ::</span> <span class="dt">EXCEPTION</span></a>
-<a class="sourceLine" id="cb78-3" data-line-number="3">                    ,<span class="ot"> console ::</span> <span class="dt">CONSOLE</span></a>
-<a class="sourceLine" id="cb78-4" data-line-number="4">                    ,<span class="ot"> readline ::</span> <span class="dt">RL.READLINE</span></a>
-<a class="sourceLine" id="cb78-5" data-line-number="5">                    <span class="fu">|</span> eff</a>
-<a class="sourceLine" id="cb78-6" data-line-number="6">                    ) <span class="dt">Unit</span></a>
-<a class="sourceLine" id="cb78-7" data-line-number="7">lineHandler currentState input <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb78-8" data-line-number="8">  <span class="kw">case</span> runRWS (game (split <span class="st">&quot; &quot;</span> input)) env currentState <span class="kw">of</span></a>
-<a class="sourceLine" id="cb78-9" data-line-number="9">    <span class="dt">RWSResult</span> state _ written <span class="ot">-&gt;</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb78-10" data-line-number="10">      for_ written log</a>
-<a class="sourceLine" id="cb78-11" data-line-number="11">      setLineHandler interface <span class="fu">$</span> lineHandler state</a>
-<a class="sourceLine" id="cb78-12" data-line-number="12">  prompt interface</a>
-<a class="sourceLine" id="cb78-13" data-line-number="13">  pure unit</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">lineHandler ::</span> <span class="dt">GameState</span> <span class="ot">-&gt;</span> <span class="dt">String</span>
+             <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot"> exception ::</span> <span class="dt">EXCEPTION</span>
+                    ,<span class="ot"> console ::</span> <span class="dt">CONSOLE</span>
+                    ,<span class="ot"> readline ::</span> <span class="dt">RL.READLINE</span>
+                    <span class="fu">|</span> eff
+                    ) <span class="dt">Unit</span>
+lineHandler currentState input <span class="fu">=</span> <span class="kw">do</span>
+  <span class="kw">case</span> runRWS (game (split <span class="st">&quot; &quot;</span> input)) env currentState <span class="kw">of</span>
+    <span class="dt">RWSResult</span> state _ written <span class="ot">-&gt;</span> <span class="kw">do</span>
+      for_ written log
+      setLineHandler interface <span class="fu">$</span> lineHandler state
+  prompt interface
+  pure unit</code></pre></div>
 <p><code>lineHandler</code>では <code>env</code>という名前のゲーム構成や、 <code>interface</code>という名前のコンソールハンドルを参照しています。</p>
 <p>このハンドラは追加の最初の引数としてゲームの状態を取ります。ゲームのロジックを実行するために <code>runRWS</code>にゲームの状態を渡さなければならないので、これは必要となっています。</p>
 <p>このアクションが最初に行うことは、 <code>Data.String</code>モジュールの <code>split</code>関数を使用して、ユーザーの入力を単語に分割することです。それから、ゲーム環境と現在のゲームの状態を渡し、 <code>runRWS</code>を使用して(<code>RWS</code>モナドで)<code>game</code>アクションを実行しています。</p>
 <p>純粋な計算であるゲームロジックを実行し、画面にすべてのログメッセージを出力して、ユーザに次のコマンドのプロンプトを表示する必要があります。 <code>for_</code>アクションは(<code>List String</code>型の)ログを走査し、コンソールにその内容を出力するために使われています。そして <code>setLineHandler</code>を使って <code>lineHandler</code>関数を更新することで、ゲームの状態を更新します。最後に <code>prompt</code>アクションを使ってプロンプトが再び表示しています。</p>
 <p><code>runGame</code>関数ではコンソールインターフェイスに最初のlineHandlerを設定して、最初のプロンプトを表示します。</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb79-1" data-line-number="1">  setLineHandler interface <span class="fu">$</span> lineHandler initialGameState</a>
-<a class="sourceLine" id="cb79-2" data-line-number="2">  prompt interface</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  setLineHandler interface <span class="fu">$</span> lineHandler initialGameState
+  prompt interface</code></pre></div>
 <blockquote>
 <h2 id="演習-5" class="unnumbered">演習</h2>
 <ol type="1">
@@ -815,22 +787,22 @@ Tuple (Left &quot;Error!&quot;) [&quot;Before the error&quot;]</code></pre>
 <h2 id="コマンドラインオプションの扱い"><span class="header-section-number">11.17</span> コマンドラインオプションの扱い</h2>
 <p>このアプリケーションの最後の部品は、コマンドラインオプションの解析と <code>GameEnvironment</code>レコードを作成する役目にあります。このためには <code>purescript-yargs</code>パッケージを使用します。</p>
 <p><code>purescript-yargs</code>は<strong>Applicativeなコマンドラインオプション構文解析器</strong>の例です。Applicative関手を使うと、いろいろな副作用の型を表す型構築子まで任意個数の引数の関数をを持ち上げられることを思い出してください。 <code>purescript-yargs</code>パッケージの場合には、コマンドラインオプションからの読み取りの副作用を追加する <code>Y</code>関手が興味深い関手になっています。これは次のようなハンドラを提供しています。</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb80-1" data-line-number="1"><span class="ot">runY ::</span> forall a eff<span class="fu">.</span> <span class="dt">YargsSetup</span> <span class="ot">-&gt;</span></a>
-<a class="sourceLine" id="cb80-2" data-line-number="2">                      <span class="dt">Y</span> (<span class="dt">Eff</span> (<span class="ot">exception ::</span> <span class="dt">EXCEPTION</span>,<span class="ot"> console ::</span> <span class="dt">CONSOLE</span> <span class="fu">|</span> eff) a) <span class="ot">-&gt;</span></a>
-<a class="sourceLine" id="cb80-3" data-line-number="3">                      <span class="dt">Eff</span> (<span class="ot">exception ::</span> <span class="dt">EXCEPTION</span>,<span class="ot"> console ::</span> <span class="dt">CONSOLE</span> <span class="fu">|</span> eff) a</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">runY ::</span> forall a eff<span class="fu">.</span> <span class="dt">YargsSetup</span> <span class="ot">-&gt;</span>
+                      <span class="dt">Y</span> (<span class="dt">Eff</span> (<span class="ot">exception ::</span> <span class="dt">EXCEPTION</span>,<span class="ot"> console ::</span> <span class="dt">CONSOLE</span> <span class="fu">|</span> eff) a) <span class="ot">-&gt;</span>
+                      <span class="dt">Eff</span> (<span class="ot">exception ::</span> <span class="dt">EXCEPTION</span>,<span class="ot"> console ::</span> <span class="dt">CONSOLE</span> <span class="fu">|</span> eff) a</code></pre></div>
 <p>この関数の使いかたは、例で示すのが最も適しているでしょう。このアプリケーションの <code>main</code>関数は <code>runY</code>を使って次のように定義されています。</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb81-1" data-line-number="1">main <span class="fu">=</span> runY (usage <span class="st">&quot;$0 -p &lt;player name&gt;&quot;</span>) <span class="fu">$</span> map runGame env</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">main <span class="fu">=</span> runY (usage <span class="st">&quot;$0 -p &lt;player name&gt;&quot;</span>) <span class="fu">$</span> map runGame env</code></pre></div>
 <p>最初の引数は <code>yargs</code>ライブラリを設定するために使用されます。今回の場合、使用方法のメッセージだけを提供していますが、 <code>Node.Yargs.Setup</code>モジュールには他にもいくつかのオプションを提供しています。</p>
 <p>2番目の引数では、 <code>Y</code>型構築子まで <code>runGame</code>関数を持ち上げるために <code>&lt;$&gt;</code>コンビネータを使用しています。引数 <code>env</code>は <code>where</code>節でApplicative演算子 <code>&lt;$&gt;</code>、 <code>&lt;*&gt;</code>を使って構築されています。</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb82-1" data-line-number="1">  <span class="kw">where</span></a>
-<a class="sourceLine" id="cb82-2" data-line-number="2"><span class="ot">  env ::</span> <span class="dt">Y</span> <span class="dt">GameEnvironment</span></a>
-<a class="sourceLine" id="cb82-3" data-line-number="3">  env <span class="fu">=</span> gameEnvironment</a>
-<a class="sourceLine" id="cb82-4" data-line-number="4">          <span class="fu">&lt;$&gt;</span> yarg <span class="st">&quot;p&quot;</span> [<span class="st">&quot;player&quot;</span>]</a>
-<a class="sourceLine" id="cb82-5" data-line-number="5">                   (<span class="dt">Just</span> <span class="st">&quot;Player name&quot;</span>)</a>
-<a class="sourceLine" id="cb82-6" data-line-number="6">                   (<span class="dt">Right</span> <span class="st">&quot;The player name is required&quot;</span>)</a>
-<a class="sourceLine" id="cb82-7" data-line-number="7">                   false</a>
-<a class="sourceLine" id="cb82-8" data-line-number="8">          <span class="fu">&lt;*&gt;</span> flag <span class="st">&quot;d&quot;</span> [<span class="st">&quot;debug&quot;</span>]</a>
-<a class="sourceLine" id="cb82-9" data-line-number="9">                   (<span class="dt">Just</span> <span class="st">&quot;Use debug mode&quot;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  <span class="kw">where</span>
+<span class="ot">  env ::</span> <span class="dt">Y</span> <span class="dt">GameEnvironment</span>
+  env <span class="fu">=</span> gameEnvironment
+          <span class="fu">&lt;$&gt;</span> yarg <span class="st">&quot;p&quot;</span> [<span class="st">&quot;player&quot;</span>]
+                   (<span class="dt">Just</span> <span class="st">&quot;Player name&quot;</span>)
+                   (<span class="dt">Right</span> <span class="st">&quot;The player name is required&quot;</span>)
+                   false
+          <span class="fu">&lt;*&gt;</span> flag <span class="st">&quot;d&quot;</span> [<span class="st">&quot;debug&quot;</span>]
+                   (<span class="dt">Just</span> <span class="st">&quot;Use debug mode&quot;</span>)</code></pre></div>
 <p><code>PlayerName -&gt; Boolean -&gt; GameEnvironment</code>という型を持つこの <code>gameEnvironment</code>関数は、 <code>Y</code>まで持ち上げられています。このふたつの引数は、コマンドラインオプションからプレイヤー名とデバッグフラグを読み取る方法を指定しています。最初の引数は <code>-p</code>もしくは <code>--player</code>オプションで指定されるプレイヤー名オプションについて記述しており、２つ目の引数は <code>-d</code>もしくは <code>--debug</code>オプションで指定されるデバッグモードフラグについて記述しています。</p>
 <p>これは <code>Node.Yargs.Applicative</code>モジュールで定義されているふたつの基本的な関数について示しています。 <code>yarg</code>は(型 <code>String</code>、 <code>Number</code>、 <code>Boolean</code>の)オプショナルな引数を取りコマンドラインオプションを定義し、 <code>flag</code>は型 <code>Boolean</code>のコマンドラインフラグを定義しています。</p>
 <p>Applicative演算子によるこの記法を使うことで、コマンドラインインターフェイスに対してコンパクトで宣言的な仕様を与えることが可能になったことに注意してください。また、 <code>env</code>の定義で <code>runGame</code>関数に新しい引数を追加し、 <code>&lt;*&gt;</code>を使って追加の引数まで <code>runGame</code>を持ち上げるだけで、簡単に新しいコマンドライン引数を追加することができます。</p>

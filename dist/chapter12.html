@@ -5,69 +5,41 @@
   <meta name="generator" content="pandoc">
   <title>実例によるPureScript</title>
   <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
   </style>
   <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
   <link rel="stylesheet" href="github-markdown.css" type="text/css"/>
@@ -246,55 +218,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre class="text"><code>npm install</code></pre>
 <h2 id="問題"><span class="header-section-number">12.3</span> 問題</h2>
 <p>通常、JavaScriptの非同期処理コードでは、プログラムの流れを構造化するために<strong>コールバック</strong>(callbacks)を使用します。たとえば、ファイルからテキストを読み取るのに好ましいアプローチとしては、 <code>readFile</code>関数を使用し、コールバック、つまりテキストが利用可能になったときに呼び出される関数を渡すことです。</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">function</span> <span class="at">readText</span>(onSuccess<span class="op">,</span> onFailure) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="kw">var</span> fs <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;fs&#39;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="va">fs</span>.<span class="at">readFile</span>(<span class="st">&#39;file1.txt&#39;</span><span class="op">,</span> <span class="op">{</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf-8&#39;</span> <span class="op">},</span> <span class="kw">function</span> (error<span class="op">,</span> data) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">    <span class="cf">if</span> (error) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">      <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">      <span class="at">onSuccess</span>(data)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">    <span class="op">}</span>   </a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">  <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="op">}</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">readText</span>(onSuccess<span class="op">,</span> onFailure) <span class="op">{</span>
+  <span class="kw">var</span> fs <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;fs&#39;</span>)<span class="op">;</span>
+  <span class="va">fs</span>.<span class="at">readFile</span>(<span class="st">&#39;file1.txt&#39;</span><span class="op">,</span> <span class="op">{</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf-8&#39;</span> <span class="op">},</span> <span class="kw">function</span> (error<span class="op">,</span> data) <span class="op">{</span>
+    <span class="cf">if</span> (error) <span class="op">{</span>
+      <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)<span class="op">;</span>
+    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+      <span class="at">onSuccess</span>(data)<span class="op">;</span>
+    <span class="op">}</span>   
+  <span class="op">}</span>)<span class="op">;</span>
+<span class="op">}</span></code></pre></div>
 <p>しかしながら、複数の非同期操作が関与している場合には入れ子になったコールバックを生じることになり、すぐに読めないコードになってしまいます。</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">function</span> <span class="at">copyFile</span>(onSuccess<span class="op">,</span> onFailure) <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="kw">var</span> fs <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;fs&#39;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="va">fs</span>.<span class="at">readFile</span>(<span class="st">&#39;file1.txt&#39;</span><span class="op">,</span> <span class="op">{</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf-8&#39;</span> <span class="op">},</span> <span class="kw">function</span> (error<span class="op">,</span> data1) <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">    <span class="cf">if</span> (error) <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">      <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">      <span class="va">fs</span>.<span class="at">writeFile</span>(<span class="st">&#39;file2.txt&#39;</span><span class="op">,</span> data<span class="op">,</span> <span class="op">{</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf-8&#39;</span> <span class="op">},</span> <span class="kw">function</span> (error) <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">        <span class="cf">if</span> (error) <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9">          <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10">        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11">          <span class="at">onSuccess</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12">        <span class="op">}</span></a>
-<a class="sourceLine" id="cb3-13" data-line-number="13">      <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-14" data-line-number="14">    <span class="op">}</span>   </a>
-<a class="sourceLine" id="cb3-15" data-line-number="15">  <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="op">}</span> </a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">copyFile</span>(onSuccess<span class="op">,</span> onFailure) <span class="op">{</span>
+  <span class="kw">var</span> fs <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;fs&#39;</span>)<span class="op">;</span>
+  <span class="va">fs</span>.<span class="at">readFile</span>(<span class="st">&#39;file1.txt&#39;</span><span class="op">,</span> <span class="op">{</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf-8&#39;</span> <span class="op">},</span> <span class="kw">function</span> (error<span class="op">,</span> data1) <span class="op">{</span>
+    <span class="cf">if</span> (error) <span class="op">{</span>
+      <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)<span class="op">;</span>
+    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+      <span class="va">fs</span>.<span class="at">writeFile</span>(<span class="st">&#39;file2.txt&#39;</span><span class="op">,</span> data<span class="op">,</span> <span class="op">{</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf-8&#39;</span> <span class="op">},</span> <span class="kw">function</span> (error) <span class="op">{</span>
+        <span class="cf">if</span> (error) <span class="op">{</span>
+          <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)<span class="op">;</span>
+        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+          <span class="at">onSuccess</span>()<span class="op">;</span>
+        <span class="op">}</span>
+      <span class="op">}</span>)<span class="op">;</span>
+    <span class="op">}</span>   
+  <span class="op">}</span>)<span class="op">;</span>
+<span class="op">}</span> </code></pre></div>
 <p>この問題に対する解決策のひとつとしては、独自の関数に個々の非同期呼び出しを分割することです。</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">function</span> <span class="at">writeCopy</span>(data<span class="op">,</span> onSuccess<span class="op">,</span> onFailure) <span class="op">{</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">  <span class="kw">var</span> fs <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;fs&#39;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">  <span class="va">fs</span>.<span class="at">writeFile</span>(<span class="st">&#39;file2.txt&#39;</span><span class="op">,</span> data<span class="op">,</span> <span class="op">{</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf-8&#39;</span> <span class="op">},</span> <span class="kw">function</span> (error) <span class="op">{</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">    <span class="cf">if</span> (error) <span class="op">{</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">      <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6">    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7">      <span class="at">onSuccess</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8">    <span class="op">}</span></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9">  <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="op">}</span></a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="kw">function</span> <span class="at">copyFile</span>(onSuccess<span class="op">,</span> onFailure) <span class="op">{</span></a>
-<a class="sourceLine" id="cb4-13" data-line-number="13">  <span class="kw">var</span> fs <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;fs&#39;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb4-14" data-line-number="14">  <span class="va">fs</span>.<span class="at">readFile</span>(<span class="st">&#39;file1.txt&#39;</span><span class="op">,</span> <span class="op">{</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf-8&#39;</span> <span class="op">},</span> <span class="kw">function</span> (error<span class="op">,</span> data) <span class="op">{</span></a>
-<a class="sourceLine" id="cb4-15" data-line-number="15">    <span class="cf">if</span> (error) <span class="op">{</span></a>
-<a class="sourceLine" id="cb4-16" data-line-number="16">      <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb4-17" data-line-number="17">    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb4-18" data-line-number="18">      <span class="at">writeCopy</span>(data<span class="op">,</span> onSuccess<span class="op">,</span> onFailure)<span class="op">;</span></a>
-<a class="sourceLine" id="cb4-19" data-line-number="19">    <span class="op">}</span>   </a>
-<a class="sourceLine" id="cb4-20" data-line-number="20">  <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="op">}</span> </a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">writeCopy</span>(data<span class="op">,</span> onSuccess<span class="op">,</span> onFailure) <span class="op">{</span>
+  <span class="kw">var</span> fs <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;fs&#39;</span>)<span class="op">;</span>
+  <span class="va">fs</span>.<span class="at">writeFile</span>(<span class="st">&#39;file2.txt&#39;</span><span class="op">,</span> data<span class="op">,</span> <span class="op">{</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf-8&#39;</span> <span class="op">},</span> <span class="kw">function</span> (error) <span class="op">{</span>
+    <span class="cf">if</span> (error) <span class="op">{</span>
+      <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)<span class="op">;</span>
+    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+      <span class="at">onSuccess</span>()<span class="op">;</span>
+    <span class="op">}</span>
+  <span class="op">}</span>)<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">function</span> <span class="at">copyFile</span>(onSuccess<span class="op">,</span> onFailure) <span class="op">{</span>
+  <span class="kw">var</span> fs <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;fs&#39;</span>)<span class="op">;</span>
+  <span class="va">fs</span>.<span class="at">readFile</span>(<span class="st">&#39;file1.txt&#39;</span><span class="op">,</span> <span class="op">{</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf-8&#39;</span> <span class="op">},</span> <span class="kw">function</span> (error<span class="op">,</span> data) <span class="op">{</span>
+    <span class="cf">if</span> (error) <span class="op">{</span>
+      <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)<span class="op">;</span>
+    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+      <span class="at">writeCopy</span>(data<span class="op">,</span> onSuccess<span class="op">,</span> onFailure)<span class="op">;</span>
+    <span class="op">}</span>   
+  <span class="op">}</span>)<span class="op">;</span>
+<span class="op">}</span> </code></pre></div>
 <p>この解決策は一応は機能しますが、いくつか問題があります。</p>
 <ul>
 <li>上で <code>writeCopy</code>へ <code>data</code>を渡したのと同じ方法で、非同期関数に関数の引数として途中の結果を渡さなければなりません。これは小さな関数についてはうまくいきますが、多くのコールバック関係する場合はデータの依存関係は複雑になることがあり、関数の引数が大量に追加される結果になります。</li>
@@ -304,162 +276,162 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 id="継続モナド"><span class="header-section-number">12.4</span> 継続モナド</h2>
 <p><code>copyFile</code>の例をFFIを使ってPureScriptへと翻訳していきましょう。PureScriptで書いていくにつれ、計算の構造はわかりやすくなり、 <code>purescript-transformers</code>パッケージで定義されている継続モナド変換子 <code>ContT</code>が自然に導入されることになるでしょう。</p>
 <p>まず、FFIを使って <code>readFile</code>と <code>writeFile</code>に型を与えなくてはなりません。型同義語をいくつかと、ファイル入出力のための作用を定義することから始めましょう。</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" data-line-number="1">foreign <span class="kw">import</span> data <span class="dt">FS</span> :: <span class="dt">Effect</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw">type</span> <span class="dt">ErrorCode</span> <span class="fu">=</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw">type</span> FilePath <span class="fu">=</span> <span class="dt">String</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">foreign <span class="kw">import </span>data <span class="dt">FS</span> :: <span class="dt">Effect</span>
+
+<span class="kw">type</span> <span class="dt">ErrorCode</span> <span class="fu">=</span> <span class="dt">String</span>
+<span class="kw">type</span> FilePath <span class="fu">=</span> <span class="dt">String</span></code></pre></div>
 <p><code>readFile</code>はファイル名と2引数のコールバックを引数に取ります。ファイルが正常に読み込まれた場合は、2番目の引数にはファイルの内容が含まれますが、そうでない場合は、最初の引数がエラーを示すために使われます。</p>
 <p>今回は <code>readFile</code>を2つのコールバックを引数としてとる関数としてラップすることにします。先ほどの <code>copyFile</code>や <code>writeCopy</code>とまったく同じように、エラーコールバック(<code>onFailure</code>)と結果コールバック(<code>onSuccess</code>)の2つです。簡単のために <code>Data.Function</code>の多引数関数の機能を使うと、このラップされた関数 <code>readFileImpl</code>は次のようになるでしょう。</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" data-line-number="1">foreign <span class="kw">import</span> readFileImpl</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="ot">  ::</span> forall eff</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">   <span class="fu">.</span> <span class="dt">Fn3</span> FilePath</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">         (<span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">         (<span class="dt">ErrorCode</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)</a>
-<a class="sourceLine" id="cb6-6" data-line-number="6">         (<span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">foreign <span class="kw">import </span>readFileImpl
+<span class="ot">  ::</span> forall eff
+   <span class="fu">.</span> <span class="dt">Fn3</span> FilePath
+         (<span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)
+         (<span class="dt">ErrorCode</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)
+         (<span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)</code></pre></div>
 <p>JavaScriptモジュールでは、 <code>readFileImpl</code>は次のように定義されます。</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="va">exports</span>.<span class="at">readFileImpl</span> <span class="op">=</span> <span class="kw">function</span>(path<span class="op">,</span> onSuccess<span class="op">,</span> onFailure) <span class="op">{</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="cf">return</span> <span class="kw">function</span>() <span class="op">{</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">    <span class="at">require</span>(<span class="st">&#39;fs&#39;</span>).<span class="at">readFile</span>(path<span class="op">,</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">      <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf-8&#39;</span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">    <span class="op">},</span> <span class="kw">function</span>(error<span class="op">,</span> data) <span class="op">{</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">      <span class="cf">if</span> (error) <span class="op">{</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7">        <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)()<span class="op">;</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8">      <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9">        <span class="at">onSuccess</span>(data)()<span class="op">;</span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10">      <span class="op">}</span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11">    <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12">  <span class="op">};</span></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="op">};</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">exports</span>.<span class="at">readFileImpl</span> <span class="op">=</span> <span class="kw">function</span>(path<span class="op">,</span> onSuccess<span class="op">,</span> onFailure) <span class="op">{</span>
+  <span class="cf">return</span> <span class="kw">function</span>() <span class="op">{</span>
+    <span class="at">require</span>(<span class="st">&#39;fs&#39;</span>).<span class="at">readFile</span>(path<span class="op">,</span> <span class="op">{</span>
+      <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf-8&#39;</span>
+    <span class="op">},</span> <span class="kw">function</span>(error<span class="op">,</span> data) <span class="op">{</span>
+      <span class="cf">if</span> (error) <span class="op">{</span>
+        <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)()<span class="op">;</span>
+      <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+        <span class="at">onSuccess</span>(data)()<span class="op">;</span>
+      <span class="op">}</span>
+    <span class="op">}</span>)<span class="op">;</span>
+  <span class="op">};</span>
+<span class="op">};</span></code></pre></div>
 <p><code>readFileImpl</code>はファイルパス、成功時のコールバック、失敗時のコールバックという３つの引数を取り、空(<code>Unit</code>)の結果を返す副作用のある計算を返す、ということをこの型は言っています。コー​​ルバック自身にも、その作用を追跡するために <code>Eff</code>モナドを使うような型が与えられていることに注意してください。</p>
 <p>この <code>readFileImpl</code>の実装がその型の正しい実行時表現を持っている理由を、よく理解しておくようにしてください。</p>
 <p><code>writeFileImpl</code>もよく似ています。違いはファイルがコールバックではなく関数自身に渡されるということだけです。実装は次のようになります。</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb8-1" data-line-number="1">foreign <span class="kw">import</span> writeFileImpl</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="ot">  ::</span> forall eff</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">   <span class="fu">.</span> <span class="dt">Fn4</span> FilePath</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">         <span class="dt">String</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">         (<span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)</a>
-<a class="sourceLine" id="cb8-6" data-line-number="6">         (<span class="dt">ErrorCode</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)</a>
-<a class="sourceLine" id="cb8-7" data-line-number="7">         (<span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="va">exports</span>.<span class="at">writeFileImpl</span> <span class="op">=</span> <span class="kw">function</span>(path<span class="op">,</span> data<span class="op">,</span> onSuccess<span class="op">,</span> onFailure) <span class="op">{</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">  <span class="cf">return</span> <span class="kw">function</span>() <span class="op">{</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">    <span class="at">require</span>(<span class="st">&#39;fs&#39;</span>).<span class="at">writeFile</span>(path<span class="op">,</span> data<span class="op">,</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">      <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf-8&#39;</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5">    <span class="op">},</span> <span class="kw">function</span>(error) <span class="op">{</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6">      <span class="cf">if</span> (error) <span class="op">{</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7">        <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)()<span class="op">;</span></a>
-<a class="sourceLine" id="cb9-8" data-line-number="8">      <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb9-9" data-line-number="9">        <span class="at">onSuccess</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb9-10" data-line-number="10">      <span class="op">}</span></a>
-<a class="sourceLine" id="cb9-11" data-line-number="11">    <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb9-12" data-line-number="12">  <span class="op">};</span></a>
-<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="op">};</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">foreign <span class="kw">import </span>writeFileImpl
+<span class="ot">  ::</span> forall eff
+   <span class="fu">.</span> <span class="dt">Fn4</span> FilePath
+         <span class="dt">String</span>
+         (<span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)
+         (<span class="dt">ErrorCode</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)
+         (<span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">exports</span>.<span class="at">writeFileImpl</span> <span class="op">=</span> <span class="kw">function</span>(path<span class="op">,</span> data<span class="op">,</span> onSuccess<span class="op">,</span> onFailure) <span class="op">{</span>
+  <span class="cf">return</span> <span class="kw">function</span>() <span class="op">{</span>
+    <span class="at">require</span>(<span class="st">&#39;fs&#39;</span>).<span class="at">writeFile</span>(path<span class="op">,</span> data<span class="op">,</span> <span class="op">{</span>
+      <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf-8&#39;</span>
+    <span class="op">},</span> <span class="kw">function</span>(error) <span class="op">{</span>
+      <span class="cf">if</span> (error) <span class="op">{</span>
+        <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)()<span class="op">;</span>
+      <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+        <span class="at">onSuccess</span>()<span class="op">;</span>
+      <span class="op">}</span>
+    <span class="op">}</span>)<span class="op">;</span>
+  <span class="op">};</span>
+<span class="op">};</span></code></pre></div>
 <p>これらのFFIの宣言が与えられれば、 <code>readFile</code>と <code>writeFile</code>の実装を書くことができます。 <code>Data.Function</code>ライブラリを使って、多引数のFFIバインディングを通常の(カリー化された)PureScript関数へと変換するので、もう少し読みやすい型になるでしょう。</p>
 <p>さらに、成功時と失敗時の２つの必須のコールバックに代わって、成功か失敗の<strong>どちらか</strong>(Either) に対応した単一のコールバックを要求するようにします。つまり、新しいコールバックは引数として <code>Either ErrorCode</code>モナドの値をとります。</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb10-1" data-line-number="1">readFile<span class="ot"> ::</span> forall eff <span class="fu">.</span> FilePath</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">  <span class="ot">-&gt;</span> (<span class="dt">Either</span> <span class="dt">ErrorCode</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)</a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">  <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span></a>
-<a class="sourceLine" id="cb10-4" data-line-number="4">readFile path k <span class="fu">=</span></a>
-<a class="sourceLine" id="cb10-5" data-line-number="5">  runFn3 readFileImpl</a>
-<a class="sourceLine" id="cb10-6" data-line-number="6">         path</a>
-<a class="sourceLine" id="cb10-7" data-line-number="7">         (k <span class="fu">&lt;&lt;&lt;</span> <span class="dt">Right</span>)</a>
-<a class="sourceLine" id="cb10-8" data-line-number="8">         (k <span class="fu">&lt;&lt;&lt;</span> <span class="dt">Left</span>)</a>
-<a class="sourceLine" id="cb10-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb10-10" data-line-number="10">writeFile<span class="ot"> ::</span> forall eff <span class="fu">.</span> FilePath</a>
-<a class="sourceLine" id="cb10-11" data-line-number="11">  <span class="ot">-&gt;</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb10-12" data-line-number="12">  <span class="ot">-&gt;</span> (<span class="dt">Either</span> <span class="dt">ErrorCode</span> <span class="dt">Unit</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)</a>
-<a class="sourceLine" id="cb10-13" data-line-number="13">  <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span></a>
-<a class="sourceLine" id="cb10-14" data-line-number="14">writeFile path text k <span class="fu">=</span></a>
-<a class="sourceLine" id="cb10-15" data-line-number="15">  runFn4 writeFileImpl</a>
-<a class="sourceLine" id="cb10-16" data-line-number="16">         path</a>
-<a class="sourceLine" id="cb10-17" data-line-number="17">         text</a>
-<a class="sourceLine" id="cb10-18" data-line-number="18">         (k <span class="fu">$</span> <span class="dt">Right</span> unit)</a>
-<a class="sourceLine" id="cb10-19" data-line-number="19">         (k <span class="fu">&lt;&lt;&lt;</span> <span class="dt">Left</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">readFile<span class="ot"> ::</span> forall eff <span class="fu">.</span> FilePath
+  <span class="ot">-&gt;</span> (<span class="dt">Either</span> <span class="dt">ErrorCode</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)
+  <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>
+readFile path k <span class="fu">=</span>
+  runFn3 readFileImpl
+         path
+         (k <span class="fu">&lt;&lt;&lt;</span> <span class="dt">Right</span>)
+         (k <span class="fu">&lt;&lt;&lt;</span> <span class="dt">Left</span>)
+
+writeFile<span class="ot"> ::</span> forall eff <span class="fu">.</span> FilePath
+  <span class="ot">-&gt;</span> <span class="dt">String</span>
+  <span class="ot">-&gt;</span> (<span class="dt">Either</span> <span class="dt">ErrorCode</span> <span class="dt">Unit</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)
+  <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>
+writeFile path text k <span class="fu">=</span>
+  runFn4 writeFileImpl
+         path
+         text
+         (k <span class="fu">$</span> <span class="dt">Right</span> unit)
+         (k <span class="fu">&lt;&lt;&lt;</span> <span class="dt">Left</span>)</code></pre></div>
 <p>ここで、重要なパターンを見つけることができます。これらの関数は何らかのモナド(この場合は <code>Eff (fs :: FS | eff)</code>)で値を返すコールバックをとり、<strong>同一のモナド</strong>で値を返します。これは、最初のコールバックが結果を返したときに、そのモナドは次の非同期関数の入力に結合するためにその結果を使用することができることを意味しています。実際、 <code>copyFile</code>の例で手作業でやったことがまさにそれです。</p>
 <p>これは <code>purescript-transformers</code>の <code>Control.Monad.Cont.Trans</code>モジュールで定義されている<strong>継続モナド変換子</strong>(continuation monad transformer)の基礎となっています。</p>
 <p><code>ContT</code>は次のようなnewtypeとして定義されます。</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">newtype</span> <span class="dt">ContT</span> r m a <span class="fu">=</span> <span class="dt">ContT</span> ((a <span class="ot">-&gt;</span> m r) <span class="ot">-&gt;</span> m r)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">ContT</span> r m a <span class="fu">=</span> <span class="dt">ContT</span> ((a <span class="ot">-&gt;</span> m r) <span class="ot">-&gt;</span> m r)</code></pre></div>
 <p><strong>継続</strong>(continuation)はコールバックの別名です。継続は計算の<strong>残余</strong>(remainder)を捕捉します。ここで「残余」とは、非同期呼び出しが行われ、結果が提供された後に起こることを指しています。</p>
 <p><code>ContT</code>データ構築子の引数は <code>readFile</code>と <code>writeFile</code>の型ととてもよく似ています。実際、もし型 <code>a</code>を型 <code>ErrorCode String</code>、 <code>r</code>を <code>Unit</code>、 <code>m</code>をモナド <code>Eff(fs :: FS | eff)</code>というように選ぶと、 <code>readFile</code>の型の右辺を復元することができます。</p>
 <p><code>readFile</code>と <code>writeFile</code>を組み立てる <code>Async</code>モナドを定義するため、型同義語を導入します。</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">type</span> <span class="dt">Async</span> eff <span class="fu">=</span> <span class="dt">ContT</span> <span class="dt">Unit</span> (<span class="dt">Eff</span> eff)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Async</span> eff <span class="fu">=</span> <span class="dt">ContT</span> <span class="dt">Unit</span> (<span class="dt">Eff</span> eff)</code></pre></div>
 <p>今回の目的では <code>Eff</code>モナドを変換するために常に <code>ContT</code>を使い、型 <code>r</code>は常に <code>Unit</code>になりますが、このことは必須ではありません。</p>
 <p><code>ContT</code>データ構築子を適用するだけで、 <code>readFile</code>と <code>writeFile</code>を <code>Async</code>モナドの計算として扱うことができます。</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb13-1" data-line-number="1">readFileCont</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="ot">  ::</span> forall eff</a>
-<a class="sourceLine" id="cb13-3" data-line-number="3">   <span class="fu">.</span> FilePath</a>
-<a class="sourceLine" id="cb13-4" data-line-number="4">  <span class="ot">-&gt;</span> <span class="dt">Async</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) (<span class="dt">Either</span> <span class="dt">ErrorCode</span> <span class="dt">String</span>)</a>
-<a class="sourceLine" id="cb13-5" data-line-number="5">readFileCont path <span class="fu">=</span> <span class="dt">ContT</span> <span class="fu">$</span> readFile path</a>
-<a class="sourceLine" id="cb13-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7">writeFileCont</a>
-<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="ot">  ::</span> forall eff</a>
-<a class="sourceLine" id="cb13-9" data-line-number="9">   <span class="fu">.</span> FilePath</a>
-<a class="sourceLine" id="cb13-10" data-line-number="10">  <span class="ot">-&gt;</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb13-11" data-line-number="11">  <span class="ot">-&gt;</span> <span class="dt">Async</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) (<span class="dt">Either</span> <span class="dt">ErrorCode</span> <span class="dt">Unit</span>)</a>
-<a class="sourceLine" id="cb13-12" data-line-number="12">writeFileCont path text <span class="fu">=</span> <span class="dt">ContT</span> <span class="fu">$</span> writeFile path text</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">readFileCont
+<span class="ot">  ::</span> forall eff
+   <span class="fu">.</span> FilePath
+  <span class="ot">-&gt;</span> <span class="dt">Async</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) (<span class="dt">Either</span> <span class="dt">ErrorCode</span> <span class="dt">String</span>)
+readFileCont path <span class="fu">=</span> <span class="dt">ContT</span> <span class="fu">$</span> readFile path
+
+writeFileCont
+<span class="ot">  ::</span> forall eff
+   <span class="fu">.</span> FilePath
+  <span class="ot">-&gt;</span> <span class="dt">String</span>
+  <span class="ot">-&gt;</span> <span class="dt">Async</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) (<span class="dt">Either</span> <span class="dt">ErrorCode</span> <span class="dt">Unit</span>)
+writeFileCont path text <span class="fu">=</span> <span class="dt">ContT</span> <span class="fu">$</span> writeFile path text</code></pre></div>
 <p>ここで <code>ContT</code>モナド変換子に対してdo記法を使うだけで、ファイル複製処理を書くことができます。</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb14-1" data-line-number="1">copyFileCont</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="ot">  ::</span> forall eff</a>
-<a class="sourceLine" id="cb14-3" data-line-number="3">   <span class="fu">.</span> FilePath</a>
-<a class="sourceLine" id="cb14-4" data-line-number="4">  <span class="ot">-&gt;</span> FilePath</a>
-<a class="sourceLine" id="cb14-5" data-line-number="5">  <span class="ot">-&gt;</span> <span class="dt">Async</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) (<span class="dt">Either</span> <span class="dt">ErrorCode</span> <span class="dt">Unit</span>)</a>
-<a class="sourceLine" id="cb14-6" data-line-number="6">copyFileCont src dest <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb14-7" data-line-number="7">  e <span class="ot">&lt;-</span> readFileCont src</a>
-<a class="sourceLine" id="cb14-8" data-line-number="8">  <span class="kw">case</span> e <span class="kw">of</span></a>
-<a class="sourceLine" id="cb14-9" data-line-number="9">    <span class="dt">Left</span> err <span class="ot">-&gt;</span> pure <span class="fu">$</span> <span class="dt">Left</span> err</a>
-<a class="sourceLine" id="cb14-10" data-line-number="10">    <span class="dt">Right</span> content <span class="ot">-&gt;</span> writeFileCont dest content</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">copyFileCont
+<span class="ot">  ::</span> forall eff
+   <span class="fu">.</span> FilePath
+  <span class="ot">-&gt;</span> FilePath
+  <span class="ot">-&gt;</span> <span class="dt">Async</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) (<span class="dt">Either</span> <span class="dt">ErrorCode</span> <span class="dt">Unit</span>)
+copyFileCont src dest <span class="fu">=</span> <span class="kw">do</span>
+  e <span class="ot">&lt;-</span> readFileCont src
+  <span class="kw">case</span> e <span class="kw">of</span>
+    <span class="dt">Left</span> err <span class="ot">-&gt;</span> pure <span class="fu">$</span> <span class="dt">Left</span> err
+    <span class="dt">Right</span> content <span class="ot">-&gt;</span> writeFileCont dest content</code></pre></div>
 <p><code>readFileCont</code>の非同期性がdo記法によってモナドの束縛に隠されていることに注目してください。これはまさに同期的なコードのように見えますが、 <code>ContT</code>モナド変換子は非同期関数を書くのを手助けしているのです。</p>
 <p>継続を与えて <code>runContT</code>ハンドラを使うと、この計算を実行することができます。この継続は<strong>次に何をするか</strong>、例えば非同期なファイル複製処理が完了した時に何をするか、を表しています。この簡単な例では、型 <code>Either ErrorCode Unit</code>の結果をコンソールに出力する <code>logShow</code>関数を単に継続として選んでいます。</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Prelude</span></a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Control.Monad.Eff.Console</span> (logShow)</a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="kw">import</span> <span class="dt">Control.Monad.Cont.Trans</span> (runContT)</a>
-<a class="sourceLine" id="cb15-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb15-6" data-line-number="6">main <span class="fu">=</span></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7">  runContT</a>
-<a class="sourceLine" id="cb15-8" data-line-number="8">    (copyFileCont <span class="st">&quot;/tmp/1.txt&quot;</span> <span class="st">&quot;/tmp/2.txt&quot;</span>)</a>
-<a class="sourceLine" id="cb15-9" data-line-number="9">    logShow</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Prelude</span>
+
+<span class="kw">import </span><span class="dt">Control.Monad.Eff.Console</span> (logShow)
+<span class="kw">import </span><span class="dt">Control.Monad.Cont.Trans</span> (runContT)
+
+main <span class="fu">=</span>
+  runContT
+    (copyFileCont <span class="st">&quot;/tmp/1.txt&quot;</span> <span class="st">&quot;/tmp/2.txt&quot;</span>)
+    logShow</code></pre></div>
 <blockquote>
 <h2 id="演習" class="unnumbered">演習</h2>
 <ol type="1">
 <li><p>(簡単)<code>readFileCont</code>と <code>writeFileCont</code>を使って、2つのテキストフ​​ァイルを連結する関数を書いてください。</p></li>
 <li><p>(やや難しい) FFIを使って、 <code>setTimeout</code>関数に適切な型を与えてください。また、 <code>Async</code>モナドを使った次のようなラッパー関数を書いてください。</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">type</span> <span class="dt">Milliseconds</span> <span class="fu">=</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3">foreign <span class="kw">import</span> data <span class="dt">TIMEOUT</span> :: <span class="dt">Effect</span></a>
-<a class="sourceLine" id="cb16-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb16-5" data-line-number="5">setTimeoutCont</a>
-<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="ot">  ::</span> forall eff</a>
-<a class="sourceLine" id="cb16-7" data-line-number="7">   <span class="fu">.</span> <span class="dt">Milliseconds</span></a>
-<a class="sourceLine" id="cb16-8" data-line-number="8">  <span class="ot">-&gt;</span> <span class="dt">Async</span> (<span class="ot">timeout ::</span> <span class="dt">TIMEOUT</span> <span class="fu">|</span> eff) <span class="dt">Unit</span></a></code></pre></div></li>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Milliseconds</span> <span class="fu">=</span> <span class="dt">Int</span>
+
+foreign <span class="kw">import </span>data <span class="dt">TIMEOUT</span> :: <span class="dt">Effect</span>
+
+setTimeoutCont
+<span class="ot">  ::</span> forall eff
+   <span class="fu">.</span> <span class="dt">Milliseconds</span>
+  <span class="ot">-&gt;</span> <span class="dt">Async</span> (<span class="ot">timeout ::</span> <span class="dt">TIMEOUT</span> <span class="fu">|</span> eff) <span class="dt">Unit</span></code></pre></div></li>
 </ol>
 </blockquote>
 <h2 id="excepttを機能させる"><span class="header-section-number">12.5</span> ExceptTを機能させる</h2>
 <p>この方法はうまく動きますが、まだ改良の余地があります。</p>
 <p><code>copyFileCont</code>の実装において、次に何をするかを決定するためには、パターン照合を使って(型 <code>Either ErrorCode String</code>の)<code>readFileCont</code>計算の結果を解析しなければなりません。しかしながら、 <code>Either</code>モナドは対応するモナド変換子 <code>ExceptT</code>を持っていることがわかっているので、 <code>ContT</code>を持つ <code>ExceptT</code>を使って非同期計算とエラー処理の２つの作用を結合できると期待するのは理にかなっています。</p>
 <p>実際にそれは可能で、 <code>ExceptT</code>の定義を見ればそれがなぜかがわかります。</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">newtype</span> <span class="dt">ExceptT</span> e m a <span class="fu">=</span> <span class="dt">ExceptT</span> (m (<span class="dt">Either</span> e a))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">ExceptT</span> e m a <span class="fu">=</span> <span class="dt">ExceptT</span> (m (<span class="dt">Either</span> e a))</code></pre></div>
 <p><code>ExceptT</code>は基礎のモナドの結果を単純に <code>a</code>から <code>Either e a</code>に変更します。現在のモナドスタックを <code>ExceptT ErrorCode</code>変換子で変換するように、 <code>copyFileCont</code>を書き換えることができることを意味します。それは現在の方法に <code>ExceptT</code>データ構築子を適用するだけなので簡単です。型同義語を与えると、ここでも型シグネチャを整理することができます。</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb18-1" data-line-number="1">readFileContEx</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="ot">  ::</span> forall eff</a>
-<a class="sourceLine" id="cb18-3" data-line-number="3">   <span class="fu">.</span> FilePath</a>
-<a class="sourceLine" id="cb18-4" data-line-number="4">  <span class="ot">-&gt;</span> <span class="dt">ExceptT</span> <span class="dt">ErrorCode</span> (<span class="dt">Async</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff)) <span class="dt">String</span></a>
-<a class="sourceLine" id="cb18-5" data-line-number="5">readFileContEx path <span class="fu">=</span> <span class="dt">ExceptT</span> <span class="fu">$</span> readFileCont path</a>
-<a class="sourceLine" id="cb18-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb18-7" data-line-number="7">writeFileContEx</a>
-<a class="sourceLine" id="cb18-8" data-line-number="8"><span class="ot">  ::</span> forall eff</a>
-<a class="sourceLine" id="cb18-9" data-line-number="9">   <span class="fu">.</span> FilePath</a>
-<a class="sourceLine" id="cb18-10" data-line-number="10">  <span class="ot">-&gt;</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb18-11" data-line-number="11">  <span class="ot">-&gt;</span> <span class="dt">ExceptT</span> <span class="dt">ErrorCode</span> (<span class="dt">Async</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff)) <span class="dt">Unit</span></a>
-<a class="sourceLine" id="cb18-12" data-line-number="12">writeFileContEx path text <span class="fu">=</span> <span class="dt">ExceptT</span> <span class="fu">$</span> writeFileCont path text</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">readFileContEx
+<span class="ot">  ::</span> forall eff
+   <span class="fu">.</span> FilePath
+  <span class="ot">-&gt;</span> <span class="dt">ExceptT</span> <span class="dt">ErrorCode</span> (<span class="dt">Async</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff)) <span class="dt">String</span>
+readFileContEx path <span class="fu">=</span> <span class="dt">ExceptT</span> <span class="fu">$</span> readFileCont path
+
+writeFileContEx
+<span class="ot">  ::</span> forall eff
+   <span class="fu">.</span> FilePath
+  <span class="ot">-&gt;</span> <span class="dt">String</span>
+  <span class="ot">-&gt;</span> <span class="dt">ExceptT</span> <span class="dt">ErrorCode</span> (<span class="dt">Async</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff)) <span class="dt">Unit</span>
+writeFileContEx path text <span class="fu">=</span> <span class="dt">ExceptT</span> <span class="fu">$</span> writeFileCont path text</code></pre></div>
 <p>非同期エラー処理が <code>ExceptT</code>モナド変換子の内部に隠されているので、このファイル複製処理ははるかに単純になります。</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb19-1" data-line-number="1">copyFileContEx</a>
-<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="ot">  ::</span> forall eff</a>
-<a class="sourceLine" id="cb19-3" data-line-number="3">   <span class="fu">.</span> FilePath</a>
-<a class="sourceLine" id="cb19-4" data-line-number="4">  <span class="ot">-&gt;</span> FilePath</a>
-<a class="sourceLine" id="cb19-5" data-line-number="5">  <span class="ot">-&gt;</span> <span class="dt">ExceptT</span> <span class="dt">ErrorCode</span> (<span class="dt">Async</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff)) <span class="dt">Unit</span></a>
-<a class="sourceLine" id="cb19-6" data-line-number="6">copyFileContEx src dest <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb19-7" data-line-number="7">  content <span class="ot">&lt;-</span> readFileContEx src</a>
-<a class="sourceLine" id="cb19-8" data-line-number="8">  writeFileContEx dest content</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">copyFileContEx
+<span class="ot">  ::</span> forall eff
+   <span class="fu">.</span> FilePath
+  <span class="ot">-&gt;</span> FilePath
+  <span class="ot">-&gt;</span> <span class="dt">ExceptT</span> <span class="dt">ErrorCode</span> (<span class="dt">Async</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff)) <span class="dt">Unit</span>
+copyFileContEx src dest <span class="fu">=</span> <span class="kw">do</span>
+  content <span class="ot">&lt;-</span> readFileContEx src
+  writeFileContEx dest content</code></pre></div>
 <blockquote>
 <h2 id="演習-1" class="unnumbered">演習</h2>
 <ol type="1">
@@ -470,42 +442,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 id="httpクライアント"><span class="header-section-number">12.6</span> HTTPクライアント</h2>
 <p><code>ContT</code>を使って非同期機能を処理する例として、この章のソースコードの <code>Network.HTTP.Client</code>モジュールについても見ていきましょう。このモジュールでは <code>Async</code>モナドを使用して、NodeJSの非同期を <code>request</code>モジュールを使っています。</p>
 <p><code>request</code>モジュールは、URLとコールバックを受け取り、応答が利用可能なとき、またはエラーが発生したときにHTTP（S）リクエストを生成してコールバックを呼び出す関数を提供します。 リクエストの例を次に示します。</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="at">require</span>(<span class="st">&#39;request&#39;</span>)(<span class="st">&#39;http://purescript.org&#39;</span>)<span class="op">,</span> <span class="kw">function</span>(err<span class="op">,</span> _<span class="op">,</span> body) <span class="op">{</span></a>
-<a class="sourceLine" id="cb20-2" data-line-number="2">  <span class="cf">if</span> (err) <span class="op">{</span></a>
-<a class="sourceLine" id="cb20-3" data-line-number="3">    <span class="va">console</span>.<span class="at">error</span>(err)<span class="op">;</span></a>
-<a class="sourceLine" id="cb20-4" data-line-number="4">  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb20-5" data-line-number="5">    <span class="va">console</span>.<span class="at">log</span>(body)<span class="op">;</span></a>
-<a class="sourceLine" id="cb20-6" data-line-number="6">  <span class="op">}</span></a>
-<a class="sourceLine" id="cb20-7" data-line-number="7"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">require</span>(<span class="st">&#39;request&#39;</span>)(<span class="st">&#39;http://purescript.org&#39;</span>)<span class="op">,</span> <span class="kw">function</span>(err<span class="op">,</span> _<span class="op">,</span> body) <span class="op">{</span>
+  <span class="cf">if</span> (err) <span class="op">{</span>
+    <span class="va">console</span>.<span class="at">error</span>(err)<span class="op">;</span>
+  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+    <span class="va">console</span>.<span class="at">log</span>(body)<span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
 <p><code>Async</code>モナドを使ってこの簡単な例をPureScriptに再作成します。</p>
 <p><code>Network.HTTP.Client</code>モジュールでは、 <code>request</code>メソッドは以下のようなAPIを持つ関数 <code>getImpl</code>としてラップされています。</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb21-1" data-line-number="1">foreign <span class="kw">import</span> data <span class="dt">HTTP</span> :: <span class="dt">Effect</span></a>
-<a class="sourceLine" id="cb21-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="kw">type</span> <span class="dt">URI</span> <span class="fu">=</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb21-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb21-5" data-line-number="5">foreign <span class="kw">import</span> getImpl</a>
-<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="ot">  ::</span> forall eff</a>
-<a class="sourceLine" id="cb21-7" data-line-number="7">   <span class="fu">.</span> <span class="dt">Fn3</span> <span class="dt">URI</span></a>
-<a class="sourceLine" id="cb21-8" data-line-number="8">         (<span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">http ::</span> <span class="dt">HTTP</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)</a>
-<a class="sourceLine" id="cb21-9" data-line-number="9">         (<span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">http ::</span> <span class="dt">HTTP</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)</a>
-<a class="sourceLine" id="cb21-10" data-line-number="10">         (<span class="dt">Eff</span> (<span class="ot">http ::</span> <span class="dt">HTTP</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="va">exports</span>.<span class="at">getImpl</span> <span class="op">=</span> <span class="kw">function</span>(uri<span class="op">,</span> done<span class="op">,</span> fail) <span class="op">{</span></a>
-<a class="sourceLine" id="cb22-2" data-line-number="2">  <span class="cf">return</span> <span class="kw">function</span>() <span class="op">{</span></a>
-<a class="sourceLine" id="cb22-3" data-line-number="3">    <span class="at">require</span>(<span class="st">&#39;request&#39;</span>)(uri<span class="op">,</span> <span class="kw">function</span>(err<span class="op">,</span> _<span class="op">,</span> body) <span class="op">{</span></a>
-<a class="sourceLine" id="cb22-4" data-line-number="4">      <span class="cf">if</span> (err) <span class="op">{</span></a>
-<a class="sourceLine" id="cb22-5" data-line-number="5">        <span class="at">fail</span>(err)()<span class="op">;</span></a>
-<a class="sourceLine" id="cb22-6" data-line-number="6">      <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb22-7" data-line-number="7">        <span class="at">done</span>(body)()<span class="op">;</span></a>
-<a class="sourceLine" id="cb22-8" data-line-number="8">      <span class="op">}</span></a>
-<a class="sourceLine" id="cb22-9" data-line-number="9">    <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb22-10" data-line-number="10">  <span class="op">};</span></a>
-<a class="sourceLine" id="cb22-11" data-line-number="11"><span class="op">};</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">foreign <span class="kw">import </span>data <span class="dt">HTTP</span> :: <span class="dt">Effect</span>
+
+<span class="kw">type</span> <span class="dt">URI</span> <span class="fu">=</span> <span class="dt">String</span>
+
+foreign <span class="kw">import </span>getImpl
+<span class="ot">  ::</span> forall eff
+   <span class="fu">.</span> <span class="dt">Fn3</span> <span class="dt">URI</span>
+         (<span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">http ::</span> <span class="dt">HTTP</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)
+         (<span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">http ::</span> <span class="dt">HTTP</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)
+         (<span class="dt">Eff</span> (<span class="ot">http ::</span> <span class="dt">HTTP</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">exports</span>.<span class="at">getImpl</span> <span class="op">=</span> <span class="kw">function</span>(uri<span class="op">,</span> done<span class="op">,</span> fail) <span class="op">{</span>
+  <span class="cf">return</span> <span class="kw">function</span>() <span class="op">{</span>
+    <span class="at">require</span>(<span class="st">&#39;request&#39;</span>)(uri<span class="op">,</span> <span class="kw">function</span>(err<span class="op">,</span> _<span class="op">,</span> body) <span class="op">{</span>
+      <span class="cf">if</span> (err) <span class="op">{</span>
+        <span class="at">fail</span>(err)()<span class="op">;</span>
+      <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+        <span class="at">done</span>(body)()<span class="op">;</span>
+      <span class="op">}</span>
+    <span class="op">}</span>)<span class="op">;</span>
+  <span class="op">};</span>
+<span class="op">};</span></code></pre></div>
 <p>再び <code>Data.Function.Uncurried</code>モジュールを使って、これを通常のカリー化されたPureScript関数に変換します。先ほどと同じように、２つのコールバックを型 <code>Maybe Chunk</code>の値を受け入れるひとつのコールバックに変換しています。 <code>String String</code>型の値を受け取り、 <code>ContT</code>データ構築子を適用して <code>Async</code>モナドのアクションを構築します。</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="ot">get ::</span> forall eff<span class="fu">.</span></a>
-<a class="sourceLine" id="cb23-2" data-line-number="2">  <span class="dt">URI</span> <span class="ot">-&gt;</span></a>
-<a class="sourceLine" id="cb23-3" data-line-number="3">  <span class="dt">Async</span> (<span class="ot">http ::</span> <span class="dt">HTTP</span> <span class="fu">|</span> eff) (<span class="dt">Either</span> <span class="dt">String</span> <span class="dt">String</span>)</a>
-<a class="sourceLine" id="cb23-4" data-line-number="4">get req <span class="fu">=</span> <span class="dt">ContT</span> \k <span class="ot">-&gt;</span></a>
-<a class="sourceLine" id="cb23-5" data-line-number="5">  runFn3 getImpl req (k <span class="fu">&lt;&lt;&lt;</span> <span class="dt">Right</span>) (k <span class="fu">&lt;&lt;&lt;</span> <span class="dt">Left</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">get ::</span> forall eff<span class="fu">.</span>
+  <span class="dt">URI</span> <span class="ot">-&gt;</span>
+  <span class="dt">Async</span> (<span class="ot">http ::</span> <span class="dt">HTTP</span> <span class="fu">|</span> eff) (<span class="dt">Either</span> <span class="dt">String</span> <span class="dt">String</span>)
+get req <span class="fu">=</span> <span class="dt">ContT</span> \k <span class="ot">-&gt;</span>
+  runFn3 getImpl req (k <span class="fu">&lt;&lt;&lt;</span> <span class="dt">Right</span>) (k <span class="fu">&lt;&lt;&lt;</span> <span class="dt">Left</span>)</code></pre></div>
 <blockquote>
 <h2 id="演習-2" class="unnumbered">演習</h2>
 <ol type="1">
@@ -525,17 +497,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>purescript-parallel</code>ライブラリは <code>Async</code>モナドの <code>Parallel</code>インスタンスを提供します。 これは、2つの連続のどれが呼び出されたかを追跡することによって、変更可能な参照を使用して並列に <code>Async</code>アクションを組み合わせます。 両方の結果が返されたら、最終結果を計算してメインの継続に渡すことができます。</p>
 <p><code>parallel</code>関数を使って <code>readFileCont</code>アクションのバージョンを作成することができます。これは並列に組み合わせることができます。 ２つのテキストファイルを並列に読み取り、連結してその結果を出力する簡単な例は次のようになります。</p>
 <p><code>Parallel</code>型構築子を使用して並列に二つのファイルを読むように上の例を書き直すことができるようになりました。</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Prelude</span></a>
-<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="kw">import</span> <span class="dt">Control.Apply</span> (lift2)</a>
-<a class="sourceLine" id="cb24-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Control.Monad.Cont.Trans</span> (runContT)</a>
-<a class="sourceLine" id="cb24-4" data-line-number="4"><span class="kw">import</span> <span class="dt">Control.Monad.Eff.Console</span> (logShow)</a>
-<a class="sourceLine" id="cb24-5" data-line-number="5"><span class="kw">import</span> <span class="dt">Control.Monad.Parallel</span> (parallel, sequential)</a>
-<a class="sourceLine" id="cb24-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb24-7" data-line-number="7">main <span class="fu">=</span> flip runContT logShow <span class="kw">do</span></a>
-<a class="sourceLine" id="cb24-8" data-line-number="8">  sequential <span class="fu">$</span></a>
-<a class="sourceLine" id="cb24-9" data-line-number="9">   lift2 append</a>
-<a class="sourceLine" id="cb24-10" data-line-number="10">     <span class="fu">&lt;$&gt;</span> parallel (readFileCont <span class="st">&quot;/tmp/1.txt&quot;</span>)</a>
-<a class="sourceLine" id="cb24-11" data-line-number="11">     <span class="fu">&lt;*&gt;</span> parallel (readFileCont <span class="st">&quot;/tmp/2.txt&quot;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Prelude</span>
+<span class="kw">import </span><span class="dt">Control.Apply</span> (lift2)
+<span class="kw">import </span><span class="dt">Control.Monad.Cont.Trans</span> (runContT)
+<span class="kw">import </span><span class="dt">Control.Monad.Eff.Console</span> (logShow)
+<span class="kw">import </span><span class="dt">Control.Monad.Parallel</span> (parallel, sequential)
+
+main <span class="fu">=</span> flip runContT logShow <span class="kw">do</span>
+  sequential <span class="fu">$</span>
+   lift2 append
+     <span class="fu">&lt;$&gt;</span> parallel (readFileCont <span class="st">&quot;/tmp/1.txt&quot;</span>)
+     <span class="fu">&lt;*&gt;</span> parallel (readFileCont <span class="st">&quot;/tmp/2.txt&quot;</span>)</code></pre></div>
 <p><code>readFileCont</code>は <code>Either ErrorCode String</code>型の値を返すので、 <code>lift2</code>を使って <code>Either</code>型構築子より <code>append</code>関数を持ち上げて結合関数を形成する必要があることに注意してください。 Applicative関手では任意個引数の関数の持ち上げができるので、このApplicativeコンビネータを使ってより多くの計算を並列に実行することができます。 <code>traverse</code>と <code>sequence</code>のようなApplicative関手を扱うすべての標準ライブラリ関数から恩恵を受けることもできます。</p>
 <p>必要に応じて <code>Parralel</code>と <code>runParallel</code>を使って型構築子を変更することで、do記法ブロックのApplicativeコンビネータを使って、直列的なコードの一部で並列計算を結合したり、またはその逆を行ったりすることができます。</p>
 <blockquote>
@@ -544,19 +516,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>(簡単)<code>parallel</code>と <code>sequential</code>を使って2つのHTTPリクエストを作成し、それらのレスポンス内容を並行して収集します。あなたの結合関数は2つのレスポンス内容を連結しなければならず、続けて <code>print</code>を使って結果をコンソールに出力してください。</p></li>
 <li><p>(やや難しい)<code>Async</code>に対応するapplicative関手は <code>Alternative</code>のインスタンスです。このインスタンスによって定義される <code>&lt;|&gt;</code>演算子は2つの計算を並列に実行し、最初に完了する計算結果を返します。</p>
 <p>この <code>Alternative</code>インスタンスを <code>setTimeoutCont</code>関数と共に使用して関数を定義してください。</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="ot">timeout ::</span> forall a eff</a>
-<a class="sourceLine" id="cb25-2" data-line-number="2">         <span class="fu">.</span> <span class="dt">Milliseconds</span></a>
-<a class="sourceLine" id="cb25-3" data-line-number="3">        <span class="ot">-&gt;</span> <span class="dt">Async</span> (<span class="ot">timeout ::</span> <span class="dt">TIMEOUT</span> <span class="fu">|</span> eff) a</a>
-<a class="sourceLine" id="cb25-4" data-line-number="4">        <span class="ot">-&gt;</span> <span class="dt">Async</span> (<span class="ot">timeout ::</span> <span class="dt">TIMEOUT</span> <span class="fu">|</span> eff) (<span class="dt">Maybe</span> a)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">timeout ::</span> forall a eff
+         <span class="fu">.</span> <span class="dt">Milliseconds</span>
+        <span class="ot">-&gt;</span> <span class="dt">Async</span> (<span class="ot">timeout ::</span> <span class="dt">TIMEOUT</span> <span class="fu">|</span> eff) a
+        <span class="ot">-&gt;</span> <span class="dt">Async</span> (<span class="ot">timeout ::</span> <span class="dt">TIMEOUT</span> <span class="fu">|</span> eff) (<span class="dt">Maybe</span> a)</code></pre></div>
 <p>指定された計算が指定されたミリ秒数以内に結果を提供しない場合、 <code>Nothing</code>を返します。</p></li>
 <li><p>(やや難しい)<code>purescript-parallel</code>は <code>ExceptT</code>を含むいくつかのモナド変換子のための <code>Parallel</code>クラスのインスタンスも提供します。</p>
 <p><code>lift2</code>で <code>append</code>を持ち上げる代わりに、 <code>ExceptT</code>を使ってエラー処理を行うように、並列ファイル入出力の例を書きなおしてください。解決策は <code>Async</code>モナドを変換するために <code>ExceptT</code>変換子を使うとよいでしょう。</p>
 <p>同様の手法で複数の入力ファイルを並列に読み込むために <code>concatenateMany</code>関数を書き換えてください。</p></li>
-<li><p>(難しい、拡張) ディスク上のJSON文書の配列が与えられ、それぞれの文書はディスク上の他のファイルへの参照の配列を含んでいるとします。</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="op">{</span> <span class="dt">references</span><span class="op">:</span> [<span class="st">&#39;/tmp/1.json&#39;</span><span class="op">,</span> <span class="st">&#39;/tmp/2.json&#39;</span>] <span class="op">}</span></a></code></pre></div>
-<p>入力として単一のファイル名をとり、そのファイルから参照されているディスク上のすべてのJSONファイルをたどって、参照されたすべてのファイルの一覧を収集するユーティリティを書いてください。</p>
-<p>そのユーティリティは、JSON文書を解析するために <code>purescript-foreign</code>ライブラリを使用する必要があり、単一のファイルが参照するファイルは並列に取得しなければなりません！ ## まとめ</p></li>
+<li><p>(難しい、拡張) ディスク上のJSON文書の配列が与えられ、それぞれの文書はディスク上の他のファイルへの参照の配列を含んでいるとします。</p></li>
 </ol>
+<p><code>javascript    { references: ['/tmp/1.json', '/tmp/2.json'] }</code> 入力として単一のファイル名をとり、そのファイルから参照されているディスク上のすべてのJSONファイルをたどって、参照されたすべてのファイルの一覧を収集するユーティリティを書いてください。</p>
+<pre><code>そのユーティリティは、JSON文書を解析するために `purescript-foreign`ライブラリを使用する必要があり、単一のファイルが参照するファイルは並列に取得しなければなりません！</code></pre>
+<h2 id="まとめ"><span class="header-section-number">12.7</span> まとめ</h2>
 </blockquote>
 <p>この章ではモナド変換子の実用的なデモンストレーションを見てきました。</p>
 <ul>

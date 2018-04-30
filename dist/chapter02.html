@@ -5,69 +5,41 @@
   <meta name="generator" content="pandoc">
   <title>実例によるPureScript</title>
   <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
   </style>
   <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
   <link rel="stylesheet" href="github-markdown.css" type="text/css"/>
@@ -271,11 +243,11 @@ $ ls
 
 bower.json  src     test</code></pre>
 <p>Pulpは2つのディレクトリ <code>src</code>、 <code>test</code>を作成し、設定ファイル <code>bower.json</code>を作成してくれます。 <code>src</code>ディレクトリにはソースコードファイルを保存し、 <code>test</code>ディレクトリにはテストコードファイルを保存します。 <code>test</code>ディレクトリについては、この本の後半で使用します。 <code>src/Main.purs</code>という名前のファイルに以下のコードを貼り付けます。</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">module</span> <span class="dt">Main</span> <span class="kw">where</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Control.Monad.Eff.Console</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">main <span class="fu">=</span> log <span class="st">&quot;Hello, World!&quot;</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">module</span> <span class="dt">Main</span> <span class="kw">where</span>
+
+<span class="kw">import </span><span class="dt">Control.Monad.Eff.Console</span>
+
+main <span class="fu">=</span> log <span class="st">&quot;Hello, World!&quot;</span></code></pre></div>
 <p>これは小さなサンプルコードですが、​​いくつかの重要な概念を示しています。</p>
 <ul>
 <li>すべてのソースファイルはモジュールヘッダから始まります。モジュール名は、ドットで区切られた大文字で始まる1つ以上の単語から構成されています。ここではモジュール名としてひとつの単語だけが使用されていますが、 <code>My.First.Module</code>というようなモジュール名も有効です。</li>
@@ -297,7 +269,7 @@ Hello, World!</code></pre>
 * Building project in ~/my-project
 * Build successful.
 * Browserifying...</code></pre>
-<p>これに続いて、大量のJavaScriptコードがコンソールに表示されます。 これは、<a href="http://browserify.org/">Browserify</a>ツールの出力で、<strong>Prelude</strong>と呼ばれる標準のPureScriptライブラリに加えて、 <code>src</code>ディレクトリのコードにも適用されます。 このJavaScriptコードをファイルに保存し、HTML文書に含めることができます。 これを試してみると、 “Hello、World！”という単語が表示されます。 ブラウザのコンソールに出力されます。</p>
+<p>これに続いて、大量のJavaScriptコードがコンソールに表示されます。 これは、<a href="http://browserify.org/">Browserify</a>ツールの出力で、<strong>Prelude</strong>と呼ばれる標準のPureScriptライブラリに加えて、 <code>src</code>ディレクトリのコードにも適用されます。 このJavaScriptコードをファイルに保存し、HTML文書に含めることができます。 これを試してみると、 &quot;Hello、World！&quot;という単語が表示されます。 ブラウザのコンソールに出力されます。</p>
 <h2 id="使用されていないコードを取り除く"><span class="header-section-number">2.7</span> 使用されていないコードを取り除く</h2>
 <p>Pulpは代替コマンド <code>pulp build</code>を提供しています。 <code>-O</code>オプションで<strong>未使用コードの削除</strong>を適用すると、不要なJavaScriptを出力から取り除くことができます。</p>
 <pre class="text"><code>$ pulp build -O --to output.js
@@ -307,14 +279,14 @@ Hello, World!</code></pre>
 * Bundling Javascript...
 * Bundled.</code></pre>
 <p>この場合も、生成されたコードはHTML文書で使用できます。 <code>output.js</code>を開くと、次のようなコンパイルされたモジュールがいくつか表示されます。</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" data-line-number="1">(<span class="kw">function</span>(exports) <span class="op">{</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">  <span class="st">&quot;use strict&quot;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">  <span class="kw">var</span> Control_Monad_Eff_Console <span class="op">=</span> PS[<span class="st">&quot;Control.Monad.Eff.Console&quot;</span>]<span class="op">;</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6">  <span class="kw">var</span> main <span class="op">=</span> <span class="va">Control_Monad_Eff_Console</span>.<span class="at">log</span>(<span class="st">&quot;Hello, World!&quot;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7">  exports[<span class="st">&quot;main&quot;</span>] <span class="op">=</span> main<span class="op">;</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="op">}</span>)(PS[<span class="st">&quot;Main&quot;</span>] <span class="op">=</span> PS[<span class="st">&quot;Main&quot;</span>] <span class="op">||</span> <span class="op">{}</span>)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">(<span class="kw">function</span>(exports) <span class="op">{</span>
+  <span class="st">&quot;use strict&quot;</span><span class="op">;</span>
+
+  <span class="kw">var</span> Control_Monad_Eff_Console <span class="op">=</span> PS[<span class="st">&quot;Control.Monad.Eff.Console&quot;</span>]<span class="op">;</span>
+
+  <span class="kw">var</span> main <span class="op">=</span> <span class="va">Control_Monad_Eff_Console</span>.<span class="at">log</span>(<span class="st">&quot;Hello, World!&quot;</span>)<span class="op">;</span>
+  exports[<span class="st">&quot;main&quot;</span>] <span class="op">=</span> main<span class="op">;</span>
+<span class="op">}</span>)(PS[<span class="st">&quot;Main&quot;</span>] <span class="op">=</span> PS[<span class="st">&quot;Main&quot;</span>] <span class="op">||</span> <span class="op">{}</span>)<span class="op">;</span></code></pre></div>
 <p>ここでPureScriptコンパイラがJavaScriptコードを生成する方法の要点が示されています。</p>
 <ul>
 <li>すべてのモジュールはオブジェクトに変換され、そのオブジェクトにはそのモジュールのエクスポートされたメンバが含まれています。モジュールは即時関数パターンによってスコープが限定されたコードで初期化されています。</li>
@@ -340,14 +312,14 @@ Hello, World!</code></pre>
 <h2 id="対角線の長さの計算"><span class="header-section-number">2.10</span> 対角線の長さの計算</h2>
 <p>それでは外部ライブラリの関数を使用する例として <code>diagonal</code>関数を書いてみましょう。</p>
 <p>まず、 <code>src/Main.purs</code>ファイルの先頭に次の行を追加し、 <code>Math</code>モジュールをインポートします。</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Math</span> (sqrt)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Math</span> (sqrt)</code></pre></div>
 <p>また、数値の加算や乗算のような非常に基本的な演算を定義する <code>Prelude</code>モジュールをインポートすることも必要です。</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Prelude</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Prelude</span></code></pre></div>
 <p>そして、次のように <code>diagonal</code>関数を定義します。</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb13-1" data-line-number="1">diagonal w h <span class="fu">=</span> sqrt (w <span class="fu">*</span> w <span class="fu">+</span> h <span class="fu">*</span> h)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">diagonal w h <span class="fu">=</span> sqrt (w <span class="fu">*</span> w <span class="fu">+</span> h <span class="fu">*</span> h)</code></pre></div>
 <p>この関数の型を定義する必要はないことに注意してください。 <code>diagonal</code>は2つの数値を取り、数を返す関数であるとコンパイラは推論することができます。しかし、ドキュメントとしても役立つので、通常は型注釈を提供しておくことをお勧めします。</p>
 <p>それでは、新しい <code>diagonal</code>関数を使うように <code>main</code>関数も変更してみましょう。</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb14-1" data-line-number="1">main <span class="fu">=</span> logShow (diagonal <span class="fl">3.0</span> <span class="fl">4.0</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">main <span class="fu">=</span> logShow (diagonal <span class="fl">3.0</span> <span class="fl">4.0</span>)</code></pre></div>
 <p><code>pulp run</code>を使用して、モジュールを再コンパイルします。</p>
 <pre class="text"><code>$ pulp run
 

@@ -5,69 +5,41 @@
   <meta name="generator" content="pandoc">
   <title>実例によるPureScript</title>
   <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
   </style>
   <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
   <link rel="stylesheet" href="github-markdown.css" type="text/css"/>
@@ -244,25 +216,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><a href="http://underscorejs.org">UnderscoreJS</a>などのライブラリは、 <code>map</code>や <code>filter</code>、 <code>reduce</code>といったよく知られた関数を活用して、小さいプログラムを組み合わせて大きなプログラムを作れるようにします。</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" data-line-number="1">    <span class="kw">var</span> sumOfPrimes <span class="op">=</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">        <span class="va">_</span>.<span class="at">chain</span>(<span class="va">_</span>.<span class="at">range</span>(<span class="dv">1000</span>))</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">         .<span class="at">filter</span>(isPrime)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">         .<span class="at">reduce</span>(<span class="kw">function</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">             <span class="cf">return</span> x <span class="op">+</span> y<span class="op">;</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">         <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">         .<span class="at">value</span>()<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> sumOfPrimes <span class="op">=</span>
+        <span class="va">_</span>.<span class="at">chain</span>(<span class="va">_</span>.<span class="at">range</span>(<span class="dv">1000</span>))
+         .<span class="at">filter</span>(isPrime)
+         .<span class="at">reduce</span>(<span class="kw">function</span>(x<span class="op">,</span> y) <span class="op">{</span>
+             <span class="cf">return</span> x <span class="op">+</span> y<span class="op">;</span>
+         <span class="op">}</span>)
+         .<span class="at">value</span>()<span class="op">;</span></code></pre></div>
 <ul>
 <li>NodeJSにおける非同期プログラミングでは、コールバックを定義するために第一級の値としての関数に大きく依存しています。</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" data-line-number="1">    <span class="at">require</span>(<span class="st">&#39;fs&#39;</span>).<span class="at">readFile</span>(sourceFile<span class="op">,</span> <span class="kw">function</span> (error<span class="op">,</span> data) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">      <span class="cf">if</span> (<span class="op">!</span>error) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">        <span class="at">require</span>(<span class="st">&#39;fs&#39;</span>).<span class="at">writeFile</span>(destFile<span class="op">,</span> data<span class="op">,</span> <span class="kw">function</span> (error) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">          <span class="cf">if</span> (<span class="op">!</span>error) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">            <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;File copied&quot;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">          <span class="op">}</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">        <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">      <span class="op">}</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">    <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="at">require</span>(<span class="st">&#39;fs&#39;</span>).<span class="at">readFile</span>(sourceFile<span class="op">,</span> <span class="kw">function</span> (error<span class="op">,</span> data) <span class="op">{</span>
+      <span class="cf">if</span> (<span class="op">!</span>error) <span class="op">{</span>
+        <span class="at">require</span>(<span class="st">&#39;fs&#39;</span>).<span class="at">writeFile</span>(destFile<span class="op">,</span> data<span class="op">,</span> <span class="kw">function</span> (error) <span class="op">{</span>
+          <span class="cf">if</span> (<span class="op">!</span>error) <span class="op">{</span>
+            <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;File copied&quot;</span>)<span class="op">;</span>
+          <span class="op">}</span>
+        <span class="op">}</span>)<span class="op">;</span>
+      <span class="op">}</span>
+    <span class="op">}</span>)<span class="op">;</span></code></pre></div>
 <ul>
 <li><a href="http://facebook.github.io/react/">React</a>や<a href="https://github.com/Matt-Esch/virtual-dom">virtual-dom</a>などのライブラリは、アプリケーションの状態を純粋な関数としてモデル化します。</li>
 </ul>
@@ -271,12 +243,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 id="型と型推論"><span class="header-section-number">1.2</span> 型と型推論</h2>
 <p>動的型付けの言語と静的型付けの言語をめぐる議論についてはよく知られています。PureScriptは<strong>静的型付け</strong>の言語、つまり正しいプログラムはコンパイラによってその動作を示すような<strong>型</strong>を与えられる言語です。逆にいえば、型を​​与えることができないプログラムは<strong>誤ったプログラム</strong>であり、コンパイラによって拒否されます。動的型付けの言語とは異なり、PureScriptでは型は<strong>コンパイル時</strong>のみに存在し、実行時には型の表現はありません。</p>
 <p>PureScriptの型は、これまでJavaやC#のような他の言語で見たような型とは、いろいろな意味で異なっていることにも注意することが大切です。おおまかに言えばPureScriptの型はJavaやC#と同じ目的を持っているものの、PureScriptの型はMLとHaskellのような言語に影響を受けています。開発者がプログラムについての強い主張を表明できるので、PureScriptの型は表現力豊かなのです。最も重要なのは、PureScriptの型システムは<strong>型推論</strong>(type inference)をサポートしていることです。型推論は最低限の明示的な型注釈だけを必要とし、型システムを厄介者ではなく<strong>道具</strong>にしてくれます。簡単な例を示すと、次のコードは<strong>数</strong>を定義していますが、それが <code>Number</code>型だという注釈はコードのどこにもありません。</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1">iAmANumber <span class="fu">=</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="kw">let</span> square x <span class="fu">=</span> x <span class="fu">*</span> x</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="kw">in</span> square <span class="fl">42.0</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">iAmANumber <span class="fu">=</span>
+  <span class="kw">let</span> square x <span class="fu">=</span> x <span class="fu">*</span> x
+  <span class="kw">in</span> square <span class="fl">42.0</span></code></pre></div>
 <p>次のもっと複雑な例では、<strong>コンパイラにとって未知</strong>の型が存在しているときでさえも、型注釈なしで型の正しさを確かめることができるということが示されています。</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1">iterate f <span class="dv">0</span> x <span class="fu">=</span> x</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">iterate f n x <span class="fu">=</span> iterate f (n <span class="fu">-</span> <span class="dv">1</span>) (f x)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">iterate f <span class="dv">0</span> x <span class="fu">=</span> x
+iterate f n x <span class="fu">=</span> iterate f (n <span class="fu">-</span> <span class="dv">1</span>) (f x)</code></pre></div>
 <p>ここで <code>x</code>の型は不明ですが、 <code>x</code>がどんな型を持っているかにかかわらず、 <code>iterate</code>が型システムの規則に従っていることをコンパイラは検証することができます。</p>
 <p>静的型はプログラムの正しさについての確信を得るためだけではなく、その正しさによって開発を助けるということをあなたに納得させる(もしくは、あなたの理解を確認する)ことをこの本では試みます。最も単純な抽象化を使わないかぎりJavaScriptでコードの大規模なリファクタリングすることは難しいですが、型検証器のある表現力豊かな型システムは、リファクタリングさえ楽しく対話的な体験にするのです。</p>
 <p>加えて、型システムによって提供されたこのセーフティネットは、より高度な抽象化をも可能にします。実際に、関数型プログラミング言語Haskellによって知られるようになった、型主導の強力な抽象化である型クラスをPureScriptは備えています。</p>
@@ -303,11 +275,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>本書の各章は、概ね章ごとに完結しています。しかしながら、多少の関数型プログラミングの経験がある初心者でも、まずは各章を順番に進めていくことをおすすめします。最初の数章では、本書の後半の内容を理解するために必要な基礎知識を養います。関数型プログラミングの考え方に十分通じた読者(特にMLやHaskellのよう強く型付けされた言語での経験を持つ読者)なら、本書の前半のほうの章を読まなくても後半の章のコードの大まかな理解を得ることがおそらく可能でしょう。</p>
 <p>各章ではそれぞれひとつの実用的な例に焦点をあて、新しい考え方を導入するための動機付けとして用います。各章のコードは本書の<a href="https://github.com/paf31/purescript-book">GitHubのリポジトリ</a>から入手できます。各章にはソースコードから抜粋したコード片が掲載されていますが、完全に理解するためには本書に掲載されたコードと平行してリポジトリのソースコードを読む必要があります。対話式環境 <code>PSCi</code>で実行し理解を確かめられるように、長めの節には短いコード片が含まれます。</p>
 <p>コード例は次のように等幅フォントで示されています。</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">module</span> <span class="dt">Example</span> <span class="kw">where</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw">import</span> <span class="dt">Control.Monad.Eff.Console</span> (log)</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">main <span class="fu">=</span> log <span class="st">&quot;Hello, World!&quot;</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">module</span> <span class="dt">Example</span> <span class="kw">where</span>
+
+<span class="kw">import </span><span class="dt">Control.Monad.Eff.Console</span> (log)
+
+main <span class="fu">=</span> log <span class="st">&quot;Hello, World!&quot;</span></code></pre></div>
 <p>先頭にドル記号がついた行は、コマンドラインに入力されたコマンドです。</p>
 <pre class="text"><code>$ pulp build</code></pre>
 <p>通常はこれらのコマンドはLinux / Mac OSの利用者には適合しますが、Windowsの利用者はファイル区切り文字を変更する、シェルの組み込み機能をWindowsの相当するものに置き換えるなどの小さな変更を加える必要があるかもしれません。</p>

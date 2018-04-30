@@ -5,69 +5,41 @@
   <meta name="generator" content="pandoc">
   <title>実例によるPureScript</title>
   <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
   </style>
   <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
   <link rel="stylesheet" href="github-markdown.css" type="text/css"/>
@@ -252,32 +224,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 id="単純な図形"><span class="header-section-number">9.3</span> 単純な図形</h2>
 <p><code>Example/Rectangle.purs</code>ファイルにはキャンバスの中心に青い四角形をひとつ描画するという簡単な例が含まれています。このモジュールは、 <code>Control.Monad.Eff</code>モジュールと、Canvas APIを扱うための <code>Eff</code>モナドのアクションが定義されている <code>Graphics.Canvas</code>モジュールをインポートします。</p>
 <p>他のモジュールでも同様ですが、 <code>main</code>アクションは最初に <code>getCanvasElementById</code>アクションを使ってCanvasオブジェクトへの参照を取得しています。また、 <code>getContext2D</code>アクションを使ってキャンバスの2Dレンダリングコンテキストを参照しています。</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1">main <span class="fu">=</span> void <span class="fu">$</span> unsafePartial <span class="kw">do</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="dt">Just</span> canvas <span class="ot">&lt;-</span> getCanvasElementById <span class="st">&quot;canvas&quot;</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  ctx <span class="ot">&lt;-</span> getContext2D canvas</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">main <span class="fu">=</span> void <span class="fu">$</span> unsafePartial <span class="kw">do</span>
+  <span class="dt">Just</span> canvas <span class="ot">&lt;-</span> getCanvasElementById <span class="st">&quot;canvas&quot;</span>
+  ctx <span class="ot">&lt;-</span> getContext2D canvas</code></pre></div>
 <p><strong>注意</strong>：<code>unsafePartial</code>への呼び出しはここでは必要です。これは <code>getCanvasElementById</code>の結果のパターンマッチングが部分的であり、 <code>Just</code>値コンストラクタだけにマッチするためです。ここではこれで問題ありませんが、プロダクションコードではおそらく <code>Nothing</code>値コンストラクタにマッチさせ、適切なエラーメッセージを提供したほうがよいでしょう。</p>
 <p>これらのアクションの型は <code>PSCi</code>を使うかドキュメントを見ると確認できます。</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ot">getCanvasElementById ::</span> forall eff<span class="fu">.</span> <span class="dt">String</span> <span class="ot">-&gt;</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) (<span class="dt">Maybe</span> <span class="dt">CanvasElement</span>)</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="ot">getContext2D ::</span> forall eff<span class="fu">.</span> <span class="dt">CanvasElement</span> <span class="ot">-&gt;</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Context2D</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">getCanvasElementById ::</span> forall eff<span class="fu">.</span> <span class="dt">String</span> <span class="ot">-&gt;</span>
+  <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) (<span class="dt">Maybe</span> <span class="dt">CanvasElement</span>)
+
+<span class="ot">getContext2D ::</span> forall eff<span class="fu">.</span> <span class="dt">CanvasElement</span> <span class="ot">-&gt;</span>
+  <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Context2D</span></code></pre></div>
 <p><code>CanvasElement</code>と <code>Context2D</code>は <code>Graphics.Canvas</code>モジュールで定義されている型です。このモジュールでは、モジュール内のすべてのアクションで使用されている <code>Canvas</code>作用も定義されています。</p>
 <p>グラフィックスコンテキスト <code>ctx</code>は、キャンバスの状態を管理し、プリミティブな図形を描画したり、スタイルや色を設定したり、座標変換を適用するためのメソッドを提供しています。</p>
 <p><code>ctx</code>の取得に続けて、 <code>setFillStyle</code>アクションを使って塗りのスタイルを青一色の塗りつぶしに設定しています。</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1">  setFillStyle <span class="st">&quot;#0000FF&quot;</span> ctx</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  setFillStyle <span class="st">&quot;#0000FF&quot;</span> ctx</code></pre></div>
 <p><code>setFillStyle</code>アクションがグラフィックスコンテキストを引数として取っていることに注意してください。これは <code>Graphics.Canvas</code>で共通のパターンです。</p>
 <p>最後に、 <code>fillPath</code>アクションを使用して矩形を塗りつぶしています。 <code>fillPath</code>は次のような型を持っています。</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="ot">fillPath ::</span> forall eff a<span class="fu">.</span> <span class="dt">Context2D</span> <span class="ot">-&gt;</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">                          <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) a <span class="ot">-&gt;</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">                          <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) a</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">fillPath ::</span> forall eff a<span class="fu">.</span> <span class="dt">Context2D</span> <span class="ot">-&gt;</span>
+                          <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) a <span class="ot">-&gt;</span>
+                          <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) a</code></pre></div>
 <p><code>fillPath</code>はグラフィックスコンテキストとレンダリングするパスを構築する別のアクションを引数にとります。パスは <code>rect</code>アクションを使うと構築することができます。 <code>rect</code>はグラフィックスコンテキストと矩形の位置及びサイズを格納するレコードを引数にとります。</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" data-line-number="1">  fillPath ctx <span class="fu">$</span> rect ctx</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">    { x<span class="fu">:</span> <span class="fl">250.0</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">    , y<span class="fu">:</span> <span class="fl">250.0</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">    , w<span class="fu">:</span> <span class="fl">100.0</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">    , h<span class="fu">:</span> <span class="fl">100.0</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">    }</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  fillPath ctx <span class="fu">$</span> rect ctx
+    { x<span class="fu">:</span> <span class="fl">250.0</span>
+    , y<span class="fu">:</span> <span class="fl">250.0</span>
+    , w<span class="fu">:</span> <span class="fl">100.0</span>
+    , h<span class="fu">:</span> <span class="fl">100.0</span>
+    }</code></pre></div>
 <p>mainモジュールに <code>Example.Rectangle</code>の名前を与え、この長方形のコード例をビルドしましょう。</p>
 <pre class="text"><code>$ mkdir dist/
 $ pulp build -O --main Example.Rectangle --to dist/Main.js</code></pre>
@@ -286,48 +258,48 @@ $ pulp build -O --main Example.Rectangle --to dist/Main.js</code></pre>
 <p>パスを描画する方法は他にもあります。 <code>arc</code>関数は円弧を描画します。 <code>moveTo</code>関数、 <code>lineTo</code>関数、 <code>closePath</code>関数は細かい線分を組み合わせることでパスを描画します。</p>
 <p><code>Shapes.purs</code>ファイルでは長方形と円弧セグメント、三角形の、3つの図形を描画しています。</p>
 <p><code>rect</code>関数は引数としてレコードをとることを見てきました。実際には、長方形のプロパティは型同義語で定義されています。</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">type</span> <span class="dt">Rectangle</span> <span class="fu">=</span> {<span class="ot"> x ::</span> <span class="dt">Number</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">                 ,<span class="ot"> y ::</span> <span class="dt">Number</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">                 ,<span class="ot"> w ::</span> <span class="dt">Number</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">                 ,<span class="ot"> h ::</span> <span class="dt">Number</span> </a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">                 }</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Rectangle</span> <span class="fu">=</span> {<span class="ot"> x ::</span> <span class="dt">Number</span>
+                 ,<span class="ot"> y ::</span> <span class="dt">Number</span>
+                 ,<span class="ot"> w ::</span> <span class="dt">Number</span>
+                 ,<span class="ot"> h ::</span> <span class="dt">Number</span> 
+                 }</code></pre></div>
 <p><code>x</code>と <code>y</code>プロパティは左上隅の位置を表しており、 <code>w</code>と <code>h</code>のプロパティはそれぞれ幅と高さを表しています。</p>
 <p><code>arc</code>関数に以下のような型を持つレコードを渡して呼び出すと、円弧を描画することができます。</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">type</span> <span class="dt">Arc</span> <span class="fu">=</span> {<span class="ot"> x     ::</span> <span class="dt">Number</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">           ,<span class="ot"> y     ::</span> <span class="dt">Number</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">           ,<span class="ot"> r     ::</span> <span class="dt">Number</span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">           ,<span class="ot"> start ::</span> <span class="dt">Number</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">           ,<span class="ot"> end   ::</span> <span class="dt">Number</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6">           }</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Arc</span> <span class="fu">=</span> {<span class="ot"> x     ::</span> <span class="dt">Number</span>
+           ,<span class="ot"> y     ::</span> <span class="dt">Number</span>
+           ,<span class="ot"> r     ::</span> <span class="dt">Number</span>
+           ,<span class="ot"> start ::</span> <span class="dt">Number</span>
+           ,<span class="ot"> end   ::</span> <span class="dt">Number</span>
+           }</code></pre></div>
 <p>ここで、 <code>x</code>と <code>y</code>プロパティは弧の中心、 <code>r</code>は半径、 <code>start</code>と <code>end</code>は弧の両端の角度を弧度法で表しています。</p>
 <p>たとえば、次のコードは中心 <code>(300、300)</code>、半径 <code>50</code>の円弧を塗りつぶします。</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" data-line-number="1">  fillPath ctx <span class="fu">$</span> arc ctx</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">    { x      <span class="fu">:</span> <span class="fl">300.0</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">    , y      <span class="fu">:</span> <span class="fl">300.0</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">    , r      <span class="fu">:</span> <span class="fl">50.0</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5">    , start  <span class="fu">:</span> Math.pi <span class="fu">*</span> <span class="fl">5.0</span> <span class="fu">/</span> <span class="fl">8.0</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6">    , end    <span class="fu">:</span> Math.pi <span class="fu">*</span> <span class="fl">2.0</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7">    }</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  fillPath ctx <span class="fu">$</span> arc ctx
+    { x      <span class="fu">:</span> <span class="fl">300.0</span>
+    , y      <span class="fu">:</span> <span class="fl">300.0</span>
+    , r      <span class="fu">:</span> <span class="fl">50.0</span>
+    , start  <span class="fu">:</span> Math.pi <span class="fu">*</span> <span class="fl">5.0</span> <span class="fu">/</span> <span class="fl">8.0</span>
+    , end    <span class="fu">:</span> Math.pi <span class="fu">*</span> <span class="fl">2.0</span>
+    }</code></pre></div>
 <p><code>Number</code>型の <code>x</code>と <code>y</code>というプロパティが <code>Rectangle</code>レコード型と <code>Arc</code>レコード型の両方に含まれていることに注意してください。どちらの場合でもこの組は点を表しています。これは、いずれのレコード型にも適用できる、行多相な関数を書くことができることを意味します。</p>
 <p>たとえば、 <code>Shapes</code>モジュールでは <code>x</code>と <code>y</code>のプロパティを変更し図形を並行移動する <code>translate</code>関数を定義されています。</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="ot">translate ::</span> forall r<span class="fu">.</span> <span class="dt">Number</span> <span class="ot">-&gt;</span> <span class="dt">Number</span> <span class="ot">-&gt;</span></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">              {<span class="ot"> x ::</span> <span class="dt">Number</span>,<span class="ot"> y ::</span> <span class="dt">Number</span> <span class="fu">|</span> r } <span class="ot">-&gt;</span></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">              {<span class="ot"> x ::</span> <span class="dt">Number</span>,<span class="ot"> y ::</span> <span class="dt">Number</span> <span class="fu">|</span> r }</a>
-<a class="sourceLine" id="cb10-4" data-line-number="4">translate dx dy shape <span class="fu">=</span> shape</a>
-<a class="sourceLine" id="cb10-5" data-line-number="5">  { x <span class="fu">=</span> shape<span class="fu">.</span>x <span class="fu">+</span> dx</a>
-<a class="sourceLine" id="cb10-6" data-line-number="6">  , y <span class="fu">=</span> shape<span class="fu">.</span>y <span class="fu">+</span> dy</a>
-<a class="sourceLine" id="cb10-7" data-line-number="7">  }</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">translate ::</span> forall r<span class="fu">.</span> <span class="dt">Number</span> <span class="ot">-&gt;</span> <span class="dt">Number</span> <span class="ot">-&gt;</span>
+              {<span class="ot"> x ::</span> <span class="dt">Number</span>,<span class="ot"> y ::</span> <span class="dt">Number</span> <span class="fu">|</span> r } <span class="ot">-&gt;</span>
+              {<span class="ot"> x ::</span> <span class="dt">Number</span>,<span class="ot"> y ::</span> <span class="dt">Number</span> <span class="fu">|</span> r }
+translate dx dy shape <span class="fu">=</span> shape
+  { x <span class="fu">=</span> shape<span class="fu">.</span>x <span class="fu">+</span> dx
+  , y <span class="fu">=</span> shape<span class="fu">.</span>y <span class="fu">+</span> dy
+  }</code></pre></div>
 <p>この行多相型に注目してください。これは <code>triangle</code>が <code>x</code>と <code>y</code>というプロパティと、<strong>それに加えて他の任意のプロパティ</strong>を持ったどんなレコードでも受け入れるということを言っています。 <code>x</code>フィールドと <code>y</code>フィールドは更新されますが、残りのフィールドは変更されません。</p>
 <p>これは<strong>レコード更新構文</strong>の例です。 <code>shape { ... }</code>という式は、 <code>shape</code>を元にして、括弧の中で指定されたように値が更新されたフィールドを持つ新たなレコードを作ります。波括弧の中の式はレコードリテラルのようなコロンではなく、等号でラベルと式を区切って書くことに注意してください。</p>
 <p><code>Shapes</code>の例からわかるように、 <code>translate</code>関数は <code>Rectangle</code>レコードと <code>Arc</code>レコード双方に対して使うことができます。</p>
 <p><code>Shape</code>の例で描画される3つめの型は線分ごとのパスです。対応するコードは次のようになります。</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" data-line-number="1">  setFillStyle <span class="st">&quot;#FF0000&quot;</span> ctx</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">  fillPath ctx <span class="fu">$</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4">    moveTo ctx <span class="fl">300.0</span> <span class="fl">260.0</span></a>
-<a class="sourceLine" id="cb11-5" data-line-number="5">    lineTo ctx <span class="fl">260.0</span> <span class="fl">340.0</span></a>
-<a class="sourceLine" id="cb11-6" data-line-number="6">    lineTo ctx <span class="fl">340.0</span> <span class="fl">340.0</span></a>
-<a class="sourceLine" id="cb11-7" data-line-number="7">    closePath ctx</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  setFillStyle <span class="st">&quot;#FF0000&quot;</span> ctx
+
+  fillPath ctx <span class="fu">$</span> <span class="kw">do</span>
+    moveTo ctx <span class="fl">300.0</span> <span class="fl">260.0</span>
+    lineTo ctx <span class="fl">260.0</span> <span class="fl">340.0</span>
+    lineTo ctx <span class="fl">340.0</span> <span class="fl">340.0</span>
+    closePath ctx</code></pre></div>
 <p>ここでは3つの関数が使われています。</p>
 <ul>
 <li><code>moveTo</code>はパスの現在位置を指定された座標へ移動させます。</li>
@@ -344,12 +316,12 @@ $ pulp build -O --main Example.Rectangle --to dist/Main.js</code></pre>
 <li><p>(簡単) これまでの例のそれぞれについて、 <code>strokePath</code>関数や <code>setStrokeStyle</code>関数を使ってみましょう。</p></li>
 <li><p>(簡単) 関数の引数の内部でdo記法ブロックを使うと、 <code>fillPath</code>関数と <code>strokePath</code>関数で共通のスタイルを持つ複雑なパスを描画することができます。同じ <code>fillPath</code>呼び出しで隣り合った２つの矩形を描画するように、 <code>Rectangle</code>のコード例を変更してみてください。線分と円弧を組み合わせてを、円の扇形を描画してみてください。</p></li>
 <li><p>(やや難しい) 次のような２次元の点を表すレコードが与えられたとします。</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">type</span> <span class="dt">Point</span> <span class="fu">=</span> {<span class="ot"> x ::</span> <span class="dt">Number</span>,<span class="ot"> y ::</span> <span class="dt">Number</span> }</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Point</span> <span class="fu">=</span> {<span class="ot"> x ::</span> <span class="dt">Number</span>,<span class="ot"> y ::</span> <span class="dt">Number</span> }</code></pre></div>
 <p>多数の点からなる閉じたパスを描く関数 <code>renderPath</code>書いてください。</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="ot">renderPath ::</span> forall eff<span class="fu">.</span> <span class="dt">Context2D</span> <span class="ot">-&gt;</span> <span class="dt">Array</span> <span class="dt">Point</span> <span class="ot">-&gt;</span> </a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">                                       <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Unit</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">renderPath ::</span> forall eff<span class="fu">.</span> <span class="dt">Context2D</span> <span class="ot">-&gt;</span> <span class="dt">Array</span> <span class="dt">Point</span> <span class="ot">-&gt;</span> 
+                                       <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Unit</span></code></pre></div>
 <p>次のような関数を考えます。</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="ot">f ::</span> <span class="dt">Number</span> <span class="ot">-&gt;</span> <span class="dt">Point</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">f ::</span> <span class="dt">Number</span> <span class="ot">-&gt;</span> <span class="dt">Point</span></code></pre></div>
 <p>この関数は引数として <code>1</code>から <code>0</code>の間の <code>Number</code>をとり、 <code>Point</code>を返します。 <code>renderPath</code>関数を利用して関数 <code>f</code>のグラフを描くアクションを書いてください。そのアクションは有限個の点を <code>f</code>からサンプリングすることによって近似しなければなりません。</p>
 <p>関数 <code>f</code>を変更し、異なるパスが描画されることを確かめてください。</p></li>
 </ol>
@@ -357,24 +329,24 @@ $ pulp build -O --main Example.Rectangle --to dist/Main.js</code></pre>
 <h2 id="無作為に円を描く"><span class="header-section-number">9.5</span> 無作為に円を描く</h2>
 <p><code>Example/Random.purs</code>ファイルには2種類の異なる副作用が混在した <code>Eff</code>モナドを使う例が含まれています。この例では無作為に生成された円をキャンバスに100個描画します。</p>
 <p><code>main</code>アクションはこれまでのようにグラフィックスコンテキストへの参照を取得し、ストロークと塗りつぶしスタイルを設定します。</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb16-1" data-line-number="1">  setFillStyle <span class="st">&quot;#FF0000&quot;</span> ctx</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2">  setStrokeStyle <span class="st">&quot;#000000&quot;</span> ctx</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  setFillStyle <span class="st">&quot;#FF0000&quot;</span> ctx
+  setStrokeStyle <span class="st">&quot;#000000&quot;</span> ctx</code></pre></div>
 <p>次のコードでは <code>forE</code>アクションを使って <code>0</code>から <code>100</code>までの整数について繰り返しをしています。</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb17-1" data-line-number="1">  for_ (<span class="dv">1</span> <span class="fu">..</span> <span class="dv">100</span>) \_ <span class="ot">-&gt;</span> <span class="kw">do</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  for_ (<span class="dv">1</span> <span class="fu">..</span> <span class="dv">100</span>) \_ <span class="ot">-&gt;</span> <span class="kw">do</span></code></pre></div>
 <p>これらの数は <code>0</code>から <code>1</code>の間に無作為に分布しています。これらはそれぞれ <code>x</code>座標、 <code>y</code>座標、半径 <code>r</code>を表しています。</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb18-1" data-line-number="1">    x <span class="ot">&lt;-</span> random</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2">    y <span class="ot">&lt;-</span> random</a>
-<a class="sourceLine" id="cb18-3" data-line-number="3">    r <span class="ot">&lt;-</span> random</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">    x <span class="ot">&lt;-</span> random
+    y <span class="ot">&lt;-</span> random
+    r <span class="ot">&lt;-</span> random</code></pre></div>
 <p>次のコードでこれらの変数に基づいて <code>Arc</code>を作成し、最後に現在のスタイルに従って円弧の塗りつぶしと線描が行われます。</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb19-1" data-line-number="1">    <span class="kw">let</span> path <span class="fu">=</span> arc ctx</a>
-<a class="sourceLine" id="cb19-2" data-line-number="2">         { x     <span class="fu">:</span> x <span class="fu">*</span> <span class="fl">600.0</span></a>
-<a class="sourceLine" id="cb19-3" data-line-number="3">         , y     <span class="fu">:</span> y <span class="fu">*</span> <span class="fl">600.0</span></a>
-<a class="sourceLine" id="cb19-4" data-line-number="4">         , r     <span class="fu">:</span> r <span class="fu">*</span> <span class="fl">50.0</span></a>
-<a class="sourceLine" id="cb19-5" data-line-number="5">         , start <span class="fu">:</span> <span class="fl">0.0</span></a>
-<a class="sourceLine" id="cb19-6" data-line-number="6">         , end   <span class="fu">:</span> Math.pi <span class="fu">*</span> <span class="fl">2.0</span></a>
-<a class="sourceLine" id="cb19-7" data-line-number="7">         }</a>
-<a class="sourceLine" id="cb19-8" data-line-number="8">    fillPath ctx path</a>
-<a class="sourceLine" id="cb19-9" data-line-number="9">    strokePath ctx path</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">    <span class="kw">let</span> path <span class="fu">=</span> arc ctx
+         { x     <span class="fu">:</span> x <span class="fu">*</span> <span class="fl">600.0</span>
+         , y     <span class="fu">:</span> y <span class="fu">*</span> <span class="fl">600.0</span>
+         , r     <span class="fu">:</span> r <span class="fu">*</span> <span class="fl">50.0</span>
+         , start <span class="fu">:</span> <span class="fl">0.0</span>
+         , end   <span class="fu">:</span> Math.pi <span class="fu">*</span> <span class="fl">2.0</span>
+         }
+    fillPath ctx path
+    strokePath ctx path</code></pre></div>
 <p><code>forE</code>に渡された関数が正しい型を持つようにするため、最後の行は必要であることに注意してください。</p>
 <p><code>Example.Random</code>をmainモジュールとして指定して、この例をビルドしましょう。</p>
 <pre class="text"><code>$ pulp build -O --main Example.Random --to dist/Main.js</code></pre>
@@ -382,47 +354,47 @@ $ pulp build -O --main Example.Rectangle --to dist/Main.js</code></pre>
 <h2 id="座標変換"><span class="header-section-number">9.6</span> 座標変換</h2>
 <p>キャンバスは簡単な図形を描画するだけのものではありません。キャンバスは変換行列を扱うことができ、図形は描画の前に形状を変形してから描画されます。図形は平行移動、回転、拡大縮小、および斜め変形することができます。</p>
 <p><code>purescript-canvas</code>ライブラリではこれらの変換を以下の関数で提供しています。</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="ot">translate ::</span> forall eff<span class="fu">.</span> <span class="dt">TranslateTransform</span> <span class="ot">-&gt;</span> <span class="dt">Context2D</span></a>
-<a class="sourceLine" id="cb21-2" data-line-number="2">                                            <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Context2D</span></a>
-<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="ot">rotate    ::</span> forall eff<span class="fu">.</span> <span class="dt">Number</span>             <span class="ot">-&gt;</span> <span class="dt">Context2D</span></a>
-<a class="sourceLine" id="cb21-4" data-line-number="4">                                            <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Context2D</span></a>
-<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="ot">scale     ::</span> forall eff<span class="fu">.</span> <span class="dt">ScaleTransform</span>     <span class="ot">-&gt;</span> <span class="dt">Context2D</span></a>
-<a class="sourceLine" id="cb21-6" data-line-number="6">                                            <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Context2D</span></a>
-<a class="sourceLine" id="cb21-7" data-line-number="7"><span class="ot">transform ::</span> forall eff<span class="fu">.</span> <span class="dt">Transform</span>          <span class="ot">-&gt;</span> <span class="dt">Context2D</span></a>
-<a class="sourceLine" id="cb21-8" data-line-number="8">                                            <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Context2D</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">translate ::</span> forall eff<span class="fu">.</span> <span class="dt">TranslateTransform</span> <span class="ot">-&gt;</span> <span class="dt">Context2D</span>
+                                            <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Context2D</span>
+<span class="ot">rotate    ::</span> forall eff<span class="fu">.</span> <span class="dt">Number</span>             <span class="ot">-&gt;</span> <span class="dt">Context2D</span>
+                                            <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Context2D</span>
+<span class="ot">scale     ::</span> forall eff<span class="fu">.</span> <span class="dt">ScaleTransform</span>     <span class="ot">-&gt;</span> <span class="dt">Context2D</span>
+                                            <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Context2D</span>
+<span class="ot">transform ::</span> forall eff<span class="fu">.</span> <span class="dt">Transform</span>          <span class="ot">-&gt;</span> <span class="dt">Context2D</span>
+                                            <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Context2D</span></code></pre></div>
 <p><code>translate</code>アクションは <code>TranslateTransform</code>レコードのプロパティで指定した大きさだけ平行移動を行います。</p>
 <p><code>rotate</code>アクションは最初の引数で指定されたラジアンの値に応じて原点を中心とした回転を行います。</p>
 <p><code>scale</code>アクションは原点を中心として拡大縮小します。 <code>ScaleTransform</code>レコードは <code>X</code>軸と <code>y</code>軸に沿った拡大率を指定するのに使います。</p>
 <p>最後の <code>transform</code>はこの４つのうちで最も一般的なアクションです。このアクションは行列に従ってアフィン変換を行います。</p>
 <p>これらのアクションが呼び出された後に描画される図形は、自動的に適切な座標変換が適用されます。</p>
 <p>実際には、これらの関数のそれぞれの作用は、コンテキストの現在の変換行列に対して変換行列を<strong>右から乗算</strong>していきます。つまり、もしある作用の変換をしていくと、その作用は実際には逆順に適用されていきます。次のような座標変換のアクションを考えてみましょう。</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb22-1" data-line-number="1">transformations ctx <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb22-2" data-line-number="2">  translate { translateX<span class="fu">:</span> <span class="fl">10.0</span>, translateY<span class="fu">:</span> <span class="fl">10.0</span> } ctx</a>
-<a class="sourceLine" id="cb22-3" data-line-number="3">  scale { scaleX<span class="fu">:</span> <span class="fl">2.0</span>, scaleY<span class="fu">:</span> <span class="fl">2.0</span> } ctx</a>
-<a class="sourceLine" id="cb22-4" data-line-number="4">  rotate (Math.pi <span class="fu">/</span> <span class="fl">2.0</span>) ctx</a>
-<a class="sourceLine" id="cb22-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb22-6" data-line-number="6">  renderScene</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">transformations ctx <span class="fu">=</span> <span class="kw">do</span>
+  translate { translateX<span class="fu">:</span> <span class="fl">10.0</span>, translateY<span class="fu">:</span> <span class="fl">10.0</span> } ctx
+  scale { scaleX<span class="fu">:</span> <span class="fl">2.0</span>, scaleY<span class="fu">:</span> <span class="fl">2.0</span> } ctx
+  rotate (Math.pi <span class="fu">/</span> <span class="fl">2.0</span>) ctx
+
+  renderScene</code></pre></div>
 <p>このアクションの作用では、まずシーンが回転され、それから拡大縮小され、最後に平行移動されます。　　　　　</p>
 <h2 id="コンテキストの保存"><span class="header-section-number">9.7</span> コンテキストの保存</h2>
 <p>一般的な使い方としては、変換を適用してシーンの一部をレンダリングし、それからその変換を元に戻します。</p>
 <p>Canvas APIにはキャンバスの状態の<strong>スタック</strong>を操作する <code>save</code>と <code>restore</code>メソッドが備わっています。 <code>purescript-canvas</code>ではこの機能を次のような関数でラップしています。</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="ot">save    ::</span> forall eff<span class="fu">.</span> <span class="dt">Context2D</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Context2D</span></a>
-<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="ot">restore ::</span> forall eff<span class="fu">.</span> <span class="dt">Context2D</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Context2D</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">save    ::</span> forall eff<span class="fu">.</span> <span class="dt">Context2D</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Context2D</span>
+<span class="ot">restore ::</span> forall eff<span class="fu">.</span> <span class="dt">Context2D</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Context2D</span></code></pre></div>
 <p><code>save</code>アクションは現在のコンテキストの状態(現在の変換行列や描画スタイル)をスタックにプッシュし、 <code>restore</code>アクションはスタックの一番上の状態をポップし、コンテキストの状態を復元します。</p>
 <p>これらのアクションにより、現在の状態を保存し、いろいろなスタイルや変換を適用し、プリミティブを描画し、最後に元の変換と状態を復元することが可能になります。例えば、次の関数はいくつかのキャンバスアクションを実行しますが、その前に回転を適用し、そのあとに変換を復元します。</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb24-1" data-line-number="1">rotated ctx render <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb24-2" data-line-number="2">  save ctx</a>
-<a class="sourceLine" id="cb24-3" data-line-number="3">  rotate Math.pi ctx</a>
-<a class="sourceLine" id="cb24-4" data-line-number="4">  render</a>
-<a class="sourceLine" id="cb24-5" data-line-number="5">  restore ctx</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">rotated ctx render <span class="fu">=</span> <span class="kw">do</span>
+  save ctx
+  rotate Math.pi ctx
+  render
+  restore ctx</code></pre></div>
 <p>こういったよくある使いかたの高階関数を利用した抽象化として、 <code>purescript-canvas</code>ライブラリでは元のコンテキスト状態を維持しながらいくつかのキャンバスアクションを実行する <code>withContext</code>関数が提供されています。</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="ot">withContext ::</span> forall eff a<span class="fu">.</span> <span class="dt">Context2D</span> <span class="ot">-&gt;</span> </a>
-<a class="sourceLine" id="cb25-2" data-line-number="2">                             <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) a <span class="ot">-&gt;</span></a>
-<a class="sourceLine" id="cb25-3" data-line-number="3">                             <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) a          </a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">withContext ::</span> forall eff a<span class="fu">.</span> <span class="dt">Context2D</span> <span class="ot">-&gt;</span> 
+                             <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) a <span class="ot">-&gt;</span>
+                             <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) a          </code></pre></div>
 <p><code>withContext</code>を使うと、先ほどの <code>rotated</code>関数を次のように書き換えることができます。</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb26-1" data-line-number="1">rotated ctx render <span class="fu">=</span> withContext ctx <span class="kw">do</span></a>
-<a class="sourceLine" id="cb26-2" data-line-number="2">    rotate Math.pi ctx</a>
-<a class="sourceLine" id="cb26-3" data-line-number="3">    render</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">rotated ctx render <span class="fu">=</span> withContext ctx <span class="kw">do</span>
+    rotate Math.pi ctx
+    render</code></pre></div>
 <h2 id="大域的な変更可能状態"><span class="header-section-number">9.8</span> 大域的な変更可能状態</h2>
 <p>この節では <code>purescript-refs</code>パッケージを使って <code>Eff</code>モナドの別の作用について実演してみます。</p>
 <p><code>Control.Monad.Eff.Ref</code>モジュールでは大域的に変更可能な参照のための型構築子、および関連する作用を提供します。</p>
@@ -436,27 +408,27 @@ Control.Monad.Eff.Effect</code></pre>
 <p>型 <code>RefVal a</code>の値は型 <code>a</code>値を保持する変更可能な領域への参照で、前の章で見た <code>STRef h a</code>によく似ています。その違いは、 <code>ST</code>作用は <code>runST</code>を用いて除去することができますが、 <code>Ref</code>作用はハンドラを提供しないということです。 <code>ST</code>は安全に局所的な状態変更を追跡するために使用されますが、 <code>Ref</code>は大域的な状態変更を追跡するために使用されます。そのため、 <code>Ref</code>は慎重に使用する必要があります。</p>
 <p><code>Example/Refs.purs</code>ファイルには <code>canvas</code>要素上のマウスクリックを追跡するのに <code>Ref</code>作用を使用する例が含まれています。</p>
 <p>このコー​​ドでは最初に <code>newRef</code>アクションを使って値 <code>0</code>で初期化された領域への新しい参照を作成しています。</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb28-1" data-line-number="1">  clickCount <span class="ot">&lt;-</span> newRef <span class="dv">0</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  clickCount <span class="ot">&lt;-</span> newRef <span class="dv">0</span></code></pre></div>
 <p>クリックイベントハンドラの内部では、 <code>modifyRef</code>アクションを使用してクリック数を更新しています。</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb29-1" data-line-number="1">    modifyRef clickCount (\count <span class="ot">-&gt;</span> count <span class="fu">+</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">    modifyRef clickCount (\count <span class="ot">-&gt;</span> count <span class="fu">+</span> <span class="dv">1</span>)</code></pre></div>
 <p><code>readRef</code>アクションは新しいクリック数を読み取るために使われています。</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb30-1" data-line-number="1">    count <span class="ot">&lt;-</span> readRef clickCount</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">    count <span class="ot">&lt;-</span> readRef clickCount</code></pre></div>
 <p><code>render</code>関数では、クリック数に応じて変換を矩形に適用しています。</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb31-1" data-line-number="1">    withContext ctx <span class="kw">do</span></a>
-<a class="sourceLine" id="cb31-2" data-line-number="2">      <span class="kw">let</span> scaleX <span class="fu">=</span> Math.sin (toNumber count <span class="fu">*</span> Math.pi <span class="fu">/</span> <span class="fl">4.0</span>) <span class="fu">+</span> <span class="fl">1.5</span></a>
-<a class="sourceLine" id="cb31-3" data-line-number="3">      <span class="kw">let</span> scaleY <span class="fu">=</span> Math.sin (toNumber count <span class="fu">*</span> Math.pi <span class="fu">/</span> <span class="fl">6.0</span>) <span class="fu">+</span> <span class="fl">1.5</span></a>
-<a class="sourceLine" id="cb31-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb31-5" data-line-number="5">      translate { translateX<span class="fu">:</span> <span class="fl">300.0</span>, translateY<span class="fu">:</span>  <span class="fl">300.0</span> } ctx</a>
-<a class="sourceLine" id="cb31-6" data-line-number="6">      rotate (toNumber count <span class="fu">*</span> Math.pi <span class="fu">/</span> <span class="fl">18.0</span>) ctx</a>
-<a class="sourceLine" id="cb31-7" data-line-number="7">      scale { scaleX<span class="fu">:</span> scaleX, scaleY<span class="fu">:</span> scaleY } ctx</a>
-<a class="sourceLine" id="cb31-8" data-line-number="8">      translate { translateX<span class="fu">:</span> <span class="fu">-</span><span class="fl">100.0</span>, translateY<span class="fu">:</span> <span class="fu">-</span><span class="fl">100.0</span> } ctx</a>
-<a class="sourceLine" id="cb31-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb31-10" data-line-number="10">      fillPath ctx <span class="fu">$</span> rect ctx</a>
-<a class="sourceLine" id="cb31-11" data-line-number="11">        { x<span class="fu">:</span> <span class="fl">0.0</span></a>
-<a class="sourceLine" id="cb31-12" data-line-number="12">        , y<span class="fu">:</span> <span class="fl">0.0</span></a>
-<a class="sourceLine" id="cb31-13" data-line-number="13">        , w<span class="fu">:</span> <span class="fl">200.0</span></a>
-<a class="sourceLine" id="cb31-14" data-line-number="14">        , h<span class="fu">:</span> <span class="fl">200.0</span></a>
-<a class="sourceLine" id="cb31-15" data-line-number="15">        }</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">    withContext ctx <span class="kw">do</span>
+      <span class="kw">let</span> scaleX <span class="fu">=</span> Math.sin (toNumber count <span class="fu">*</span> Math.pi <span class="fu">/</span> <span class="fl">4.0</span>) <span class="fu">+</span> <span class="fl">1.5</span>
+      <span class="kw">let</span> scaleY <span class="fu">=</span> Math.sin (toNumber count <span class="fu">*</span> Math.pi <span class="fu">/</span> <span class="fl">6.0</span>) <span class="fu">+</span> <span class="fl">1.5</span>
+
+      translate { translateX<span class="fu">:</span> <span class="fl">300.0</span>, translateY<span class="fu">:</span>  <span class="fl">300.0</span> } ctx
+      rotate (toNumber count <span class="fu">*</span> Math.pi <span class="fu">/</span> <span class="fl">18.0</span>) ctx
+      scale { scaleX<span class="fu">:</span> scaleX, scaleY<span class="fu">:</span> scaleY } ctx
+      translate { translateX<span class="fu">:</span> <span class="fu">-</span><span class="fl">100.0</span>, translateY<span class="fu">:</span> <span class="fu">-</span><span class="fl">100.0</span> } ctx
+
+      fillPath ctx <span class="fu">$</span> rect ctx
+        { x<span class="fu">:</span> <span class="fl">0.0</span>
+        , y<span class="fu">:</span> <span class="fl">0.0</span>
+        , w<span class="fu">:</span> <span class="fl">200.0</span>
+        , h<span class="fu">:</span> <span class="fl">200.0</span>
+        }</code></pre></div>
 <p>このアクションでは元の変換を維持するために <code>withContext</code>を使用しており、それから続く変換を順に適用しています(変換が下から上に適用されることを思い出してください)。</p>
 <ul>
 <li>中心が原点に来るように、矩形を <code>(-100, -100)</code>平行移動します。</li>
@@ -483,104 +455,104 @@ Control.Monad.Eff.Effect</code></pre>
 <pre class="text"><code>L -&gt; L
 R -&gt; R
 F -&gt; FLFRRFLF</code></pre>
-<p>配列 “FRRFRRFRR” から始めて処理を繰り返すと、次のような経過を辿ります。</p>
+<p>配列 &quot;FRRFRRFRR&quot; から始めて処理を繰り返すと、次のような経過を辿ります。</p>
 <pre class="text"><code>FRRFRRFRR
 FLFRRFLFRRFLFRRFLFRRFLFRRFLFRR
 FLFRRFLFLFLFRRFLFRRFLFRRFLFLFLFRRFLFRRFLFRRFLF...</code></pre>
 <p>この命令群に対応する線分パスをプロットすると、<strong>コッホ曲線</strong>と呼ばれる曲線に近似します。反復回数を増やすと、曲線の解像度が増加していきます。</p>
 <p>それでは型と関数の言語へとこれを翻訳してみましょう。</p>
 <p>アルファベットの選択肢は型の選択肢によって表すことができます。今回の例では、以下のような型で定義することができます。</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Alphabet</span> <span class="fu">=</span> <span class="dt">L</span> <span class="fu">|</span> <span class="dt">R</span> <span class="fu">|</span> <span class="dt">F</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Alphabet</span> <span class="fu">=</span> <span class="dt">L</span> <span class="fu">|</span> <span class="dt">R</span> <span class="fu">|</span> <span class="dt">F</span></code></pre></div>
 <p>このデータ型では、アルファベットの文字ごとに１つづつデータ構築子が定義されています。</p>
 <p>文字の初期配列はどのように表したらいいでしょうか。単なるアルファベットの配列でいいでしょう。これを <code>Sentence</code>と呼ぶことにします。</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">type</span> <span class="dt">Sentence</span> <span class="fu">=</span> <span class="dt">Array</span> <span class="dt">Alphabet</span></a>
-<a class="sourceLine" id="cb36-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb36-3" data-line-number="3"><span class="ot">initial ::</span> <span class="dt">Sentence</span></a>
-<a class="sourceLine" id="cb36-4" data-line-number="4">initial <span class="fu">=</span> [<span class="dt">F</span>, <span class="dt">R</span>, <span class="dt">R</span>, <span class="dt">F</span>, <span class="dt">R</span>, <span class="dt">R</span>, <span class="dt">F</span>, <span class="dt">R</span>, <span class="dt">R</span>]</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Sentence</span> <span class="fu">=</span> <span class="dt">Array</span> <span class="dt">Alphabet</span>
+
+<span class="ot">initial ::</span> <span class="dt">Sentence</span>
+initial <span class="fu">=</span> [<span class="dt">F</span>, <span class="dt">R</span>, <span class="dt">R</span>, <span class="dt">F</span>, <span class="dt">R</span>, <span class="dt">R</span>, <span class="dt">F</span>, <span class="dt">R</span>, <span class="dt">R</span>]</code></pre></div>
 <p>生成規則は <code>Alphabet</code>から <code>Sentence</code>への関数として表すことができます。</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="ot">productions ::</span> <span class="dt">Alphabet</span> <span class="ot">-&gt;</span> <span class="dt">Sentence</span></a>
-<a class="sourceLine" id="cb37-2" data-line-number="2">productions <span class="dt">L</span> <span class="fu">=</span> [<span class="dt">L</span>]</a>
-<a class="sourceLine" id="cb37-3" data-line-number="3">productions <span class="dt">R</span> <span class="fu">=</span> [<span class="dt">R</span>]</a>
-<a class="sourceLine" id="cb37-4" data-line-number="4">productions <span class="dt">F</span> <span class="fu">=</span> [<span class="dt">F</span>, <span class="dt">L</span>, <span class="dt">F</span>, <span class="dt">R</span>, <span class="dt">R</span>, <span class="dt">F</span>, <span class="dt">L</span>, <span class="dt">F</span>]</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">productions ::</span> <span class="dt">Alphabet</span> <span class="ot">-&gt;</span> <span class="dt">Sentence</span>
+productions <span class="dt">L</span> <span class="fu">=</span> [<span class="dt">L</span>]
+productions <span class="dt">R</span> <span class="fu">=</span> [<span class="dt">R</span>]
+productions <span class="dt">F</span> <span class="fu">=</span> [<span class="dt">F</span>, <span class="dt">L</span>, <span class="dt">F</span>, <span class="dt">R</span>, <span class="dt">R</span>, <span class="dt">F</span>, <span class="dt">L</span>, <span class="dt">F</span>]</code></pre></div>
 <p>これはまさに上記の仕様をそのまま書き写したものです。</p>
 <p>これで、この形式の仕様を受け取りキャンバスに描画する関数 <code>lsystem</code>を実装することができます。 <code>lsystem</code>はどのような型を持っているべきでしょうか。この関数は初期状態 <code>initial</code>と生成規則 <code>productions</code>のような値だけでなく、アルファベットの文字をキャンバスに描画する関数を引数に取る必要があります。</p>
 <p><code>lsystem</code>の型の最初の大まかな設計としては、次のようになるかもしれません。</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb38-1" data-line-number="1">forall eff<span class="fu">.</span> <span class="dt">Sentence</span></a>
-<a class="sourceLine" id="cb38-2" data-line-number="2">         <span class="ot">-&gt;</span> (<span class="dt">Alphabet</span> <span class="ot">-&gt;</span> <span class="dt">Sentence</span>)</a>
-<a class="sourceLine" id="cb38-3" data-line-number="3">         <span class="ot">-&gt;</span> (<span class="dt">Alphabet</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)</a>
-<a class="sourceLine" id="cb38-4" data-line-number="4">         <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb38-5" data-line-number="5">         <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Unit</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">forall eff<span class="fu">.</span> <span class="dt">Sentence</span>
+         <span class="ot">-&gt;</span> (<span class="dt">Alphabet</span> <span class="ot">-&gt;</span> <span class="dt">Sentence</span>)
+         <span class="ot">-&gt;</span> (<span class="dt">Alphabet</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)
+         <span class="ot">-&gt;</span> <span class="dt">Int</span>
+         <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Unit</span></code></pre></div>
 <p>最初の2つの引数の型は、値 <code>initial</code>と <code>productions</code>に対応しています。</p>
 <p>3番目の引数は、アルファベットの文字を取り、キャンバス上のいくつかのアクションを実行することによって<strong>翻訳</strong>する関数を表します。この例では、文字 <code>L</code>は左回転、文字 <code>R</code>で右回転、文字 <code>F</code>は前進を意味します。</p>
 <p>最後の引数は、実行したい生成規則の繰り返し回数を表す数です。</p>
 <p>最初に気づくことは、現在の <code>lsystem</code>関数は <code>Alphabet</code>型だけで機能しますが、どんなアルファベットについても機能すべきですから、この型はもっと一般化されるべきです。それでは、量子化された型変数 <code>a</code>について、 <code>Alphabet</code>と <code>Sentence</code>を <code>a</code>と <code>Array a</code>で置き換えましょう。</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb39-1" data-line-number="1">forall a eff<span class="fu">.</span> <span class="dt">Array</span> a</a>
-<a class="sourceLine" id="cb39-2" data-line-number="2">           <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> <span class="dt">Array</span> a)</a>
-<a class="sourceLine" id="cb39-3" data-line-number="3">           <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)</a>
-<a class="sourceLine" id="cb39-4" data-line-number="4">           <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb39-5" data-line-number="5">           <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Unit</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">forall a eff<span class="fu">.</span> <span class="dt">Array</span> a
+           <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> <span class="dt">Array</span> a)
+           <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)
+           <span class="ot">-&gt;</span> <span class="dt">Int</span>
+           <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) <span class="dt">Unit</span></code></pre></div>
 <p>次に気付くこととしては、「左回転」と「右回転」のような命令を実装するためには、いくつかの状態を管理する必要があります。具体的に言えば、その時点でパスが向いている方向を状態として持たなければなりません。計算を通じて状態を関数に渡すように変更する必要があります。ここでも <code>lsystem</code>関数は状態がどんな型でも動作しなければなりませんから、型変数 <code>s</code>を使用してそれを表しています。</p>
 <p>型 <code>s</code>を追加する必要があるのは3箇所で、次のようになります。</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb40-1" data-line-number="1">forall a s eff<span class="fu">.</span> <span class="dt">Array</span> a</a>
-<a class="sourceLine" id="cb40-2" data-line-number="2">             <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> <span class="dt">Array</span> a)</a>
-<a class="sourceLine" id="cb40-3" data-line-number="3">             <span class="ot">-&gt;</span> (s <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) s)</a>
-<a class="sourceLine" id="cb40-4" data-line-number="4">             <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb40-5" data-line-number="5">             <span class="ot">-&gt;</span> s</a>
-<a class="sourceLine" id="cb40-6" data-line-number="6">             <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) s</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">forall a s eff<span class="fu">.</span> <span class="dt">Array</span> a
+             <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> <span class="dt">Array</span> a)
+             <span class="ot">-&gt;</span> (s <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) s)
+             <span class="ot">-&gt;</span> <span class="dt">Int</span>
+             <span class="ot">-&gt;</span> s
+             <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) s</code></pre></div>
 <p>まず追加の引数の型として <code>lsystem</code>に型 <code>s</code>が追加されています。この引数はL-Systemの初期状態を表しています。</p>
 <p>型 <code>s</code>は引数にも現れますが、翻訳関数(<code>lsystem</code>の第3引数)の返り値の型としても現れます。翻訳関数は今のところ、引数としてL-Systemの現在の状態を受け取り、返り値として更新された新しい状態を返します。</p>
 <p>この例の場合では、次のような型を使って状態を表す型を定義することができます。</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">type</span> <span class="dt">State</span> <span class="fu">=</span></a>
-<a class="sourceLine" id="cb41-2" data-line-number="2">  {<span class="ot"> x ::</span> <span class="dt">Number</span></a>
-<a class="sourceLine" id="cb41-3" data-line-number="3">  ,<span class="ot"> y ::</span> <span class="dt">Number</span></a>
-<a class="sourceLine" id="cb41-4" data-line-number="4">  ,<span class="ot"> theta ::</span> <span class="dt">Number</span></a>
-<a class="sourceLine" id="cb41-5" data-line-number="5">  }</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">State</span> <span class="fu">=</span>
+  {<span class="ot"> x ::</span> <span class="dt">Number</span>
+  ,<span class="ot"> y ::</span> <span class="dt">Number</span>
+  ,<span class="ot"> theta ::</span> <span class="dt">Number</span>
+  }</code></pre></div>
 <p>プロパティ <code>x</code>と <code>y</code>はパスの現在の位置を表しており、プロパティ <code>theta</code>は現在の向きを表しており、ラジアンで表された水平線に対するパスの角度です。</p>
 <p>システムの初期状態としては次のようなものが考えられます。</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="ot">initialState ::</span> <span class="dt">State</span></a>
-<a class="sourceLine" id="cb42-2" data-line-number="2">initialState <span class="fu">=</span> { x<span class="fu">:</span> <span class="fl">120.0</span>, y<span class="fu">:</span> <span class="fl">200.0</span>, theta<span class="fu">:</span> <span class="fl">0.0</span> }</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">initialState ::</span> <span class="dt">State</span>
+initialState <span class="fu">=</span> { x<span class="fu">:</span> <span class="fl">120.0</span>, y<span class="fu">:</span> <span class="fl">200.0</span>, theta<span class="fu">:</span> <span class="fl">0.0</span> }</code></pre></div>
 <p>それでは、 <code>lsystem</code>関数を実装してみます。定義はとても単純であることがわかるでしょう。</p>
 <p><code>lsystem</code>は第４引数の値(型 <code>Number</code>)に応じて再帰するのが良さそうです。再帰の各ステップでは、生成規則に従って状態が更新され、現在の文が変化していきます。このことを念頭に置きつつ、まずは関数の引数の名前を導入して、補助関数に処理を移譲することから始めましょう。</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="ot">lsystem ::</span> forall a s eff<span class="fu">.</span> <span class="dt">Array</span> a</a>
-<a class="sourceLine" id="cb43-2" data-line-number="2">        <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> <span class="dt">Array</span> a)</a>
-<a class="sourceLine" id="cb43-3" data-line-number="3">        <span class="ot">-&gt;</span> (s <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) s)</a>
-<a class="sourceLine" id="cb43-4" data-line-number="4">        <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb43-5" data-line-number="5">        <span class="ot">-&gt;</span> s</a>
-<a class="sourceLine" id="cb43-6" data-line-number="6">        <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) s</a>
-<a class="sourceLine" id="cb43-7" data-line-number="7">lsystem init prod interpret n state <span class="fu">=</span> go init n</a>
-<a class="sourceLine" id="cb43-8" data-line-number="8">  <span class="kw">where</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">lsystem ::</span> forall a s eff<span class="fu">.</span> <span class="dt">Array</span> a
+        <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> <span class="dt">Array</span> a)
+        <span class="ot">-&gt;</span> (s <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) s)
+        <span class="ot">-&gt;</span> <span class="dt">Int</span>
+        <span class="ot">-&gt;</span> s
+        <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span> <span class="fu">|</span> eff) s
+lsystem init prod interpret n state <span class="fu">=</span> go init n
+  <span class="kw">where</span></code></pre></div>
 <p><code>go</code>関数は第2引数に応じて再帰することで動きます。 <code>n</code>がゼロであるときと <code>n</code>がゼロでないときの2つの場合で分岐します。</p>
 <p><code>n</code>がゼロの場合では再帰は完了し、解釈関数に応じて現在の文を解釈します。ここでは引数として与えられている型 <code>Array a</code>の文、型 <code>s</code>の状態、型 <code>s -&gt; a -&gt; Eff (canvas :: Canvas | eff) s</code>の関数を参照することができます。これらの引数の型を考えると、以前定義した <code>foldM</code>の呼び出しにちょうど対応していることがわかります。 <code>foldM</code>は <code>purescript-control</code>パッケージでも定義されています。</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb44-1" data-line-number="1">  go s <span class="dv">0</span> <span class="fu">=</span> foldM interpret state s</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  go s <span class="dv">0</span> <span class="fu">=</span> foldM interpret state s</code></pre></div>
 <p>ゼロでない場合ではどうでしょうか。その場合は、単に生成規則を現在の文のそれぞれの文字に適用して、その結果を連結し、そしてこの処理を再帰します。</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb45-1" data-line-number="1">  go s n <span class="fu">=</span> go (concatMap prod s) (n <span class="fu">-</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  go s n <span class="fu">=</span> go (concatMap prod s) (n <span class="fu">-</span> <span class="dv">1</span>)</code></pre></div>
 <p>これだけです！<code>foldM</code>や <code>concatMap</code>のような高階関数を使うと、このようにアイデアを簡潔に表現することができるのです。</p>
 <p>しかし、まだ完全に終わったわけではありません。ここで与えた型は、実際はまだ特殊化されすぎています。この定義ではキャンバスの操作が実装のどこにも使われていないことに注目してください。それに、まったく <code>Eff</code>モナドの構造を利用していません。実際には、この関数は<strong>どんな</strong>モナド <code>m</code>についても動作するのです！</p>
 <p>この章に添付されたソースコードで定義されている、 <code>lsystem</code>のもっと一般的な型は次のようになっています。</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="ot">lsystem ::</span> forall a m s <span class="fu">.</span> <span class="dt">Monad</span> m <span class="ot">=&gt;</span></a>
-<a class="sourceLine" id="cb46-2" data-line-number="2">           <span class="dt">Array</span> a</a>
-<a class="sourceLine" id="cb46-3" data-line-number="3">        <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> <span class="dt">Array</span> a)</a>
-<a class="sourceLine" id="cb46-4" data-line-number="4">        <span class="ot">-&gt;</span> (s <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> m s)</a>
-<a class="sourceLine" id="cb46-5" data-line-number="5">        <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
-<a class="sourceLine" id="cb46-6" data-line-number="6">        <span class="ot">-&gt;</span> s</a>
-<a class="sourceLine" id="cb46-7" data-line-number="7">        <span class="ot">-&gt;</span> m s</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">lsystem ::</span> forall a m s <span class="fu">.</span> <span class="dt">Monad</span> m <span class="ot">=&gt;</span>
+           <span class="dt">Array</span> a
+        <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> <span class="dt">Array</span> a)
+        <span class="ot">-&gt;</span> (s <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> m s)
+        <span class="ot">-&gt;</span> <span class="dt">Int</span>
+        <span class="ot">-&gt;</span> s
+        <span class="ot">-&gt;</span> m s</code></pre></div>
 <p>この型が言っているのは、この翻訳関数はモナド <code>m</code>で追跡される任意の副作用をまったく自由に持つことができる、ということだと理解することができます。キャンバスに描画したり、またはコンソールに情報を出力するかもしれませんし、失敗や複数の戻り値に対応しているかもしれません。こういった様々な型の副作用を使ったL-Systemを記述してみることを読者にお勧めします。</p>
 <p>この関数は実装からデータを分離することの威力を示す良い例となっています。この手法の利点は、複数の異なる方法でデータを解釈する自由が得られることです。 <code>lsystem</code>は２つの小さな関数へと分解することができるかもしれません。ひとつめは <code>concatMap</code>の適用の繰り返しを使って文を構築するもので、ふたつめは <code>foldM</code>を使って文を翻訳するものです。これは読者の演習として残しておきます。</p>
 <p>それでは翻訳関数を実装して、この章の例を完成させましょう​​。 <code>lsystem</code>の型は型シグネチャが言っているのは、翻訳関数の型は、何らかの型 <code>a</code>と <code>s</code>、型構築子 <code>m</code>について、 <code>s -&gt; a -&gt; m s</code>でなければならないということです。今回は <code>a</code>を <code>Alphabet</code>、 <code>s</code>を <code>State</code>、モナド <code>m</code>を <code>Eff (canvas :: Canvas)</code>というように選びたいということがわかっています。これにより次のような型になります。</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="ot">interpret ::</span> <span class="dt">State</span> <span class="ot">-&gt;</span> <span class="dt">Alphabet</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span>) <span class="dt">State</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">interpret ::</span> <span class="dt">State</span> <span class="ot">-&gt;</span> <span class="dt">Alphabet</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">canvas ::</span> <span class="dt">Canvas</span>) <span class="dt">State</span></code></pre></div>
 <p>この関数を実装するには、 <code>Alphabet</code>型の3つのデータ構築子それぞれについて処理する必要があります。文字 <code>L</code>(左回転)と <code>R</code>(右回転)の解釈では、 <code>theta</code>を適切な角度へ変更するように状態を更新するだけです。</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb48-1" data-line-number="1">interpret state <span class="dt">L</span> <span class="fu">=</span> pure <span class="fu">$</span> state { theta <span class="fu">=</span> state<span class="fu">.</span>theta <span class="fu">-</span> Math.pi <span class="fu">/</span> <span class="dv">3</span> }</a>
-<a class="sourceLine" id="cb48-2" data-line-number="2">interpret state <span class="dt">R</span> <span class="fu">=</span> pure <span class="fu">$</span> state { theta <span class="fu">=</span> state<span class="fu">.</span>theta <span class="fu">+</span> Math.pi <span class="fu">/</span> <span class="dv">3</span> }</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">interpret state <span class="dt">L</span> <span class="fu">=</span> pure <span class="fu">$</span> state { theta <span class="fu">=</span> state<span class="fu">.</span>theta <span class="fu">-</span> Math.pi <span class="fu">/</span> <span class="dv">3</span> }
+interpret state <span class="dt">R</span> <span class="fu">=</span> pure <span class="fu">$</span> state { theta <span class="fu">=</span> state<span class="fu">.</span>theta <span class="fu">+</span> Math.pi <span class="fu">/</span> <span class="dv">3</span> }</code></pre></div>
 <p>文字 <code>F</code>(前進)を解釈するには、パスの新しい位置を計算し、線分を描画し、状態を次のように更新します。</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb49-1" data-line-number="1">interpret state <span class="dt">F</span> <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb49-2" data-line-number="2">  <span class="kw">let</span> x <span class="fu">=</span> state<span class="fu">.</span>x <span class="fu">+</span> Math.cos state<span class="fu">.</span>theta <span class="fu">*</span> <span class="fl">1.5</span></a>
-<a class="sourceLine" id="cb49-3" data-line-number="3">      y <span class="fu">=</span> state<span class="fu">.</span>y <span class="fu">+</span> Math.sin state<span class="fu">.</span>theta <span class="fu">*</span> <span class="fl">1.5</span></a>
-<a class="sourceLine" id="cb49-4" data-line-number="4">  moveTo ctx state<span class="fu">.</span>x state<span class="fu">.</span>y</a>
-<a class="sourceLine" id="cb49-5" data-line-number="5">  lineTo ctx x y</a>
-<a class="sourceLine" id="cb49-6" data-line-number="6">  pure { x, y, theta<span class="fu">:</span> state<span class="fu">.</span>theta }</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">interpret state <span class="dt">F</span> <span class="fu">=</span> <span class="kw">do</span>
+  <span class="kw">let</span> x <span class="fu">=</span> state<span class="fu">.</span>x <span class="fu">+</span> Math.cos state<span class="fu">.</span>theta <span class="fu">*</span> <span class="fl">1.5</span>
+      y <span class="fu">=</span> state<span class="fu">.</span>y <span class="fu">+</span> Math.sin state<span class="fu">.</span>theta <span class="fu">*</span> <span class="fl">1.5</span>
+  moveTo ctx state<span class="fu">.</span>x state<span class="fu">.</span>y
+  lineTo ctx x y
+  pure { x, y, theta<span class="fu">:</span> state<span class="fu">.</span>theta }</code></pre></div>
 <p>この章のソースコードでは、名前 <code>ctx</code>を参照できるようにするために、 <code>interpret</code>関数は <code>main</code>関数内で <code>let</code>束縛を使用して定義されていることに注意してください。 <code>State</code>型がコンテキストを持つように変更することは可能でしょうが、それはこのシステムの状態の変化部分ではないので不適切でしょう。</p>
 <p>このL-Systemsを描画するには、次のような <code>strokePath</code>アクションを使用するだけです。</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb50-1" data-line-number="1">strokePath ctx <span class="fu">$</span> lsystem initial productions interpret <span class="dv">5</span> initialState</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">strokePath ctx <span class="fu">$</span> lsystem initial productions interpret <span class="dv">5</span> initialState</code></pre></div>
 <p>L-Systemをコンパイルし、</p>
 <pre class="text"><code>$ pulp build -O --main Example.LSystem --to dist/Main.js</code></pre>
 <p><code>html/index.html</code>を開いてみましょう。キャンバスにコッホ曲線が描画されるのがわかると思います。</p>
@@ -592,9 +564,9 @@ FLFRRFLFLFLFRRFLFRRFLFRRFLFLFLFRRFLFRRFLFRRFLF...</code></pre>
 <li><p>(やや難しい)<code>lsystem</code>関数を2つの小さな関数に分割してください。ひとつめは <code>concatMap</code>の適用の繰り返しを使用して最終的な結果を構築するもので、ふたつめは <code>foldM</code>を使用して結果を解釈するものでなくてはなりません。</p></li>
 <li><p>(やや難しい)<code>setShadowOffsetX</code>アクション、 <code>setShadowOffsetY</code>アクション、 <code>setShadowBlur</code>アクション、 <code>setShadowColor</code>アクションを使い、塗りつぶされた図形にドロップシャドウを追加してください。<strong>ヒント</strong>：<code>PSCi</code>を使って、これらの関数の型を調べてみましょう。</p></li>
 <li><p>(やや難しい) 向きを変えるときの角度の大きさは今のところ一定(<code>pi/3</code>)です。その代わりに、 <code>Alphabet</code>データ型の中に角度の大きさを追加して、生成規則によって角度を変更できるようにしてください。</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw">type</span> <span class="dt">Angle</span> <span class="fu">=</span> <span class="dt">Number</span></a>
-<a class="sourceLine" id="cb52-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb52-3" data-line-number="3"><span class="kw">data</span> <span class="dt">Alphabet</span> <span class="fu">=</span> <span class="dt">L</span> <span class="dt">Angle</span> <span class="fu">|</span> <span class="dt">R</span> <span class="dt">Angle</span> <span class="fu">|</span> <span class="dt">F</span> <span class="dt">Angle</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Angle</span> <span class="fu">=</span> <span class="dt">Number</span>
+
+<span class="kw">data</span> <span class="dt">Alphabet</span> <span class="fu">=</span> <span class="dt">L</span> <span class="dt">Angle</span> <span class="fu">|</span> <span class="dt">R</span> <span class="dt">Angle</span> <span class="fu">|</span> <span class="dt">F</span> <span class="dt">Angle</span></code></pre></div>
 生成規則でこの新しい情報を使うと、どんな面白い図形を作ることができるでしょうか。 　</li>
 <li><p>(難しい)<code>L</code>(60度左回転 )、 <code>R</code>(60度右回転)、 <code>F</code>(前進)、 <code>M</code>(これも前進)という４つの文字からなるアルファベットでL-Systemが与えられたとします。</p>
 <p>このシステムの文の初期状態は、単一の文字 <code>M</code>です。</p>
@@ -605,7 +577,7 @@ F -&gt; FLMLFRMRFRMRFLMLF
 M -&gt; MRFRMLFLMLFLMRFRM</code></pre>
 <p>このL-Systemを描画してください。<strong>注意</strong>：最後の文のサイズは反復回数に従って指数関数的に増大するので、生成規則の繰り返しの回数を削減することが必要になります。</p>
 <p>ここで、生成規則における <code>L</code>と <code>M</code>の間の対称性に注目してください。ふたつの「前進」命令は、次のようなアルファベット型を使用すると、 <code>Boolean</code>値を使って区別することができます。</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Alphabet</span> <span class="fu">=</span> <span class="dt">L</span> <span class="fu">|</span> <span class="dt">R</span> <span class="fu">|</span> <span class="dt">F</span> <span class="dt">Boolean</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Alphabet</span> <span class="fu">=</span> <span class="dt">L</span> <span class="fu">|</span> <span class="dt">R</span> <span class="fu">|</span> <span class="dt">F</span> <span class="dt">Boolean</span></code></pre></div>
 <p>このアルファベットの表現を使用して、もう一度このL-Systemを実装してください。</p></li>
 <li><p>(難しい) 翻訳関数で別のモナド <code>m</code>を使ってみましょう。 <code>Trace</code>作用を利用してコンソール上にL-Systemを出力したり、 <code>Random</code>作用を利用して状態の型に無作為の突然変異を適用したりしてみてください。</p></li>
 </ol>
@@ -613,12 +585,12 @@ M -&gt; MRFRMLFLMLFLMRFRM</code></pre>
 <h2 id="まとめ"><span class="header-section-number">9.10</span> まとめ</h2>
 <p>この章では、 <code>purescript-canvas</code>ライブラリを使用することにより、PureScriptからHTML5 Canvas APIを使う方法について学びました。マップや畳み込み、レコードと行多型、副作用を扱うための <code>Eff</code>モナドなど、これまで学んできた手法を利用した実用的な例について多く見ました。</p>
 <p>この章の例では、高階関数の威力を示すとともに、<strong>実装からデータを分離</strong>も実演しました。これは例えば、代数データ型を使用すると、これらの概念を次のように拡張し、描画関数からシーンの表現を完全に分離できるようになります。</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Scene</span> <span class="fu">=</span> <span class="dt">Rect</span> <span class="dt">Rectangle</span></a>
-<a class="sourceLine" id="cb55-2" data-line-number="2">           <span class="fu">|</span> <span class="dt">Arc</span> <span class="dt">Arc</span></a>
-<a class="sourceLine" id="cb55-3" data-line-number="3">           <span class="fu">|</span> <span class="dt">PiecewiseLinear</span> (<span class="dt">Array</span> <span class="dt">Point</span>)</a>
-<a class="sourceLine" id="cb55-4" data-line-number="4">           <span class="fu">|</span> <span class="dt">Transformed</span> <span class="dt">Transform</span> <span class="dt">Scene</span></a>
-<a class="sourceLine" id="cb55-5" data-line-number="5">           <span class="fu">|</span> <span class="dt">Clipped</span> <span class="dt">Rectangle</span> <span class="dt">Scene</span></a>
-<a class="sourceLine" id="cb55-6" data-line-number="6">           <span class="fu">|</span> <span class="fu">...</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Scene</span> <span class="fu">=</span> <span class="dt">Rect</span> <span class="dt">Rectangle</span>
+           <span class="fu">|</span> <span class="dt">Arc</span> <span class="dt">Arc</span>
+           <span class="fu">|</span> <span class="dt">PiecewiseLinear</span> (<span class="dt">Array</span> <span class="dt">Point</span>)
+           <span class="fu">|</span> <span class="dt">Transformed</span> <span class="dt">Transform</span> <span class="dt">Scene</span>
+           <span class="fu">|</span> <span class="dt">Clipped</span> <span class="dt">Rectangle</span> <span class="dt">Scene</span>
+           <span class="fu">|</span> <span class="fu">...</span></code></pre></div>
 <p>この手法は <code>purescript-drawing</code>パッケージでも採用されており、描画前にさまざまな方法でデータとしてシーンを操作することができるという柔軟性をもたらしています。</p>
 <p>次の章では、PureScriptの<strong>外部関数インタフェース</strong>(foreign function interface)を使って、既存のJavaScriptの関数をラップした <code>purescript-canvas</code>のようなライブラリを実装する方法について説明します。</p>
       <p class="previous" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
