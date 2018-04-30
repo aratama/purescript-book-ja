@@ -1,11 +1,3 @@
-
-# 【注意】
-
-**PureScript 0.7で言語仕様が大幅に変更されたため、
-最新版のコンパイラでは本書のサンプルコードの多くがそのままではコンパイルできなくなっていることに注意してください。
-バージョン0.7での変更点については[リリースノート](https://github.com/purescript/purescript/releases/tag/v0.7.0)を参照してください。
-原書もいずれ最新の言語仕様に合わせて修正されるようですが、それに合わせてこの邦訳も修正する予定です。(訳者)**
-
 ## 目次
 
 <div class="columns2">
@@ -35,7 +27,7 @@
 - [単一HTMLページ版](purescript-book-ja.html)
 - [PDF版](purescript-book-ja.pdf)
 - [EPUB版](purescript-book-ja.epub)
-
+- [原書GitHub](https://github.com/paf31/purescript-book)
 
 </div>
 
@@ -46,7 +38,7 @@ This book is licensed under the [Creative Commons Attribution-NonCommercial-Shar
 本書は[クリエイティブコモンズ 表示 - 非営利 - 継承 3.0 非移植ライセンス](http://creativecommons.org/licenses/by-nc-sa/3.0/deed.ja)でライセンスされています。
 
 ## 更新履歴
-
+* 2018/04/28 バージョン0.11での変更に合わせ修正
 * 2015/07/01 バージョン0.7での変更についての注意書きの追加 
 * 2015/04/09 公開
 
