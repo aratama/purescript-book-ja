@@ -666,7 +666,7 @@ showAddress addr <span class="fu">=</span> addr<span class="fu">.</span>street <
 <pre class="text"><code>&gt; showAddress address
 
 &quot;123 Fake St., Faketown, CA&quot;</code></pre>
-<p>そして、例で作成した <code>address</code>を含む住所簿の <code>entry</code>レコードを作成し <code>showEntry</code>に適用させましょう。</p>
+<p>そして、例で作成した <code>address</code>を含む住所録の <code>entry</code>レコードを作成し <code>showEntry</code>に適用させましょう。</p>
 <pre class="text"><code>&gt; entry = { firstName: &quot;John&quot;, lastName: &quot;Smith&quot;, address: address }
 &gt; showEntry entry
 
@@ -722,7 +722,7 @@ insertEntry entry <span class="fu">=</span> <span class="dt">Cons</span> entry</
 insertEntry <span class="fu">=</span> <span class="dt">Cons</span></code></pre></div>
 <p>この処理は<strong>イータ変換</strong>(eta conversion)と呼ばれ、引数を参照することなく関数を定義する<strong>ポイントフリー形式</strong>(point-free form)へと関数を書き換えるのに使うことができます。</p>
 <p><code>insertEntry</code>の場合には、イータ変換によって「 <code>insertEntry</code>は単にリストに対する <code>cons</code>だ」と関数の定義はとても明確になりました。しかしながら、常にポイントフリー形式のほうがいいのかどうかには議論の余地があります。</p>
-<h2 id="あなたの住所簿は">あなたの住所簿は？</h2>
+<h2 id="あなたの住所録は">あなたの住所録は？</h2>
 <p>最小限の住所録アプリケーションの実装で必要になる最後の関数は、名前で人を検索し適切な <code>Entry</code>を返すものです。これは小さな関数を組み合わせることでプログラムを構築するという、関数型プログラミングで鍵となる考え方のよい応用例になるでしょう。</p>
 <p>まずは住所録をフィルタリングし、該当する姓名を持つ項目だけを保持するようにするのがいいでしょう。それから、結果のリストの先頭の(head)要素を返すだけです。</p>
 <p>この大まかな仕様に従って、この関数の型を計算することができます。まず <code>PSCi</code>を起動し、 <code>filter</code>関数と <code>head</code>関数の型を見てみましょう。</p>
@@ -815,7 +815,7 @@ Nothing</code></pre>
 <p>もっと使いやすくするために、 <code>Entry</code>を文字列として出力するような関数を定義し、毎回 <code>showEntry</code>を使わなくてもいいようにすることもできます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">printEntry firstName lastName book
   <span class="fu">=</span> map showEntry (findEntry firstName lastName book)</code></pre></div>
-<p>それでは空でない住所簿を作成してもう一度試してみましょう。先ほどの項目の例を再利用します。</p>
+<p>それでは空でない住所録を作成してもう一度試してみましょう。先ほどの項目の例を再利用します。</p>
 <pre class="text"><code>&gt; book1 = insertEntry entry emptyBook
 
 &gt; printEntry &quot;John&quot; &quot;Smith&quot; book1
@@ -827,8 +827,8 @@ Just (&quot;Smith, John: 123 Fake St., Faketown, CA&quot;)</code></pre>
 <ol type="1">
 <li><p>（簡単） <code>findEntry</code>関数の定義の主な部分式の型を書き下し、 <code>findEntry</code>関数についてよく理解しているか試してみましょう。たとえば、 <code>findEntry</code>の定義のなかにある <code>head</code>関数の型は <code>AddressBook -&gt; Maybe Entry</code>と特殊化されています。</p></li>
 <li><p>（簡単） <code>findEntry</code>の既存のコードを再利用し、与えられた電話番号から <code>Entry</code>を検索する関数を書いてみましょう。また、 <code>PSCi</code>で実装した関数をテストしてみましょう。</p></li>
-<li><p>（やや難しい） 指定された名前が <code>AddressBook</code>に存在するかどうかを調べて真偽値で返す関数を書いてみましょう。<strong>ヒント</strong>：リストが空かどうかを調べる <code>Data.List.null</code>関数の型を <code>psci</code>で調べてみてみましょう。</p></li>
-<li><p>（難しい） 姓名が重複している項目を住所録から削除する関数 <code>removeDuplicates</code>を書いてみましょう。<strong>ヒント</strong>：値どうしの等価性を定義する述語関数に基づいてリストから重複要素を削除する関数 <code>List.nubBy</code>の型を、 <code>psci</code>を使用して調べてみましょう。</p></li>
+<li><p>（やや難しい） 指定された名前が <code>AddressBook</code>に存在するかどうかを調べて真偽値で返す関数を書いてみましょう。 (<strong>ヒント</strong>：リストが空かどうかを調べる <code>Data.List.null</code>関数の型を <code>psci</code>で調べてみてみましょう)</p></li>
+<li><p>（難しい） 姓名が重複している項目を住所録から削除する関数 <code>removeDuplicates</code>を書いてみましょう。 (<strong>ヒント</strong>：値どうしの等価性を定義する述語関数に基づいてリストから重複要素を削除する関数 <code>List.nubBy</code>の型を、 <code>psci</code>を使用して調べてみましょう)</p></li>
 </ol>
 </blockquote>
 <h2 id="まとめ-1">まとめ</h2>
@@ -845,9 +845,9 @@ Just (&quot;Smith, John: 123 Fake St., Faketown, CA&quot;)</code></pre>
 <p>次の章からは、これらの考えかたに基づいて進めていきます。</p>
 <h1 id="再帰マップ畳み込み">再帰、マップ、畳み込み</h1>
 <h2 id="この章の目標-2">この章の目標</h2>
-<p>この章では再帰関数を使ってどのようにアルゴリズムを構造化するかについて見ていきましょう。再帰はこの本を通じて使用する関数型プログラミングの基本的な手法です。</p>
-<p>また、PureScriptの標準ライブラリから標準的な関数をいくつか扱います。 <code>map</code>や <code>fold</code>のような関数だけでなく、 <code>filter</code>や <code>concatMap</code>といった便利で特殊なものについても見ていきます。</p>
-<p>この章では仮想的なファイルシステムを操作する関数のライブラリを動機付けに用います。この章で学ぶ手法を応用して、模擬的なファイルシステムによって表されるファイルのプロパティを計算する関数を記述します。</p>
+<p>この章では、再帰関数を使ってどのようにアルゴリズムを構造化するかについて見ていきましょう。再帰はこの本を通じて使用する、関数型プログラミングの基本的な手法です。</p>
+<p>また、PureScriptの標準ライブラリから標準的な関数をいくつか取り扱います。 <code>map</code>や <code>fold</code>のようなよく知られた関数だけでなく、 <code>filter</code>や <code>concatMap</code>といった珍しいけれど便利なものについても見ていきます。</p>
+<p>この章では、仮想的なファイルシステムを操作する関数のライブラリを動機付けに用います。この章で学ぶ手法を応用して、擬似的なファイルシステムによって表されるファイルのプロパティを計算する関数を記述します。</p>
 <h2 id="プロジェクトの準備-1">プロジェクトの準備</h2>
 <p>この章のソースコードには、 <code>src/Data/Path.purs</code>と <code>src/FileOperations.purs</code>という２つのファイルが含まれています。</p>
 <p><code>Data.Path</code>モジュールには、仮想ファイルシステムが含まれています。このモジュールの内容を変更する必要はありません。</p>
@@ -923,9 +923,9 @@ length arr <span class="fu">=</span>
 <p>それでは <code>map</code>の型を見てみましょう。</p>
 <pre class="text"><code>&gt; :type map
 forall a b f. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b</code></pre>
-<p>実際には <code>map</code>の型は、２つの型を選択し汎用的に使用することができます。例えば、型を選択して <code>map</code>を以下のように扱うことができます。</p>
+<p>実は<code>map</code>の型は、この章で必要とされているものよりも一般的な型になっています。今回の目的では、次のようなもっと具体的な型であるかのように、<code>map</code>を扱うことができます。</p>
 <pre class="text"><code>forall a b. (a -&gt; b) -&gt; Array a -&gt; Array b</code></pre>
-<p><code>map</code>関数に適用するときには <code>a</code>と <code>b</code>という２つの型を自由に選ぶことができると、この型は示しています。 <code>a</code>は元の配列の要素の型で、 <code>b</code>は目的の配列の要素の型です。もっと言えば、 <code>map</code>が配列要素の型を変化させても構わないということです。例えば、数値を文字列に変換するのにマップを使用することができます。</p>
+<p><code>map</code>関数に適用するときには <code>a</code>と <code>b</code>という２つの型を自由に選ぶことができると、この型は示しています。 <code>a</code>は元の配列の要素の型で、 <code>b</code>は目的の配列の要素の型です。もっと言えば、 <code>map</code>が配列要素の型を変化させても構わないということです。たとえば、<code>map</code>を使用すると数値を文字列に変換することができます。</p>
 <pre class="text"><code>&gt; show &lt;$&gt; [1, 2, 3, 4, 5]
 
 [&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;]</code></pre>
@@ -942,7 +942,7 @@ forall a b f. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b</code></pre>
 &gt; show &lt;$&gt; (1 .. 5)
 [&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;]</code></pre>
 <p><strong>注意</strong>： 独自の中置演算子は自然な構文を持った領域特化言語を定義するのに優れた手段になりえます。ただし、使用には充分注意してください。初心者が読めないコードになることがありますから、新たな演算子の定義には慎重になるのが賢明です。</p>
-<p>上記の例では、 <code>1 .. 5</code>という式は括弧で囲まれていましたが、実際にはこれは必要ありません。なぜなら、 <code>Data.Array</code>モジュールは、 <code>&lt;$&gt;</code>に割り当てられた優先順位より高い優先順位を <code>..</code>演算子に割り当てているからです。PureScriptでは予約語 <code>infix</code>を使用して後の数字である <code>8</code>として定義されていました。ここでは <code>&lt;$&gt;</code>の優先順位よりも高い優先順位を <code>(..)</code>に割り当てており、これは括弧を付け加える必要がないということです。</p>
+<p>上記の例では、 <code>1 .. 5</code>という式は括弧で囲まれていましたが、実際にはこれは必要ありません。なぜなら、 <code>Data.Array</code>モジュールは、 <code>&lt;$&gt;</code>に割り当てられた優先順位より高い優先順位を <code>..</code>演算子に割り当てているからです。上の例では、<code>..</code>の優先順位は、予約語<code>infix</code>のあとに書かれた数の <code>8</code> と定義されていました。ここでは <code>&lt;$&gt;</code>の優先順位よりも高い優先順位を <code>(..)</code>に割り当てており、このため括弧を付け加える必要がないということです。</p>
 <pre class="text"><code>&gt; show &lt;$&gt; 1 .. 5
   
 [&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;]</code></pre>
@@ -1036,7 +1036,7 @@ factors n <span class="fu">=</span> filter (\xs <span class="ot">-&gt;</span> pr
 <li><code>let</code>キーワードを使用し、式に名前を与える式(ここでは使われていません)。</li>
 </ul>
 <p>この新しい記法を使うとアルゴリズムの構造がわかりやすくなることがあります。心のなかで <code>&lt;-</code>を「選ぶ」という単語に置き換えるとすると、「1からnの間の要素 <code>i</code>を選び、それからiからnの間の要素 <code>j</code>を選び、 <code>[i, j]</code>を返す」というように読むことができるかもしれません。</p>
-<p>最後の行の <code>pure</code>関数は、 <code>PSCi</code>で評価するために型を明示しなければなりません。</p>
+<p>最後の行では、<code>pure</code>関数を使っています。この関数は<code>PSCi</code>で評価することができますが、型を明示する必要があります。</p>
 <pre class="text"><code>&gt; pure [1, 2] :: Array (Array Int)
 [[1, 2]]</code></pre>
 <p>配列の場合、 <code>pure</code>は単に１要素の配列を作成します。実際に、 <code>pure</code>の代わりにこの形式を使うように <code>factors</code>関数を変更することもできます。</p>
@@ -1056,7 +1056,7 @@ factors n <span class="fu">=</span> <span class="kw">do</span>
   j <span class="ot">&lt;-</span> i <span class="fu">..</span> n
   guard <span class="fu">$</span> i <span class="fu">*</span> j <span class="fu">==</span> n
   pure [i, j]</code></pre></div>
-<p><code>pure</code>と同じように、 <code>guard</code>関数がどのように動作するかを理解するために、 <code>PSCi</code>で通常の関数のように <code>guard</code>を適用してみましょう。 <code>guard</code>関数の型は、一般的な型であり <code>guard</code>は予約語<strong>ではありません</strong>.</p>
+<p><code>pure</code>と同じように、<code>guard</code>関数がどのように動作するかを理解するために、<code>PSCi</code>で<code>guard</code>関数を適用してみましょう。 <code>guard</code>関数の型は、ここで必要とされるものよりもっと一般的な型になっています。</p>
 <pre class="text"><code>&gt; import Control.MonadZero
 
 &gt; :type guard
@@ -1276,8 +1276,8 @@ Nothing</code></pre>
 <p><code>Data.Picture</code>モジュールでは、 <code>Global</code>と <code>Math</code>モジュールもインポートするため <code>as</code>キーワードを使用します。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Global</span> <span class="kw">as</span> <span class="dt">Global</span>
 <span class="kw">import </span><span class="dt">Math</span> <span class="kw">as</span> <span class="dt">Math</span></code></pre></div>
-<p>これは型や関数をモジュール内で使用できるようにし、合わせて <code>Global.infinity</code>や <code>Math.max</code>などの修飾名を使用にできるようにします。これは重複したインポートをさけ、使用するモジュールを明確にすることに有効な方法です。</p>
-<p><strong>注意</strong>：同じモジュール名を修飾名に使用する場合には不要な作業です。 <code>import Math as M</code>などの短い名前を使用することが一般的に使用されています。</p>
+<p>これは型や関数をモジュール内で使用できるようにしますが、<code>Global.infinity</code>や<code>Math.max</code>といった<strong>修飾名</strong>でのみ使用にできるようにします。これは重複したインポートをさけ、使用するモジュールを明確にするのに有効な方法です。</p>
+<p><strong>注意</strong>：同じモジュール名を修飾名に使用する場合には不要な作業です。一般的には<code>import Math as M</code>などの短い名前がよく使われています。</p>
 <h2 id="単純なパターン照合">単純なパターン照合</h2>
 <p>それではコード例を見ることから始めましょう。パターン照合を使用して2つの整数の最大公約数を計算する関数は、次のようになります。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">gcd<span class="ot"> ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span>
@@ -1355,9 +1355,9 @@ takeFive _ <span class="fu">=</span> <span class="dv">0</span></code></pre></div
 
 &gt; takeFive []
 0</code></pre>
-<p>配列のリテラルパターンは、固定長の配列と一致させることができますが、PureScriptはこれらの方法で不変な配列を破壊するとパフォーマンスが低下する可能性があるため、不特定の長さの配列を一致させる手段を提供しません。 このようなマッチングをサポートするデータ構造が必要な場合は、 <code>Data.List</code>を使用することをお勧めします。 異なる動作に対して改善された漸近性能を提供する他のデータ構造が存在する。</p>
+<p>配列のリテラルパターンでは固定長の配列と一致させることはできますが、不特定の長さの配列を照合させる手段を提供していません。PureScriptでは、これらの方法で不変な配列を分解すると、パフォーマンスが低下する可能性があるためです。このような照合を提供するデータ構造が必要な場合は、<code>Data.List</code>を使うことをお勧めします。ほかの操作についてより優れた漸近性能を提供するデータ構造も存在します。</p>
 <h2 id="レコードパターンと行多相">レコードパターンと行多相</h2>
-<p><strong>レコードパターン</strong>(Record patterns)は(ご想像のとおり)レコードにマッチします。</p>
+<p><strong>レコードパターン</strong>(Record patterns)は(ご想像のとおり)レコードに照合します。</p>
 <p>レコードパターンはレコードリテラルに見た目が似ていますが、レコードリテラルでラベルと式を<strong>コロン</strong>で区切るのとは異なり、レコードパターンではラベルとパターンを<strong>等号</strong>で区切ります。</p>
 <p>たとえば、次のパターンは <code>first</code>と <code>last</code>と呼ばれるフィールドが含まれた任意のレコードにマッチし、これらのフィールドの値はそれぞれ <code>x</code>と <code>y</code>という名前に束縛されます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">showPerson ::</span> {<span class="ot"> first ::</span> <span class="dt">String</span>,<span class="ot"> last ::</span> <span class="dt">String</span> } <span class="ot">-&gt;</span> <span class="dt">String</span>
@@ -1407,7 +1407,7 @@ sortPair arr <span class="fu">=</span> arr</code></pre></div>
 <ol type="1">
 <li><p>（簡単）レコードパターンを使って、2つの <code>Person</code>レコードが同じ都市にいるか探す関数 <code>sameCity</code>を定義してみましょう。</p></li>
 <li><p>（やや難しい）行多相を考慮すると、 <code>sameCity</code>関数の最も一般的な型は何でしょうか？先ほど定義した <code>livesInLA</code>関数についてはどうでしょうか？</p></li>
-<li><p>（やや難しい）配列リテラルパターンを使って１要素の配列の唯一のメンバーを抽出する関数 <code>fromSingleton</code>を書いてみましょう。１要素だけを持つ配列でない場合、関数は指定されたデフォルト値を返さなければなりません。 <strong>ヒント</strong>: この関数は <code>forall a. a -&gt; Array a -&gt; a</code>.という型を持っていなければなりません。</p></li>
+<li><p>（やや難しい）配列リテラルパターンを使って、１要素の配列の唯一のメンバーを抽出する関数<code>fromSingleton</code>を書いてみましょう。１要素だけを持つ配列でない場合、関数は指定されたデフォルト値を返さなければなりません。この関数は <code>forall a. a -&gt; Array a -&gt; a</code>.という型を持っていなければなりません。</p></li>
 </ol>
 </blockquote>
 <h2 id="case式">Case式</h2>
@@ -1441,25 +1441,25 @@ partialFunction <span class="fu">=</span> unsafePartial \true <span class="ot">-
 Failed pattern match</code></pre>
 <p>どんな入力の組み合わせに対しても値を返すような関数は<strong>全関数</strong>(total function)と呼ばれ、そうでない関数は<strong>部分関数</strong>(partial function)と呼ばれています。</p>
 <p>一般的には、可能な限り全関数として定義したほうが良いと考えられています。もしその関数が正しい入力に対して値を返さないことがあるとわかっているなら、大抵は <code>a</code>に対して型 <code>Maybe a</code>の返り値にし、失敗を示すときには <code>Nothing</code>を使うようにしたほうがよいでしょう。この方法なら、型安全な方法で値の有無を示すことができます。</p>
-<p>PureScriptコンパイラは、不完全なパターンマッチのために関数が全関数ではないことを検出できる場合にエラーを生成します。部分関数が安全である場合、 <code>unsafePartial</code>関数を使ってこれらのエラーを抑制することができます。上記の <code>unsafePartial</code>関数への呼び出しを取り除いた場合、コンパイラは次のエラーを生成します。</p>
+<p>PureScriptコンパイラは、パターンマッチが不完全で関数が全関数ではないことを検出するとエラーを生成します。部分関数が安全である場合、<code>unsafePartial</code>関数を使ってこれらのエラーを抑制することができます(その部分関数が安全だとあなたが言い切れるなら！)。もし上記の <code>unsafePartial</code>関数の呼び出しを取り除くと、コンパイラは次のエラーを生成します。</p>
 <pre class="text"><code>A case expression could not be determined to cover all inputs.
 The following additional cases are required to cover all inputs:
 
   false</code></pre>
-<p>これは、値 <code>false</code>が定義されたどのパターンでも一致しないことを示しています。これらの警告には、複数の不一致のケースが含まれることがあります。</p>
-<p>上記の型シグネチャも省略した場合</p>
+<p>これは値<code>false</code>が、定義されたどのパターンとも一致しないことを示しています。これらの警告には、複数の不一致のケースが含まれることがあります。</p>
+<p>上記の型シグネチャも省略した場合は、次のようになります。</p>
 <pre class="purescript"><code>partialFunction true = true</code></pre>
-<p>PSCiは、見慣れない推論を行います｡</p>
+<p>このとき、PSCiは興味深い型を推論します｡</p>
 <pre class="text"><code>&gt; :type partialFunction
 
 Partial =&gt; Boolean -&gt; Boolean</code></pre>
-<p>後で <code>=&gt;</code>記号を含むより多くの型（それらは<strong>型クラス</strong>に関連しています）が見られます。しかし、今のところ、PureScriptは型システムを使って部分関数を追跡していること、開発者は型検証器にコードが安全であることを明示的に指示する必要があることを確認するだけで十分です。</p>
-<p>コンパイラは、定義されたパターンが<strong>冗長</strong>であることを検出できる場合（すでに定義されたパターンに一致するケースのみ）でも警告を生成します。</p>
+<p>本書ではのちに<code>=&gt;</code>記号を含むいろいろな型を見ることができます（これらは<strong>型クラス</strong>に関連しています）。しかし、今のところは、PureScriptは型システムを使って部分関数を追跡していること、開発者は型検証器にコードが安全であることを明示する必要があることを確認すれば十分です。</p>
+<p>コンパイラは、定義されたパターンが<strong>冗長</strong>であることを検出した場合（すでに定義されたパターンに一致するケースのみ）でも警告を生成します。</p>
 <pre class="purescript"><code>redundantCase :: Boolean -&gt; Boolean
 redundantCase true = true
 redundantCase false = false
 redundantCase false = false</code></pre>
-<p>この場合、最後のケースは冗長であると正しく識別されます。</p>
+<p>このとき、最後のケースは冗長であると正しく検出されます。</p>
 <pre class="text"><code>Redundant cases have been detected.
 The definition has the following redundant cases:
 
@@ -1622,7 +1622,7 @@ bounds <span class="fu">=</span> foldl combine emptyBounds
 <span class="kw">import </span><span class="dt">Data.Either</span>
 <span class="kw">import </span><span class="dt">Data.String</span>
 <span class="kw">import </span><span class="dt">Data.Function</span></code></pre></div>
-<h2 id="見せてください">見せてください！</h2>
+<h2 id="見せてくださいshow-me">見せてください！(Show Me!)</h2>
 <p>型クラスの最初に扱う例は、すでに何回か見てきた関数に関係します。 <code>show</code>は何らかの値を取りそれを文字列として表示する関数です。</p>
 <p><code>show</code>は <code>Prelude</code>モジュールの <code>Show</code>と呼ばれる型クラスで次のように定義されています。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Show</span> a <span class="kw">where</span>
@@ -1685,7 +1685,7 @@ No type class instance was found for
 <h2 id="標準的な型クラス">標準的な型クラス</h2>
 <p>この節では、Preludeや標準ライブラリで定義されている標準的な型クラスをいくつか見ていきましょう。これらの型クラスはPureScript特有の抽象化の基礎としてあちこちで使われているので、これらの関数の基本についてよく理解しておくことを強くお勧めします。</p>
 <h3 id="eq型クラス">Eq型クラス</h3>
-<p><code>Eq</code>型クラスはこの関数は2つの値が等しいかどうかをテストする <code>eq</code>関数を定義しています。等値演算子(<code>==</code>)は <code>eq</code>の別名として定義されています。</p>
+<p><code>Eq</code>型クラスは、2つの値が等しいかどうかを調べる<code>eq</code>関数を定義しています。等値演算子(<code>==</code>)は<code>eq</code>の別名にすぎません。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Eq</span> a <span class="kw">where</span>
 <span class="ot">  eq ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Boolean</span></code></pre></div>
 <p>異なる型の2つの値を比較しても意味がありませんから、いずれの演算子も2つの引数が同じ型を持つ必要があることに注意してください。</p>
@@ -1717,8 +1717,8 @@ LT</code></pre>
 <p><code>Field</code>型クラスは加算、減算、乗算、除算などの数値演算子を使用可能な型を示します。必要に応じて再利用できるように、これらの演算子を抽象化するわけです。</p>
 <p><strong>注意</strong>: 関数呼び出しが型クラスの実装に基いて呼び出されるのとは対照的に、型クラス <code>Eq</code>や <code>Ord</code>のクラスと同様に、 <code>Field</code>型のクラスはPureScriptでは特別に扱われ、 <code>1 + 2 * 3</code>のような単純な式は単純なJavaScriptへと変換されます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">EuclideanRing</span> a <span class="fu">&lt;=</span> <span class="dt">Field</span> a</code></pre></div>
-<p><code>Field</code>型クラスはいくつかのスーパークラスから作られています。この型クラスは抽象的なすべてではないいくつかの数値演算子をサポートしています。例えば、自然数の型は、加算および乗算の際に閉じられるが、減法について閉じていないため、この型は <code>Semiring</code>クラスのインスタンスであり、 <code>Ring</code>や <code>Field</code>のインスタンスではありません。</p>
-<p>スーパークラスはこの章の後半で説明します。しかしすべての数値型クラスの継承について述べるのはこの章の目的から外れているため、この内容に興味のある読者は <code>purescript-prelude</code>内の <code>Field</code>に関するドキュメントを参照してください。</p>
+<p><code>Field</code>型クラスは、いくつかのより抽象的な<strong>スーパークラス</strong>が組み合わさってできています。これは、その型は<code>Field</code>型クラスの操作をすべてを提供しているわけではないが、その一部を提供する、というように抽象的に説明することができます。この型クラスは抽象的なすべてではないいくつかの数値演算子をサポートしています。例えば、自然数の型は加算および乗算については閉じていますが、減算については閉じていないため、この型は<code>Semiring</code>クラス(これは<code>Num</code>のスーパークラスです)のインスタンスですが、<code>Ring</code>や<code>Field</code>のインスタンスではありません。</p>
+<p>スーパークラスについては、この章の後半で説明します。しかし、すべての数値型クラスの階層について述べるのはこの章の目的から外れているため、この内容に興味のある読者は<code>purescript-prelude</code>内の <code>Field</code>に関するドキュメントを参照してください。</p>
 <h3 id="半群とモノイド">半群とモノイド</h3>
 <p><code>Semigroup</code>(半群)型クラスは、連結演算子 <code>append</code>を提供する型を示します。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Semigroup</span> a <span class="kw">where</span>
@@ -1760,7 +1760,7 @@ LT</code></pre>
 <p>PureScriptで副作用を伴う関数型プログラミングのスタイルを可能にするための <code>Functor</code>と <code>Applicative</code>、 <code>Monad</code>といった型クラスがPreludeでは定義されています。これらの抽象については本書で後ほど扱いますが、まずは「持ち上げ演算子」 <code>map</code>の形ですでに見てきた <code>Functor</code>型クラスの定義を見てみましょう。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Functor</span> f <span class="kw">where</span>
 <span class="ot">  map ::</span> forall a b<span class="fu">.</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> f a <span class="ot">-&gt;</span> f b</code></pre></div>
-<p>演算子 <code>map</code>関数（エイリアス <code>&lt;$&gt;</code>）は関数をそのデータ構造まで「持ち上げる」(lift)ことができます。ここで「持ち上げ」という言葉の具体的な定義は問題のデータ構造に依りますが、すでにいくつかの単純な型についてその動作を見てきました。</p>
+<p>演算子 <code>map</code>関数（別名<code>&lt;$&gt;</code>）は関数をそのデータ構造まで「持ち上げる」(lift)ことができます。ここで「持ち上げ」という言葉の具体的な定義は問題のデータ構造に依りますが、すでにいくつかの単純な型についてその動作を見てきました。</p>
 <pre class="text"><code>&gt; import Prelude
 
 &gt; map (\n -&gt; n &lt; 3) [1, 2, 3, 4, 5]
@@ -1807,10 +1807,10 @@ showCompare a1 a2 <span class="fu">|</span> a1 <span class="fu">&gt;</span> a2 <
   show a1 <span class="fu">&lt;&gt;</span> <span class="st">&quot; is greater than &quot;</span> <span class="fu">&lt;&gt;</span> show a2
 showCompare a1 a2 <span class="fu">=</span>
   show a1 <span class="fu">&lt;&gt;</span> <span class="st">&quot; is equal to &quot;</span> <span class="fu">&lt;&gt;</span> show a2</code></pre></div>
-<p><code>=&gt;</code>シンボルを複数回使って複数の制約を指定できることに注意してください。複数の引数のカリー化関数を指定するのと同じです。しかし、2つの記号を混同しないように注意してください。</p>
+<p><code>=&gt;</code>シンボルを複数回使って複数の制約を指定できることに注意してください。複数の引数のカリー化された関数を定義するのと同様です。しかし、2つの記号を混同しないように注意してください。</p>
 <ul>
 <li><code>a -&gt; b</code>は<strong>型</strong><code>a</code>から<strong>型</strong><code>b</code>への関数の型を表します。</li>
-<li><code>a =&gt; b</code>は、型 <code>b</code>に<strong>制約</strong><code>a</code>を適用します。</li>
+<li><code>a =&gt; b</code>は<strong>制約</strong><code>a</code>を型<code>b</code>に適用します。</li>
 </ul>
 <p>PureScriptコンパイラは、型の注釈が提供されていない場合、制約付き型を推測しようとします。これは、関数に対して可能な最も一般的な型を使用したい場合に便利です。</p>
 <p><code>PSCi</code>で <code>Semiring</code>のような標準の型クラスのいずれかを使って、このことを試してみましょう。</p>
@@ -1818,7 +1818,7 @@ showCompare a1 a2 <span class="fu">=</span>
 
 &gt; :type \x -&gt; x + x
 forall a. Semiring a =&gt; a -&gt; a</code></pre>
-<p>ここでは、この関数に <code>Int -&gt; Int</code>または <code>Number -&gt; Number</code>と注釈を付けることを考えられますが、PSCiでは一般的な型が <code>Semiring</code>で動作するため、 <code>Int</code>と <code>Number</code>の両方で関数を実行させることができます。</p>
+<p>ここで、この関数には<code>Int -&gt; Int</code>または<code>Number -&gt; Number</code>と注釈を付けることが考えられますが、最も一般的な型が<code>Semiring</code>で動作するため、PSCiでは<code>Int</code>と <code>Number</code>の両方で関数を実行させることができます。</p>
 <h2 id="インスタンスの重複">インスタンスの重複</h2>
 <p>PureScriptには型クラスのインスタンスに関する<strong>重複インスタンス規則</strong>(Overlapping instances rule)という規則があります。型クラスのインスタンスが関数呼び出しのところで必要とされるときはいつでも、PureScriptは正しいインスタンスを選択するために型検証器によって推論された情報を使用します。そのとき、その型の適切なインスタンスがちょうどひとつだけ存在しなければなりません。</p>
 <p>これを実証するために、適当な型に対して2つの異なる型クラスのインスタンスを作成してみましょう。次のコードでは、型 <code>T</code>の2つの重複する <code>Show</code>インスタンスを作成しています。</p>
@@ -1840,7 +1840,7 @@ forall a. Semiring a =&gt; a -&gt; a</code></pre>
 <p><code>Show</code>型クラスを例に考えてみましょう。要素を <code>show</code>する方法があるとき、その要素の配列を <code>show</code>する型クラスインスタンスを書くことができます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> showArray ::</span> <span class="dt">Show</span> a <span class="ot">=&gt;</span> <span class="dt">Show</span> (<span class="dt">Array</span> a) <span class="kw">where</span>
   <span class="fu">...</span></code></pre></div>
-<p>型クラスインスタンスが複数の他のインスタンスに依存する場合、それらのインスタンスは、 <code>=&gt;</code>シンボルの左側で、カッコで区切り、コンマで区切る必要があります。</p>
+<p>型クラスインスタンスが複数の他のインスタンスに依存する場合、括弧で囲んでそれらのインスタンスをコンマで区切り、それを<code>=&gt;</code>シンボルの左側に置く必要があります。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> showEither ::</span> (<span class="dt">Show</span> a, <span class="dt">Show</span> b) <span class="ot">=&gt;</span> <span class="dt">Show</span> (<span class="dt">Either</span> a b) <span class="kw">where</span>
   <span class="fu">...</span></code></pre></div>
 <p>これらの2つの型クラスインスタンスは <code>purescript-prelude</code>ライブラリにあります。</p>
@@ -1915,7 +1915,7 @@ The inferred type
 has type variables which are not mentioned in the body of the type.
 Consider adding a type annotation.</code></pre>
 <p>ここでは、コンパイラが <code>streamString</code>インスタンスを選択することを期待しています。結局のところ、 <code>String</code>は <code>Char</code>のストリームであり、他の型のストリームであってはなりません。</p>
-<p>コンパイラは自動的にその排除を行うことはできず、 <code>streamString</code>インスタンスに引き渡すことはできません。しかし、型クラス定義にヒントを追加することで、コンパイラの助けになります。</p>
+<p>コンパイラは自動的にその排除を行うことはできず、 <code>streamString</code>インスタンスに引き渡すことはできません。しかし、型クラス定義にヒントを追加すると、コンパイラを助けることができます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Stream</span> stream element <span class="fu">|</span> stream <span class="ot">-&gt;</span> element <span class="kw">where</span>
 <span class="ot">  uncons ::</span> stream <span class="ot">-&gt;</span> <span class="dt">Maybe</span> {<span class="ot"> head ::</span> element,<span class="ot"> tail ::</span> stream }</code></pre></div>
 <p>ここで、 <code>stream -&gt; element</code>は<strong>関数従属性</strong>(functional dependency)と呼ばれます。関数従属性は、多変数型クラスの型引数間の関数関係を宣言します。この関数の依存関係は、ストリーム型から（一意の）要素型への関数があることをコンパイラに伝えるので、コンパイラがストリーム型を知っていれば要素型へ適用できます。</p>
@@ -2006,20 +2006,20 @@ combineHashes (<span class="dt">HashCode</span> h1) (<span class="dt">HashCode</
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">hashEqual ::</span> forall a<span class="fu">.</span> <span class="dt">Hashable</span> a <span class="ot">=&gt;</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Boolean</span>
 hashEqual <span class="fu">=</span> eq <span class="ot">`on`</span> hash</code></pre></div>
 <p>この関数はハッシュ同値性を定義するために <code>Data.Function</code>の <code>on</code>関数を使っていますが、このハッシュ同値性の定義は『それぞれの値が <code>hash</code>関数に渡されたあとで２つの値が等しいなら、それらの値は「ハッシュ同値」である』というように宣言的に読めるはずです。</p>
-<p>プリミティブ型の <code>Hashable</code>インスタンスをいくつか書いてみましょう。まずは整数のインスタンスです。 <code>HashCode</code>は実際には単なるラップされた整数なので、これは簡単です - 私たちは <code>hashCode</code>ヘルパー関数を使うことができます。</p>
+<p>プリミティブ型の <code>Hashable</code>インスタンスをいくつか書いてみましょう。まずは整数のインスタンスです。 <code>HashCode</code>は実際には単なるラップされた整数なので、これは簡単です。<code>hashCode</code>ヘルパー関数を使うことができます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> hashInt ::</span> <span class="dt">Hashable</span> <span class="dt">Int</span> <span class="kw">where</span>
   hash <span class="fu">=</span> hashCode</code></pre></div>
-<p>パターンマッチングを使って <code>Boolean</code>値の単純なインスタンスを定義することもできます。</p>
+<p>パターン照合を使うと、<code>Boolean</code>値の単純なインスタンスを定義することもできます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> hashBoolean ::</span> <span class="dt">Hashable</span> <span class="dt">Boolean</span> <span class="kw">where</span>
   hash false <span class="fu">=</span> hashCode <span class="dv">0</span>
   hash true  <span class="fu">=</span> hashCode <span class="dv">1</span></code></pre></div>
-<p>整数のインスタンスでは、 <code>Data.Char</code>の <code>toCharCode</code>関数を使って <code>Char</code>をハッシュするインスタンスを作成できます。</p>
+<p>整数のインスタンスでは、 <code>Data.Char</code>の <code>toCharCode</code>関数を使うと<code>Char</code>をハッシュするインスタンスを作成できます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> hashChar ::</span> <span class="dt">Hashable</span> <span class="dt">Char</span> <span class="kw">where</span>
   hash <span class="fu">=</span> hash <span class="fu">&lt;&lt;&lt;</span> toCharCode</code></pre></div>
-<p>配列のインスタンスを定義するために、（要素型が <code>Hashable</code>のインスタンスでもあるならば）配列の要素に <code>hash</code>関数を <code>map</code>してから、 <code>combineHashes</code>関数の結果を使ってハッシュを左側に畳み込みます。</p>
+<p>（要素型が <code>Hashable</code>のインスタンスでもあるならば）配列の要素に <code>hash</code>関数を <code>map</code>してから、 <code>combineHashes</code>関数の結果を使ってハッシュを左側に畳み込むことで、配列のインスタンスを定義します。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> hashArray ::</span> <span class="dt">Hashable</span> a <span class="ot">=&gt;</span> <span class="dt">Hashable</span> (<span class="dt">Array</span> a) <span class="kw">where</span>
   hash <span class="fu">=</span> foldl combineHashes (hashCode <span class="dv">0</span>) <span class="fu">&lt;&lt;&lt;</span> map hash</code></pre></div>
-<p>すでに書いたより単純なインスタンスを使用してインスタンスを構築する方法に注目してください。 <code>String</code>を <code>Char</code>の配列に変換することによって、新しい <code>Array</code>インスタンスを使って <code>String</code>インスタンスを定義しましょう。</p>
+<p>すでに書いたより単純なインスタンスを使用して新たなインスタンスを構築する方法に注目してください。 <code>String</code>を<code>Char</code>の配列に変換し、この新たな<code>Array</code>インスタンスを使って<code>String</code>インスタンスを定義しましょう。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> hashString ::</span> <span class="dt">Hashable</span> <span class="dt">String</span> <span class="kw">where</span>
   hash <span class="fu">=</span> hash <span class="fu">&lt;&lt;&lt;</span> toCharArray</code></pre></div>
 <p>これらの <code>Hashable</code>インスタンスが先ほどの型クラスの法則を満たしていることを証明するにはどうしたらいいでしょうか。同じ値が等しいハッシュ値を持っていることを確認する必要があります。 <code>Int</code>、 <code>Char</code>、 <code>String</code>、 <code>Boolean</code>の場合は、 <code>Eq</code>の意味では同じ値でも厳密には同じではない、というような型の値は存在しないので簡単です。</p>

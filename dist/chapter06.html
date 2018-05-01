@@ -225,7 +225,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">import </span><span class="dt">Data.Either</span>
 <span class="kw">import </span><span class="dt">Data.String</span>
 <span class="kw">import </span><span class="dt">Data.Function</span></code></pre></div>
-<h2 id="見せてください"><span class="header-section-number">6.3</span> 見せてください！</h2>
+<h2 id="見せてくださいshow-me"><span class="header-section-number">6.3</span> 見せてください！(Show Me!)</h2>
 <p>型クラスの最初に扱う例は、すでに何回か見てきた関数に関係します。 <code>show</code>は何らかの値を取りそれを文字列として表示する関数です。</p>
 <p><code>show</code>は <code>Prelude</code>モジュールの <code>Show</code>と呼ばれる型クラスで次のように定義されています。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Show</span> a <span class="kw">where</span>
@@ -288,7 +288,7 @@ No type class instance was found for
 <h2 id="標準的な型クラス"><span class="header-section-number">6.4</span> 標準的な型クラス</h2>
 <p>この節では、Preludeや標準ライブラリで定義されている標準的な型クラスをいくつか見ていきましょう。これらの型クラスはPureScript特有の抽象化の基礎としてあちこちで使われているので、これらの関数の基本についてよく理解しておくことを強くお勧めします。</p>
 <h3 id="eq型クラス"><span class="header-section-number">6.4.1</span> Eq型クラス</h3>
-<p><code>Eq</code>型クラスはこの関数は2つの値が等しいかどうかをテストする <code>eq</code>関数を定義しています。等値演算子(<code>==</code>)は <code>eq</code>の別名として定義されています。</p>
+<p><code>Eq</code>型クラスは、2つの値が等しいかどうかを調べる<code>eq</code>関数を定義しています。等値演算子(<code>==</code>)は<code>eq</code>の別名にすぎません。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Eq</span> a <span class="kw">where</span>
 <span class="ot">  eq ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Boolean</span></code></pre></div>
 <p>異なる型の2つの値を比較しても意味がありませんから、いずれの演算子も2つの引数が同じ型を持つ必要があることに注意してください。</p>
@@ -320,8 +320,8 @@ LT</code></pre>
 <p><code>Field</code>型クラスは加算、減算、乗算、除算などの数値演算子を使用可能な型を示します。必要に応じて再利用できるように、これらの演算子を抽象化するわけです。</p>
 <p><strong>注意</strong>: 関数呼び出しが型クラスの実装に基いて呼び出されるのとは対照的に、型クラス <code>Eq</code>や <code>Ord</code>のクラスと同様に、 <code>Field</code>型のクラスはPureScriptでは特別に扱われ、 <code>1 + 2 * 3</code>のような単純な式は単純なJavaScriptへと変換されます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">EuclideanRing</span> a <span class="fu">&lt;=</span> <span class="dt">Field</span> a</code></pre></div>
-<p><code>Field</code>型クラスはいくつかのスーパークラスから作られています。この型クラスは抽象的なすべてではないいくつかの数値演算子をサポートしています。例えば、自然数の型は、加算および乗算の際に閉じられるが、減法について閉じていないため、この型は <code>Semiring</code>クラスのインスタンスであり、 <code>Ring</code>や <code>Field</code>のインスタンスではありません。</p>
-<p>スーパークラスはこの章の後半で説明します。しかしすべての数値型クラスの継承について述べるのはこの章の目的から外れているため、この内容に興味のある読者は <code>purescript-prelude</code>内の <code>Field</code>に関するドキュメントを参照してください。</p>
+<p><code>Field</code>型クラスは、いくつかのより抽象的な<strong>スーパークラス</strong>が組み合わさってできています。これは、その型は<code>Field</code>型クラスの操作をすべてを提供しているわけではないが、その一部を提供する、というように抽象的に説明することができます。この型クラスは抽象的なすべてではないいくつかの数値演算子をサポートしています。例えば、自然数の型は加算および乗算については閉じていますが、減算については閉じていないため、この型は<code>Semiring</code>クラス(これは<code>Num</code>のスーパークラスです)のインスタンスですが、<code>Ring</code>や<code>Field</code>のインスタンスではありません。</p>
+<p>スーパークラスについては、この章の後半で説明します。しかし、すべての数値型クラスの階層について述べるのはこの章の目的から外れているため、この内容に興味のある読者は<code>purescript-prelude</code>内の <code>Field</code>に関するドキュメントを参照してください。</p>
 <h3 id="半群とモノイド"><span class="header-section-number">6.4.4</span> 半群とモノイド</h3>
 <p><code>Semigroup</code>(半群)型クラスは、連結演算子 <code>append</code>を提供する型を示します。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Semigroup</span> a <span class="kw">where</span>
@@ -363,7 +363,7 @@ LT</code></pre>
 <p>PureScriptで副作用を伴う関数型プログラミングのスタイルを可能にするための <code>Functor</code>と <code>Applicative</code>、 <code>Monad</code>といった型クラスがPreludeでは定義されています。これらの抽象については本書で後ほど扱いますが、まずは「持ち上げ演算子」 <code>map</code>の形ですでに見てきた <code>Functor</code>型クラスの定義を見てみましょう。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Functor</span> f <span class="kw">where</span>
 <span class="ot">  map ::</span> forall a b<span class="fu">.</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> f a <span class="ot">-&gt;</span> f b</code></pre></div>
-<p>演算子 <code>map</code>関数（エイリアス <code>&lt;$&gt;</code>）は関数をそのデータ構造まで「持ち上げる」(lift)ことができます。ここで「持ち上げ」という言葉の具体的な定義は問題のデータ構造に依りますが、すでにいくつかの単純な型についてその動作を見てきました。</p>
+<p>演算子 <code>map</code>関数（別名<code>&lt;$&gt;</code>）は関数をそのデータ構造まで「持ち上げる」(lift)ことができます。ここで「持ち上げ」という言葉の具体的な定義は問題のデータ構造に依りますが、すでにいくつかの単純な型についてその動作を見てきました。</p>
 <pre class="text"><code>&gt; import Prelude
 
 &gt; map (\n -&gt; n &lt; 3) [1, 2, 3, 4, 5]
@@ -410,10 +410,10 @@ showCompare a1 a2 <span class="fu">|</span> a1 <span class="fu">&gt;</span> a2 <
   show a1 <span class="fu">&lt;&gt;</span> <span class="st">&quot; is greater than &quot;</span> <span class="fu">&lt;&gt;</span> show a2
 showCompare a1 a2 <span class="fu">=</span>
   show a1 <span class="fu">&lt;&gt;</span> <span class="st">&quot; is equal to &quot;</span> <span class="fu">&lt;&gt;</span> show a2</code></pre></div>
-<p><code>=&gt;</code>シンボルを複数回使って複数の制約を指定できることに注意してください。複数の引数のカリー化関数を指定するのと同じです。しかし、2つの記号を混同しないように注意してください。</p>
+<p><code>=&gt;</code>シンボルを複数回使って複数の制約を指定できることに注意してください。複数の引数のカリー化された関数を定義するのと同様です。しかし、2つの記号を混同しないように注意してください。</p>
 <ul>
 <li><code>a -&gt; b</code>は<strong>型</strong><code>a</code>から<strong>型</strong><code>b</code>への関数の型を表します。</li>
-<li><code>a =&gt; b</code>は、型 <code>b</code>に<strong>制約</strong><code>a</code>を適用します。</li>
+<li><code>a =&gt; b</code>は<strong>制約</strong><code>a</code>を型<code>b</code>に適用します。</li>
 </ul>
 <p>PureScriptコンパイラは、型の注釈が提供されていない場合、制約付き型を推測しようとします。これは、関数に対して可能な最も一般的な型を使用したい場合に便利です。</p>
 <p><code>PSCi</code>で <code>Semiring</code>のような標準の型クラスのいずれかを使って、このことを試してみましょう。</p>
@@ -421,7 +421,7 @@ showCompare a1 a2 <span class="fu">=</span>
 
 &gt; :type \x -&gt; x + x
 forall a. Semiring a =&gt; a -&gt; a</code></pre>
-<p>ここでは、この関数に <code>Int -&gt; Int</code>または <code>Number -&gt; Number</code>と注釈を付けることを考えられますが、PSCiでは一般的な型が <code>Semiring</code>で動作するため、 <code>Int</code>と <code>Number</code>の両方で関数を実行させることができます。</p>
+<p>ここで、この関数には<code>Int -&gt; Int</code>または<code>Number -&gt; Number</code>と注釈を付けることが考えられますが、最も一般的な型が<code>Semiring</code>で動作するため、PSCiでは<code>Int</code>と <code>Number</code>の両方で関数を実行させることができます。</p>
 <h2 id="インスタンスの重複"><span class="header-section-number">6.6</span> インスタンスの重複</h2>
 <p>PureScriptには型クラスのインスタンスに関する<strong>重複インスタンス規則</strong>(Overlapping instances rule)という規則があります。型クラスのインスタンスが関数呼び出しのところで必要とされるときはいつでも、PureScriptは正しいインスタンスを選択するために型検証器によって推論された情報を使用します。そのとき、その型の適切なインスタンスがちょうどひとつだけ存在しなければなりません。</p>
 <p>これを実証するために、適当な型に対して2つの異なる型クラスのインスタンスを作成してみましょう。次のコードでは、型 <code>T</code>の2つの重複する <code>Show</code>インスタンスを作成しています。</p>
@@ -443,7 +443,7 @@ forall a. Semiring a =&gt; a -&gt; a</code></pre>
 <p><code>Show</code>型クラスを例に考えてみましょう。要素を <code>show</code>する方法があるとき、その要素の配列を <code>show</code>する型クラスインスタンスを書くことができます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> showArray ::</span> <span class="dt">Show</span> a <span class="ot">=&gt;</span> <span class="dt">Show</span> (<span class="dt">Array</span> a) <span class="kw">where</span>
   <span class="fu">...</span></code></pre></div>
-<p>型クラスインスタンスが複数の他のインスタンスに依存する場合、それらのインスタンスは、 <code>=&gt;</code>シンボルの左側で、カッコで区切り、コンマで区切る必要があります。</p>
+<p>型クラスインスタンスが複数の他のインスタンスに依存する場合、括弧で囲んでそれらのインスタンスをコンマで区切り、それを<code>=&gt;</code>シンボルの左側に置く必要があります。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> showEither ::</span> (<span class="dt">Show</span> a, <span class="dt">Show</span> b) <span class="ot">=&gt;</span> <span class="dt">Show</span> (<span class="dt">Either</span> a b) <span class="kw">where</span>
   <span class="fu">...</span></code></pre></div>
 <p>これらの2つの型クラスインスタンスは <code>purescript-prelude</code>ライブラリにあります。</p>
@@ -518,7 +518,7 @@ The inferred type
 has type variables which are not mentioned in the body of the type.
 Consider adding a type annotation.</code></pre>
 <p>ここでは、コンパイラが <code>streamString</code>インスタンスを選択することを期待しています。結局のところ、 <code>String</code>は <code>Char</code>のストリームであり、他の型のストリームであってはなりません。</p>
-<p>コンパイラは自動的にその排除を行うことはできず、 <code>streamString</code>インスタンスに引き渡すことはできません。しかし、型クラス定義にヒントを追加することで、コンパイラの助けになります。</p>
+<p>コンパイラは自動的にその排除を行うことはできず、 <code>streamString</code>インスタンスに引き渡すことはできません。しかし、型クラス定義にヒントを追加すると、コンパイラを助けることができます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Stream</span> stream element <span class="fu">|</span> stream <span class="ot">-&gt;</span> element <span class="kw">where</span>
 <span class="ot">  uncons ::</span> stream <span class="ot">-&gt;</span> <span class="dt">Maybe</span> {<span class="ot"> head ::</span> element,<span class="ot"> tail ::</span> stream }</code></pre></div>
 <p>ここで、 <code>stream -&gt; element</code>は<strong>関数従属性</strong>(functional dependency)と呼ばれます。関数従属性は、多変数型クラスの型引数間の関数関係を宣言します。この関数の依存関係は、ストリーム型から（一意の）要素型への関数があることをコンパイラに伝えるので、コンパイラがストリーム型を知っていれば要素型へ適用できます。</p>
@@ -609,20 +609,20 @@ combineHashes (<span class="dt">HashCode</span> h1) (<span class="dt">HashCode</
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">hashEqual ::</span> forall a<span class="fu">.</span> <span class="dt">Hashable</span> a <span class="ot">=&gt;</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Boolean</span>
 hashEqual <span class="fu">=</span> eq <span class="ot">`on`</span> hash</code></pre></div>
 <p>この関数はハッシュ同値性を定義するために <code>Data.Function</code>の <code>on</code>関数を使っていますが、このハッシュ同値性の定義は『それぞれの値が <code>hash</code>関数に渡されたあとで２つの値が等しいなら、それらの値は「ハッシュ同値」である』というように宣言的に読めるはずです。</p>
-<p>プリミティブ型の <code>Hashable</code>インスタンスをいくつか書いてみましょう。まずは整数のインスタンスです。 <code>HashCode</code>は実際には単なるラップされた整数なので、これは簡単です - 私たちは <code>hashCode</code>ヘルパー関数を使うことができます。</p>
+<p>プリミティブ型の <code>Hashable</code>インスタンスをいくつか書いてみましょう。まずは整数のインスタンスです。 <code>HashCode</code>は実際には単なるラップされた整数なので、これは簡単です。<code>hashCode</code>ヘルパー関数を使うことができます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> hashInt ::</span> <span class="dt">Hashable</span> <span class="dt">Int</span> <span class="kw">where</span>
   hash <span class="fu">=</span> hashCode</code></pre></div>
-<p>パターンマッチングを使って <code>Boolean</code>値の単純なインスタンスを定義することもできます。</p>
+<p>パターン照合を使うと、<code>Boolean</code>値の単純なインスタンスを定義することもできます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> hashBoolean ::</span> <span class="dt">Hashable</span> <span class="dt">Boolean</span> <span class="kw">where</span>
   hash false <span class="fu">=</span> hashCode <span class="dv">0</span>
   hash true  <span class="fu">=</span> hashCode <span class="dv">1</span></code></pre></div>
-<p>整数のインスタンスでは、 <code>Data.Char</code>の <code>toCharCode</code>関数を使って <code>Char</code>をハッシュするインスタンスを作成できます。</p>
+<p>整数のインスタンスでは、 <code>Data.Char</code>の <code>toCharCode</code>関数を使うと<code>Char</code>をハッシュするインスタンスを作成できます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> hashChar ::</span> <span class="dt">Hashable</span> <span class="dt">Char</span> <span class="kw">where</span>
   hash <span class="fu">=</span> hash <span class="fu">&lt;&lt;&lt;</span> toCharCode</code></pre></div>
-<p>配列のインスタンスを定義するために、（要素型が <code>Hashable</code>のインスタンスでもあるならば）配列の要素に <code>hash</code>関数を <code>map</code>してから、 <code>combineHashes</code>関数の結果を使ってハッシュを左側に畳み込みます。</p>
+<p>（要素型が <code>Hashable</code>のインスタンスでもあるならば）配列の要素に <code>hash</code>関数を <code>map</code>してから、 <code>combineHashes</code>関数の結果を使ってハッシュを左側に畳み込むことで、配列のインスタンスを定義します。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> hashArray ::</span> <span class="dt">Hashable</span> a <span class="ot">=&gt;</span> <span class="dt">Hashable</span> (<span class="dt">Array</span> a) <span class="kw">where</span>
   hash <span class="fu">=</span> foldl combineHashes (hashCode <span class="dv">0</span>) <span class="fu">&lt;&lt;&lt;</span> map hash</code></pre></div>
-<p>すでに書いたより単純なインスタンスを使用してインスタンスを構築する方法に注目してください。 <code>String</code>を <code>Char</code>の配列に変換することによって、新しい <code>Array</code>インスタンスを使って <code>String</code>インスタンスを定義しましょう。</p>
+<p>すでに書いたより単純なインスタンスを使用して新たなインスタンスを構築する方法に注目してください。 <code>String</code>を<code>Char</code>の配列に変換し、この新たな<code>Array</code>インスタンスを使って<code>String</code>インスタンスを定義しましょう。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> hashString ::</span> <span class="dt">Hashable</span> <span class="dt">String</span> <span class="kw">where</span>
   hash <span class="fu">=</span> hash <span class="fu">&lt;&lt;&lt;</span> toCharArray</code></pre></div>
 <p>これらの <code>Hashable</code>インスタンスが先ほどの型クラスの法則を満たしていることを証明するにはどうしたらいいでしょうか。同じ値が等しいハッシュ値を持っていることを確認する必要があります。 <code>Int</code>、 <code>Char</code>、 <code>String</code>、 <code>Boolean</code>の場合は、 <code>Eq</code>の意味では同じ値でも厳密には同じではない、というような型の値は存在しないので簡単です。</p>

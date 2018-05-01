@@ -204,9 +204,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <p class="previous" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
 <h1 id="再帰マップ畳み込み"><span class="header-section-number">4</span> 再帰、マップ、畳み込み</h1>
 <h2 id="この章の目標"><span class="header-section-number">4.1</span> この章の目標</h2>
-<p>この章では再帰関数を使ってどのようにアルゴリズムを構造化するかについて見ていきましょう。再帰はこの本を通じて使用する関数型プログラミングの基本的な手法です。</p>
-<p>また、PureScriptの標準ライブラリから標準的な関数をいくつか扱います。 <code>map</code>や <code>fold</code>のような関数だけでなく、 <code>filter</code>や <code>concatMap</code>といった便利で特殊なものについても見ていきます。</p>
-<p>この章では仮想的なファイルシステムを操作する関数のライブラリを動機付けに用います。この章で学ぶ手法を応用して、模擬的なファイルシステムによって表されるファイルのプロパティを計算する関数を記述します。</p>
+<p>この章では、再帰関数を使ってどのようにアルゴリズムを構造化するかについて見ていきましょう。再帰はこの本を通じて使用する、関数型プログラミングの基本的な手法です。</p>
+<p>また、PureScriptの標準ライブラリから標準的な関数をいくつか取り扱います。 <code>map</code>や <code>fold</code>のようなよく知られた関数だけでなく、 <code>filter</code>や <code>concatMap</code>といった珍しいけれど便利なものについても見ていきます。</p>
+<p>この章では、仮想的なファイルシステムを操作する関数のライブラリを動機付けに用います。この章で学ぶ手法を応用して、擬似的なファイルシステムによって表されるファイルのプロパティを計算する関数を記述します。</p>
 <h2 id="プロジェクトの準備"><span class="header-section-number">4.2</span> プロジェクトの準備</h2>
 <p>この章のソースコードには、 <code>src/Data/Path.purs</code>と <code>src/FileOperations.purs</code>という２つのファイルが含まれています。</p>
 <p><code>Data.Path</code>モジュールには、仮想ファイルシステムが含まれています。このモジュールの内容を変更する必要はありません。</p>
@@ -282,9 +282,9 @@ length arr <span class="fu">=</span>
 <p>それでは <code>map</code>の型を見てみましょう。</p>
 <pre class="text"><code>&gt; :type map
 forall a b f. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b</code></pre>
-<p>実際には <code>map</code>の型は、２つの型を選択し汎用的に使用することができます。例えば、型を選択して <code>map</code>を以下のように扱うことができます。</p>
+<p>実は<code>map</code>の型は、この章で必要とされているものよりも一般的な型になっています。今回の目的では、次のようなもっと具体的な型であるかのように、<code>map</code>を扱うことができます。</p>
 <pre class="text"><code>forall a b. (a -&gt; b) -&gt; Array a -&gt; Array b</code></pre>
-<p><code>map</code>関数に適用するときには <code>a</code>と <code>b</code>という２つの型を自由に選ぶことができると、この型は示しています。 <code>a</code>は元の配列の要素の型で、 <code>b</code>は目的の配列の要素の型です。もっと言えば、 <code>map</code>が配列要素の型を変化させても構わないということです。例えば、数値を文字列に変換するのにマップを使用することができます。</p>
+<p><code>map</code>関数に適用するときには <code>a</code>と <code>b</code>という２つの型を自由に選ぶことができると、この型は示しています。 <code>a</code>は元の配列の要素の型で、 <code>b</code>は目的の配列の要素の型です。もっと言えば、 <code>map</code>が配列要素の型を変化させても構わないということです。たとえば、<code>map</code>を使用すると数値を文字列に変換することができます。</p>
 <pre class="text"><code>&gt; show &lt;$&gt; [1, 2, 3, 4, 5]
 
 [&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;]</code></pre>
@@ -301,7 +301,7 @@ forall a b f. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b</code></pre>
 &gt; show &lt;$&gt; (1 .. 5)
 [&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;]</code></pre>
 <p><strong>注意</strong>： 独自の中置演算子は自然な構文を持った領域特化言語を定義するのに優れた手段になりえます。ただし、使用には充分注意してください。初心者が読めないコードになることがありますから、新たな演算子の定義には慎重になるのが賢明です。</p>
-<p>上記の例では、 <code>1 .. 5</code>という式は括弧で囲まれていましたが、実際にはこれは必要ありません。なぜなら、 <code>Data.Array</code>モジュールは、 <code>&lt;$&gt;</code>に割り当てられた優先順位より高い優先順位を <code>..</code>演算子に割り当てているからです。PureScriptでは予約語 <code>infix</code>を使用して後の数字である <code>8</code>として定義されていました。ここでは <code>&lt;$&gt;</code>の優先順位よりも高い優先順位を <code>(..)</code>に割り当てており、これは括弧を付け加える必要がないということです。</p>
+<p>上記の例では、 <code>1 .. 5</code>という式は括弧で囲まれていましたが、実際にはこれは必要ありません。なぜなら、 <code>Data.Array</code>モジュールは、 <code>&lt;$&gt;</code>に割り当てられた優先順位より高い優先順位を <code>..</code>演算子に割り当てているからです。上の例では、<code>..</code>の優先順位は、予約語<code>infix</code>のあとに書かれた数の <code>8</code> と定義されていました。ここでは <code>&lt;$&gt;</code>の優先順位よりも高い優先順位を <code>(..)</code>に割り当てており、このため括弧を付け加える必要がないということです。</p>
 <pre class="text"><code>&gt; show &lt;$&gt; 1 .. 5
   
 [&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;]</code></pre>
@@ -395,7 +395,7 @@ factors n <span class="fu">=</span> filter (\xs <span class="ot">-&gt;</span> pr
 <li><code>let</code>キーワードを使用し、式に名前を与える式(ここでは使われていません)。</li>
 </ul>
 <p>この新しい記法を使うとアルゴリズムの構造がわかりやすくなることがあります。心のなかで <code>&lt;-</code>を「選ぶ」という単語に置き換えるとすると、「1からnの間の要素 <code>i</code>を選び、それからiからnの間の要素 <code>j</code>を選び、 <code>[i, j]</code>を返す」というように読むことができるかもしれません。</p>
-<p>最後の行の <code>pure</code>関数は、 <code>PSCi</code>で評価するために型を明示しなければなりません。</p>
+<p>最後の行では、<code>pure</code>関数を使っています。この関数は<code>PSCi</code>で評価することができますが、型を明示する必要があります。</p>
 <pre class="text"><code>&gt; pure [1, 2] :: Array (Array Int)
 [[1, 2]]</code></pre>
 <p>配列の場合、 <code>pure</code>は単に１要素の配列を作成します。実際に、 <code>pure</code>の代わりにこの形式を使うように <code>factors</code>関数を変更することもできます。</p>
@@ -415,7 +415,7 @@ factors n <span class="fu">=</span> <span class="kw">do</span>
   j <span class="ot">&lt;-</span> i <span class="fu">..</span> n
   guard <span class="fu">$</span> i <span class="fu">*</span> j <span class="fu">==</span> n
   pure [i, j]</code></pre></div>
-<p><code>pure</code>と同じように、 <code>guard</code>関数がどのように動作するかを理解するために、 <code>PSCi</code>で通常の関数のように <code>guard</code>を適用してみましょう。 <code>guard</code>関数の型は、一般的な型であり <code>guard</code>は予約語<strong>ではありません</strong>.</p>
+<p><code>pure</code>と同じように、<code>guard</code>関数がどのように動作するかを理解するために、<code>PSCi</code>で<code>guard</code>関数を適用してみましょう。 <code>guard</code>関数の型は、ここで必要とされるものよりもっと一般的な型になっています。</p>
 <pre class="text"><code>&gt; import Control.MonadZero
 
 &gt; :type guard

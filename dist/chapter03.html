@@ -392,7 +392,7 @@ showAddress addr <span class="fu">=</span> addr<span class="fu">.</span>street <
 <pre class="text"><code>&gt; showAddress address
 
 &quot;123 Fake St., Faketown, CA&quot;</code></pre>
-<p>そして、例で作成した <code>address</code>を含む住所簿の <code>entry</code>レコードを作成し <code>showEntry</code>に適用させましょう。</p>
+<p>そして、例で作成した <code>address</code>を含む住所録の <code>entry</code>レコードを作成し <code>showEntry</code>に適用させましょう。</p>
 <pre class="text"><code>&gt; entry = { firstName: &quot;John&quot;, lastName: &quot;Smith&quot;, address: address }
 &gt; showEntry entry
 
@@ -448,7 +448,7 @@ insertEntry entry <span class="fu">=</span> <span class="dt">Cons</span> entry</
 insertEntry <span class="fu">=</span> <span class="dt">Cons</span></code></pre></div>
 <p>この処理は<strong>イータ変換</strong>(eta conversion)と呼ばれ、引数を参照することなく関数を定義する<strong>ポイントフリー形式</strong>(point-free form)へと関数を書き換えるのに使うことができます。</p>
 <p><code>insertEntry</code>の場合には、イータ変換によって「 <code>insertEntry</code>は単にリストに対する <code>cons</code>だ」と関数の定義はとても明確になりました。しかしながら、常にポイントフリー形式のほうがいいのかどうかには議論の余地があります。</p>
-<h2 id="あなたの住所簿は"><span class="header-section-number">3.12</span> あなたの住所簿は？</h2>
+<h2 id="あなたの住所録は"><span class="header-section-number">3.12</span> あなたの住所録は？</h2>
 <p>最小限の住所録アプリケーションの実装で必要になる最後の関数は、名前で人を検索し適切な <code>Entry</code>を返すものです。これは小さな関数を組み合わせることでプログラムを構築するという、関数型プログラミングで鍵となる考え方のよい応用例になるでしょう。</p>
 <p>まずは住所録をフィルタリングし、該当する姓名を持つ項目だけを保持するようにするのがいいでしょう。それから、結果のリストの先頭の(head)要素を返すだけです。</p>
 <p>この大まかな仕様に従って、この関数の型を計算することができます。まず <code>PSCi</code>を起動し、 <code>filter</code>関数と <code>head</code>関数の型を見てみましょう。</p>
@@ -541,7 +541,7 @@ Nothing</code></pre>
 <p>もっと使いやすくするために、 <code>Entry</code>を文字列として出力するような関数を定義し、毎回 <code>showEntry</code>を使わなくてもいいようにすることもできます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">printEntry firstName lastName book
   <span class="fu">=</span> map showEntry (findEntry firstName lastName book)</code></pre></div>
-<p>それでは空でない住所簿を作成してもう一度試してみましょう。先ほどの項目の例を再利用します。</p>
+<p>それでは空でない住所録を作成してもう一度試してみましょう。先ほどの項目の例を再利用します。</p>
 <pre class="text"><code>&gt; book1 = insertEntry entry emptyBook
 
 &gt; printEntry &quot;John&quot; &quot;Smith&quot; book1
@@ -553,8 +553,8 @@ Just (&quot;Smith, John: 123 Fake St., Faketown, CA&quot;)</code></pre>
 <ol type="1">
 <li><p>（簡単） <code>findEntry</code>関数の定義の主な部分式の型を書き下し、 <code>findEntry</code>関数についてよく理解しているか試してみましょう。たとえば、 <code>findEntry</code>の定義のなかにある <code>head</code>関数の型は <code>AddressBook -&gt; Maybe Entry</code>と特殊化されています。</p></li>
 <li><p>（簡単） <code>findEntry</code>の既存のコードを再利用し、与えられた電話番号から <code>Entry</code>を検索する関数を書いてみましょう。また、 <code>PSCi</code>で実装した関数をテストしてみましょう。</p></li>
-<li><p>（やや難しい） 指定された名前が <code>AddressBook</code>に存在するかどうかを調べて真偽値で返す関数を書いてみましょう。<strong>ヒント</strong>：リストが空かどうかを調べる <code>Data.List.null</code>関数の型を <code>psci</code>で調べてみてみましょう。</p></li>
-<li><p>（難しい） 姓名が重複している項目を住所録から削除する関数 <code>removeDuplicates</code>を書いてみましょう。<strong>ヒント</strong>：値どうしの等価性を定義する述語関数に基づいてリストから重複要素を削除する関数 <code>List.nubBy</code>の型を、 <code>psci</code>を使用して調べてみましょう。</p></li>
+<li><p>（やや難しい） 指定された名前が <code>AddressBook</code>に存在するかどうかを調べて真偽値で返す関数を書いてみましょう。 (<strong>ヒント</strong>：リストが空かどうかを調べる <code>Data.List.null</code>関数の型を <code>psci</code>で調べてみてみましょう)</p></li>
+<li><p>（難しい） 姓名が重複している項目を住所録から削除する関数 <code>removeDuplicates</code>を書いてみましょう。 (<strong>ヒント</strong>：値どうしの等価性を定義する述語関数に基づいてリストから重複要素を削除する関数 <code>List.nubBy</code>の型を、 <code>psci</code>を使用して調べてみましょう)</p></li>
 </ol>
 </blockquote>
 <h2 id="まとめ"><span class="header-section-number">3.16</span> まとめ</h2>

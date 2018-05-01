@@ -224,8 +224,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><code>Data.Picture</code>モジュールでは、 <code>Global</code>と <code>Math</code>モジュールもインポートするため <code>as</code>キーワードを使用します。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Global</span> <span class="kw">as</span> <span class="dt">Global</span>
 <span class="kw">import </span><span class="dt">Math</span> <span class="kw">as</span> <span class="dt">Math</span></code></pre></div>
-<p>これは型や関数をモジュール内で使用できるようにし、合わせて <code>Global.infinity</code>や <code>Math.max</code>などの修飾名を使用にできるようにします。これは重複したインポートをさけ、使用するモジュールを明確にすることに有効な方法です。</p>
-<p><strong>注意</strong>：同じモジュール名を修飾名に使用する場合には不要な作業です。 <code>import Math as M</code>などの短い名前を使用することが一般的に使用されています。</p>
+<p>これは型や関数をモジュール内で使用できるようにしますが、<code>Global.infinity</code>や<code>Math.max</code>といった<strong>修飾名</strong>でのみ使用にできるようにします。これは重複したインポートをさけ、使用するモジュールを明確にするのに有効な方法です。</p>
+<p><strong>注意</strong>：同じモジュール名を修飾名に使用する場合には不要な作業です。一般的には<code>import Math as M</code>などの短い名前がよく使われています。</p>
 <h2 id="単純なパターン照合"><span class="header-section-number">5.3</span> 単純なパターン照合</h2>
 <p>それではコード例を見ることから始めましょう。パターン照合を使用して2つの整数の最大公約数を計算する関数は、次のようになります。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">gcd<span class="ot"> ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span>
@@ -303,9 +303,9 @@ takeFive _ <span class="fu">=</span> <span class="dv">0</span></code></pre></div
 
 &gt; takeFive []
 0</code></pre>
-<p>配列のリテラルパターンは、固定長の配列と一致させることができますが、PureScriptはこれらの方法で不変な配列を破壊するとパフォーマンスが低下する可能性があるため、不特定の長さの配列を一致させる手段を提供しません。 このようなマッチングをサポートするデータ構造が必要な場合は、 <code>Data.List</code>を使用することをお勧めします。 異なる動作に対して改善された漸近性能を提供する他のデータ構造が存在する。</p>
+<p>配列のリテラルパターンでは固定長の配列と一致させることはできますが、不特定の長さの配列を照合させる手段を提供していません。PureScriptでは、これらの方法で不変な配列を分解すると、パフォーマンスが低下する可能性があるためです。このような照合を提供するデータ構造が必要な場合は、<code>Data.List</code>を使うことをお勧めします。ほかの操作についてより優れた漸近性能を提供するデータ構造も存在します。</p>
 <h2 id="レコードパターンと行多相"><span class="header-section-number">5.7</span> レコードパターンと行多相</h2>
-<p><strong>レコードパターン</strong>(Record patterns)は(ご想像のとおり)レコードにマッチします。</p>
+<p><strong>レコードパターン</strong>(Record patterns)は(ご想像のとおり)レコードに照合します。</p>
 <p>レコードパターンはレコードリテラルに見た目が似ていますが、レコードリテラルでラベルと式を<strong>コロン</strong>で区切るのとは異なり、レコードパターンではラベルとパターンを<strong>等号</strong>で区切ります。</p>
 <p>たとえば、次のパターンは <code>first</code>と <code>last</code>と呼ばれるフィールドが含まれた任意のレコードにマッチし、これらのフィールドの値はそれぞれ <code>x</code>と <code>y</code>という名前に束縛されます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">showPerson ::</span> {<span class="ot"> first ::</span> <span class="dt">String</span>,<span class="ot"> last ::</span> <span class="dt">String</span> } <span class="ot">-&gt;</span> <span class="dt">String</span>
@@ -355,7 +355,7 @@ sortPair arr <span class="fu">=</span> arr</code></pre></div>
 <ol type="1">
 <li><p>（簡単）レコードパターンを使って、2つの <code>Person</code>レコードが同じ都市にいるか探す関数 <code>sameCity</code>を定義してみましょう。</p></li>
 <li><p>（やや難しい）行多相を考慮すると、 <code>sameCity</code>関数の最も一般的な型は何でしょうか？先ほど定義した <code>livesInLA</code>関数についてはどうでしょうか？</p></li>
-<li><p>（やや難しい）配列リテラルパターンを使って１要素の配列の唯一のメンバーを抽出する関数 <code>fromSingleton</code>を書いてみましょう。１要素だけを持つ配列でない場合、関数は指定されたデフォルト値を返さなければなりません。 <strong>ヒント</strong>: この関数は <code>forall a. a -&gt; Array a -&gt; a</code>.という型を持っていなければなりません。</p></li>
+<li><p>（やや難しい）配列リテラルパターンを使って、１要素の配列の唯一のメンバーを抽出する関数<code>fromSingleton</code>を書いてみましょう。１要素だけを持つ配列でない場合、関数は指定されたデフォルト値を返さなければなりません。この関数は <code>forall a. a -&gt; Array a -&gt; a</code>.という型を持っていなければなりません。</p></li>
 </ol>
 </blockquote>
 <h2 id="case式"><span class="header-section-number">5.10</span> Case式</h2>
@@ -389,25 +389,25 @@ partialFunction <span class="fu">=</span> unsafePartial \true <span class="ot">-
 Failed pattern match</code></pre>
 <p>どんな入力の組み合わせに対しても値を返すような関数は<strong>全関数</strong>(total function)と呼ばれ、そうでない関数は<strong>部分関数</strong>(partial function)と呼ばれています。</p>
 <p>一般的には、可能な限り全関数として定義したほうが良いと考えられています。もしその関数が正しい入力に対して値を返さないことがあるとわかっているなら、大抵は <code>a</code>に対して型 <code>Maybe a</code>の返り値にし、失敗を示すときには <code>Nothing</code>を使うようにしたほうがよいでしょう。この方法なら、型安全な方法で値の有無を示すことができます。</p>
-<p>PureScriptコンパイラは、不完全なパターンマッチのために関数が全関数ではないことを検出できる場合にエラーを生成します。部分関数が安全である場合、 <code>unsafePartial</code>関数を使ってこれらのエラーを抑制することができます。上記の <code>unsafePartial</code>関数への呼び出しを取り除いた場合、コンパイラは次のエラーを生成します。</p>
+<p>PureScriptコンパイラは、パターンマッチが不完全で関数が全関数ではないことを検出するとエラーを生成します。部分関数が安全である場合、<code>unsafePartial</code>関数を使ってこれらのエラーを抑制することができます(その部分関数が安全だとあなたが言い切れるなら！)。もし上記の <code>unsafePartial</code>関数の呼び出しを取り除くと、コンパイラは次のエラーを生成します。</p>
 <pre class="text"><code>A case expression could not be determined to cover all inputs.
 The following additional cases are required to cover all inputs:
 
   false</code></pre>
-<p>これは、値 <code>false</code>が定義されたどのパターンでも一致しないことを示しています。これらの警告には、複数の不一致のケースが含まれることがあります。</p>
-<p>上記の型シグネチャも省略した場合</p>
+<p>これは値<code>false</code>が、定義されたどのパターンとも一致しないことを示しています。これらの警告には、複数の不一致のケースが含まれることがあります。</p>
+<p>上記の型シグネチャも省略した場合は、次のようになります。</p>
 <pre class="purescript"><code>partialFunction true = true</code></pre>
-<p>PSCiは、見慣れない推論を行います｡</p>
+<p>このとき、PSCiは興味深い型を推論します｡</p>
 <pre class="text"><code>&gt; :type partialFunction
 
 Partial =&gt; Boolean -&gt; Boolean</code></pre>
-<p>後で <code>=&gt;</code>記号を含むより多くの型（それらは<strong>型クラス</strong>に関連しています）が見られます。しかし、今のところ、PureScriptは型システムを使って部分関数を追跡していること、開発者は型検証器にコードが安全であることを明示的に指示する必要があることを確認するだけで十分です。</p>
-<p>コンパイラは、定義されたパターンが<strong>冗長</strong>であることを検出できる場合（すでに定義されたパターンに一致するケースのみ）でも警告を生成します。</p>
+<p>本書ではのちに<code>=&gt;</code>記号を含むいろいろな型を見ることができます（これらは<strong>型クラス</strong>に関連しています）。しかし、今のところは、PureScriptは型システムを使って部分関数を追跡していること、開発者は型検証器にコードが安全であることを明示する必要があることを確認すれば十分です。</p>
+<p>コンパイラは、定義されたパターンが<strong>冗長</strong>であることを検出した場合（すでに定義されたパターンに一致するケースのみ）でも警告を生成します。</p>
 <pre class="purescript"><code>redundantCase :: Boolean -&gt; Boolean
 redundantCase true = true
 redundantCase false = false
 redundantCase false = false</code></pre>
-<p>この場合、最後のケースは冗長であると正しく識別されます。</p>
+<p>このとき、最後のケースは冗長であると正しく検出されます。</p>
 <pre class="text"><code>Redundant cases have been detected.
 The definition has the following redundant cases:
 
