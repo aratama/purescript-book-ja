@@ -13,6 +13,7 @@ async function main(){
   const files = await globp('src/chapter*.md')
   
   const child = await execFilep("pandoc", ["--from=markdown", "--to=html5", "--output=dist/index.html", "--template=./templates/default.html", "src/index.md"])
+  
   if (child.stderr) {
     throw child.stderr
   }
@@ -22,18 +23,30 @@ async function main(){
     const name = /([^\\\/]*)$/.exec(file)[1];
     const number = parseInt(/^chapter([0-9]*?)\.md$/.exec(name)[1]) - 1;
     const chapter = `chapter${(number + 1).toString().padStart(2, "0")}`
-    const c = await execFilep("pandoc", [
+    const c = cp.spawn("pandoc", [
       "--from=markdown", 
       "--to=html5", 
       `--output=dist/${chapter}.html`, 
       "--number-sections", 
       '--number-offset', number, 
-      "--template=./templates/default.html", 
-      `src/${chapter}.md`
+      "--template=./templates/default.html"
     ])
-    if (c.stderr) {
-      throw c.stderr
+ 
+    c.stdin.setEncoding('utf-8');
+    c.stdout.pipe(process.stdout);
+    c.stderr.pipe(process.stderr);    
+
+    
+    const content = await fs.readFile(file)
+    c.stdin.write(content);
+    c.stdin.write("\n");   
+    
+    if (i < files.length - 1) {
+      const next = i + 2
+      c.stdin.write(`<a href="chapter${next.toString().padStart(2, "0")}.html"><div class="next">次の第${next}章を読む</div></a>\n`)
     }
+
+    c.stdin.end(); 
   }
 
   const c = await execFilep("pandoc", [
@@ -47,11 +60,7 @@ async function main(){
     throw c.stderr
   }
 
-  fs.copy('res/style.css', 'dist/style.css')
-  fs.copy('res/logo-shadow.png', 'dist/logo-shadow.png')
-  fs.copy('res/favicon-96x96.png', 'dist/favicon-96x96.png') 
   fs.copy('node_modules/github-markdown-css/github-markdown.css', 'dist/github-markdown.css')
-
 }
 
 main().catch(e => console.error(e))

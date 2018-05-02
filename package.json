@@ -5,10 +5,11 @@
   "main": " ",
   "scripts": {
     "test": " ",
-    "clean": "node --experimental-modules script/clean.mjs",
+    "clean": "rimraf ./dist/*.html",
     "html": "npm run clean && node --experimental-modules script/html.mjs",
     "epub": "npm run html && node --experimental-modules script/epub.mjs",
-    "pdf": "chrome --headless --disable-gpu --print-to-pdf=./dist/purescript-book-ja.pdf ./dist/purescript-book-ja.html"
+    "pdf": "chrome --headless --disable-gpu --print-to-pdf=./dist/purescript-book-ja.pdf ./dist/purescript-book-ja.html",
+    "echo": "echo lib/**/*.js"
   },
   "repository": {
     "type": "git",

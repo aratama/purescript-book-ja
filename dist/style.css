@@ -3,10 +3,6 @@ body {
     margin: 0;
 }
 
-p {
-    text-indent: 1em;
-    text-align: justify;
-}
 
 div.main {
     margin: 0 auto;
@@ -101,6 +97,24 @@ h6 {
 
 .markdown-body.content h2 {
     margin-top: 3em;
+}
+
+.markdown-body.content p {
+    text-indent: 1em;
+    text-align: justify;
+}
+
+.markdown-body.content .next {
+    text-align: center;
+    color: white;
+    background-color: #1d222d;
+    padding: 10px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.markdown-body.content .next:hover {
+    background-color: #424b61;
 }
 
 table.sourceCode tr {
