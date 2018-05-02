@@ -7,6 +7,9 @@ import glob from 'glob'
 const globp = util.promisify(glob)
 const execFilep = util.promisify(cp.execFile)
 
+process.stdout.setMaxListeners(16)
+process.stderr.setMaxListeners(16)
+
 async function main(){
 
   await fs.ensureDir("dist")
