@@ -55,16 +55,28 @@ async function main(){
     c.stdin.end(); 
   }
 
-  const c = await execFilep("pandoc", [
+
+
+  const c = cp.spawn("pandoc", [
     "--from=markdown", 
     "--to=html5", 
     "--number-sections", 
     "--output=dist/purescript-book-ja.html", 
     "--template=./templates/default.html"
-  ].concat(files))
-  if (c.stderr) {
-    throw c.stderr
+  ])
+  c.stdin.setEncoding('utf-8');
+  c.stdout.pipe(process.stdout);
+  c.stderr.pipe(process.stderr);    
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i] 
+    const content = await fs.readFile(file)
+    c.stdin.write(content)
+    c.stdin.write(`\n<div class="pagebreak"></div>\n`)
   }
+  c.stdin.end(); 
+
+
+  
 
   fs.copy('node_modules/github-markdown-css/github-markdown.css', 'dist/github-markdown.css')
 }

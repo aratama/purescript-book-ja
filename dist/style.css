@@ -151,6 +151,10 @@ table.sourceCode pre {
   }
 }
 
+.pagebreak { 
+    margin-bottom: 14em;
+}
+
 @page {
     margin: 12mm;
 }
@@ -185,6 +189,11 @@ table.sourceCode pre {
 
     .markdown-body .highlight code, .markdown-body code {
         font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
+    }
+
+    .pagebreak { 
+        margin-bottom: 2em;
+        page-break-before: always; 
     }
 }
 
