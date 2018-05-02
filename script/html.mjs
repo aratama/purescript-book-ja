@@ -39,6 +39,7 @@ async function main(){
   const c = await execFilep("pandoc", [
     "--from=markdown", 
     "--to=html5", 
+    "--number-sections", 
     "--output=dist/purescript-book-ja.html", 
     "--template=./templates/default.html"
   ].concat(files))
@@ -46,6 +47,7 @@ async function main(){
     throw c.stderr
   }
 
+  fs.copy('res/style.css', 'dist/style.css')
   fs.copy('res/logo-shadow.png', 'dist/logo-shadow.png')
   fs.copy('res/favicon-96x96.png', 'dist/favicon-96x96.png') 
   fs.copy('node_modules/github-markdown-css/github-markdown.css', 'dist/github-markdown.css')

@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>実例によるPureScript</title>
   <style type="text/css">
 div.sourceCode { overflow-x: auto; }
@@ -44,143 +45,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
   <link rel="stylesheet" href="github-markdown.css" type="text/css"/>
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto"/>
-  <style>
-    body {
-      background-color: #f5f5f5;
-    }
-
-    div.main {
-        min-width: 540px;
-        max-width: 980px;
-        margin: 0 auto;
-        
-        background-color: white;
-        border: solid 1px #cbcbcb;
-        box-shadow: 0 0 15px rgba(0,0,0,0.1);
-
-        font-family: 'Roboto', 'Meiryo UI', sans-serif !important;
-    }
-
-    div.header img.logo:hover {
-      background-color: rgba(255, 255, 255, 0.3);
-    }
-
-    div.header {
-      background-color: #1d222d;
-      color: white;
-      padding: 50px;
-    }
-
-    div.header a {
-      color: white;
-      text-decoration: none;
-    }
-
-    div.header a:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    div.header h1 {
-      letter-spacing: 0.2em;
-      border-bottom: solid 1px rgba(255, 255, 255, 0.4);
-      padding: 0.4em;
-    }
-
-    div.header p.author {
-      font-family: 'Roboto', sans-serif;
-    }
-
-    div.content {
-        padding: 30px;
-
-        font-family: 'Roboto', 'Meiryo UI', sans-serif !important;
-    }
-
-    div.content a {
-      color: #c4953a;
-      text-decoration: none;
-    }
-
-
-
-    .main ol {
-        list-style-type: decimal;
-    }
-    .main ol ol {
-        list-style-type: decimal;
-    }
-    .main ol ol ol {
-        list-style-type: decimal;
-    }
-
-    .main blockquote {
-      color: #333;
-    }
-
-    .markdown code {
-      white-space: pre;
-      word-wrap: keep-all !important;  
-    }
-
-    /* Bug Workaround for Readium */
-    .main h1, h2, h3, h4, h5, h6 {
-      position: static !important;
-      font-family: serif;
-      font-weight: bold;
-      letter-spacing: 0.12em;
-    }
-
-    .markdown-body.content h2 {
-      margin-top: 4em;
-    }
-
-    table.sourceCode tr {
-      padding: 0;
-      border: none;
-    }
-
-    table.sourceCode td {
-      padding: 0;
-      border: none;
-    }
-
-    table.sourceCode pre {
-      margin: 0;
-      border: none;
-    }
-
-    @media print {
-      body {
-        background-color: transparent;
-      }
-
-      .previous {
-        visibility: hidden;
-      }
-
-      .main {
-        font-family: 'MS PMincho', Serif;
-        text-justify: inter-cluster;
-
-        background-color: transparent;
-        border: none 0px transparent;
-        box-shadow: none;
-      }
-      .main h1, h2, h3, h4, h5, h6 {
-        position: static !important;
-      
-      }
-      pre {
-        overflow: visible !important;
-      }
-    }
-
-    .sourceCode, .shell {
-      font-family: 'Courier New', Monospace;
-      
-    }
-
-  </style>
+  <link rel="stylesheet" href="style.css"/>
 
 
 
@@ -188,17 +53,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <body>
   <div class="main">
-    <div class="header" style="position:relative;">
-      <a href="/purescript/">
-          <img class="logo" src="logo-shadow.png"  style="display:block; position:absolute; left:50px;">
+    <header>
+      <a class="logo" href="/purescript/">
+          <img class="logo" src="logo-shadow.png">
       </a>
-      <div class="title" style="margin-left: 220px; position:relative; left:0px; right:0px;">
+      <div class="title">
           <h1 id="実例によるpurescript">実例によるPureScript</h1>
           <p>ウェブのための関数型プログラミング</p>
           <p class="author"><a href="https://leanpub.com/purescript/read">Phil Freeman, &quot;PureScript by Example - Functional Programming for the Web&quot;</a></p>
       </div>
-      <div style="clear:both;"></div>
-    </div>
+    </header>
 
     <div class="markdown-body content">
       <p class="previous" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
@@ -213,8 +77,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>purescript-eff</code> - Effモナドを提供します。</li>
 <li><code>purescript-react</code> - Reactユーザインターフェイスへ接続するライブラリを提供します。</li>
 </ul>
-<p>前章のモジュールに加えて、この章ではエントリポイントとなり、UIを描写する <code>Main</code>モジュールを使用します。</p>
-<p>このプロジェクトをコンパイルするには、まずReactをインストールするため <code>npm install</code>を実行し、ビルドのため <code>pulp browserify --to dist/Main.js</code>を行います。このプロジェクトを実行するには、 <code>html/index.html</code>ファイルをウェブブラウザで開いてください。</p>
+<p>前章のモジュールに加えて、この章では<code>Main</code>モジュールを使用します。このモジュールはエントリポイントであるとともに、UIの描写も行います。</p>
+<p>このプロジェクトをコンパイルするには、まずReactをインストールするため<code>npm install</code>を実行し、それから<code>pulp browserify --to dist/Main.js</code>でビルドを行います。このプロジェクトを実行するには、<code>html/index.html</code>ファイルをウェブブラウザで開いてください。</p>
 <h2 id="モナドとdo記法"><span class="header-section-number">8.3</span> モナドとdo記法</h2>
 <p>do記法は<strong>配列内包表記</strong>を扱うときに最初に導入されました。配列内包表記は <code>Data.Array</code>モジュールの <code>concatMap</code>関数の構文糖として提供されています。</p>
 <p>次の例を考えてみましょう。２つのサイコロを振って出た目を数え、出た目の合計が <code>n</code>のときそれを得点とすることを考えます。次のような非決定的なアルゴリズムを使うとこれを実現することができます。</p>
@@ -255,7 +119,7 @@ userCity root <span class="fu">=</span> <span class="kw">do</span>
   city <span class="ot">&lt;-</span> child addr <span class="st">&quot;city&quot;</span>
   pure city</code></pre></div>
 <p><code>userCity</code>関数は子の要素である <code>profile</code>を探し、 <code>profile</code>要素の中にある <code>address</code>要素、最後に <code>address</code>要素から <code>city</code>要素を探します。これらの要素のいずれかが欠落している場合は、返り値は <code>Nothing</code>になります。そうでなければ、返り値は <code>city</code>ノードから <code>Just</code>を使って構築されています。</p>
-<p>最後の行の <code>pure</code>関数は予約語ではないことを思い出してください。 <code>pure</code>は実際にすべての <code>Applicative</code>関手について定義されている <code>Maybe</code>の <code>Applicative</code>関手に対する <code>Just</code>として定義されており、最後の行を <code>Just city</code>へ変更しても同じように正しく動きます。</p>
+<p>最後の行にある<code>pure</code>関数は、すべての<code>Applicative</code>関手について定義されているのでした。<code>Maybe</code>の<code>Applicative</code>関手の<code>pure</code>関数は<code>Just</code>として定義されており、最後の行を <code>Just city</code>へ変更しても同じように正しく動きます。</p>
 <h2 id="モナド型クラス"><span class="header-section-number">8.4</span> モナド型クラス</h2>
 <p><code>Monad</code>型クラスは次のように定義されています。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Apply</span> m <span class="fu">&lt;=</span> <span class="dt">Bind</span> m <span class="kw">where</span>
@@ -441,7 +305,7 @@ lift2 f a b <span class="fu">=</span> f <span class="fu">&lt;$&gt;</span> a <spa
 <p>その答えはPureScriptの目的は副作用を排除することではないということです。これは、純粋な計算と副作用のある計算とを型システムにおいて区別することができるような方法で、副作用を表現することを目的としているのです。この意味で、言語はあくまで純粋だということです。</p>
 <p>副作用のある値は、純粋な値とは異なる型を持っています。このように、例えば副作用のある引数を関数に渡すことはできず、予期せず副作用持つようなことが起こらなくなります。</p>
 <p><code>Eff</code>モナドで管理された副作用を実行する唯一の方法は、型 <code>Eff eff a</code>の計算をJavaScriptから実行することです。</p>
-<p>ビルドツールPulpは、オプションを与えることで、アプリケーションの起動時に <code>main</code>計算を呼び出すためのJavaScriptコードを簡単に追加で生成できるようにしています。 <code>main</code>は <code>Eff</code>モナドでの計算であることが要求されます。</p>
+<p>ビルドツールPulp(や他のツール)は、オプションを与えることで、アプリケーションの起動時に <code>main</code>計算を呼び出すためのJavaScriptコードを簡単に追加で生成できるようにしています。 <code>main</code>は <code>Eff</code>モナドでの計算であることが要求されます。</p>
 <p>このように、 <code>main</code>によって使われる副作用が期待されることを、開発者は正確に知ることができます。加えて、 <code>main</code>がどのような種類の副作用を持つかを制限するのに <code>Eff</code>モナドを使うことができるので、例えば、アプリケーションはコンソールと相互作用するが、それ以外は何もしない、ということを確実に言うことができます。</p>
 <h2 id="effモナド-1"><span class="header-section-number">8.10</span> Effモナド</h2>
 <p><code>Eff</code>モナドの目的は、副作用のある計算に型付けされたAPIを提供すると同時に、効率的なJavaScriptを生成することにあります。これは<strong>拡張可能作用</strong>(extensible effects)のモナドとも呼ばれており、これについては後述します。</p>
@@ -717,9 +581,9 @@ spec
 <li><code>Render</code>型同義語は、いくつかの型シグネチャを単純化するために提供され、コンポーネントのレンダリング機能を表します。</li>
 <li><code>Render</code>アクションは（ <code>ReactThis</code>型の）コンポーネントへの参照をとり、 <code>Eff</code>モナドに <code>ReactElement</code>を返します。 <code>ReactElement</code>はレンダリング後の意図したDOMの状態を記述するデータ構造体です。</li>
 <li>すべてのReactコンポーネントは、ある型の状態を定義します。ボタンのクリックなどのイベントに応じて状態を変更することができます。 <code>purescript-react</code>では、初期状態値が <code>spec</code>関数で提供されます。</li>
-<li><code>Render</code>型の作用の行は、いくつかの変わった作用を使用して、特定の関数からReactコンポーネントの状態へのアクセスを制限します。例えば、レンダリングの間、「refs」オブジェクトへのアクセスは <code>Disallowed</code>であり、コンポーネント状態へのアクセスは <code>ReadOnly</code>である。</li>
+<li><code>Render</code>型の作用の行は、いくつかの面白い作用を使用して、特定の関数からReactコンポーネントの状態へのアクセスを制限します。たとえば、レンダリングのあいだ、「refs」オブジェクトへのアクセスは <code>Disallowed</code>であり、コンポーネント状態へのアクセスは <code>ReadOnly</code>です。</li>
 </ul>
-<p><code>Main</code>モジュールは、住所録コンポーネントの状態型と初期状態を定義します。</p>
+<p><code>Main</code>モジュールは、住所録コンポーネントの状態の型と初期状態を定義します。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">AppState</span> <span class="fu">=</span> <span class="dt">AppState</span>
   {<span class="ot"> person ::</span> <span class="dt">Person</span>
   ,<span class="ot"> errors ::</span> <span class="dt">Errors</span>
@@ -733,7 +597,7 @@ initialState <span class="fu">=</span> <span class="dt">AppState</span>
 <p>状態には、（フォームコンポーネントを使用して編集可能にする） <code>Person</code>レコードと、既存の検証コードを使用して入力されるエラーの配列が含まれています。</p>
 <p>次に、コンポーネントの定義を見てみましょう。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">addressBook ::</span> forall props<span class="fu">.</span> <span class="dt">ReactClass</span> props</code></pre></div>
-<p>すでに指摘したように、Reactクラスを作成するため、 <code>addressBook</code>は <code>createClass</code>と <code>spec</code>を使用します。ここから初期状態値と <code>Render</code>アクションを得ることができます。取得した <code>Render</code>アクションで何ができるのでしょうか？例えば、 <code>purescript-react</code>は以下のような単純なアクションを提供しています。</p>
+<p>すでに述べたように、<code>addressBook</code>は<code>createClass</code>と<code>spec</code>を使用してReactクラスを作成します。ここから初期状態の値と<code>Render</code>アクションを得ることができます。取得した<code>Render</code>アクションでいったい何ができるのでしょうか？　例えば、<code>purescript-react</code>は以下のような単純なアクションを提供しています。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">readState
 <span class="ot">  ::</span> forall props state access eff
    <span class="fu">.</span> <span class="dt">ReactThis</span> props state
@@ -754,17 +618,17 @@ writeState
          ) state</code></pre></div>
 <p><code>readState</code>と <code>writeState</code>アクションは拡張可能作用を伴って、ReactState作用を使ってReactの状態にアクセスできるようにしますが、<strong>他の</strong>行の <code>ReactState</code>作用をパラメータ化することで、読み書き権限がさらに分離されることに注意してください！</p>
 <p>これは、PureScriptの行ベースの作用に関する興味深い点を示しています。行内に現れる作用は単純な１要素である必要はなく、様々な構造を持つことができ、この柔軟性によってコンパイル時にいくつかの有用な制限が可能になります。 <code>purescript-react</code>ライブラリがこの制限をしなかった場合、 <code>Render</code>アクションで状態を書き込もうとすると、実行時に例外を受け取ることになります。適切な制限を行うことで、このような間違いがコンパイル時に捕捉されるようになりました。</p>
-<p>これで <code>addressBook</code>コンポーネントの定義を読むことができます。まず、現在のコンポーネントの状態を読み込みます。</p>
+<p>これで <code>addressBook</code>コンポーネントの定義を読むことができるようになりました。まずは現在のコンポーネントの状態を読むことから始めましょう。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">addressBook <span class="fu">=</span> createClass <span class="fu">$</span> spec initialState \ctx <span class="ot">-&gt;</span> <span class="kw">do</span>
   <span class="dt">AppState</span> { person<span class="fu">:</span> <span class="dt">Person</span> person<span class="fu">@</span>{ homeAddress<span class="fu">:</span> <span class="dt">Address</span> address }
            , errors
            } <span class="ot">&lt;-</span> readState ctx</code></pre></div>
 <p>次の点に注意してください。</p>
 <ul>
-<li>名前 <code>ctx</code>は <code>ReactThis</code>を参照し、適切な状態を読み書きするために使用することができます。</li>
-<li>AppState内のレコードは、レコードバインダーを使用して一致しています。これには、<strong>errors</strong>フィールドのレコード同名利用も含まれます。便宜のためにステート構造体の様々な部分を明示しています。</li>
+<li>名前<code>ctx</code>は <code>ReactThis</code>を参照しており、必要に応じて状態を読み書きするために使用することができます。</li>
+<li>AppState内のレコードは、レコードパターンを使用して照合しています。これには<strong>errors</strong>フィールドのレコード同名利用も含まれます。便利なように、状態の構造のそれぞれの部分に明示的な名前をつけています。</li>
 </ul>
-<p><code>Render</code>は、DOMの意図された状態を表す <code>ReactElement</code>構造体を返さなければならないことを思い出してください。 <code>Render</code>アクションはいくつかの補助関数から定義されています。そのような補助関数の1つは <code>renderValidationErrors</code>です。これは <code>Errors</code>構造体を <code>ReactElement</code>の配列に変換します。</p>
+<p><code>Render</code>はDOMの次の状態を表す<code>ReactElement</code>構造体を返さなければならないのでした。<code>Render</code>アクションはいくつかの補助関数から定義されています。その補助関数の1つは <code>renderValidationErrors</code>です。これは<code>Errors</code>構造体を<code>ReactElement</code>の配列に変換します。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">renderValidationError ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">ReactElement</span>
 renderValidationError err <span class="fu">=</span> D.li&#39; [ D.text err ]
 
@@ -774,7 +638,7 @@ renderValidationErrors xs <span class="fu">=</span>
   [ D.div [ P.className <span class="st">&quot;alert alert-danger&quot;</span> ]
           [ D.ul&#39; (map renderValidationError xs) ]
   ]</code></pre></div>
-<p><code>purescript-react</code>では、 <code>ReactElement</code>は通常、単一のHTML要素を <code>div</code>のような関数を適用することで作成します。これらの関数は通常、属性の配列と子要素の配列を引数として取ります。しかし、ここでは <code>ul'</code>のようにダッシュ記号(', prime character)で終わる名前は属性配列を省略し、代わりにデフォルトの属性を使用します。</p>
+<p><code>purescript-react</code>では、 <code>ReactElement</code>は通常、単一のHTML要素を <code>div</code>のような関数を適用することで作成します。これらの関数は通常、属性の配列と子要素の配列を引数として取ります。しかし、ここでは <code>ul'</code>のようにプライム記号(', prime character)で終わる名前は属性配列を省略し、代わりにデフォルトの属性を使用します。</p>
 <p>ここでは通常のデータ構造体を単純に操作しているので、 <code>map</code>のような関数を使って様々な要素を構築することができます。</p>
 <p>2番目の補助関数は <code>formField</code>です。これは、単一フォームフィールドのテキスト入力を含む <code>ReactElement</code>を作成します。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">formField

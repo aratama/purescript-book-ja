@@ -27,9 +27,9 @@ main = void $ unsafePartial do
   ctx <- getContext2D canvas
 ```
 
-**注意**：`unsafePartial`への呼び出しはここでは必要です。これは `getCanvasElementById`の結果のパターンマッチングが部分的であり、 `Just`値コンストラクタだけにマッチするためです。ここではこれで問題ありませんが、プロダクションコードではおそらく `Nothing`値コンストラクタにマッチさせ、適切なエラーメッセージを提供したほうがよいでしょう。
+**注意**：この`unsafePartial`の呼び出しは必須です。これは `getCanvasElementById`の結果のパターンマッチングが部分的で、`Just`値構築子だけと照合するためです。ここではこれで問題ありませんが、実際の製品のコードではおそらく`Nothing`値構築子と照合させ、適切なエラーメッセージを提供したほうがよいでしょう。
 
-これらのアクションの型は `PSCi`を使うかドキュメントを見ると確認できます。
+これらのアクションの型は、`PSCi`を使うかドキュメントを見ると確認できます。
 
 ```haskell
 getCanvasElementById :: forall eff. String ->
@@ -70,7 +70,7 @@ fillPath :: forall eff a. Context2D ->
     }
 ```
 
-mainモジュールに `Example.Rectangle`の名前を与え、この長方形のコード例をビルドしましょう。
+mainモジュールの名前として`Example.Rectangle`を指定して、この長方形のコード例をビルドしましょう。
 
 ```text
 $ mkdir dist/
@@ -162,13 +162,13 @@ translate dx dy shape = shape
 
 このコード片を実行すると、二等辺三角形を塗りつぶされます。
 
-`Example.Shapes`をmainモジュールとして指定して、この例をビルドしましょう。
+mainモジュールとして`Example.Shapes`を指定して、この例をビルドしましょう。
 
 ```text
 $ pulp build -O --main Example.Shapes --to dist/Main.js
 ```
 
-そしてもう一度 `html/index.html`を開き、結果を確認して下さい。キャンバスに３つの異なる型が描画されるはずです。
+そしてもう一度 `html/index.html`を開き、結果を確認してください。キャンバスに３つの異なる図形が描画されるはずです。
 
 > ## 演習 {-}
 > 
@@ -216,7 +216,7 @@ $ pulp build -O --main Example.Shapes --to dist/Main.js
   for_ (1 .. 100) \_ -> do
 ```
 
-これらの数は `0`から `1`の間に無作為に分布しています。これらはそれぞれ `x`座標、 `y`座標、半径 `r`を表しています。
+これらの数は `0`から `1`の間に無作為に分布しており、それぞれ `x`座標、 `y`座標、半径 `r`を表しています。
 
 ```haskell
     x <- random
@@ -240,7 +240,7 @@ $ pulp build -O --main Example.Shapes --to dist/Main.js
 
 `forE`に渡された関数が正しい型を持つようにするため、最後の行は必要であることに注意してください。
 
-`Example.Random`をmainモジュールとして指定して、この例をビルドしましょう。
+mainモジュールとして`Example.Random`を指定して、この例をビルドしましょう。
 
 ```text
 $ pulp build -O --main Example.Random --to dist/Main.js

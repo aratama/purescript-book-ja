@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>実例によるPureScript</title>
   <style type="text/css">
 div.sourceCode { overflow-x: auto; }
@@ -44,143 +45,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
   <link rel="stylesheet" href="github-markdown.css" type="text/css"/>
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto"/>
-  <style>
-    body {
-      background-color: #f5f5f5;
-    }
-
-    div.main {
-        min-width: 540px;
-        max-width: 980px;
-        margin: 0 auto;
-        
-        background-color: white;
-        border: solid 1px #cbcbcb;
-        box-shadow: 0 0 15px rgba(0,0,0,0.1);
-
-        font-family: 'Roboto', 'Meiryo UI', sans-serif !important;
-    }
-
-    div.header img.logo:hover {
-      background-color: rgba(255, 255, 255, 0.3);
-    }
-
-    div.header {
-      background-color: #1d222d;
-      color: white;
-      padding: 50px;
-    }
-
-    div.header a {
-      color: white;
-      text-decoration: none;
-    }
-
-    div.header a:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    div.header h1 {
-      letter-spacing: 0.2em;
-      border-bottom: solid 1px rgba(255, 255, 255, 0.4);
-      padding: 0.4em;
-    }
-
-    div.header p.author {
-      font-family: 'Roboto', sans-serif;
-    }
-
-    div.content {
-        padding: 30px;
-
-        font-family: 'Roboto', 'Meiryo UI', sans-serif !important;
-    }
-
-    div.content a {
-      color: #c4953a;
-      text-decoration: none;
-    }
-
-
-
-    .main ol {
-        list-style-type: decimal;
-    }
-    .main ol ol {
-        list-style-type: decimal;
-    }
-    .main ol ol ol {
-        list-style-type: decimal;
-    }
-
-    .main blockquote {
-      color: #333;
-    }
-
-    .markdown code {
-      white-space: pre;
-      word-wrap: keep-all !important;  
-    }
-
-    /* Bug Workaround for Readium */
-    .main h1, h2, h3, h4, h5, h6 {
-      position: static !important;
-      font-family: serif;
-      font-weight: bold;
-      letter-spacing: 0.12em;
-    }
-
-    .markdown-body.content h2 {
-      margin-top: 4em;
-    }
-
-    table.sourceCode tr {
-      padding: 0;
-      border: none;
-    }
-
-    table.sourceCode td {
-      padding: 0;
-      border: none;
-    }
-
-    table.sourceCode pre {
-      margin: 0;
-      border: none;
-    }
-
-    @media print {
-      body {
-        background-color: transparent;
-      }
-
-      .previous {
-        visibility: hidden;
-      }
-
-      .main {
-        font-family: 'MS PMincho', Serif;
-        text-justify: inter-cluster;
-
-        background-color: transparent;
-        border: none 0px transparent;
-        box-shadow: none;
-      }
-      .main h1, h2, h3, h4, h5, h6 {
-        position: static !important;
-      
-      }
-      pre {
-        overflow: visible !important;
-      }
-    }
-
-    .sourceCode, .shell {
-      font-family: 'Courier New', Monospace;
-      
-    }
-
-  </style>
+  <link rel="stylesheet" href="style.css"/>
 
 
 
@@ -188,17 +53,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <body>
   <div class="main">
-    <div class="header" style="position:relative;">
-      <a href="/purescript/">
-          <img class="logo" src="logo-shadow.png"  style="display:block; position:absolute; left:50px;">
+    <header>
+      <a class="logo" href="/purescript/">
+          <img class="logo" src="logo-shadow.png">
       </a>
-      <div class="title" style="margin-left: 220px; position:relative; left:0px; right:0px;">
+      <div class="title">
           <h1 id="実例によるpurescript">実例によるPureScript</h1>
           <p>ウェブのための関数型プログラミング</p>
           <p class="author"><a href="https://leanpub.com/purescript/read">Phil Freeman, &quot;PureScript by Example - Functional Programming for the Web&quot;</a></p>
       </div>
-      <div style="clear:both;"></div>
-    </div>
+    </header>
 
     <div class="markdown-body content">
       <p class="previous" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
@@ -206,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2 id="この章の目標"><span class="header-section-number">7.1</span> この章の目標</h2>
 <p>この章では、 <code>Applicative</code>型クラスによって表現される<strong>Applicative関手</strong>(applicative functor)という重要な抽象化と新たに出会うことになります。名前が難しそうに思えても心配しないでください。フォームデータの検証という実用的な例を使ってこの概念を説明していきます。Applicative関手を使うと、大量の決まり文句を伴うような入力項目の内容を検証するためのコードを、簡潔で宣言的な記述へと変えることができるようになります。</p>
 <p>また、<strong>Traversable関手</strong>(traversable functor)を表現する <code>Traversable</code>という別の型クラスにも出会います。現実の問題への解決策からこの概念が自然に生じるということがわかるでしょう。</p>
-<p>この章では第3章から引き続き住所録を例として扱います。今回は住所録のデータ型を拡張し、これらの型の値を検証する関数を書きます。これらの関数は、例えばデータ入力フォームの一部で、使用者へエラーを表示するウェブユーザインタフェースで使われると考えてください。　　　　</p>
+<p>この章では第3章に引き続き住所録を例として扱います。今回は住所録のデータ型を拡張し、これらの型の値を検証する関数を書きます。これらの関数は、例えばデータ入力フォームの一部で、使用者へエラーを表示するウェブユーザインタフェースで使われると考えてください。　　　　</p>
 <h2 id="プロジェクトの準備"><span class="header-section-number">7.2</span> プロジェクトの準備</h2>
 <p>この章のソース·コードは、 <code>src/Data/AddressBook.purs</code>と <code>src/Data/AddressBook/Validation.purs</code>というファイルで定義されています。</p>
 <p>このプロジェクトは多くのBower依存関係を持っていますが、その大半はすでに見てきたものです。新しい依存関係は２つです。</p>

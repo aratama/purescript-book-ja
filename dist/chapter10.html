@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>実例によるPureScript</title>
   <style type="text/css">
 div.sourceCode { overflow-x: auto; }
@@ -44,143 +45,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
   <link rel="stylesheet" href="github-markdown.css" type="text/css"/>
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto"/>
-  <style>
-    body {
-      background-color: #f5f5f5;
-    }
-
-    div.main {
-        min-width: 540px;
-        max-width: 980px;
-        margin: 0 auto;
-        
-        background-color: white;
-        border: solid 1px #cbcbcb;
-        box-shadow: 0 0 15px rgba(0,0,0,0.1);
-
-        font-family: 'Roboto', 'Meiryo UI', sans-serif !important;
-    }
-
-    div.header img.logo:hover {
-      background-color: rgba(255, 255, 255, 0.3);
-    }
-
-    div.header {
-      background-color: #1d222d;
-      color: white;
-      padding: 50px;
-    }
-
-    div.header a {
-      color: white;
-      text-decoration: none;
-    }
-
-    div.header a:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    div.header h1 {
-      letter-spacing: 0.2em;
-      border-bottom: solid 1px rgba(255, 255, 255, 0.4);
-      padding: 0.4em;
-    }
-
-    div.header p.author {
-      font-family: 'Roboto', sans-serif;
-    }
-
-    div.content {
-        padding: 30px;
-
-        font-family: 'Roboto', 'Meiryo UI', sans-serif !important;
-    }
-
-    div.content a {
-      color: #c4953a;
-      text-decoration: none;
-    }
-
-
-
-    .main ol {
-        list-style-type: decimal;
-    }
-    .main ol ol {
-        list-style-type: decimal;
-    }
-    .main ol ol ol {
-        list-style-type: decimal;
-    }
-
-    .main blockquote {
-      color: #333;
-    }
-
-    .markdown code {
-      white-space: pre;
-      word-wrap: keep-all !important;  
-    }
-
-    /* Bug Workaround for Readium */
-    .main h1, h2, h3, h4, h5, h6 {
-      position: static !important;
-      font-family: serif;
-      font-weight: bold;
-      letter-spacing: 0.12em;
-    }
-
-    .markdown-body.content h2 {
-      margin-top: 4em;
-    }
-
-    table.sourceCode tr {
-      padding: 0;
-      border: none;
-    }
-
-    table.sourceCode td {
-      padding: 0;
-      border: none;
-    }
-
-    table.sourceCode pre {
-      margin: 0;
-      border: none;
-    }
-
-    @media print {
-      body {
-        background-color: transparent;
-      }
-
-      .previous {
-        visibility: hidden;
-      }
-
-      .main {
-        font-family: 'MS PMincho', Serif;
-        text-justify: inter-cluster;
-
-        background-color: transparent;
-        border: none 0px transparent;
-        box-shadow: none;
-      }
-      .main h1, h2, h3, h4, h5, h6 {
-        position: static !important;
-      
-      }
-      pre {
-        overflow: visible !important;
-      }
-    }
-
-    .sourceCode, .shell {
-      font-family: 'Courier New', Monospace;
-      
-    }
-
-  </style>
+  <link rel="stylesheet" href="style.css"/>
 
 
 
@@ -188,17 +53,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <body>
   <div class="main">
-    <div class="header" style="position:relative;">
-      <a href="/purescript/">
-          <img class="logo" src="logo-shadow.png"  style="display:block; position:absolute; left:50px;">
+    <header>
+      <a class="logo" href="/purescript/">
+          <img class="logo" src="logo-shadow.png">
       </a>
-      <div class="title" style="margin-left: 220px; position:relative; left:0px; right:0px;">
+      <div class="title">
           <h1 id="実例によるpurescript">実例によるPureScript</h1>
           <p>ウェブのための関数型プログラミング</p>
           <p class="author"><a href="https://leanpub.com/purescript/read">Phil Freeman, &quot;PureScript by Example - Functional Programming for the Web&quot;</a></p>
       </div>
-      <div style="clear:both;"></div>
-    </div>
+    </header>
 
     <div class="markdown-body content">
       <p class="previous" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
@@ -218,13 +82,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>フォームのデータを直列化してブラウザのローカルストレージに保存し、アプリケーションが再起動したときにそれを再読み込みする</li>
 </ul>
 <h2 id="プロジェクトの準備"><span class="header-section-number">10.2</span> プロジェクトの準備</h2>
-<p>このモジュールのソースコードは、第7章及び第8章の続きになります。今回もそれぞれのディレクトリから適切なソースファイルがソースファイルに含められています。</p>
+<p>このモジュールのソースコードは、第3章、第7章及び第8章の続きになります。今回もそれぞれのディレクトリから適切なソースファイルがソースファイルに含められています。</p>
 <p>この章では、2つの新しいBower依存関係を追加します。</p>
 <ol type="1">
 <li><code>purescript-foreign</code>- データ型と関数を提供しています。</li>
 <li><code>purescript-foreign-generic</code>- <strong>データ型ジェネリックプログラミング</strong>を操作するためのデータ型と関数を提供します。</li>
 </ol>
-<p><strong>注意</strong>：ウェブページがローカルファイルから配信されているときに起こる、ローカルストレージとブラウザ固有の問題を避けるために、この章の例を実行するには、 <code>pulp run</code>でソースコードをビルドしてから、NodeJSにコンパイルされたJavaScriptを渡します。それからブラウザで <a href="http://localhost:8000/"><code>http://localhost:8000/</code></a> を開いてください。</p>
+<p><strong>注意</strong>：ウェブページがローカルファイルから配信されているときに起こる、ローカルストレージとブラウザ特有の問題を避けるために、この章の例を実行するには、HTTPを経由してこの章のプロジェクトを実行する必要があります。</p>
 <h2 id="免責事項"><span class="header-section-number">10.3</span> 免責事項</h2>
 <p>JavaScriptとの共同作業をできる限り簡単にするため、PureScriptは単純な多言語関数インタフェースを提供します。しかしながら、FFIはPureScriptの<strong>高度な</strong>機能であることには留意していただきたいと思います。FFIを安全かつ効率的に使用するには、扱うつもりであるデータの実行時の表現についてよく理解していなければなりません。この章では、PureScriptの標準ライブラリのコードに関連する、そのような理解を与えることを目指しています。</p>
 <p>PureScriptのFFIはとても柔軟に設計されています。実際には、外部関数に最低限の型だけを与えるか、それとも型システムを利用して外部のコードの誤った使い方を防ぐようにするか、開発者が選ぶことができるということを意味しています。標準ライブラリのコードは、後者の手法を好む傾向にあります。</p>
@@ -317,7 +181,7 @@ gcd n m
 <p>この型を持っている関数にはどんなものがあるでしょうか。少なくともひとつはこの型を持つ関数が存在しています。すなわち、 <code>Prelude</code>で定義されている恒等関数 <code>id</code>です。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">id<span class="ot"> ::</span> forall a<span class="fu">.</span> a <span class="ot">-&gt;</span> a
 id a <span class="fu">=</span> a</code></pre></div>
-<p>実のところ、 <code>id</code>の関数はこの型の<strong>唯一の</strong>(全)関数です！これは間違いなさそうに見えます(この型を持った <code>id</code>とは明らかに異なる式を書こうとしてみてください)が、しかし、これを確かめるにはどうしたらいいでしょうか。これは型の実行時表現を考えることによって確認することができます。</p>
+<p>実のところ、 <code>id</code>の関数はこの型の<strong>唯一の</strong>(全)関数です！これは確かに間違いなさそうに見えますが(この型を持った <code>id</code>とは明らかに異なる式を書こうとしてみてください)、これを確かめるにはどうしたらいいでしょうか。これは型の実行時表現を考えることによって確認することができます。</p>
 <p>量化された型 <code>forall a. t</code>の実行時表現はどうなっているのでしょうか。さて、この型の実行時表現を持つ任意の式は、型 <code>a</code>をどのように選んでも型 <code>t</code>の適切な実行時表現を持っていなければなりません。上の例では、型 <code>forall a. a -&gt; a</code>の関数は、 <code>String -&gt; String</code>、 <code>Number -&gt; Number</code>、 <code>Array Boolean -&gt; Array Boolean</code>などといった型について、適切な実行時表現を持っていなければなりません。 これらは、数から数、文字列から文字列の関数でなくてはなりません。</p>
 <p>しかし、それだけでは十分ではありません。量化された型の実行時表現は、これよりも更に厳しくなります。任意の式がパラメトリック多相的でなければなりません。つまり、その実装において、引数の型についてのどんな情報も使うことができないのです。この追加の条件は、考えられる多相型のうち、次のようなJavaScriptの関数として問題のある実装を禁止します。</p>
 <div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">invalid</span>(a) <span class="op">{</span>
@@ -356,7 +220,7 @@ forall a<span class="fu">.</span> <span class="dt">Ord</span> a <span class="ot"
 </ol>
 </blockquote>
 <h2 id="purescriptからのjavascriptコードを使う"><span class="header-section-number">10.10</span> PureScriptからのJavaScriptコードを使う</h2>
-<p>PureScriptからJavaScriptコードを使用する最も簡単な方法は、<strong>foreign import</strong>宣言を使用し、既存のJavaScriptの値に型を与えることです。JavaScriptからの関数の導入は<strong>foreign JavaScriptモジュール</strong>に対応する宣言を持つ必要があります。</p>
+<p>PureScriptからJavaScriptコードを使用する最も簡単な方法は、<strong>外部インポート宣言</strong>(foreign import declaration)を使用し、既存のJavaScriptの値に型を与えることです。外部インポート宣言では、対応するJavaScriptの宣言を<strong>外部JavaScriptモジュール</strong>(foreign JavaScript module)に持つ必要があります。</p>
 <p>たとえば、特殊文字をエスケープすることによりURIのコンポーネントを符号化するJavaScriptの <code>encodeURIComponent</code>関数について考えてみます。</p>
 <pre class="text"><code>$ node
 
@@ -367,19 +231,19 @@ node&gt; encodeURIComponent(&#39;Hello World&#39;)
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">module</span> <span class="dt">Data.URI</span> <span class="kw">where</span>
 
 foreign <span class="kw">import </span>encodeURIComponent :: <span class="dt">String</span> -&gt; <span class="dt">String</span></code></pre></div>
-<p>我々はまた、外国のJavaScriptモジュールを書く必要があります。上記のモジュールが <code>src/Data/URI.purs</code>として保存されている場合、外部JavaScriptモジュールは <code>src/Data/URI.js</code>：</p>
+<p>また、外部JavaScriptモジュールを書く必要があります。上記のモジュールを<code>src/Data/URI.purs</code>として保存した場合、次のような外部JavaScriptモジュールを<code>src/Data/URI.js</code>として保存します。</p>
 <div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="st">&quot;use strict&quot;</span><span class="op">;</span>
 
 <span class="va">exports</span>.<span class="at">encodeURIComponent</span> <span class="op">=</span> encodeURIComponent<span class="op">;</span></code></pre></div>
-<p>Pulpは <code>src</code>ディレクトリにある <code>.js</code>ファイルを見つけ、それを外部JavaScriptモジュールとしてコンパイラに提供します。</p>
-<p>JavaScriptの関数と値は、通常のCommonJSモジュールと同じように <code>exports</code>オブジェクトに代入することで、外部JavaScriptモジュールからエクスポートされます。 <code>purs</code>コンパイラは、このモジュールを通常のCommonJSモジュールのように扱い、コンパイルされたPureScriptモジュールへの依存として追加します。 しかし、 <code>psc-bundle</code>や <code>pulp build -O --to</code>を使ってブラウザのコードを束ねるときは、上記のパターンに従い、プロパティの割り当てを使って <code>exports</code>オブジェクトに書き出しを割り当てることが非常に重要です。 これは、 <code>psc-bundle</code>がこのフォーマットを認識し、未使用のJavaScriptのエクスポートをバンドルされたコードから削除できるようにするためです。</p>
-<p>これら2つの部分を使って、PureScriptで書かれた関数のように、PureScript<code>encodeURIComponent</code>関数を使うことができます。 たとえば、この宣言をモジュールとして保存してPSCiにロードすると、上記の計算を再現できます。</p>
+<p>Pulpは<code>src</code>ディレクトリにある<code>.js</code>ファイルを見つけ、それを外部JavaScriptモジュールとしてコンパイラに提供します。</p>
+<p>JavaScriptの関数と値は、通常のCommonJSモジュールと同じように<code>exports</code>オブジェクトに代入することで、外部JavaScriptモジュールからエクスポートされます。<code>purs</code>コンパイラは、このモジュールを通常のCommonJSモジュールのように扱い、コンパイルされたPureScriptモジュールへの依存関係として追加します。しかし、<code>psc-bundle</code>や<code>pulp build -O --to</code>を使ってブラウザ向けのコードをバンドルするときは、上記のパターンに従い、プロパティ代入を使って<code>exports</code>オブジェクトにエクスポートする値を代入することがとても重要です。 これは、<code>psc-bundle</code>がこの形式を認識し、未使用のJavaScriptのエクスポートをバンドルされたコードから削除できるようにするためです。</p>
+<p>これら2つの部品を使うことで、PureScriptで書かれた関数のように、PureScriptから<code>encodeURIComponent</code>関数を使うことができます。たとえば、この宣言をモジュールとして保存してPSCiにロードすると、上記の計算を再現できます。</p>
 <pre class="text"><code>$ pulp repl
 
 &gt; import Data.URI
 &gt; encodeURIComponent &quot;Hello World&quot;
 &quot;Hello%20World&quot;</code></pre>
-<p>このアプローチは、簡単なJav​​aScriptの値には適していますが、もっと複雑な値に使うには限界があります。ほとんどの既存のJavaScriptコードは、基本的なPureScriptの型の実行時表現によって課せられた厳しい条件を満たしていないからです。このような場合のためには、適切な実行時表現に従うことを強制するようにJavaScriptコードを<strong>ラップする</strong>という別の方法があります。</p>
+<p>この手法は簡単なJav​​aScriptの値には適していますが、もっと複雑な値に使うには限界があります。ほとんどの既存のJavaScriptコードは、基本的なPureScriptの型の実行時表現によって課せられた厳しい条件を満たしていないからです。このような場合のためには、適切な実行時表現に従うことを強制するようにJavaScriptコードを<strong>ラップする</strong>という別の方法があります。</p>
 <h2 id="javascriptの値のラッピング"><span class="header-section-number">10.11</span> JavaScriptの値のラッピング</h2>
 <p>これはPureScriptの型を与えるためにJavaScriptコードの既存の部分をラップする場合に特に便利です。このようにしたくなる理由はいくつかあります。</p>
 <ul>
@@ -392,7 +256,7 @@ foreign <span class="kw">import </span>encodeURIComponent :: <span class="dt">St
     <span class="cf">return</span> arr[<span class="dv">0</span>]<span class="op">;</span>
 <span class="op">}</span></code></pre></div>
 <p>しかし、この関数には問題があります。型 <code>forall a. Array a -&gt; a</code>を与えようとしても、空の配列に対してこの関数は <code>undefined</code>を返します。したがって、この特殊な場合を処理するために、ラッパー関数を使用する必要があります。</p>
-<p>簡単な方法としては、空の配列の場合に例外を投げる方法があります。厳密に言えば、純粋な関数は例外をスローするべきではありませんが、デモンストレーションの目的では十分であり、関数名に安全性の欠如を示すことができます。</p>
+<p>簡単な方法としては、空の配列の場合に例外を投げる方法があります。厳密に言えば、純粋な関数は例外を投げるべきではありませんが、デモンストレーションの目的ではこれで十分ですし、安全性でないということを関数名で示しておけばいいでしょう。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">foreign <span class="kw">import </span>unsafeHead :: forall a. <span class="dt">Array</span> a -&gt; a</code></pre></div>
 <p>JavaScriptモジュールでは、 <code>unsafeHead</code>を以下のように定義することができます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">exports<span class="fu">.</span>unsafeHead <span class="fu">=</span> function(arr) {
@@ -427,7 +291,7 @@ foreign <span class="kw">import </span>encodeURIComponent :: <span class="dt">St
 isEmpty <span class="fu">=</span> isUndefined <span class="fu">&lt;&lt;&lt;</span> head</code></pre></div>
 <p>ここで、定義されたこの外部関数はとても簡単であり、PureScriptの型検査器を使うことによる利益をなるべく多く得るということを意味します。一般に外部関数は可能な限り小さく保ち、アプリケーションの処理はPureScriptコードへ移動しておくことをおすすめします。</p>
 <h2 id="多変数関数"><span class="header-section-number">10.13</span> 多変数​関数</h2>
-<p>PureScriptのPreludeには、興味深い外部型がいくつかも含まれています。すでに扱ってきたように、PureScriptの関数型は単一の引数だけを取りますが、<strong>カリー化</strong>を使うと複数の引数の関数をシミュレートすることができます。これには明らかな利点があります。関数を部分適用することができ、関数型の型クラスインスタンスを与えることができます。ただし、効率上のペナルティが生じます。パフォーマンス重視するコードでは、複数の引数を受け入れる本物のJavaScript関数を定義することが必要な場合があります。Preludeではそのような関数を安全に扱うことができるようにする外部型が定義されています。</p>
+<p>PureScriptのPreludeには、興味深い外部型がいくつかも含まれています。すでに扱ってきたように、PureScriptの関数型は単一の引数だけを取りますが、<strong>カリー化</strong>(Currying)を使うと複数の引数の関数をシミュレートすることができます。これには明らかな利点があります。関数を部分適用することができ、関数型の型クラスインスタンスを与えることができます。ただし、効率上のペナルティが生じます。パフォーマンス重視するコードでは、複数の引数を受け入れる本物のJavaScript関数を定義することが必要な場合があります。Preludeではそのような関数を安全に扱うことができるようにする外部型が定義されています。</p>
 <p>たとえば、Preludeの <code>Data.Function.Uncurried</code>モジュールには次の外部型宣言があります。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">foreign <span class="kw">import </span>data <span class="dt">Fn2</span> :: <span class="dt">Type</span> -&gt; <span class="dt">Type</span> -&gt; <span class="dt">Type</span> -&gt; <span class="dt">Type</span></code></pre></div>
 <p>これは3つの型引数を取る型構築子 <code>Fn2</code>を定義します。 <code>Fn2 a b c</code>は、型 <code>a</code>と <code>b</code>の２つの引数、返り値の型 <code>c</code>をもつJavaScript関数の型を表現しています。</p>
@@ -533,13 +397,13 @@ foreign <span class="kw">import </span>setItem :: forall eff . <span class="dt">
 <pre class="text"><code>&gt; import Data.Foreign
 &gt; import Data.Foreign.Generic
 &gt; import Data.Foreign.JSON</code></pre>
-<p><code>Foreign</code>な値を取得するためには、JSON文書を解析するのがいいでしょう。 <code>purescript-foreign</code>はで次の2つの関数が定義されています。</p>
+<p><code>Foreign</code>な値を取得するためには、JSON文書を解析するのがいいでしょう。 <code>purescript-foreign</code>では次の2つの関数が定義されています。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">parseJSON ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">F</span> <span class="dt">Foreign</span>
 <span class="ot">decodeJSON ::</span> forall a<span class="fu">.</span> <span class="dt">Decode</span> a <span class="ot">=&gt;</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">F</span> a</code></pre></div>
-<p>型構築子 <code>F</code>は、実際は <code>Data.Foreign</code>で定義されている型同義語です。</p>
+<p>型構築子<code>F</code>は、実際には<code>Data.Foreign</code>で定義されている型同義語です。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">F</span> <span class="fu">=</span> <span class="dt">Except</span> (<span class="dt">NonEmptyList</span> <span class="dt">ForeignError</span>)</code></pre></div>
-<p>ここで、 <code>Except</code>は、 <code>Either</code>のように、純粋なコードで例外を処理するためのモナドです。 <code>F</code>モナドの値を <code>runExcept</code>関数を使って <code>Either</code>モナドの値に変換することができます。</p>
-<p>この <code>Decode</code>型クラスは、それらの型が型付けされていないデータから得られることを表しています。プリミティブ型や配列について定義された型クラスインスタンスは存在しますが、独自のインスタンスを定義することもできます。</p>
+<p>ここで<code>Except</code>は、<code>Either</code>のように、純粋なコードで例外を処理するためのモナドです。<code>runExcept</code>関数を使うと、<code>F</code>モナドの値を<code>Either</code>モナドの値に変換することができます。</p>
+<p>この <code>Decode</code>型クラスは、それらの型が型付けされていないデータから得られることを表しています。プリミティブ型や配列については型クラスインスタンスがすでに定義されていますが、独自のインスタンスを定義することもできます。</p>
 <p>それでは <code>PSCi</code>で <code>readJSON</code>を使用していくつかの簡単なJSON文書を解析してみましょう。</p>
 <pre class="text"><code>&gt; import Control.Monad.Except
 
@@ -573,18 +437,18 @@ Right [1, 2, 3]</code></pre>
     :: F (Array (NullOrUndefined Int))) (Right [(Just 1),(Just 2),Nothing])</code></pre>
 <p>一般的には、同じ型に異なる直列化戦略を提供するには、newtypesを使って既存の型をラップするのがいいでしょう。 <code>NullOrUndefined</code>それぞれの型は、 <code>Maybe</code>型構築子に包まれたnewtypeとして定義されています。</p>
 <h2 id="住所録の項目の直列化"><span class="header-section-number">10.18</span> 住所録の項目の直列化</h2>
-<p>実際、 <code>purescript-foreign-generic</code>クラスは<strong>datatype-generic programming</strong>という技術を使って<strong>derive</strong>インスタンスを許可しているので、 <code>Decode</code>クラスのインスタンスを書く必要はほとんどありません。このテクニックの完全な説明はこの本の範囲を超えていますが、関数を一度記述して、型自体の構造に基づいてさまざまなデータ型に再利用することができます。</p>
-<p><code>FormData</code>型の <code>Decode</code>インスタンスを派生させるためには、まず <code>derive</code>キーワードを使って <code>Generic</code>型クラスのインスタンスを派生させます。：</p>
+<p>実のところ、<code>purescript-foreign-generic</code>クラスは<strong>datatype-generic programming</strong>という技術を使ってインスタンスの<strong>自動導出</strong>(derive)することが可能なので、<code>Decode</code>クラスのインスタンスを自分で書く必要はほとんどありません。このテクニックの完全な説明は本書の範囲を超えていますが、関数を一度記述すれば、型自体の構造に基づいてさまざまなデータ型に再利用することができます。</p>
+<p><code>FormData</code>型の <code>Decode</code>インスタンスを派生させるためには、まず <code>derive</code>キーワードを使って <code>Generic</code>型クラスのインスタンスを派生させます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">derive <span class="kw">instance</span><span class="ot"> genericFormData ::</span> <span class="dt">Generic</span> <span class="dt">FormData</span> _</code></pre></div>
-<p>次に、次のように <code>genericDecode</code>関数を使って <code>decode</code>関数を定義します。</p>
+<p>そして、<code>genericDecode</code>関数を使って、次のように<code>decode</code>関数を定義します。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> decodeFormData ::</span> <span class="dt">Decode</span> <span class="dt">FormData</span> <span class="kw">where</span>
   decode <span class="fu">=</span> genericDecode (defaultOptions { unwrapSingleConstructors <span class="fu">=</span> true })</code></pre></div>
 <p>実際、同じ方法で <code>encoder</code>を導出することもできます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span><span class="ot"> encodeFormData ::</span> <span class="dt">Encode</span> <span class="dt">FormData</span> <span class="kw">where</span>
   encode <span class="fu">=</span> genericEncode (defaultOptions { unwrapSingleConstructors <span class="fu">=</span> true })</code></pre></div>
 <p>デコーダとエンコーダで同じオプションを使用することが重要です。そうしないと、エンコードされたJSONドキュメントが正しくデコードされないことがあります。</p>
-<p>保存ボタンをクリックすると、型 <code>FormData</code>の値が(<code>Foreign</code>の値に変換されたあとで)<code>stringify</code>関数に渡され、JSON文書として直列化されます。 <code>FormData</code>型はレコードのnewtypeで、 <code>JSON.stringify</code>が渡された型 <code>FormData</code>の値はJSON<strong>オブジェクト</strong>として扱われて直列化されます。これは、JSONエンコーダを定義する際に <code>unwrapSingleConstructors</code>オプションを使用したためです。</p>
-<p>型 <code>Decode</code>クラスのインスタンスは、ローカル·ストレージから取得したJSON文書を解析するために <code>decodeJSON</code>一緒に次のように使われています。</p>
+<p>保存ボタンをクリックすると、JSON文書への直列化を行う<code>encode</code>関数に<code>FormData</code>型の値が渡されます。<code>FormData</code>型はレコードのnewtypeで、<code>encode</code>が渡された<code>FormData</code>型の値はJSON<strong>オブジェクト</strong>として直列化されます。これは、JSONエンコーダを定義する際に<code>unwrapSingleConstructors</code>オプションを指定したためです。</p>
+<p>この<code>Decode</code>型クラスのインスタンスは、<code>decodeJSON</code>とともにローカル·ストレージから取得したJSON文書を解析するために次のように使われています。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">loadSavedData <span class="fu">=</span> <span class="kw">do</span>
   item <span class="ot">&lt;-</span> getItem <span class="st">&quot;person&quot;</span>
 
@@ -593,7 +457,7 @@ Right [1, 2, 3]</code></pre>
     savedData <span class="fu">=</span> runExcept <span class="kw">do</span>
       jsonOrNull <span class="ot">&lt;-</span> traverse readString <span class="fu">=&lt;&lt;</span> readNullOrUndefined item
       traverse decodeJSON jsonOrNull</code></pre></div>
-<p><code>savedData</code>アクションは２つのステップにわけて <code>FormData</code>構造を読み取ります。まず、 <code>getItem</code>から得た <code>Foreign</code>値を解析します。 <code>jsonOrNull</code>の型はコンパイラによって <code>Null String</code>だと推論されます(読者への演習：　この型はどのように推論されているのでしょうか？)。 <code>traverse</code>関数は <code>readJSON</code>を <code>Maybe.String</code>型の結果の(不足しているかもしれない)要素へと適用するのに使われます。 <code>readJSON</code>について推論される型クラスのインスタンスはちょうどさっき書いたもので、型 <code>F (Maybe FormData)</code>の値で結果を返します。</p>
+<p><code>savedData</code>アクションは２つの手順にわけて <code>FormData</code>構造を読み取ります。まず、 <code>getItem</code>から得た <code>Foreign</code>値を解析します。 <code>jsonOrNull</code>の型はコンパイラによって <code>Null String</code>だと推論されます(読者への演習：　この型はどのように推論されているのでしょうか？)。 <code>traverse</code>関数は <code>readJSON</code>を <code>Maybe.String</code>型の結果の(不足しているかもしれない)要素へと適用するのに使われます。 <code>readJSON</code>について推論される型クラスのインスタンスはちょうどさっき書いたもので、型 <code>F (Maybe FormData)</code>の値で結果を返します。</p>
 <p><code>traverse</code>の引数には <code>read</code>が最初の行で得た結果 <code>jsonOrNull</code>を使っているので、 <code>F</code>のモナド構造を使う必要があります。</p>
 <p>結果の <code>FormData</code>には3つの可能性があります。</p>
 <ul>
@@ -602,23 +466,23 @@ Right [1, 2, 3]</code></pre>
 <li>最後に、 <code>Right (Just _)</code>に適合した値はJSON文書としてただしく構文解析されたことを示しています。この場合、アプリケーションは適切な値でフォームフィールドを更新します。</li>
 </ul>
 <p><code>pulp build -O --to dist/Main.js</code>を実行してコードを試してから、ブラウザで <code>html/index.html</code>を開いてください。 保存ボタンをクリックするとフォームフィールドの内容をローカルストレージへ保存することができ、ページを再読込するとフィールドが再現されるはずです。</p>
-<p><strong>注意</strong>：特定のブラウザー固有の問題を避けるために、HTTPサーバーからHTMLファイルとJavaScriptファイルをローカルで提供する必要があります。</p>
+<p><strong>注意</strong>：ブラウザ特有の問題を避けるために、ローカルなHTTPサーバからHTMLファイルとJavaScriptファイルを提供する必要があるかもしれません。</p>
 <blockquote>
 <h2 id="演習-2" class="unnumbered">演習</h2>
 <ol type="1">
-<li><p>(簡単)<code>decodeJSON</code>を使って、 <code>[[1, 2, 3], [4, 5], [6]]</code>のようなJavaScriptの数の２次元配列を表現するJSON文書を解析してください。要素をnullにすることが許容されている場合はどうでしょうか。配列自体がnullにすることが許容されている場合はどうなりますか。</p></li>
+<li><p>(簡単)<code>decodeJSON</code>を使って、 <code>[[1, 2, 3], [4, 5], [6]]</code>のようなJavaScriptの数の２次元配列を表現するJSON文書を解析してください。要素をnullにすることが許容されている場合はどうでしょうか。配列自体をnullにすることが許容されている場合はどうなりますか。</p></li>
 <li><p>(やや難しい)<code>savedData</code>の実装の型を検証し、計算のそれぞれの部分式の推論された型を書き出してみましょう。</p></li>
 <li><p>(難しい)次のデータ型は、葉で値を持つ二分木を表しています。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Tree</span> a <span class="fu">=</span> <span class="dt">Leaf</span> a <span class="fu">|</span> <span class="dt">Branch</span> (<span class="dt">Tree</span> a) (<span class="dt">Tree</span> a)</code></pre></div>
 <p><code>purescript-foreign-generic</code>を使ってこのタイプの <code>Encode</code>と <code>Decode</code>インスタンスを導き、エンコードされた値がPSCiで正しくデコードできることを確認してください。</p></li>
-<li><p>(難しい) 次の <code>data</code>型は<strong>タグ付き</strong>共用体として直列化されなければならない。</p>
+<li><p>(難しい) 次の<code>data</code>型は、整数か文字列のどちらかであるJSONを直接表現しています。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">IntOrString</span>
   <span class="fu">=</span> <span class="dt">IntOrString_Int</span> <span class="dt">Int</span>
   <span class="fu">|</span> <span class="dt">IntOrString_String</span> <span class="dt">String</span></code></pre></div>
 <p>この動作を実装する <code>IntOrString</code>データ型の <code>Encode</code>と <code>Decode</code>のインスタンスを記述し、エンコードされた値が <code>PSCi</code>で正しくデコードできることを確認してください。</p></li>
 </ol>
-<h2 id="まとめ"><span class="header-section-number">10.18</span> まとめ</h2>
 </blockquote>
+<h2 id="まとめ"><span class="header-section-number">10.19</span> まとめ</h2>
 <p>この章では、PureScriptから外部のJavaScriptコードを扱う方法、およびその逆の方法を学びました。また、FFIを使用して信頼できるコードを書く時に生じる問題について見てきました。</p>
 <ul>
 <li>データの<strong>実行時表現</strong>の重要性を見て、外部関数が正しい表現を持っていることを確かめました。</li>
@@ -626,7 +490,7 @@ Right [1, 2, 3]</code></pre>
 <li>Preludeで定義されたいくつかの共通の外部型、既存のJavaScriptコードとどのように相互運用に使用するかを見てきました。特に、 <code>Eff</code>モナドにおける副作用の表現を導入し、新たな副作用を追跡するために <code>Eff</code>モナドを使用する方法を説明しました。</li>
 <li><code>IsForeign</code>型クラスを使用して安全にJSONデータを復元する方法を説明しました。</li>
 </ul>
-<p>その他の例については、Githubの <code>purescript</code>組織,<code>purescript-contrib</code>組織および <code>purescript-node</code>組織が、FFIを使用するライブラリの例を多数提供しています。残りの章では、型安全な方法で現実世界の問題を解決するために使うライブラリを幾つか見ていきます。</p>
+<p>その他の例については、Githubの <code>purescript</code>組織、<code>purescript-contrib</code>組織および <code>purescript-node</code>組織が、FFIを使用するライブラリの例を多数提供しています。残りの章では、型安全な方法で現実世界の問題を解決するために使うライブラリを幾つか見ていきます。</p>
       <p class="previous" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
     </div>
 
