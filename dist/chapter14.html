@@ -69,7 +69,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     </header>
 
     <div class="markdown-body content">
-      <p class="home" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
+<p class="home">
+<a href="index.html">&lt; 目次に戻る</a>
+</p>
 <h1 id="領域特化言語"><span class="header-section-number">14</span> 領域特化言語</h1>
 <h2 id="この章の目標"><span class="header-section-number">14.1</span> この章の目標</h2>
 <p>この章では、多数の標準的な手法を使ったPureScriptにおける<strong>領域特化言語</strong>(domain-specific language, DSL) の実装について探求していきます。</p>
@@ -510,10 +512,9 @@ name <span class="fu">=</span> <span class="dt">AttributeKey</span> <span class=
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">newName ::</span> <span class="dt">Content</span> <span class="dt">Name</span>
 newName <span class="fu">=</span> liftF <span class="fu">$</span> <span class="dt">NewName</span> id</code></pre></div>
 <p><code>id</code>関数を継続として提供していることに注意してください。型 <code>Name</code>の結果を変更せずに返すということを意味しています。</p>
-<p>最後に、新しいアクションを解釈するために、解釈関数を更新する必要があります。以前は計算を解釈するために <code>Writer String</code>モナドを使っていましたが、このモナドは新しい名前を生成する能力を持っていないので、何か他のものに切り替えなければなりません。</p>
-<p><code>WriterT</code>モナド変換子は <code>State</code>モナドと共に使用して、必要な効果を組み合わせることができます。型シグネチャを短く保てるように、この解釈モナドを型同義語としての定義しておきます。</p>
+<p>最後に、新しいアクションを解釈するために、解釈関数を更新する必要があります。以前は計算を解釈するために <code>Writer String</code>モナドを使っていましたが、このモナドは新しい名前を生成する能力を持っていないので、何か他のものに切り替えなければなりません。<code>WriterT</code>モナド変換子を<code>State</code>モナドと一緒に使うと、必要な作用を組み合わせることができます。型注釈を短く保てるように、この解釈モナドを型同義語として定義しておきます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Interp</span> <span class="fu">=</span> <span class="dt">WriterT</span> <span class="dt">String</span> (<span class="dt">State</span> <span class="dt">Int</span>)</code></pre></div>
-<p>Int型の引数は状態の型で、この場合は増加していくカウンタとして振る舞う数で、一意な名前を生成するのに使われます。</p>
+<p>Int型の引数は状態の型で、この場合は増加していくカウンタとして振る舞う数であり、一意な名前を生成するのに使われます。</p>
 <p><code>Writer</code>と <code>WriterT</code>モナドはそれらのアクションを抽象化するのに同じ型クラスメンバを使うので、どのアクションも変更する必要がありません。必要なのは、 <code>Writer String</code>への参照すべてを <code>Interp</code>で置き換えることだけです。しかし、この計算を実行するために使われるハンドラを変更しなければいけません。 <code>execWriter</code>の代わりに、 <code>evalState</code>を使います。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">render ::</span> <span class="dt">Element</span> <span class="ot">-&gt;</span> <span class="dt">String</span>
 render e <span class="fu">=</span> evalState (execWriterT (renderElement e)) <span class="dv">0</span></code></pre></div>
@@ -554,7 +555,7 @@ unit</code></pre>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">isMobile ::</span> <span class="dt">Content</span> <span class="dt">Boolean</span></code></pre></div></li>
 </ol>
 <p>　 このアクションは、この文書がモバイルデバイス上での表示のためにレンダリングされているかどうかを示す真偽値を返します。 　<br />
-　 <strong>ヒント</strong>：<code>ask</code>アクションと <code>ReaderT</code>型変換子を使って、このアクションを解釈してください。あるいは、 <code>RWS</code>モナドを使うことを検討してみてください。</p>
+　 <strong>ヒント</strong>：<code>ask</code>アクションと<code>ReaderT</code>型変換子を使って、このアクションを解釈してみてください。あるいは、<code>RWS</code>モナドを使うほうが好みの人もいるかもしれません。</p>
 </blockquote>
 <h2 id="まとめ"><span class="header-section-number">14.9</span> まとめ</h2>
 <p>この章では、いくつかの標準的な技術を使って、単純な実装を段階的に改善することにより、HTML文書を作成するための領域特化言語を開発しました。</p>
@@ -562,20 +563,14 @@ unit</code></pre>
 <li>データ表現の詳細を隠蔽し、<strong>構築方法により正しい</strong>文書を作ることだけを許可するために、<strong>スマート構築子</strong>を使いました。</li>
 <li>言語の構文を改善するために、<strong>ユーザ定義の中置２項演算子</strong>を使用しました。</li>
 <li>使用者が間違った型の属性値を提供するのを防ぐために、データの型に追加の情報を符号化する<strong>幻影型</strong>を使用しました。</li>
-<li><strong>Freeモナド</strong>を使って、内容の集まりの配列内包表記をdo表記で提供するモナド表現に変換しました。モナドの新しいアクションをサポートするためにこの表現を拡張し、標準のモナド型変換子でモナド計算を解釈しました。</li>
+<li><strong>Freeモナド</strong>を使って、内容の集まりの配列的な表現を、do表記を提供するモナド的な表現に変換しました。この表現を拡張してモナドの新しいアクションを提供し、標準のモナド型変換子でモナドの計算を解釈しました。</li>
 </ul>
 <p>使用者が間違いを犯すのを防ぎ、領域特化言語の構文を改良するために、これらの手法はすべてPureScriptのモジュールと型システムを活用しています。</p>
 <p>関数型プログラミング言語による領域特化言語の実装は活発に研究されている分野ですが、いくつかの簡単なテクニックに対して役に立つ導入を提供し、表現力豊かな型を持つ言語で作業すること威力を示すことができていれば幸いです。</p>
-      <p class="home" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
+<p class="home">
+<a href="index.html">&lt; 目次に戻る</a>
+</p>
     </div>
-
-    <script>
-        if(location.pathname !== "/purescript/" && location.pathname !== "/purescript/index.html"){
-            Array.prototype.forEach.call(document.querySelectorAll(".home"), function(elem){
-                elem.style.visibility = "visible";
-            });
-        }
-    </script>
   </div>
 </body>
 </html>

@@ -109,7 +109,7 @@ foreign import readFileImpl
          (Eff (fs :: FS | eff) Unit)
 ```
 
-JavaScriptモジュールでは、 `readFileImpl`は次のように定義されます。
+外部JavaScriptモジュールでは、`readFileImpl`は次のように定義されます。
 
 ```javascript
 exports.readFileImpl = function(path, onSuccess, onFailure) {
@@ -197,15 +197,15 @@ newtype ContT r m a = ContT ((a -> m r) -> m r)
 
 **継続**(continuation)はコールバックの別名です。継続は計算の**残余**(remainder)を捕捉します。ここで「残余」とは、非同期呼び出しが行われ、結果が提供された後に起こることを指しています。
 
-`ContT`データ構築子の引数は `readFile`と `writeFile`の型ととてもよく似ています。実際、もし型 `a`を型 `ErrorCode String`、 `r`を `Unit`、 `m`をモナド `Eff(fs :: FS | eff)`というように選ぶと、 `readFile`の型の右辺を復元することができます。 
+`ContT`データ構築子の引数は `readFile`と `writeFile`の型ととてもよく似ています。実際、もし型`a`を`ErrorCode String`型、`r`を`Unit`、`m`をモナド`Eff(fs :: FS | eff)`というように選ぶと、`readFile`の型の右辺を復元することができます。 
 
-`readFile`と `writeFile`を組み立てる `Async`モナドを定義するため、型同義語を導入します。
+`readFile`や`writeFile`のような非同期のアクションを組み立てるために使う`Async`モナドを定義するため、次のような型同義語を導入します。
 
 ```haskell
 type Async eff = ContT Unit (Eff eff)
 ```
 
-今回の目的では `Eff`モナドを変換するために常に `ContT`を使い、型 `r`は常に `Unit`になりますが、このことは必須ではありません。
+今回の目的では `Eff`モナドを変換するために常に `ContT`を使い、型 `r`は常に `Unit`になりますが、必ずそうしなければならないというわけではありません。
 
 `ContT`データ構築子を適用するだけで、 `readFile`と `writeFile`を `Async`モナドの計算として扱うことができます。
 
@@ -336,7 +336,7 @@ require('request')('http://purescript.org'), function(err, _, body) {
 });
 ```
 
-`Async`モナドを使ってこの簡単な例をPureScriptに再作成します。
+`Async`モナドを使うと、この簡単な例をPureScriptで書きなおすことができます。
 
 `Network.HTTP.Client`モジュールでは、 `request`メソッドは以下のようなAPIを持つ関数 `getImpl`としてラップされています。
 
@@ -367,7 +367,7 @@ exports.getImpl = function(uri, done, fail) {
 };
 ```
 
-再び `Data.Function.Uncurried`モジュールを使って、これを通常のカリー化されたPureScript関数に変換します。先ほどと同じように、２つのコールバックを型 `Maybe Chunk`の値を受け入れるひとつのコールバックに変換しています。 `String String`型の値を受け取り、 `ContT`データ構築子を適用して `Async`モナドのアクションを構築します。
+再び`Data.Function.Uncurried`モジュールを使って、これを通常のカリー化されたPureScript関数に変換します。先ほどと同じように、２つのコールバックを`Maybe Chunk`型の値を受け入れるひとつのコールバックに変換しています。`Either String String`型の値を受け取り、`ContT`データ構築子を適用して`Async`モナドのアクションを構築します。
 
 ```haskell
 get :: forall eff.
@@ -389,19 +389,24 @@ get req = ContT \k ->
 
 `ContT`モナドとdo記法を使って、非同期計算を順番に実行されるように合成する方法を見てきました。非同期計算を**並列に**合成することもできたら便利でしょう。
 
-`Eff`モナドを変換するために `ContT`を使用している場合、単に２つの計算のうち一方を開始した後に他方の計算を開始すれば、並列に計算することができます。
+もし`ContT`を使って`Eff`モナドを変換しているなら、単に２つの計算のうち一方を開始した後に他方の計算を開始すれば、並列に計算することができます。
 
-クラスは2つの関数を定義します。
+`purescript-parallel`パッケージは型クラス`Parallel`を定義します。この型クラスはモナドのために並列計算を提供する`Async`のようなものです。以前に本書でApplicative関手を導入したとき、並列計算を合成するときにApplicative関手がどのように便利なのかを観察しました。実は`Parallel`のインスタンスは、(`Async`のような)モナド`m`と、並列に計算を合成するために使われるApplicative関手`f`との対応関係を定義しているのです。
+
+```haskell
+class (Monad m, Applicative f) <= Parallel f m | m -> f, f -> m where
+  sequential :: forall a. f a -> m a
+  parallel :: forall a. m a -> f a
+```
+
+このクラスは2つの関数を定義しています。
 
 - `parallel`：モナド `m`を計算し、それを応用ファンクタ `f`の計算に変換します。
 - `sequential`：反対方向の変換を行います。
 
-`purescript-parallel`ライブラリは `Async`モナドの `Parallel`インスタンスを提供します。 これは、2つの連続のどれが呼び出されたかを追跡することによって、変更可能な参照を使用して並列に `Async`アクションを組み合わせます。 両方の結果が返されたら、最終結果を計算してメインの継続に渡すことができます。
+`purescript-parallel`ライブラリは `Async`モナドの `Parallel`インスタンスを提供します。 これは、2つの継続(continuation)のどちらが呼び出されたかを追跡することによって、変更可能な参照を使用して並列に `Async`アクションを組み合わせます。 両方の結果が返されたら、最終結果を計算してメインの継続に渡すことができます。
 
-`parallel`関数を使って `readFileCont`アクションのバージョンを作成することができます。これは並列に組み合わせることができます。
-２つのテキストファイルを並列に読み取り、連結してその結果を出力する簡単な例は次のようになります。
-
-`Parallel`型構築子を使用して並列に二つのファイルを読むように上の例を書き直すことができるようになりました。
+`parallel`関数を使うと`readFileCont`アクションの別のバージョンを作成することもできます。これは並列に組み合わせることができます。２つのテキストファイルを並列に読み取り、連結してその結果を出力する簡単な例は次のようになります。
 
 ```haskell
 import Prelude
@@ -418,6 +423,7 @@ main = flip runContT logShow do
 ```
 
 `readFileCont`は `Either ErrorCode String`型の値を返すので、 `lift2`を使って `Either`型構築子より `append`関数を持ち上げて結合関数を形成する必要があることに注意してください。
+
 Applicative関手では任意個引数の関数の持ち上げができるので、このApplicativeコンビネータを使ってより多くの計算を並列に実行することができます。 `traverse`と `sequence`のようなApplicative関手を扱うすべての標準ライブラリ関数から恩恵を受けることもできます。
 
 必要に応じて `Parralel`と `runParallel`を使って型構築子を変更することで、do記法ブロックのApplicativeコンビネータを使って、直列的なコードの一部で並列計算を結合したり、またはその逆を行ったりすることができます。

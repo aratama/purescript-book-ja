@@ -69,7 +69,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     </header>
 
     <div class="markdown-body content">
-      <p class="home" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
+<p class="home">
+<a href="index.html">&lt; 目次に戻る</a>
+</p>
 <h1 id="コールバック地獄"><span class="header-section-number">12</span> コールバック地獄</h1>
 <h2 id="この章の目標"><span class="header-section-number">12.1</span> この章の目標</h2>
 <p>この章では、これまでに見てきたモナド変換子やApplicative関手といった道具が、現実世界の問題解決にどのように役立つかを見ていきましょう。ここでは特に、<strong>コールバック地獄</strong>(callback hell)の問題を解決について見ていきます。</p>
@@ -148,7 +150,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
          (<span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)
          (<span class="dt">ErrorCode</span> <span class="ot">-&gt;</span> <span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)
          (<span class="dt">Eff</span> (<span class="ot">fs ::</span> <span class="dt">FS</span> <span class="fu">|</span> eff) <span class="dt">Unit</span>)</code></pre></div>
-<p>JavaScriptモジュールでは、 <code>readFileImpl</code>は次のように定義されます。</p>
+<p>外部JavaScriptモジュールでは、<code>readFileImpl</code>は次のように定義されます。</p>
 <div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">exports</span>.<span class="at">readFileImpl</span> <span class="op">=</span> <span class="kw">function</span>(path<span class="op">,</span> onSuccess<span class="op">,</span> onFailure) <span class="op">{</span>
   <span class="cf">return</span> <span class="kw">function</span>() <span class="op">{</span>
     <span class="at">require</span>(<span class="st">&#39;fs&#39;</span>).<span class="at">readFile</span>(path<span class="op">,</span> <span class="op">{</span>
@@ -211,10 +213,10 @@ writeFile path text k <span class="fu">=</span>
 <p><code>ContT</code>は次のようなnewtypeとして定義されます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">ContT</span> r m a <span class="fu">=</span> <span class="dt">ContT</span> ((a <span class="ot">-&gt;</span> m r) <span class="ot">-&gt;</span> m r)</code></pre></div>
 <p><strong>継続</strong>(continuation)はコールバックの別名です。継続は計算の<strong>残余</strong>(remainder)を捕捉します。ここで「残余」とは、非同期呼び出しが行われ、結果が提供された後に起こることを指しています。</p>
-<p><code>ContT</code>データ構築子の引数は <code>readFile</code>と <code>writeFile</code>の型ととてもよく似ています。実際、もし型 <code>a</code>を型 <code>ErrorCode String</code>、 <code>r</code>を <code>Unit</code>、 <code>m</code>をモナド <code>Eff(fs :: FS | eff)</code>というように選ぶと、 <code>readFile</code>の型の右辺を復元することができます。</p>
-<p><code>readFile</code>と <code>writeFile</code>を組み立てる <code>Async</code>モナドを定義するため、型同義語を導入します。</p>
+<p><code>ContT</code>データ構築子の引数は <code>readFile</code>と <code>writeFile</code>の型ととてもよく似ています。実際、もし型<code>a</code>を<code>ErrorCode String</code>型、<code>r</code>を<code>Unit</code>、<code>m</code>をモナド<code>Eff(fs :: FS | eff)</code>というように選ぶと、<code>readFile</code>の型の右辺を復元することができます。</p>
+<p><code>readFile</code>や<code>writeFile</code>のような非同期のアクションを組み立てるために使う<code>Async</code>モナドを定義するため、次のような型同義語を導入します。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Async</span> eff <span class="fu">=</span> <span class="dt">ContT</span> <span class="dt">Unit</span> (<span class="dt">Eff</span> eff)</code></pre></div>
-<p>今回の目的では <code>Eff</code>モナドを変換するために常に <code>ContT</code>を使い、型 <code>r</code>は常に <code>Unit</code>になりますが、このことは必須ではありません。</p>
+<p>今回の目的では <code>Eff</code>モナドを変換するために常に <code>ContT</code>を使い、型 <code>r</code>は常に <code>Unit</code>になりますが、必ずそうしなければならないというわけではありません。</p>
 <p><code>ContT</code>データ構築子を適用するだけで、 <code>readFile</code>と <code>writeFile</code>を <code>Async</code>モナドの計算として扱うことができます。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">readFileCont
 <span class="ot">  ::</span> forall eff
@@ -309,7 +311,7 @@ copyFileContEx src dest <span class="fu">=</span> <span class="kw">do</span>
     <span class="va">console</span>.<span class="at">log</span>(body)<span class="op">;</span>
   <span class="op">}</span>
 <span class="op">}</span>)<span class="op">;</span></code></pre></div>
-<p><code>Async</code>モナドを使ってこの簡単な例をPureScriptに再作成します。</p>
+<p><code>Async</code>モナドを使うと、この簡単な例をPureScriptで書きなおすことができます。</p>
 <p><code>Network.HTTP.Client</code>モジュールでは、 <code>request</code>メソッドは以下のようなAPIを持つ関数 <code>getImpl</code>としてラップされています。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">foreign <span class="kw">import </span>data <span class="dt">HTTP</span> :: <span class="dt">Effect</span>
 
@@ -332,7 +334,7 @@ foreign <span class="kw">import </span>getImpl
     <span class="op">}</span>)<span class="op">;</span>
   <span class="op">};</span>
 <span class="op">};</span></code></pre></div>
-<p>再び <code>Data.Function.Uncurried</code>モジュールを使って、これを通常のカリー化されたPureScript関数に変換します。先ほどと同じように、２つのコールバックを型 <code>Maybe Chunk</code>の値を受け入れるひとつのコールバックに変換しています。 <code>String String</code>型の値を受け取り、 <code>ContT</code>データ構築子を適用して <code>Async</code>モナドのアクションを構築します。</p>
+<p>再び<code>Data.Function.Uncurried</code>モジュールを使って、これを通常のカリー化されたPureScript関数に変換します。先ほどと同じように、２つのコールバックを<code>Maybe Chunk</code>型の値を受け入れるひとつのコールバックに変換しています。<code>Either String String</code>型の値を受け取り、<code>ContT</code>データ構築子を適用して<code>Async</code>モナドのアクションを構築します。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">get ::</span> forall eff<span class="fu">.</span>
   <span class="dt">URI</span> <span class="ot">-&gt;</span>
   <span class="dt">Async</span> (<span class="ot">http ::</span> <span class="dt">HTTP</span> <span class="fu">|</span> eff) (<span class="dt">Either</span> <span class="dt">String</span> <span class="dt">String</span>)
@@ -348,15 +350,18 @@ get req <span class="fu">=</span> <span class="dt">ContT</span> \k <span class="
 </blockquote>
 <h2 id="並列計算"><span class="header-section-number">12.7</span> 並列計算</h2>
 <p><code>ContT</code>モナドとdo記法を使って、非同期計算を順番に実行されるように合成する方法を見てきました。非同期計算を<strong>並列に</strong>合成することもできたら便利でしょう。</p>
-<p><code>Eff</code>モナドを変換するために <code>ContT</code>を使用している場合、単に２つの計算のうち一方を開始した後に他方の計算を開始すれば、並列に計算することができます。</p>
-<p>クラスは2つの関数を定義します。</p>
+<p>もし<code>ContT</code>を使って<code>Eff</code>モナドを変換しているなら、単に２つの計算のうち一方を開始した後に他方の計算を開始すれば、並列に計算することができます。</p>
+<p><code>purescript-parallel</code>パッケージは型クラス<code>Parallel</code>を定義します。この型クラスはモナドのために並列計算を提供する<code>Async</code>のようなものです。以前に本書でApplicative関手を導入したとき、並列計算を合成するときにApplicative関手がどのように便利なのかを観察しました。実は<code>Parallel</code>のインスタンスは、(<code>Async</code>のような)モナド<code>m</code>と、並列に計算を合成するために使われるApplicative関手<code>f</code>との対応関係を定義しているのです。</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> (<span class="dt">Monad</span> m, <span class="dt">Applicative</span> f) <span class="fu">&lt;=</span> <span class="dt">Parallel</span> f m <span class="fu">|</span> m <span class="ot">-&gt;</span> f, f <span class="ot">-&gt;</span> m <span class="kw">where</span>
+<span class="ot">  sequential ::</span> forall a<span class="fu">.</span> f a <span class="ot">-&gt;</span> m a
+<span class="ot">  parallel ::</span> forall a<span class="fu">.</span> m a <span class="ot">-&gt;</span> f a</code></pre></div>
+<p>このクラスは2つの関数を定義しています。</p>
 <ul>
 <li><code>parallel</code>：モナド <code>m</code>を計算し、それを応用ファンクタ <code>f</code>の計算に変換します。</li>
 <li><code>sequential</code>：反対方向の変換を行います。</li>
 </ul>
-<p><code>purescript-parallel</code>ライブラリは <code>Async</code>モナドの <code>Parallel</code>インスタンスを提供します。 これは、2つの連続のどれが呼び出されたかを追跡することによって、変更可能な参照を使用して並列に <code>Async</code>アクションを組み合わせます。 両方の結果が返されたら、最終結果を計算してメインの継続に渡すことができます。</p>
-<p><code>parallel</code>関数を使って <code>readFileCont</code>アクションのバージョンを作成することができます。これは並列に組み合わせることができます。 ２つのテキストファイルを並列に読み取り、連結してその結果を出力する簡単な例は次のようになります。</p>
-<p><code>Parallel</code>型構築子を使用して並列に二つのファイルを読むように上の例を書き直すことができるようになりました。</p>
+<p><code>purescript-parallel</code>ライブラリは <code>Async</code>モナドの <code>Parallel</code>インスタンスを提供します。 これは、2つの継続(continuation)のどちらが呼び出されたかを追跡することによって、変更可能な参照を使用して並列に <code>Async</code>アクションを組み合わせます。 両方の結果が返されたら、最終結果を計算してメインの継続に渡すことができます。</p>
+<p><code>parallel</code>関数を使うと<code>readFileCont</code>アクションの別のバージョンを作成することもできます。これは並列に組み合わせることができます。２つのテキストファイルを並列に読み取り、連結してその結果を出力する簡単な例は次のようになります。</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Prelude</span>
 <span class="kw">import </span><span class="dt">Control.Apply</span> (lift2)
 <span class="kw">import </span><span class="dt">Control.Monad.Cont.Trans</span> (runContT)
@@ -368,7 +373,8 @@ main <span class="fu">=</span> flip runContT logShow <span class="kw">do</span>
    lift2 append
      <span class="fu">&lt;$&gt;</span> parallel (readFileCont <span class="st">&quot;/tmp/1.txt&quot;</span>)
      <span class="fu">&lt;*&gt;</span> parallel (readFileCont <span class="st">&quot;/tmp/2.txt&quot;</span>)</code></pre></div>
-<p><code>readFileCont</code>は <code>Either ErrorCode String</code>型の値を返すので、 <code>lift2</code>を使って <code>Either</code>型構築子より <code>append</code>関数を持ち上げて結合関数を形成する必要があることに注意してください。 Applicative関手では任意個引数の関数の持ち上げができるので、このApplicativeコンビネータを使ってより多くの計算を並列に実行することができます。 <code>traverse</code>と <code>sequence</code>のようなApplicative関手を扱うすべての標準ライブラリ関数から恩恵を受けることもできます。</p>
+<p><code>readFileCont</code>は <code>Either ErrorCode String</code>型の値を返すので、 <code>lift2</code>を使って <code>Either</code>型構築子より <code>append</code>関数を持ち上げて結合関数を形成する必要があることに注意してください。</p>
+<p>Applicative関手では任意個引数の関数の持ち上げができるので、このApplicativeコンビネータを使ってより多くの計算を並列に実行することができます。 <code>traverse</code>と <code>sequence</code>のようなApplicative関手を扱うすべての標準ライブラリ関数から恩恵を受けることもできます。</p>
 <p>必要に応じて <code>Parralel</code>と <code>runParallel</code>を使って型構築子を変更することで、do記法ブロックのApplicativeコンビネータを使って、直列的なコードの一部で並列計算を結合したり、またはその逆を行ったりすることができます。</p>
 <blockquote>
 <h2 id="演習-3" class="unnumbered">演習</h2>
@@ -400,17 +406,11 @@ main <span class="fu">=</span> flip runContT logShow <span class="kw">do</span>
 <div class="next">
 次の第13章を読む
 </div>
-<p></a></p>
-      <p class="home" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
+</a>
+<p class="home">
+<a href="index.html">&lt; 目次に戻る</a>
+</p>
     </div>
-
-    <script>
-        if(location.pathname !== "/purescript/" && location.pathname !== "/purescript/index.html"){
-            Array.prototype.forEach.call(document.querySelectorAll(".home"), function(elem){
-                elem.style.visibility = "visible";
-            });
-        }
-    </script>
   </div>
 </body>
 </html>

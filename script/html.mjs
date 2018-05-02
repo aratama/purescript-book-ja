@@ -41,6 +41,7 @@ async function main(){
 
     
     const content = await fs.readFile(file)
+    c.stdin.write(`<p class="home"><a href="index.html">&lt; 目次に戻る</a></p>\n`);       
     c.stdin.write(content);
     c.stdin.write("\n");   
     
@@ -48,6 +49,8 @@ async function main(){
       const next = i + 2
       c.stdin.write(`<a href="chapter${next.toString().padStart(2, "0")}.html"><div class="next">次の第${next}章を読む</div></a>\n`)
     }
+
+    c.stdin.write(`<p class="home"><a href="index.html">&lt; 目次に戻る</a></p>\n`);
 
     c.stdin.end(); 
   }

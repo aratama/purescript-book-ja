@@ -69,7 +69,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     </header>
 
     <div class="markdown-body content">
-      <p class="home" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
+<p class="home">
+<a href="index.html">&lt; 目次に戻る</a>
+</p>
 <h1 id="モナドの探求"><span class="header-section-number">11</span> モナドの探求</h1>
 <h2 id="この章の目標"><span class="header-section-number">11.1</span> この章の目標</h2>
 <p>この章の目標は、異なるモナドから提供された副作用を合成する方法を提供する<strong>モナド変換子</strong>(monad transformers)について学ぶことです。NodeJSのコンソール上で遊ぶことができる、テキストアドベンチャーゲームを題材として扱います。ゲームの様々な副作用(ロギング、状態、および設定)がすべてモナド変換子スタックによって提供されます。</p>
@@ -403,7 +405,7 @@ split <span class="fu">=</span> <span class="kw">do</span>
 <p>この構文解析器は次のように動作しなくてはなりません。</p>
 <pre class="text"><code>&gt; runParser (string &quot;abc&quot;) &quot;abcdef&quot;
 (Right (Tuple (Tuple &quot;abc&quot; &quot;def&quot;) [&quot;The state is abcdef&quot;]))</code></pre>
-<p><strong>ヒント</strong>：出発点として <code>split</code>の実装を使うといいでしょう。 <code>stripPrefix</code>関数の使用も役に立ちます。</p></li>
+<p><strong>ヒント</strong>：出発点として <code>split</code>の実装を使うといいでしょう。<code>stripPrefix</code>関数も役に立ちます。</p></li>
 <li><p>(難しい) 以前 <code>Reader</code>モナドを使用して書いた文書出力ライブラリを、 <code>ReaderT</code>と <code>WriterT</code>モナド変換子を使用して再実装してください。</p>
 <p>文字列を出力する <code>line</code>や文字列を連結する <code>cat</code>を使うのではなく、 <code>WriteT</code>モナド変換子と一緒に <code>Array String</code>モノイドを使い、結果へ行を追加するのに <code>tell</code>を使ってください。</p></li>
 </ol>
@@ -682,17 +684,11 @@ lineHandler currentState input <span class="fu">=</span> <span class="kw">do</sp
 <div class="next">
 次の第12章を読む
 </div>
-<p></a></p>
-      <p class="home" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
+</a>
+<p class="home">
+<a href="index.html">&lt; 目次に戻る</a>
+</p>
     </div>
-
-    <script>
-        if(location.pathname !== "/purescript/" && location.pathname !== "/purescript/index.html"){
-            Array.prototype.forEach.call(document.querySelectorAll(".home"), function(elem){
-                elem.style.visibility = "visible";
-            });
-        }
-    </script>
   </div>
 </body>
 </html>

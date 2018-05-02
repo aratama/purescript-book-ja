@@ -556,7 +556,7 @@ split = do
 >     (Right (Tuple (Tuple "abc" "def") ["The state is abcdef"]))
 >     ```
 > 
->     **ヒント**：出発点として `split`の実装を使うといいでしょう。 `stripPrefix`関数の使用も役に立ちます。
+>     **ヒント**：出発点として `split`の実装を使うといいでしょう。`stripPrefix`関数も役に立ちます。
 > 
 > 1. (難しい) 以前 `Reader`モナドを使用して書いた文書出力ライブラリを、 `ReaderT`と `WriterT`モナド変換子を使用して再実装してください。
 > 

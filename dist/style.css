@@ -160,9 +160,6 @@ table.sourceCode pre {
         background-color: transparent;
         font-size: 16pt;
     }
-    .previous {
-        visibility: hidden;
-    }
     .main {
         font-family: 'MS PMincho', Serif;
         text-justify: inter-cluster;
@@ -180,9 +177,6 @@ table.sourceCode pre {
     }
     pre {
         overflow: visible !important;
-    }
-    .home {
-        display: none;
     }
 
     div.content {
