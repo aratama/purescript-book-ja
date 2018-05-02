@@ -65,7 +65,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     </header>
 
     <div class="markdown-body content">
-      <p class="previous" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
+      <p class="home" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
 <h1 id="テストの自動生成"><span class="header-section-number">13</span> テストの自動生成</h1>
 <h2 id="この章の目標"><span class="header-section-number">13.1</span> この章の目標</h2>
 <p>この章では、テスティングの問題に対する、型クラスの特に洗練された応用について示します。<strong>どのようにテストするのかを</strong>コンパイラに教えるのではなく、コードが<strong>どのような性質を持っているべきか</strong>を教えることでテストします。型クラスを使って無作為データ生成のための定型コードを隠し、テストケースを仕様から無作為に生成することができます。これは<strong>生成的テスティング</strong>(generative testing、またはproperty-based testing）と呼ばれ、Haskellの<a href="http://www.haskell.org/haskellwiki/Introduction_to_QuickCheck1">QuickCheck</a>ライブラリによって知られるようになった手法です。</p>
@@ -304,12 +304,12 @@ Success : Success : ...</code></pre>
 <li><code>Arbitrary</code>と <code>Coarbitrary</code>型クラスは、定型的なテストコードの自動生成を可能にし、高階性質関数を可能にすることも説明しました。</li>
 <li>独自のデータ型に対して <code>Arbitrary</code>と <code>Coarbitrary</code>インスタンスを実装する方法を説明しました。</li>
 </ul>
-      <p class="previous" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
+      <p class="home" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
     </div>
 
     <script>
         if(location.pathname !== "/purescript/" && location.pathname !== "/purescript/index.html"){
-            Array.prototype.forEach.call(document.querySelectorAll(".previous"), function(elem){
+            Array.prototype.forEach.call(document.querySelectorAll(".home"), function(elem){
                 elem.style.visibility = "visible";
             });
         }

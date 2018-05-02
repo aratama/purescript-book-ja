@@ -20,7 +20,7 @@
 - [原書GitHub](https://github.com/paf31/purescript-book)
 - [単一HTMLページ版](purescript-book-ja.html)
 - [EPUB版](purescript-book-ja.epub)
-<!-- - [PDF版](purescript-book-ja.pdf) -->
+- [PDF版](purescript-book-ja.pdf)
 
 
 ## ライセンス

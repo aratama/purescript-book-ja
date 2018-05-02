@@ -39,14 +39,14 @@ $endfor$
     </header>
 
     <div class="markdown-body content">
-      <p class="previous" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
+      <p class="home" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
 $body$
-      <p class="previous" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
+      <p class="home" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
     </div>
 
     <script>
         if(location.pathname !== "/purescript/" && location.pathname !== "/purescript/index.html"){
-            Array.prototype.forEach.call(document.querySelectorAll(".previous"), function(elem){
+            Array.prototype.forEach.call(document.querySelectorAll(".home"), function(elem){
                 elem.style.visibility = "visible";
             });
         }

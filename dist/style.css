@@ -53,7 +53,6 @@ header p.author {
 div.content {
     padding: 30px;
     font-family: 'Yu Gothic', 'Roboto', 'Meiryo UI', sans-serif !important;
-    /* font-family: 'Yu Mincho', serif !important; */
 }
 
 div.content a {
@@ -117,7 +116,10 @@ table.sourceCode td {
 table.sourceCode pre {
     margin: 0;
     border: none;
+    
 }
+
+
 
 @media screen and (min-width: 800px) {
   body {
@@ -135,9 +137,14 @@ table.sourceCode pre {
   }
 }
 
+@page {
+    margin: 12mm;
+}
+
 @media print {
     body {
         background-color: transparent;
+        font-size: 16pt;
     }
     .previous {
         visibility: hidden;
@@ -159,6 +166,17 @@ table.sourceCode pre {
     }
     pre {
         overflow: visible !important;
+    }
+    .home {
+        display: none;
+    }
+
+    div.content {
+        font-family: 'Yu Mincho', serif !important;
+    }
+
+    .markdown-body .highlight code, .markdown-body code {
+        font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
     }
 }
 

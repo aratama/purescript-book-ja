@@ -65,7 +65,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     </header>
 
     <div class="markdown-body content">
-      <p class="previous" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
+      <p class="home" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
 <h1 id="applicativeによる検証"><span class="header-section-number">7</span> Applicativeによる検証</h1>
 <h2 id="この章の目標"><span class="header-section-number">7.1</span> この章の目標</h2>
 <p>この章では、 <code>Applicative</code>型クラスによって表現される<strong>Applicative関手</strong>(applicative functor)という重要な抽象化と新たに出会うことになります。名前が難しそうに思えても心配しないでください。フォームデータの検証という実用的な例を使ってこの概念を説明していきます。Applicative関手を使うと、大量の決まり文句を伴うような入力項目の内容を検証するためのコードを、簡潔で宣言的な記述へと変えることができるようになります。</p>
@@ -444,12 +444,12 @@ traverse f (<span class="dt">Cons</span> x xs) <span class="fu">=</span> <span c
 </ul>
 <p>Applicative関手は多くの問題に対して優れた解決策を与える興味深い抽象化です。本書を通じて何度も見ることになるでしょう。今回は、<strong>どうやって</strong>検証を行うかではなく、<strong>何を</strong>検証器が検証すべきなのかを定義することを可能にする、宣言的なスタイルで書く手段をApplicative関手は提供しました。一般に、Applicative関手は<strong>領域特化言語</strong>の設計のための便利な道具になります。</p>
 <p>次の章では、これに関連する<strong>モナド</strong>という型クラスについて見ていきましょう。</p>
-      <p class="previous" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
+      <p class="home" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
     </div>
 
     <script>
         if(location.pathname !== "/purescript/" && location.pathname !== "/purescript/index.html"){
-            Array.prototype.forEach.call(document.querySelectorAll(".previous"), function(elem){
+            Array.prototype.forEach.call(document.querySelectorAll(".home"), function(elem){
                 elem.style.visibility = "visible";
             });
         }

@@ -3,4 +3,6 @@ import util from 'util'
 
 const rimrafp = util.promisify(rimraf)
 
-rimrafp('./dist')
+rimrafp('./dist/*.html')
+rimrafp('./dist/*.png')
+rimrafp('./dist/*.css')

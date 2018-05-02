@@ -7,7 +7,8 @@
     "test": " ",
     "clean": "node --experimental-modules script/clean.mjs",
     "html": "npm run clean && node --experimental-modules script/html.mjs",
-    "epub": "npm run html && node --experimental-modules script/epub.mjs"
+    "epub": "npm run html && node --experimental-modules script/epub.mjs",
+    "pdf": "chrome --headless --disable-gpu --print-to-pdf=./dist/purescript-book-ja.pdf ./dist/purescript-book-ja.html"
   },
   "repository": {
     "type": "git",

@@ -65,7 +65,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     </header>
 
     <div class="markdown-body content">
-      <p class="previous" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
+      <p class="home" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
 <h1 id="モナドの探求"><span class="header-section-number">11</span> モナドの探求</h1>
 <h2 id="この章の目標"><span class="header-section-number">11.1</span> この章の目標</h2>
 <p>この章の目標は、異なるモナドから提供された副作用を合成する方法を提供する<strong>モナド変換子</strong>(monad transformers)について学ぶことです。NodeJSのコンソール上で遊ぶことができる、テキストアドベンチャーゲームを題材として扱います。ゲームの様々な副作用(ロギング、状態、および設定)がすべてモナド変換子スタックによって提供されます。</p>
@@ -674,12 +674,12 @@ lineHandler currentState input <span class="fu">=</span> <span class="kw">do</sp
 <p>モナド変換子によって、型システムによって作用が追跡される命令型のスタイルで、安全なコードを書くことができることを見てきました。また、型クラスは、コードの再利用を可能にするモナドによって提供される、アクション上の抽象化の強力な方法を提供します。標準的なモナド変換子を組み合わせることにより、 <code>Alternative</code>や <code>MonadPlus</code>のような標準的な抽象化を使用して、役に立つモナドを構築することができました。</p>
 <p>モナド変換子は、高階多相や多変数型クラスなどの高度な型システムの機能を利用することによって記述することができ、表現力の高いコードの優れた実演となっています。</p>
 <p>次の章では、非同期なJavaScriptのコードにありがちな不満、<strong>コールバック地獄</strong>の問題に対して、モナド変換子がどのような洗練された解決策を与えるのかを見ていきます。</p>
-      <p class="previous" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
+      <p class="home" style="visibility:hidden;"><a href="index.html">&lt; 目次に戻る</a></p>
     </div>
 
     <script>
         if(location.pathname !== "/purescript/" && location.pathname !== "/purescript/index.html"){
-            Array.prototype.forEach.call(document.querySelectorAll(".previous"), function(elem){
+            Array.prototype.forEach.call(document.querySelectorAll(".home"), function(elem){
                 elem.style.visibility = "visible";
             });
         }
