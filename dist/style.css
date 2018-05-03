@@ -90,7 +90,7 @@ h4,
 h5,
 h6 {
     position: static !important;
-    font-family: serif;
+    font-family: "Yu Mincho", serif;
     font-weight: bold;
     letter-spacing: 0.12em;
 }
