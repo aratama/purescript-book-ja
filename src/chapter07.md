@@ -10,7 +10,10 @@
 
 ## プロジェクトの準備
 
-この章のソース·コードは、 `src/Data/AddressBook.purs`と `src/Data/AddressBook/Validation.purs`というファイルで定義されています。
+この章のソース·コードは、次の２つのファイルで定義されています。
+
+* `src/Data/AddressBook.purs`
+* `src/Data/AddressBook/Validation.purs`
 
 このプロジェクトは多くのBower依存関係を持っていますが、その大半はすでに見てきたものです。新しい依存関係は２つです。
 
