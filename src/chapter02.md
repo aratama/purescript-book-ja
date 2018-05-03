@@ -19,8 +19,7 @@ PureScript開発環境を準備するために、次のツールを使います�
 
 ## PureScriptのインストール
 
-PureScriptコンパイラをインストールするときにお勧めなのは、[PureScriptのウェブサイト](http://purescript.org)からバイナリディストリビューションとしてダウンロードする方法です。
-PureScriptコンパイラおよび関連する実行ファイルがパス上で利用できるかどうか確認をしてください。確認のために、コマンドラインでPureScriptコンパイラを実行してみましょう。
+PureScriptコンパイラをインストールするときにお勧めなのは、[PureScriptのウェブサイト](http://purescript.org)からバイナリ配布物としてダウンロードする方法です。PureScriptコンパイラおよび関連する実行ファイルが、パス上で利用できるかどうか確認をしてください。試しに、コマンドラインでPureScriptコンパイラを実行してみましょう。
 
 ```text
 $ purs
@@ -28,14 +27,14 @@ $ purs
 
 PureScriptコンパイラをインストールする他の選択肢としては、次のようなものがあります。
 
-- NPMを使用する: `npm install -g purescript`
-- ソースコードからコンパイルを行う。この方法については、PureScriptのWebサイトが参考になります
+- NPMを使用する。`npm install -g purescript`
+- ソースコードからコンパイルを行う。この方法については、PureScriptのWebサイトが参考になります。
 
 ## 各ツールのインストール
 
 もし[NodeJS](http://nodejs.org/)がインストールされていないなら、NodeJSをインストールする必要があります。そうするとシステムに `npm`パッケージマネージャもインストールされるはずです。 `npm`がインストールされ、パス上で利用可能であることを確認してください。
 
-`npm`がインストールされたら、 `pulp`と `bower`もインストールする必要があります。プロジェクトがどこで作業しているかにかかわらずこれらのコマンドラインツールを利用可能にするため、通常はグローバルにインストールしておくのがいいでしょう。
+`npm`がインストールされたら、 `pulp`と `bower`もインストールする必要があります。プロジェクトがどこで作業しているかにかかわらずこれらのコマンドラインツールが利用可能であるようにするため、通常はグローバルにインストールしておくのがいいでしょう。
 
 ```text
 $ npm install -g pulp bower
@@ -45,9 +44,8 @@ $ npm install -g pulp bower
 
 ## Hello, PureScript!
 
-まずはシンプルに始めましょう。PureScriptコンパイラ `pulp`を直接使用して、基本的なHello World! プログラムをコンパイルします。
-まず最初に、空のディレクトリ `my-project`を作成し、そこで `pulp init`を実行し
-ます。
+まずはシンプルに始めましょう。PureScriptコンパイラ`pulp`を直接使用して、基本的なHello World! プログラムをコンパイルします。
+最初に空のディレクトリ`my-project`を作成し、そこで`pulp init`を実行します。
 
 ```text
 $ mkdir my-project
@@ -61,9 +59,9 @@ $ ls
 bower.json	src		test
 ```
 
-Pulpは2つのディレクトリ `src`、 `test`と設定ファイル `bower.json`を作成してくれます。 `src`ディレクトリにはソースコードファイルを保存し、 `test`ディレクトリにはテストコードファイルを保存します。 `test`ディレクトリについては、この本の後半で使用します。
+Pulpは`src`と`test`という2つのディレクトリと設定ファイル`bower.json`を作成してくれます。`src`ディレクトリにはソースコードファイルを保存し、`test`ディレクトリにはテストコードファイルを保存します。`test`ディレクトリはこの本の後半で使います。
 
-`src/Main.purs`という名前のファイルに、以下のコードを貼り付けます。
+`src/Main.purs`という名前のファイルに、以下のコードを貼り付けてください。
 
 ```haskell
 module Main where
@@ -104,7 +102,7 @@ $ pulp browserify
 * Browserifying...
 ```
 
-これに続いて、大量のJavaScriptコードがコンソールに表示されます。 これは[Browserify](http://browserify.org/)ツールの出力で、**Prelude**と呼ばれる標準のPureScriptライブラリに加えて、 `src`ディレクトリのコードにも適用されます。 このJavaScriptコードをファイルに保存し、HTML文書に含めることもできます。 これを試しに実行してみると、ブラウザのコンソールに"Hello、World！"という文章が出力されます。
+これに続いて、大量のJavaScriptコードがコンソールに表示されます。 これは[Browserify](http://browserify.org/)の出力で、**Prelude**と呼ばれる標準のPureScriptライブラリに加え、`src`ディレクトリのコードにも適用されます。このJavaScriptコードをファイルに保存し、HTML文書に含めることもできます。これを試しに実行してみると、ブラウザのコンソールに"Hello、World！"という文章が出力されます。
 
 ## 使用されていないコードを取り除く
 

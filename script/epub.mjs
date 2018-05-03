@@ -15,6 +15,7 @@ async function main(){
   const c = await execFilep("pandoc", [
     "--from=markdown", 
     "--to=epub3", 
+    "--number-sections", 
     "--output=./dist/purescript-book-ja.epub", 
     "--template=./templates/default.epub", 
     '--epub-stylesheet', 'node_modules/github-markdown-css/github-markdown.css', 

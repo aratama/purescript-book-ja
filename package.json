@@ -5,7 +5,7 @@
   "main": " ",
   "scripts": {
     "test": " ",
-    "clean": "rimraf ./dist/*.html",
+    "clean": "rimraf ./dist/*.html ./dist/*.epub",
     "html": "npm run clean && node --experimental-modules script/html.mjs",
     "epub": "npm run html && node --experimental-modules script/epub.mjs",
     "pdf": "chrome --headless --disable-gpu --print-to-pdf=./dist/purescript-book-ja.pdf ./dist/purescript-book-ja.html",

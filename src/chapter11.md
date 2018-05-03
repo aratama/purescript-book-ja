@@ -398,7 +398,7 @@ class MonadTrans t where
   lift :: forall m a. Monad m => m a -> t m a
 ```
 
-このクラスは、基礎となる任意のモナド `m`の計算をとり、それをラップされたモナド `t m`へと持ち上げる、 `lift`というひとつの関数だけを持っています。今回の場合、型構築子 `t`は `StateT String`で、 `m`は `Either String`モナドとなり、 `lift`は型 `Either String a`の計算を、型 `State String (Either String) a`の計算へと持ち上げる方法を提供することになります。これは、型 `Either String a`の計算を使うときは、 `lfft`を使えばいつでも作用 `StateT String`と `Either String`を隣り合わせに使うことができることを意味します。
+このクラスは、基礎となる任意のモナド `m`の計算をとり、それをラップされたモナド `t m`へと持ち上げる、 `lift`というひとつの関数だけを持っています。今回の場合、型構築子 `t`は `StateT String`で、 `m`は `Either String`モナドとなり、 `lift`は型 `Either String a`の計算を、型 `State String (Either String) a`の計算へと持ち上げる方法を提供することになります。これは、型 `Either String a`の計算を使うときは、 `lift`を使えばいつでも作用 `StateT String`と `Either String`を隣り合わせに使うことができることを意味します。
 
 たとえば、次の計算は `StateT`モナド変換子で導入されている状態を読み込み、状態が空の文字列である場合はエラーを投げます。
 

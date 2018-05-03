@@ -2,3 +2,4 @@ temp
 bower_components
 node_modules
 public
+dist/*.html
