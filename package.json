@@ -4,7 +4,7 @@
   "description": "",
   "main": " ",
   "scripts": {
-    "clean": "rimraf ./dist/*.html ./dist/*.epub",
+    "clean": "rimraf ./dist/*.html ./dist/*.epub ./dist/*.pdf",
     "html": "npm run clean && node --experimental-modules script/html.mjs",
     "epub": "node --experimental-modules script/epub.mjs",
     "pdf": "node --experimental-modules script/pdf.mjs",

@@ -4,3 +4,4 @@ node_modules
 public
 dist/*.html
 dist/*.epub
+dist/*.pdf
