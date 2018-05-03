@@ -32,6 +32,7 @@ div.main {
     background-color: white;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     font-family: 'Noto Serif Japanese', "Yu Mincho", serif !important;
+    overflow: hidden;
 }
 
 header .logo {

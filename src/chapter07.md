@@ -319,7 +319,13 @@ Nothing
 > 
 > 1. (やや難しい) 上で与えられた `lift3`の定義について、 `<$>`と `<*>`の型が整合していることを確認して下さい。
 > 
-> 1. (難しい) 型 `forall a f. (Applicative f) => Maybe (f a) -> f (Maybe a)`を持つ関数 `combineMaybe`を書いてください。この関数は副作用をもつオプショナルな計算をとり、オプショナルな結果をもつ副作用のある計算を返します。
+> 1. (難しい) 次の型を持つ関数`combineMaybe`を書いてください。
+> 
+>     ```haskell
+>     combineMaybe : forall a f. (Applicative f) => Maybe (f a) -> f (Maybe a)
+>     ```
+> 
+>     この関数は副作用をもつオプショナルな計算をとり、オプショナルな結果をもつ副作用のある計算を返します。
 
 ## Applicativeによる検証
 
