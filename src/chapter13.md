@@ -405,7 +405,7 @@ Success : Success : ...
     ```haskell
     data OneTwoThree a = One a | Two a a | Three a a a
     ```
->
+
     **ヒント**：`Test.QuickCheck.Gen`で定義された `oneOf`関数を使って `Arbitrary`インスタンスを定義します。
 1. (やや難しい)`all`関数を使って `quickCheckPure`関数の結果を単純化してください。その関数はもしどんなテストもパスするなら `true`を返し、そうでなければ `false`を返さなくてはいけません。 `purescript-monoids`で定義されている `First`モノイドを、失敗時の最初のエラーを保存するために `foldMap`関数と一緒に使ってみてください。
 
