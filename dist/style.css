@@ -48,6 +48,7 @@ header {
     color: white;
     padding: 50px;
     display: flex;
+    margin-bottom: 30px;
 }
 
 header a {
@@ -66,12 +67,12 @@ header h1 {
 }
 
 header p.author {
-    font-family: 'Noto Serif Japanese', 'Yu Mincho', serif;
+    font-family: 'Yu Mincho', 'Noto Serif Japanese', serif;
 }
 
 div.content {
-    padding: 30px;
-    font-family: 'Noto Serif Japanese', 'Yu Mincho', serif !important;
+    padding: 8px;
+    font-family: 'Yu Mincho', 'Noto Serif Japanese', serif !important;
 }
 
 div.content a {
@@ -80,7 +81,7 @@ div.content a {
 }
 
 div.content strong {
-    font-family: 'Noto Sans Japanese', 'Yu Gothic', sans-serif !important;
+    font-family: 'Yu Gothic', 'Noto Sans Japanese', sans-serif !important;
 }
 
 .main ol {
@@ -99,24 +100,26 @@ div.content strong {
     color: #333;
 }
 
-.markdown-body code {
-    font-family: "Fira Code", 'Courier New', monospace;
-    white-space: pre;
-    word-wrap: keep-all !important;
-}
 
 /* Bug Workaround for Readium */
 
-.main h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+.markdown-body.content {
+    padding: 0px;
+    padding-bottom: 40px;
+}
+
+.markdown-body.content h1,
+.markdown-body.content h2,
+.markdown-body.content h3,
+.markdown-body.content h4,
+.markdown-body.content h5,
+.markdown-body.content h6 {
     position: static !important;
-    font-family: 'Noto Serif Japanese', "Yu Mincho", serif;
+    font-family: "Yu Mincho", 'Noto Serif Japanese', serif;
     font-weight: bold;
     letter-spacing: 0.12em;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .markdown-body.content h2 {
@@ -126,6 +129,40 @@ h6 {
 .markdown-body.content p {
     text-indent: 1em;
     text-align: justify;
+    line-height: 1.8;
+}
+
+.markdown-body.content h1,
+.markdown-body.content h2,
+.markdown-body.content h3,
+.markdown-body.content h4,
+.markdown-body.content h5,
+.markdown-body.content h6,
+.markdown-body.content p,
+.markdown-body.content pre {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.markdown-body.content ul,
+.markdown-body.content ol {
+    padding-left: 80px;
+    padding-right: 40px;
+}
+
+.markdown-body.content li p {
+    padding: 0;
+}
+
+.markdown-body code {
+    font-family: "Fira Code", 'Courier New', monospace;
+    white-space: pre;
+    word-wrap: keep-all !important;
+}
+
+.markdown-body.content pre {
+    background-color: #1d222d;
+    color: white;
 }
 
 .markdown-body.content .next {
@@ -140,6 +177,8 @@ h6 {
 .markdown-body.content .next:hover {
     background-color: #424b61;
 }
+
+
 
 table.sourceCode tr {
     padding: 0;
@@ -167,6 +206,7 @@ table.sourceCode pre {
         min-width: 540px;
         max-width: 800px;
     }
+
 }
 
 .pagebreak {
@@ -199,11 +239,6 @@ table.sourceCode pre {
     pre {
         overflow: visible !important;
     }
-    div.content {
-    }
-    .markdown-body .highlight code,
-    .markdown-body code {
-    }
     .pagebreak {
         margin-bottom: 2em;
         page-break-before: always;
@@ -214,3 +249,5 @@ table.sourceCode pre {
 .shell {
     font-family: 'Fira Code', 'Courier New', Monospace;
 }
+
+

@@ -18,6 +18,10 @@
   "author": "",
   "license": " ",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "commonmark": "^0.28.1",
+    "epub-gen": "0.0.20",
+    "highlightjs": "^9.10.0",
     "puppeteer": "^1.3.0"
   },
   "devDependencies": {

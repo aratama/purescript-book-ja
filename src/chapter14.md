@@ -247,14 +247,14 @@ unit
 
 しかし、基礎のデータ表現が変更されていないので、 `render`関数を変更する必要はなかったことにも注目してください。これはスマート構築子による手法の利点のひとつです。外部APIの使用者によって認識される表現から、モジュールの内部データ表現を分離することができるのです。
 
-> ## 演習 {-}
+> ## 演習
 > 
 > 1. (簡単)`Data.DOM.Smart`モジュールで `render`を使った新しいHTML文書の作成を試してみましょう。
 > 
 > 1. (やや難しい)　`checked`と `disabled`など、値を要求しないHTML属性がありますが、これらは次のような**空の属性**として表示されるかもしれません。
 > 
 >     ```html
->     <input disabled>
+>     &lt;input disabled&gt;
 >     ```
 > 
 >     空の属性を扱えるように `Attribute`の表現を変更してください。要素に空の属性を追加するために、 `attribute`または `:=`の代わりに使える関数を記述してください。
@@ -270,7 +270,7 @@ unit
     , height := "bar"
     ]
 
-<img src="cat.jpg" width="foo" height="bar" />
+&lt;img src="cat.jpg" width="foo" height="bar" /&gt;
 unit
 ```
 
@@ -347,11 +347,11 @@ height = AttributeKey "height"
 …   ]
 … ^D
 
-<img src="cat.jpg" width="100" height="200" />
+&lt;img src="cat.jpg" width="100" height="200" /&gt;
 unit
 ```
 
-> ## 演習　{-}
+> ## 演習
 > 
 > 1. (簡単) ピクセルまたはパーセントの長さのいずれかを表すデータ型を作成してください。その型について `IsValue`のインスタンスを書いてください。この型を使うように `width`と `height`属性を変更してください。
 > 
@@ -566,11 +566,11 @@ render = execWriter <<< renderElement
 …   text "A cat"
 … ^D
 
-<p><img src="cat.jpg" />A cat</p>
+&lt;p&gt;&lt;img src="cat.jpg" /&gt;A cat&lt;/p&gt;
 unit
 ```
 
-> ## 演習 {-}
+> ## 演習
 > 
 > 1. (やや難しい)`ContentF`型に新しいデータ構築子を追加して、生成されたHTMLにコメントを出力する新しいアクション `comment`に対応してください。 `liftF`を使ってこの新しいアクションを実装してください。新しい構築子を適切に解釈するように、解釈 `renderContentItem`を更新してください。
 
@@ -705,7 +705,7 @@ unit
 
 複数回の `newName`呼び出しの結果が、実際に一意な名前になっていることを確かめてみてください。
 
-> ## 演習 {-}
+> ## 演習
 > 
 > 1. (やや難しい) 使用者から `Element`型を隠蔽すると、さらにAPIを簡素化することができます。次の手順に従って、これらの変更を行ってください。
 > 

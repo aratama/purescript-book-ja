@@ -170,7 +170,7 @@ $ pulp build -O --main Example.Shapes --to dist/Main.js
 
 そしてもう一度 `html/index.html`を開き、結果を確認してください。キャンバスに３つの異なる図形が描画されるはずです。
 
-> ## 演習 {-}
+> ## 演習
 > 
 > 1. (簡単) これまでの例のそれぞれについて、 `strokePath`関数や `setStrokeStyle`関数を使ってみましょう。
 > 
@@ -400,7 +400,7 @@ $ pulp build -O --main Example.Refs --to dist/Main.js
 
 `html/index.html`ファイルを開いてみましょう。何度かキャンバスをクリックすると、キャンバスの中心の周りを回転する緑の四角形が表示されるはずです。
 
-> ## 演習 {-}
+> ## 演習
 > 
 > 1. (簡単) パスの線描と塗りつぶしを同時に行う高階関数を書いてください。その関数を使用して `Random.purs`例を書きなおしてください。
 > 
@@ -545,7 +545,13 @@ lsystem init prod interpret n state = go init n
 
 `go`関数は第2引数に応じて再帰することで動きます。 `n`がゼロであるときと `n`がゼロでないときの2つの場合で分岐します。
 
-`n`がゼロの場合では再帰は完了し、解釈関数に応じて現在の文を解釈します。ここでは引数として与えられている型 `Array a`の文、型 `s`の状態、型 `s -> a -> Eff (canvas :: Canvas | eff) s`の関数を参照することができます。これらの引数の型を考えると、以前定義した `foldM`の呼び出しにちょうど対応していることがわかります。 `foldM`は `purescript-control`パッケージでも定義されています。
+`n`がゼロの場合では再帰は完了し、解釈関数に応じて現在の文を解釈します。ここでは引数として与えられている、
+
+* 型 `Array a`の文
+* 型 `s`の状態
+* 型 `s -> a -> Eff (canvas :: Canvas | eff) s`の関数
+ 
+を参照することができます。これらの引数の型を考えると、以前定義した `foldM`の呼び出しにちょうど対応していることがわかります。 `foldM`は `purescript-control`パッケージでも定義されています。
 
 ```haskell
   go s 0 = foldM interpret state s
@@ -617,7 +623,7 @@ $ pulp build -O --main Example.LSystem --to dist/Main.js
 
 `html/index.html`を開いてみましょう。キャンバスにコッホ曲線が描画されるのがわかると思います。
 
-> ## 演習 {-}
+> ## 演習
 > 
 > 1. (簡単)`strokePath`の代わりに `fillPath`を使用するように、上のL-Systemsの例を変更してください。**ヒント**：`closePath`の呼び出しを含め、 `moveTo`の呼び出しを `interpret`関数の外側に移動する必要があります。
 > 
