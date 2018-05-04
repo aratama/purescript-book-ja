@@ -255,22 +255,22 @@ main =
     logShow
 ```
 
-> ## 演習
-> 
-> 1. (簡単)`readFileCont`と `writeFileCont`を使って、2つのテキストフ​​ァイルを連結する関数を書いてください。
-> 
-> 1. (やや難しい) FFIを使って、 `setTimeout`関数に適切な型を与えてください。また、 `Async`モナドを使った次のようなラッパー関数を書いてください。
-> 
->     ```haskell
->     type Milliseconds = Int
-> 
->     foreign import data TIMEOUT :: Effect
-> 
->     setTimeoutCont
->       :: forall eff
->        . Milliseconds
->       -> Async (timeout :: TIMEOUT | eff) Unit
->     ```
+## 演習
+
+1. (簡単)`readFileCont`と `writeFileCont`を使って、2つのテキストフ​​ァイルを連結する関数を書いてください。
+
+1. (やや難しい) FFIを使って、 `setTimeout`関数に適切な型を与えてください。また、 `Async`モナドを使った次のようなラッパー関数を書いてください。
+
+    ```haskell
+    type Milliseconds = Int
+
+    foreign import data TIMEOUT :: Effect
+
+    setTimeoutCont
+      :: forall eff
+       . Milliseconds
+      -> Async (timeout :: TIMEOUT | eff) Unit
+    ```
 
 ## ExceptTを機能させる
 
@@ -314,11 +314,11 @@ copyFileContEx src dest = do
   writeFileContEx dest content
 ```
 
-> ## 演習
-> 
-> 1. (やや難しい) 任意のエラーを処理するために、 `ExceptT`を使用して2つのファイルを連結しする先ほどの解決策を書きなおしてください。
->
-> 1. (やや難しい) 入力ファイル名の配列を与えて複数のテキストファイルを連結する関数 `concatenateMany`を書く。 **ヒント**：`traverse`を使用します。
+## 演習
+
+1. (やや難しい) 任意のエラーを処理するために、 `ExceptT`を使用して2つのファイルを連結しする先ほどの解決策を書きなおしてください。
+
+1. (やや難しい) 入力ファイル名の配列を与えて複数のテキストファイルを連結する関数 `concatenateMany`を書く。 **ヒント**：`traverse`を使用します。
 
 ## HTTPクライアント
 
@@ -377,13 +377,13 @@ get req = ContT \k ->
   runFn3 getImpl req (k <<< Right) (k <<< Left)
 ```
 
-> ## 演習
-> 
-> 1. (やや難しい)`runContT`を使ってHTTP応答の各チャンクをコンソールへ出力することで、 `get`を試してみてください。
-> 
-> 1. (やや難しい)`readFileCont`と `writeFileCont`に対して以前に行ったように、 `ExceptT`を使い `get`をラップする関数 `getEx`を書いてください。
->
-> 1.（難しい） `getEx`と `writeFileContEx`を使って、ディスク上のファイルからの内容をを保存する関数を書いてください。
+## 演習
+
+1. (やや難しい)`runContT`を使ってHTTP応答の各チャンクをコンソールへ出力することで、 `get`を試してみてください。
+
+1. (やや難しい)`readFileCont`と `writeFileCont`に対して以前に行ったように、 `ExceptT`を使い `get`をラップする関数 `getEx`を書いてください。
+
+1.（難しい） `getEx`と `writeFileContEx`を使って、ディスク上のファイルからの内容をを保存する関数を書いてください。
 
 ## 並列計算
 
@@ -428,37 +428,37 @@ Applicative関手では任意個引数の関数の持ち上げができるので
 
 必要に応じて `Parralel`と `runParallel`を使って型構築子を変更することで、do記法ブロックのApplicativeコンビネータを使って、直列的なコードの一部で並列計算を結合したり、またはその逆を行ったりすることができます。
 
-> ## 演習
-> 
-> 1. (簡単)`parallel`と ` sequential`を使って2つのHTTPリクエストを作成し、それらのレスポンス内容を並行して収集します。あなたの結合関数は2つのレスポンス内容を連結しなければならず、続けて `print`を使って結果をコンソールに出力してください。
->
-> 1. (やや難しい)`Async`に対応するapplicative関手は ` Alternative`のインスタンスです。このインスタンスによって定義される `<|>`演算子は2つの計算を並列に実行し、最初に完了する計算結果を返します。
->
->     この `Alternative`インスタンスを `setTimeoutCont`関数と共に使用して関数を定義してください。
->
->     ```haskell
->     timeout :: forall a eff
->              . Milliseconds
->             -> Async (timeout :: TIMEOUT | eff) a
->             -> Async (timeout :: TIMEOUT | eff) (Maybe a)
->     ```
->
->     指定された計算が指定されたミリ秒数以内に結果を提供しない場合、 `Nothing`を返します。
->
-> 1. (やや難しい)`purescript-parallel`は `ExceptT`を含むいくつかのモナド変換子のための `Parallel`クラスのインスタンスも提供します。
->
->     `lift2`で `append`を持ち上げる代わりに、 `ExceptT`を使ってエラー処理を行うように、並列ファイル入出力の例を書きなおしてください。解決策は `Async`モナドを変換するために `ExceptT`変換子を使うとよいでしょう。
-> 
->     同様の手法で複数の入力ファイルを並列に読み込むために `concatenateMany`関数を書き換えてください。
->     
-> 1. (難しい、拡張) ディスク上のJSON文書の配列が与えられ、それぞれの文書はディスク上の他のファイルへの参照の配列を含んでいるとします。
-> 
->    ```javascript
->    { references: ['/tmp/1.json', '/tmp/2.json'] }
->    ```
->    入力として単一のファイル名をとり、そのファイルから参照されているディスク上のすべてのJSONファイルをたどって、参照されたすべてのファイルの一覧を収集するユーティリティを書いてください。
->
->    そのユーティリティは、JSON文書を解析するために `purescript-foreign`ライブラリを使用する必要があり、単一のファイルが参照するファイルは並列に取得しなければなりません！
+## 演習
+
+1. (簡単)`parallel`と ` sequential`を使って2つのHTTPリクエストを作成し、それらのレスポンス内容を並行して収集します。あなたの結合関数は2つのレスポンス内容を連結しなければならず、続けて `print`を使って結果をコンソールに出力してください。
+
+1. (やや難しい)`Async`に対応するapplicative関手は ` Alternative`のインスタンスです。このインスタンスによって定義される `<|>`演算子は2つの計算を並列に実行し、最初に完了する計算結果を返します。
+
+    この `Alternative`インスタンスを `setTimeoutCont`関数と共に使用して関数を定義してください。
+
+    ```haskell
+    timeout :: forall a eff
+             . Milliseconds
+            -> Async (timeout :: TIMEOUT | eff) a
+            -> Async (timeout :: TIMEOUT | eff) (Maybe a)
+    ```
+
+    指定された計算が指定されたミリ秒数以内に結果を提供しない場合、 `Nothing`を返します。
+
+1. (やや難しい)`purescript-parallel`は `ExceptT`を含むいくつかのモナド変換子のための `Parallel`クラスのインスタンスも提供します。
+
+    `lift2`で `append`を持ち上げる代わりに、 `ExceptT`を使ってエラー処理を行うように、並列ファイル入出力の例を書きなおしてください。解決策は `Async`モナドを変換するために `ExceptT`変換子を使うとよいでしょう。
+
+    同様の手法で複数の入力ファイルを並列に読み込むために `concatenateMany`関数を書き換えてください。
+    
+1. (難しい、拡張) ディスク上のJSON文書の配列が与えられ、それぞれの文書はディスク上の他のファイルへの参照の配列を含んでいるとします。
+
+   ```javascript
+   { references: ['/tmp/1.json', '/tmp/2.json'] }
+   ```
+   入力として単一のファイル名をとり、そのファイルから参照されているディスク上のすべてのJSONファイルをたどって、参照されたすべてのファイルの一覧を収集するユーティリティを書いてください。
+
+   そのユーティリティは、JSON文書を解析するために `purescript-foreign`ライブラリを使用する必要があり、単一のファイルが参照するファイルは並列に取得しなければなりません！
 
 ## まとめ
 

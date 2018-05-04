@@ -77,11 +77,11 @@ length arr =
 
 この例はJavaScriptで配列の長さを調べるのにはどうみても実用的な方法とはいえませんが、次の演習を完了するための手がかりとしては充分でしょう。
 
-> ## 演習
-> 
-> 1. (簡単) 入力が偶数であるとき、かつそのときに限り `true`に返すような再帰関数を書いてみましょう。
-> 
-> 1. (少し難しい) 配列内の偶数の数を数える再帰関数を書いてみましょう。**ヒント**：`Data.Array.Partial`モジュールの `unsafePartial head`関数を使って、空でない配列の最初の要素を見つけることができます。
+## 演習
+
+1. (簡単) 入力が偶数であるとき、かつそのときに限り `true`に返すような再帰関数を書いてみましょう。
+
+1. (少し難しい) 配列内の偶数の数を数える再帰関数を書いてみましょう。**ヒント**：`Data.Array.Partial`モジュールの `unsafePartial head`関数を使って、空でない配列の最初の要素を見つけることができます。
 
 ## マップ
 
@@ -94,8 +94,8 @@ length arr =
 ```text
 $ pulp repl
 
-> import Data.Array
-> map (\n -> n + 1) [1, 2, 3, 4, 5]
+import Data.Array
+map (\n -> n + 1) [1, 2, 3, 4, 5]
 
 [2, 3, 4, 5, 6]
 ```
@@ -107,7 +107,7 @@ $ pulp repl
 バッククォート(\`)で関数名を囲むと、対応関係を表す関数と配列の間に `map`関数を書くことができます。
 
 ```text
-> (\n -> n + 1) `map` [1, 2, 3, 4, 5]
+(\n -> n + 1) `map` [1, 2, 3, 4, 5]
 
 [2, 3, 4, 5, 6]
 ```
@@ -117,7 +117,7 @@ $ pulp repl
 配列を扱うときは、 `map`関数と等価な `<$>`という演算子が存在します。この演算子は他の二項演算子と同じように中置で使用することができます。
 
 ```text
-> (\n -> n + 1) <$> [1, 2, 3, 4, 5]
+(\n -> n + 1) <$> [1, 2, 3, 4, 5]
 
 [2, 3, 4, 5, 6]
 ```
@@ -127,7 +127,7 @@ $ pulp repl
 それでは `map`の型を見てみましょう。
 
 ```text
-> :type map
+:type map
 forall a b f. Functor f => (a -> b) -> f a -> f b
 ```
 
@@ -140,7 +140,7 @@ forall a b. (a -> b) -> Array a -> Array b
 `map`関数に適用するときには `a`と `b`という２つの型を自由に選ぶことができると、この型は示しています。 `a`は元の配列の要素の型で、 `b`は目的の配列の要素の型です。もっと言えば、 `map`が配列要素の型を変化させても構わないということです。たとえば、`map`を使用すると数値を文字列に変換することができます。
 
 ```text
-> show <$> [1, 2, 3, 4, 5]
+show <$> [1, 2, 3, 4, 5]
 
 ["1","2","3","4","5"]
 ```
@@ -148,7 +148,7 @@ forall a b. (a -> b) -> Array a -> Array b
 中置演算子`<$>`は特別な構文のように見えるかもしれませんが、実はPureScriptの普通の関数です。中置構文を使用した単なる**適用**にすぎません。実際、括弧でその名前を囲むと、この関数を通常の関数のように使用することができます。これは、`map`代わりに、括弧で囲まれた`(<$>)`という名前を使って配列に関数を適用できるということです。
 
 ```text
-> (<$>) show [1, 2, 3, 4, 5]
+(<$>) show [1, 2, 3, 4, 5]
 ["1","2","3","4","5"]
 ```
 
@@ -161,11 +161,11 @@ infix 8 range as ..
 この演算子は次のように使うことができます。
 
 ```text
-> import Data.Array
-> 1 .. 5
+import Data.Array
+1 .. 5
 [1, 2, 3, 4, 5]
 
-> show <$> (1 .. 5)
+show <$> (1 .. 5)
 ["1","2","3","4","5"]
 ```
 
@@ -174,7 +174,7 @@ infix 8 range as ..
 上記の例では、 `1 .. 5`という式は括弧で囲まれていましたが、実際にはこれは必要ありません。なぜなら、 `Data.Array`モジュールは、 `<$>`に割り当てられた優先順位より高い優先順位を `..`演算子に割り当てているからです。上の例では、`..`の優先順位は、予約語`infix`のあとに書かれた数の `8` と定義されていました。ここでは `<$>`の優先順位よりも高い優先順位を `(..)`に割り当てており、このため括弧を付け加える必要がないということです。
 
 ```text
-> show <$> 1 .. 5
+show <$> 1 .. 5
   
 ["1","2","3","4","5"]
 ```
@@ -188,30 +188,30 @@ infix 8 range as ..
 たとえば、1から10までの数で、偶数であるような数の配列を計算したいとします。これは次のように行うことができます。
 
 ```text
-> import Data.Array
+import Data.Array
 
-> filter (\n -> n % 2 == 0) (1 .. 10)
+filter (\n -> n % 2 == 0) (1 .. 10)
 [2,4,6,8,10]
 ```
 
-> ## 演習
-> 
-> 1. (簡単)`map`関数や `<$>`関数を使用して、 配列に格納された数のそれぞれの平方を計算する関数を書いてみましょう。
-> 
-> 1. (簡単)`filter`関数を使用して、数の配列から負の数を取り除く関数を書いてみましょう。
-> 
-> 1. (やや難しい)`filter`関数と同じ意味の中置演算子 `<$?>`を定義してみましょう。先ほどの演習の回答を、この新しい演算子を使用して書き換えてください。また、 `PSCi`でこの演算子の優先順位と結合性を試してみてください。
+## 演習
+
+1. (簡単)`map`関数や `<$>`関数を使用して、 配列に格納された数のそれぞれの平方を計算する関数を書いてみましょう。
+
+1. (簡単)`filter`関数を使用して、数の配列から負の数を取り除く関数を書いてみましょう。
+
+1. (やや難しい)`filter`関数と同じ意味の中置演算子 `<$?>`を定義してみましょう。先ほどの演習の回答を、この新しい演算子を使用して書き換えてください。また、 `PSCi`でこの演算子の優先順位と結合性を試してみてください。
 
 ##  配列の平坦化
 
 `Data.Array`で定義されている配列に関する標準の関数としては、 `concat`関数もあります。 `concat`は配列の配列をひとつの配列へと平坦化します。
 
 ```text
-> import Data.Array
-> :type concat 
+import Data.Array
+:type concat 
 forall a. Array (Array a) -> Array a
 
-> concat [[1, 2, 3], [4, 5], [6]]
+concat [[1, 2, 3], [4, 5], [6]]
 [1, 2, 3, 4, 5, 6]
 ```
 
@@ -220,12 +220,12 @@ forall a. Array (Array a) -> Array a
 実際に動かして見てみましょう。
 
 ```text
-> import Data.Array
+import Data.Array
 
-> :type concatMap
+:type concatMap
 forall a b. (a -> Array b) -> Array a -> Array b
 
-> concatMap (\n -> [n, n * n]) (1 .. 5)
+concatMap (\n -> [n, n * n]) (1 .. 5)
 [1,1,2,4,3,9,4,16,5,25]
 ```
 
@@ -246,52 +246,52 @@ forall a b. (a -> Array b) -> Array a -> Array b
 `1 .. n`のそれぞれの数を配列 `1 .. n`へとマッピングすることから始めましょう。
 
 ```text
-> pairs n = concatMap (\i -> 1 .. n) (1 .. n)
+pairs n = concatMap (\i -> 1 .. n) (1 .. n)
 ```
 
 この関数をテストしてみましょう。
 
 ```text
-> pairs 3
+pairs 3
 [1,2,3,1,2,3,1,2,3]
 ```
 
 これは求めているものとはぜんぜん違います。単にそれぞれの組み合わせの２つ目の要素を返すのではなく、ペア全体を保持することができるように、内側の `1 .. n`の複製について関数をマッピングする必要があります。
 
 ```text
-> :paste
+:paste
 … pairs' n =
 …   concatMap (\i ->
 …     map (\j -> [i, j]) (1 .. n)
 …   ) (1 .. n)
 … ^D
 
-> pairs' 3
+pairs' 3
 [[1,1],[1,2],[1,3],[2,1],[2,2],[2,3],[3,1],[3,2],[3,3]]
 ```
 
 いい感じになってきました。しかし、 `[1, 2]`と `[2, 1]`の両方があるように、余計な組み合わせが生成されています。 `j`を `i`から `n`の範囲に限定することで、２つ目の場合を取り除くことができます。
 
 ```text
-> :paste
+:paste
 … pairs'' n =
 …   concatMap (\i ->
 …     map (\j -> [i, j]) (i .. n)
 …   ) (1 .. n)
 … ^D
 
-> pairs'' 3
+pairs'' 3
 [[1,1],[1,2],[1,3],[2,2],[2,3],[3,3]]
 ```
 
 すばらしい！因数の候補のすべての組み合わせを得たので、 `filter`を使って、積が与えられた `n`であるような組み合わせを選択することができます。
 
 ```text
-> import Data.Foldable
+import Data.Foldable
 
-> factors n = filter (\pair -> product pair == n) (pairs'' n)
+factors n = filter (\pair -> product pair == n) (pairs'' n)
 
-> factors 10
+factors 10
 [[1,10],[2,5]]
 ```
 
@@ -326,7 +326,7 @@ factors n = filter (\xs -> product xs == n) $ do
 最後の行では、`pure`関数を使っています。この関数は`PSCi`で評価することができますが、型を明示する必要があります。
 
 ```text
-> pure [1, 2] :: Array (Array Int)
+pure [1, 2] :: Array (Array Int)
 [[1, 2]]
 ```
 
@@ -361,9 +361,9 @@ factors n = do
 
 
 ```text
-> import Control.MonadZero
+import Control.MonadZero
 
-> :type guard
+:type guard
 forall m. MonadZero m => Boolean -> m Unit
 ```
 
@@ -376,12 +376,12 @@ Boolean -> Array Unit
 次の計算の結果から、配列における `guard`関数について今知りたいことはすべてわかります。
 
 ```text
-> import Data.Array
+import Data.Array
 
-> length $ guard true
+length $ guard true
 1
 
-> length $ guard false
+length $ guard false
 0
 ```
 
@@ -389,15 +389,15 @@ Boolean -> Array Unit
 
 ガードが失敗した場合、配列内包表記の現在の分岐は、結果なしで早めに終了されることを意味します。これは、 `guard`の呼び出しが、途中の配列に対して `filter`を使用するのと同じだということです。これらが同じ結果になることを確認するために、 `factors`の二つの定義を試してみてください。
 
-> ## 演習
-> 
-> 1. (簡単)`factors`関数を使用して、整数の引数が素数であるかどうかを調べる関数 `isPrime`を定義してみましょう。
-> 
-> 1. (やや難しい)　2つの配列の**直積集合**を見つけるための関数を書いてみましょう。直積集合とはつまり、要素 `a`、 `b`のすべての組み合わせの集合です。ここで `a`は最初の配列の要素、 `b`は２つ目の配列の要素です。
-> 
-> 1. (やや難しい) **ピタゴラスの三つ組数**とは、 `a² + b² = c²`を満たすような３つの数の配列 `[a, b, c]`のことです。配列内包表記の中で `guard`関数を使用して、数 `n`を引数に取り、どの要素も `n`より小さいようなピタゴラスの三つ組数すべてを求める関数を書いてみましょう。その関数は `Int -> Array (Array Int)`という型を持っていなければなりません。
-> 
-> 1. (鬼のように難しい)`factors`関数を使用して、数 `n`のすべての**因数分解**を求める関数 `factorizations`を定義してみましょう。数 `n`の因数分解とは、それらの積が `n`であるような整数の配列のことです。**ヒント**：１は因数ではないと考えてください。また、無限再帰に陥らないように注意しましょう。
+## 演習
+
+1. (簡単)`factors`関数を使用して、整数の引数が素数であるかどうかを調べる関数 `isPrime`を定義してみましょう。
+
+1. (やや難しい)　2つの配列の**直積集合**を見つけるための関数を書いてみましょう。直積集合とはつまり、要素 `a`、 `b`のすべての組み合わせの集合です。ここで `a`は最初の配列の要素、 `b`は２つ目の配列の要素です。
+
+1. (やや難しい) **ピタゴラスの三つ組数**とは、 `a² + b² = c²`を満たすような３つの数の配列 `[a, b, c]`のことです。配列内包表記の中で `guard`関数を使用して、数 `n`を引数に取り、どの要素も `n`より小さいようなピタゴラスの三つ組数すべてを求める関数を書いてみましょう。その関数は `Int -> Array (Array Int)`という型を持っていなければなりません。
+
+1. (鬼のように難しい)`factors`関数を使用して、数 `n`のすべての**因数分解**を求める関数 `factorizations`を定義してみましょう。数 `n`の因数分解とは、それらの積が `n`であるような整数の配列のことです。**ヒント**：１は因数ではないと考えてください。また、無限再帰に陥らないように注意しましょう。
 
 ## 畳み込み
 
@@ -406,22 +406,22 @@ Boolean -> Array Unit
 `PSCi`を使って、 `Data.Foldable`モジュールをインポートし、 `foldl`と `foldr`関数の型を調べることから始めましょう。
 
 ```text
-> import Data.Foldable
+import Data.Foldable
 
-> :type foldl
+:type foldl
 forall a b f. Foldable f => (b -> a -> b) -> b -> f a -> b
 
-> :type foldr
+:type foldr
 forall a b f. Foldable f => (a -> b -> b) -> b -> f a -> b
 ```
 
 これらの型は、現在興味があるものよりも一般的です。この章の目的では、 `PSCi`は以下の(より具体的な)答えを与えていたと考えておきましょう。
 
 ```text
-> :type foldl
+:type foldl
 forall a b. (b -> a -> b) -> b -> Array a -> b
 
-> :type foldr
+:type foldr
 forall a b. (a -> b -> b) -> b -> Array a -> b
 ```
 
@@ -432,24 +432,24 @@ forall a b. (a -> b -> b) -> b -> Array a -> b
 これらの関数の動きを見てみましょう。 `foldl`を使用して数の配列の和を求めてみます。型 `a`は `Number`になり、結果の型 `b`も `Number`として選択することができます。ここでは、次の要素を累積器に加算する `Number -> Number -> Number`という型の関数、 `Number`型の累積器の初期値、和を求めたい `Number`の配列という、3つの引数を提供する必要があります。最初の引数としては、加算演算子を使用することができますし、累積器の初期値はゼロになります。
 
 ```text
-> foldl (+) 0 (1 .. 5)
+foldl (+) 0 (1 .. 5)
 15
 ```
 
 この場合では、引数が逆になっていても `(+)`関数は同じ結果を返すので、 `foldl`と `foldr`のどちらでも問題ありません。
 
 ```text
-> foldr (+) 0 (1 .. 5)
+foldr (+) 0 (1 .. 5)
 15
 ```
 
 `foldl`と `foldr`の違いを説明するために、畳み込み関数の選択が影響する例も書いてみましょう。加算関数の代わりに、文字列連結を使用して文字列を作ってみます。
 
 ```text
-> foldl (\acc n -> acc <> show n) "" [1,2,3,4,5]
+foldl (\acc n -> acc <> show n) "" [1,2,3,4,5]
 "12345"
 
-> foldr (\n acc -> acc <> show n) "" [1,2,3,4,5]
+foldr (\n acc -> acc <> show n) "" [1,2,3,4,5]
 "54321"
 ```
 
@@ -472,13 +472,13 @@ forall a b. (a -> b -> b) -> b -> Array a -> b
 `PSCi`で次のコードを入力すると、この問題を簡単に検証できます。
 
 ```text
-> f 0 = 0
-> f n = 1 + f (n - 1)
+f 0 = 0
+f n = 1 + f (n - 1)
 
-> f 10
+f 10
 10
   
-> f 10000
+f 10000
 RangeError: Maximum call stack size exceeded
 ```
 
@@ -539,37 +539,37 @@ reverse = reverse' []
 例えば、 先ほどの `reverse`の例は、畳み込みとして少なくとも2つの方法で書くことができます。 `foldr`を使用すると次のようになります。
 
 ```text
-> import Data.Foldable
-> :paste
+import Data.Foldable
+:paste
 … reverse :: forall a. Array a -> Array a
 … reverse = foldr (\x xs -> xs <> [x]) []
 … ^D
-> reverse [1, 2, 3]
+reverse [1, 2, 3]
 
 [3,2,1]
 ```
 
 `foldl`を使って `reverse`を書くことは、読者への課題として残しておきます。
 
-> ## 演習
-> 
-> 1. (簡単)`foldl`を使って、真偽値の配列の要素すべてが真かどうか調べてみてください。
-> 
-> 1. (やや難しい) 関数 `foldl (==) false xs`が真を返すような配列 `xs`とはどのようなものか説明してください。
-> 
-> 1. (やや難しい) 累積器引数を使用して、次の関数を末尾再帰形に書きなおしてください。
-> 
->     ```haskell
->     import Prelude
->     import Data.Array.Partial (head, tail)
->     count :: forall a. (a -> Boolean) -> Array a -> Int
->     count _ [] = 0
->     count p xs = if p (unsafePartial head xs)
->                    then count p (unsafePartial tail xs) + 1
->                    else count p (unsafePartial tail xs)
->     ```
-> 
-> 1. (やや難しい)`foldl`を使って `reverse`を書いてみましょう。
+## 演習
+
+1. (簡単)`foldl`を使って、真偽値の配列の要素すべてが真かどうか調べてみてください。
+
+1. (やや難しい) 関数 `foldl (==) false xs`が真を返すような配列 `xs`とはどのようなものか説明してください。
+
+1. (やや難しい) 累積器引数を使用して、次の関数を末尾再帰形に書きなおしてください。
+
+    ```haskell
+    import Prelude
+    import Data.Array.Partial (head, tail)
+    count :: forall a. (a -> Boolean) -> Array a -> Int
+    count _ [] = 0
+    count p xs = if p (unsafePartial head xs)
+                   then count p (unsafePartial tail xs) + 1
+                   else count p (unsafePartial tail xs)
+    ```
+
+1. (やや難しい)`foldl`を使って `reverse`を書いてみましょう。
 
 ## 仮想ファイルシステム
 
@@ -602,15 +602,15 @@ isDirectory :: Path -> Boolean
 
 ```text
 $ pulp repl
-> import Data.Path
+import Data.Path
 
-> root
+root
 /
 
-> isDirectory root
+isDirectory root
 true
 
-> ls root
+ls root
 [/bin/,/etc/,/home/]
 ```
 
@@ -637,10 +637,10 @@ allFiles file = file : concatMap allFiles (ls file)
 それでは `PSCi`でこの関数を試してみましょう。
 
 ```text
-> import FileOperations
-> import Data.Path
+import FileOperations
+import Data.Path
 
-> allFiles root
+allFiles root
   
 [/,/bin/,/bin/cp,/bin/ls,/bin/mv,/etc/,/etc/hosts, ...]
 ```
@@ -660,23 +660,23 @@ allFiles' file = file : do
 
 `PSCi`で新しいコードを試してみてください。同じ結果が返ってくるはずです。どちらのほうがわかりやすいかの選択はお任せします。
 
-> ## 演習
-> 
-> 1. (簡単) ディレクトリのすべてのサブディレクトリの中まで、ディレクトリを除くすべてのファイルを返すような関数 `onlyFiles`を書いてみてください。
-> 
-> 1. (やや難しい) このファイルシステムで最大と最小のファイルを決定するような畳み込みを書いてください。
-> 
-> 1. (難しい) ファイルを名前で検索する関数 `whereIs`を書いてください。この関数は型 `Maybe Path`の値を返すものとします。この値が存在するなら、そのファイルがそのディレクトリに含まれているということを表します。この関数は次のように振る舞う必要があります。
-> 
->     ```text
->     > whereIs "/bin/ls"
->     Just (/bin/)
-> 
->     > whereIs "/bin/cat"
->     Nothing
->     ```
-> 
->     **ヒント**：do記法で配列内包表記を使用して、この関数を記述してみてください。
+## 演習
+
+1. (簡単) ディレクトリのすべてのサブディレクトリの中まで、ディレクトリを除くすべてのファイルを返すような関数 `onlyFiles`を書いてみてください。
+
+1. (やや難しい) このファイルシステムで最大と最小のファイルを決定するような畳み込みを書いてください。
+
+1. (難しい) ファイルを名前で検索する関数 `whereIs`を書いてください。この関数は型 `Maybe Path`の値を返すものとします。この値が存在するなら、そのファイルがそのディレクトリに含まれているということを表します。この関数は次のように振る舞う必要があります。
+
+    ```text
+    > whereIs "/bin/ls"
+    Just (/bin/)
+
+    > whereIs "/bin/cat"
+    Nothing
+    ```
+
+    **ヒント**：do記法で配列内包表記を使用して、この関数を記述してみてください。
 
 ## まとめ
 

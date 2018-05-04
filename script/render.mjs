@@ -37,7 +37,7 @@ export function renderMarkdown(chapter, lastChapter, content, homeLinks){
 
   // insert link to the next chapter
   if (chapter !== null && lastChapter !== null && chapter < lastChapter) {
-    const nextChapter = chapter + 2
+    const nextChapter = chapter + 1
     const nextChapterLink = new commonmark.Node("html_block")
     nextChapterLink.literal = `\n\n<a href="chapter${nextChapter.toString().padStart(2, "0")}.html"><div class="next">次の第${nextChapter}章を読む</div></a>`
     document.appendChild(nextChapterLink)
@@ -64,5 +64,25 @@ export function renderMarkdown(chapter, lastChapter, content, homeLinks){
     const result = highlightjs.highlightAuto($(node).text(), ["haskell", "javascript"])
     $(node).text(result.value)
   })
+
+  $(`h2`).each((i, element) => {
+    if($(element).text().trim() === "演習") {
+
+      const div = $(`<div class="exercise"><h2>演習</h2></div>`)
+
+      const children = []
+      for(let child = $(element).next(); 0 < child.length; child = child.next()){
+        //debugger
+        if(child.is("h1, h2, h3, h4, h5, h6")){
+          break;
+        }else{
+          div.append(child)
+        }
+      }
+
+      $(element).replaceWith(div)
+    }
+  })
+
   return $.html()
 }

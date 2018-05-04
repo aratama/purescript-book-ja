@@ -178,6 +178,18 @@ div.content strong {
     background-color: #424b61;
 }
 
+.markdown-body.content .exercise {
+    border: solid 1px lightgrey;
+    margin: 30px;
+    margin-top: 100px;
+    margin-bottom: 100px;    
+}
+
+.markdown-body.content .exercise h2 {
+    letter-spacing: 1em;
+    text-align: center;
+    margin-top: 10px;
+}
 
 
 table.sourceCode tr {

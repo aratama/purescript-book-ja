@@ -263,19 +263,19 @@ var shout = function (dict) {
 shout(require('Prelude').showNumber)(42);
 ```
 
-> ## 演習
-> 
-> 1. (簡単) これらの型の実行時の表現は何でしょうか。
-> 
->     ```haskell
->     forall a. a
->     forall a. a -> a -> a
->     forall a. Ord a => Array a -> Boolean
->     ```
-> 
->     これらの型を持つ式についてわかることはなんでしょうか。
->     
-> 1. (やや難しい)`pulp build`を使ってコンパイルし、NodeJSの `require`関数を使ってモジュールをインポートすることで、JavaScriptから `purescript-arrays`ライブラリの関数を使ってみてください。**ヒント**：生成されたCommonJSモジュールがNodeJSモジュールのパスで使用できるように、出力パスを設定する必要があります。
+## 演習
+
+1. (簡単) これらの型の実行時の表現は何でしょうか。
+
+    ```haskell
+    forall a. a
+    forall a. a -> a -> a
+    forall a. Ord a => Array a -> Boolean
+    ```
+
+    これらの型を持つ式についてわかることはなんでしょうか。
+    
+1. (やや難しい)`pulp build`を使ってコンパイルし、NodeJSの `require`関数を使ってモジュールをインポートすることで、JavaScriptから `purescript-arrays`ライブラリの関数を使ってみてください。**ヒント**：生成されたCommonJSモジュールがNodeJSモジュールのパスで使用できるように、出力パスを設定する必要があります。
 
 ## PureScriptからのJavaScriptコードを使う
 
@@ -576,11 +576,11 @@ foreign import setItem :: forall eff . String
 
 `Data.Foreign`は、**型付けされていないデータ**、もっと一般的にいえば実行時表現が不明なデータを扱う方法を提供しています。
 
-> ## 演習
-> 
-> 1. (やや難しい) JavaScriptの `Window`オブジェクトの `confirm`メソッドのラッパを書き、 `Control.Monad.Eff.Alert`モジュールにその関数を追加してください。
-> 
-> 1. (やや難しい)`localStorage`オブジェクトの `removeItem`メソッドのラッパを書き、 `Control.Monad.Eff.Storage`モジュールに追加してください
+## 演習
+
+1. (やや難しい) JavaScriptの `Window`オブジェクトの `confirm`メソッドのラッパを書き、 `Control.Monad.Eff.Alert`モジュールにその関数を追加してください。
+
+1. (やや難しい)`localStorage`オブジェクトの `removeItem`メソッドのラッパを書き、 `Control.Monad.Eff.Storage`モジュールに追加してください
 
 ## 型付けされていないデータの操作
 
@@ -743,30 +743,30 @@ loadSavedData = do
 
 **注意**：ブラウザ特有の問題を避けるために、ローカルなHTTPサーバからHTMLファイルとJavaScriptファイルを提供する必要があるかもしれません。
 
-> ## 演習
-> 
-> 1. (簡単)`decodeJSON`を使って、 `[[1, 2, 3], [4, 5], [6]]`のようなJavaScriptの数の２次元配列を表現するJSON文書を解析してください。要素をnullにすることが許容されている場合はどうでしょうか。配列自体をnullにすることが許容されている場合はどうなりますか。
-> 
-> 1. (やや難しい)`savedData`の実装の型を検証し、計算のそれぞれの部分式の推論された型を書き出してみましょう。
-> 
-> 1. (難しい)次のデータ型は、葉で値を持つ二分木を表しています。
-> 
->     ```haskell
->     data Tree a = Leaf a | Branch (Tree a) (Tree a)
->     ```
-> 
->     `purescript-foreign-generic`を使ってこのタイプの `Encode`と `Decode`インスタンスを導き、エンコードされた値がPSCiで正しくデコードできることを確認してください。
->
-> 1. (難しい) 次の`data`型は、整数か文字列のどちらかであるJSONを直接表現しています。 
-> 
->     ```haskell
->     data IntOrString
->       = IntOrString_Int Int
->       | IntOrString_String String
->     ```
-> 
->     この動作を実装する `IntOrString`データ型の `Encode`と `Decode`のインスタンスを記述し、エンコードされた値が `PSCi`で正しくデコードできることを確認してください。
->    
+## 演習
+
+1. (簡単)`decodeJSON`を使って、 `[[1, 2, 3], [4, 5], [6]]`のようなJavaScriptの数の２次元配列を表現するJSON文書を解析してください。要素をnullにすることが許容されている場合はどうでしょうか。配列自体をnullにすることが許容されている場合はどうなりますか。
+
+1. (やや難しい)`savedData`の実装の型を検証し、計算のそれぞれの部分式の推論された型を書き出してみましょう。
+
+1. (難しい)次のデータ型は、葉で値を持つ二分木を表しています。
+
+    ```haskell
+    data Tree a = Leaf a | Branch (Tree a) (Tree a)
+    ```
+
+    `purescript-foreign-generic`を使ってこのタイプの `Encode`と `Decode`インスタンスを導き、エンコードされた値がPSCiで正しくデコードできることを確認してください。
+
+1. (難しい) 次の`data`型は、整数か文字列のどちらかであるJSONを直接表現しています。 
+
+    ```haskell
+    data IntOrString
+      = IntOrString_Int Int
+      | IntOrString_String String
+    ```
+
+    この動作を実装する `IntOrString`データ型の `Encode`と `Decode`のインスタンスを記述し、エンコードされた値が `PSCi`で正しくデコードできることを確認してください。
+   
 
 ## まとめ
 

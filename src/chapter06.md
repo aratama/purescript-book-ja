@@ -122,9 +122,9 @@ No type class instance was found for
   Data.Show.Show (Int -> Int)
 ```
 
-> ## 演習
-> 
-> 1. (簡単)前章の `showShape`関数を使って、 `Shape`型に対しての `Show`インスタンスを定義してみましょう。
+## 演習
+
+1. (簡単)前章の `showShape`関数を使って、 `Shape`型に対しての `Show`インスタンスを定義してみましょう。
 
 ## 標準的な型クラス
 
@@ -302,18 +302,18 @@ class Functor f where
 
 標準の型クラスの多くには、このような法則が付随しています。一般に、型クラスに与えられた法則は、型クラスの関数に構造を与え、インスタンスについて調べられるようにします。興味のある読者は、すでに見てきた標準の型クラスに属する法則について調べてみてもよいでしょう。
 
-> ## 演習
-> 
-> 1. (簡単)次のnewtypeは複素数を表します。
-> 
->     ```haskell
->     newtype Complex = Complex 
->         { real :: Number
->         , imaginary :: Number 
->         }
->     ```
-> 
-> `Complex`について、 `Show`と `Eq`のインスタンスを定義してください。
+## 演習
+
+1. (簡単)次のnewtypeは複素数を表します。
+
+    ```haskell
+    newtype Complex = Complex 
+        { real :: Number
+        , imaginary :: Number 
+        }
+    ```
+
+`Complex`について、 `Show`と `Eq`のインスタンスを定義してください。
 
 ## 型注釈
 
@@ -408,40 +408,40 @@ instance showEither :: (Show a, Show b) => Show (Either a b) where
 
 プログラムがコンパイルされると、 `Show`の正しい型クラスのインスタンスは `show`の引数の推論された型に基づいて選ばれますが、このあたりの複雑さに開発者が関与することはありません。
 
-> ## 演習
-> 
-> 1. (簡単)次は型 `a`の要素の空でない配列の型を定義しています。
-> 
->     ```haskell
->     data NonEmpty a = NonEmpty a (Array a)
->     ```
+## 演習
+
+1. (簡単)次は型 `a`の要素の空でない配列の型を定義しています。
+
+    ```haskell
+    data NonEmpty a = NonEmpty a (Array a)
+    ```
 >
->     `Eq a`と `Eq (Array a)`のインスタンスを再利用して、型 `NonEmpty a`に対する `Eq`インスタンスを書いてみましょう。    
+    `Eq a`と `Eq (Array a)`のインスタンスを再利用して、型 `NonEmpty a`に対する `Eq`インスタンスを書いてみましょう。    
 >
-> 1. (やや難しい)`Semigroup`インスタンスを `Array`に再利用して `NonEmpty a`の `Semigroup`インスタンスを作成しましょう。
+1. (やや難しい)`Semigroup`インスタンスを `Array`に再利用して `NonEmpty a`の `Semigroup`インスタンスを作成しましょう。
 >
-> 1. (やや難しい)`NonEmpty`の `Functor`インスタンスを書いてみましょう。
+1. (やや難しい)`NonEmpty`の `Functor`インスタンスを書いてみましょう。
 >
-> 1. (やや難しい)`Ord`のインスタンスを持つ型 `a`があれば、他の値より大きい新しい **無限**の値を追加することができます。
+1. (やや難しい)`Ord`のインスタンスを持つ型 `a`があれば、他の値より大きい新しい **無限**の値を追加することができます。
 >
->     ```haskell
->     data Extended a = Finite a | Infinite
->     ```
+    ```haskell
+    data Extended a = Finite a | Infinite
+    ```
 >
->     `a`の `Ord`インスタンスを再利用して、 `Extended a`の `Ord`インスタンスを書いてみましょう。
+    `a`の `Ord`インスタンスを再利用して、 `Extended a`の `Ord`インスタンスを書いてみましょう。
 >
-> 1. (難しい)`NonEmpty`の `Foldable`インスタンスを書いてみましょう。**ヒント**：配列の `Foldable`インスタンスを再利用してみましょう。
+1. (難しい)`NonEmpty`の `Foldable`インスタンスを書いてみましょう。**ヒント**：配列の `Foldable`インスタンスを再利用してみましょう。
 >
-> 1. (難しい)　順序付きコンテナを定義する(そして `Foldable`のインスタンスを持っている)ような型構築子 `f`が与えられたとき、追加の要素を先頭に含めるような新たなコンテナ型を作ることができます。
-> 
->     ```haskell
->     data OneMore f a = OneMore a (f a)
->     ```
->     このコンテナ `OneMore f`もまた順序を持っています。ここで、新しい要素は任意の `f`の要素よりも前にきます。この `OneMore f`の `Foldable`インスタンスを書いてみましょう。
-> 
->     ```haskell
->     instance foldableOneMore :: Foldable f => Foldable (OneMore f) where
->     ```
+1. (難しい)　順序付きコンテナを定義する(そして `Foldable`のインスタンスを持っている)ような型構築子 `f`が与えられたとき、追加の要素を先頭に含めるような新たなコンテナ型を作ることができます。
+
+    ```haskell
+    data OneMore f a = OneMore a (f a)
+    ```
+    このコンテナ `OneMore f`もまた順序を持っています。ここで、新しい要素は任意の `f`の要素よりも前にきます。この `OneMore f`の `Foldable`インスタンスを書いてみましょう。
+
+    ```haskell
+    instance foldableOneMore :: Foldable f => Foldable (OneMore f) where
+    ```
 
 ## 多変数型クラス
 
@@ -594,53 +594,53 @@ unsafePartial :: forall a. (Partial => a) -> a
 
 この場合に上位クラス関係を定義する別の考え方としては、この２つのクラスの間には明らかに"is-a"の関係があることです。下位クラスのすべてのメンバは、上位クラスのメンバでもあるということです。
 
-> ### 演習
-> 
-> 1. (やや難しい) 整数の空でない配列の最大値を求める部分関数を定義します。あなたの関数の型は `Partial => Array Int - > Int`でなければなりません。 `unsafePartial`を使ってPSCiであなたの関数をテストしてください。 **ヒント**：`Data.Foldable`の `maximum`関数を使います。
+### 演習
+
+1. (やや難しい) 整数の空でない配列の最大値を求める部分関数を定義します。あなたの関数の型は `Partial => Array Int - > Int`でなければなりません。 `unsafePartial`を使ってPSCiであなたの関数をテストしてください。 **ヒント**：`Data.Foldable`の `maximum`関数を使います。
 >
-> 1. (やや難しい) 次の `Action`クラスは、ある型の動作(action)を定義する、多変数型クラスです。
-> 
->     ```haskell
->     class Monoid m <= Action m a where
->       act :: m -> a -> a
->     ```
->     
->     **act**はモノイドがどうやって他の型の値を変更するのに使われるのかを説明する関数です。この動作が　モノイドの連結演算子に従っていると期待しましょう。
->     
->     - `act mempty a = a`
->     - `act (m1 <> m2) a = act m1 (act m2 a)`
->
->     この動作は `Monoid`クラスによって定義された操作を順守します。
->        
->     たとえば、乗算を持つ自然数のモノイドを形成します。
->
->     ```haskell
->     newtype Multiply = Multiply Int
->
->     instance semigroupMultiply :: Semigroup Multiply where
->       append (Multiply n) (Multiply m) = Multiply (n * m)
->
->     instance monoidMultiply :: Monoid Multiply where
->       mempty = Multiply 1
->     ```
->
->     このモノイドは、文字列の何度かの繰り返しとして文字列に対して動作します。このアクションを実装するインスタンスを作成します。
->
->     ```haskell
->     instance repeatAction :: Action Multiply String
->     ```
->
->     このインスタンスが上記の法則を満たしているか確かめましょう。
->
-> 1. (やや難しい) インスタンス `Action m a => Action m（Array a） `を書いてみましょう。ここで、 配列上の動作は要素の順序で実行されるように定義されるものとします。
-> 
-> 1. (難しい) 以下のnewtypeが与えられたとき、 `Action m (Self m)`のインスタンスを書いてみましょう。ここで、モノイド `m`は連結によって自身に作用するものとします。
-> 
->     ```haskell
->     newtype Self m = Self m
->     ```
-> 
-> 1.（難しい）多変数型のクラス `Action`の引数は、いくつかの関数従属性によって関連づけられるべきですか。それはなぜでしょうか。
+1. (やや難しい) 次の `Action`クラスは、ある型の動作(action)を定義する、多変数型クラスです。
+
+    ```haskell
+    class Monoid m <= Action m a where
+      act :: m -> a -> a
+    ```
+    
+    **act**はモノイドがどうやって他の型の値を変更するのに使われるのかを説明する関数です。この動作が　モノイドの連結演算子に従っていると期待しましょう。
+    
+    - `act mempty a = a`
+    - `act (m1 <> m2) a = act m1 (act m2 a)`
+
+    この動作は `Monoid`クラスによって定義された操作を順守します。
+       
+    たとえば、乗算を持つ自然数のモノイドを形成します。
+
+    ```haskell
+    newtype Multiply = Multiply Int
+
+    instance semigroupMultiply :: Semigroup Multiply where
+      append (Multiply n) (Multiply m) = Multiply (n * m)
+
+    instance monoidMultiply :: Monoid Multiply where
+      mempty = Multiply 1
+    ```
+
+    このモノイドは、文字列の何度かの繰り返しとして文字列に対して動作します。このアクションを実装するインスタンスを作成します。
+
+    ```haskell
+    instance repeatAction :: Action Multiply String
+    ```
+
+    このインスタンスが上記の法則を満たしているか確かめましょう。
+
+1. (やや難しい) インスタンス `Action m a => Action m（Array a） `を書いてみましょう。ここで、 配列上の動作は要素の順序で実行されるように定義されるものとします。
+
+1. (難しい) 以下のnewtypeが与えられたとき、 `Action m (Self m)`のインスタンスを書いてみましょう。ここで、モノイド `m`は連結によって自身に作用するものとします。
+
+    ```haskell
+    newtype Self m = Self m
+    ```
+
+1.（難しい）多変数型のクラス `Action`の引数は、いくつかの関数従属性によって関連づけられるべきですか。それはなぜでしょうか。
 
 ## ハッシュの型クラス
 
@@ -729,24 +729,24 @@ instance hashString :: Hashable String where
 
 この章のソースコードには、 `Maybe`と `Tuple`型のインスタンスなど、他にも `Hashable`インスタンスの例が含まれています。
 
-> ### 演習
-> 
-> 1. (簡単)`PSCi`を使って、各インスタンスのハッシュ関数をテストしてください。
-> 
-> 1. (やや難しい) 同値性の近似として `hashEqual`関数のハッシュ同値性を使い、配列が重複する要素を持っているかどうかを調べる関数を書いてください。ハッシュ値が一致したペアが見つかった場合は、 `==`を使って値の同値性を厳密に検証することを忘れないようにしてください。 **ヒント**：`Data.Array`の `nubBy`関数を使用してみてください。
-> 
-> 1. (やや難しい) 型クラスの法則を満たす、次のnewtypeの `Hashable`インスタンスを書いてください。
-> 
->     ```haskell
->     newtype Hour = Hour Int
->     
->     instance eqHour :: Eq Hour where
->       eq (Hour n) (Hour m) = mod n 12 == mod m 12
->     ```
->     
->     newtypeの `Hour`とその `Eq`インスタンスは、12進数である型を表します。したがって、1と13は等しいと見なされます。そのインスタンスが型クラスの法則を満たしていることを証明してください。
-> 
-> 1. (難しい)`Maybe`、 `Either`、 `Tuple`の `Hashable`インスタンスが型クラスの法則を満たしていることを証明してください。
+### 演習
+
+1. (簡単)`PSCi`を使って、各インスタンスのハッシュ関数をテストしてください。
+
+1. (やや難しい) 同値性の近似として `hashEqual`関数のハッシュ同値性を使い、配列が重複する要素を持っているかどうかを調べる関数を書いてください。ハッシュ値が一致したペアが見つかった場合は、 `==`を使って値の同値性を厳密に検証することを忘れないようにしてください。 **ヒント**：`Data.Array`の `nubBy`関数を使用してみてください。
+
+1. (やや難しい) 型クラスの法則を満たす、次のnewtypeの `Hashable`インスタンスを書いてください。
+
+    ```haskell
+    newtype Hour = Hour Int
+    
+    instance eqHour :: Eq Hour where
+      eq (Hour n) (Hour m) = mod n 12 == mod m 12
+    ```
+    
+    newtypeの `Hour`とその `Eq`インスタンスは、12進数である型を表します。したがって、1と13は等しいと見なされます。そのインスタンスが型クラスの法則を満たしていることを証明してください。
+
+1. (難しい)`Maybe`、 `Either`、 `Tuple`の `Hashable`インスタンスが型クラスの法則を満たしていることを証明してください。
 
 ## まとめ
 
