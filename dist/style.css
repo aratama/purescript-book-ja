@@ -128,7 +128,7 @@ div.content strong {
 
 .markdown-body.content p {
     text-indent: 1em;
-    text-align: justify;
+    /* text-align: justify; */
     line-height: 1.8;
 }
 
@@ -140,14 +140,14 @@ div.content strong {
 .markdown-body.content h6,
 .markdown-body.content p,
 .markdown-body.content pre {
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 .markdown-body.content ul,
 .markdown-body.content ol {
-    padding-left: 80px;
-    padding-right: 40px;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 .markdown-body.content li p {
@@ -219,6 +219,25 @@ table.sourceCode pre {
         max-width: 800px;
     }
 
+    
+
+    .markdown-body.content h1,
+    .markdown-body.content h2,
+    .markdown-body.content h3,
+    .markdown-body.content h4,
+    .markdown-body.content h5,
+    .markdown-body.content h6,
+    .markdown-body.content p,
+    .markdown-body.content pre {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .markdown-body.content ul,
+    .markdown-body.content ol {
+        padding-left: 80px;
+        padding-right: 40px;
+    }
 }
 
 .pagebreak {
@@ -255,6 +274,8 @@ table.sourceCode pre {
         margin-bottom: 2em;
         page-break-before: always;
     }
+
+
 }
 
 .sourceCode,
