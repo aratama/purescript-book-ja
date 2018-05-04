@@ -1,0 +1,12 @@
+{
+    "extends": "standard",
+    "env": {
+      "node": true
+    },
+    "rules": {
+    },
+    "parserOptions": {
+      "ecmaVersion": 8,
+      "sourceType": "module"
+    }
+  }

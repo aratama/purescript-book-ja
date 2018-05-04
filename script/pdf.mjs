@@ -1,16 +1,16 @@
-import puppeteer from "puppeteer"
+import puppeteer from 'puppeteer'
 
-async function main(){
+async function main () {
   const browser = await puppeteer.launch()
   const page = await browser.newPage()
   await page.goto(`file:///${process.cwd()}/dist/purescript-book-ja.html`)
   await page.pdf({
-    path: "./dist/purescript-book-ja.pdf",
-    format: "A4",
+    path: './dist/purescript-book-ja.pdf',
+    format: 'A4',
     printBackground: true,
     displayHeaderFooter: false,
     margin: {
-      left: "0.35cm"
+      left: '0.35cm'
     }
   })
   await browser.close()
