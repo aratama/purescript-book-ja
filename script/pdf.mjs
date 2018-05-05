@@ -16,4 +16,4 @@ async function main () {
   await browser.close()
 }
 
-main()
+main().catch(e => console.error(e))

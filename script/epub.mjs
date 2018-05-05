@@ -1,19 +1,15 @@
 
-import fs from 'fs-extra'
 import util from 'util'
 import glob from 'glob'
 import Epub from 'epub-gen'
-import { renderMarkdown } from './render'
+import { renderMarkdown, readMarkdown } from './render'
 
 async function main () {
   const files = await util.promisify(glob)('src/chapter*.md')
-
-  const cssBuffer = await util.promisify(glob)('node_modules/github-markdown-css/github-markdown.css')
-  const css = cssBuffer.toString()
-
+  const css = await util.promisify(glob)('node_modules/github-markdown-css/github-markdown.css', 'utf8')
   const chapters = await Promise.all(files.map(async (file, i) => {
-    const buffer = await fs.readFile(file)
-    const html = renderMarkdown(i + 1, null, buffer.toString(), false)
+    const buffer = await readMarkdown(file)
+    const html = renderMarkdown(buffer, { chapter: i + 1, lastChapter: null, homeLinks: false })
     return {
       title: `chapter${(i + 1).toString().padStart(2, '0')}`,
       data: html,

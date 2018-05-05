@@ -4,6 +4,7 @@
       "node": true
     },
     "rules": {
+      "no-debugger": 0
     },
     "parserOptions": {
       "ecmaVersion": 8,

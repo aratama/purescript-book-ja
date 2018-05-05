@@ -3,12 +3,12 @@ import fs from 'fs-extra'
 import util from 'util'
 import glob from 'glob'
 import cheerio from 'cheerio'
-import { renderMarkdown } from './render'
+import { writeHtml, renderMarkdown, readMarkdown, numberHeadings, insertPageBreak, insertNextChapterLink, insertLinkToHome, markdownToHtml, transformExercise, highlightCodes } from './render'
 
-function renderWithTemplate (content, template) {
+async function renderWithTemplate (path, content, template) {
   const $ = cheerio.load(template, { decodeEntities: false })
-  $('.content').append(content)
-  return $.html()
+  $('.content').append(content('body > *'))
+  await writeHtml(path, $)
 }
 
 async function main () {
@@ -16,37 +16,48 @@ async function main () {
   const files = await util.promisify(glob)('src/chapter*.md')
 
   // load the template
-  const templateBuffer = await fs.readFile('templates/default.html')
-  const template = templateBuffer.toString()
+  const template = await fs.readFile('templates/default.html', 'utf8')
 
   // render index page
-  const indexContentBuffer = await fs.readFile('src/index.md')
-  const indexRendered = renderMarkdown(null, null, indexContentBuffer.toString(), false)
-  const indexPage = renderWithTemplate(indexRendered, template)
-  await fs.writeFile('dist/index.html', indexPage)
+  const indexDocument = await readMarkdown('src/index.md')
+  await renderWithTemplate('dist/index.html', renderMarkdown(indexDocument), template)
 
-  // render chapters
-  const chapters = await Promise.all(files.map(async (file, i) => {
+  // render each chapters
+  await Promise.all(files.map(async (file, i) => {
     const chapter = i + 1
-    const contentBuffer = await fs.readFile(file)
-    const content = contentBuffer.toString()
-    const rendered = renderMarkdown(chapter, files.length - 1, content, true)
-
-    // render with template
-    const page = renderWithTemplate(rendered, template)
-    await fs.writeFile(`dist/chapter${(chapter).toString().padStart(2, '0')}.html`, page)
-    return content
+    const document = await readMarkdown(file)
+    numberHeadings(document, chapter)
+    insertNextChapterLink(document, chapter, files.length - 1)
+    insertLinkToHome(document)
+    const $ = markdownToHtml(document)
+    highlightCodes($)
+    transformExercise($)
+    await renderWithTemplate(`dist/chapter${(chapter).toString().padStart(2, '0')}.html`, $, template)
   }))
 
   // render integrated page
-  const renderedChapters = await Promise.all(chapters.map(async (content, i) => {
-    return renderMarkdown(i + 1, null, content, false)
+  const integrated = await Promise.all(files.map(async (file, i) => {
+    const chapter = i + 1
+    const document = await readMarkdown(file)
+    numberHeadings(document, chapter)
+    const $ = markdownToHtml(document)
+    highlightCodes($)
+    transformExercise($)
+    insertPageBreak($)
+    return $
   }))
 
-  const all = renderedChapters.map(chapter => chapter + `\n<div class="pagebreak"></div>\n`).concat()
-  const page = renderWithTemplate(all, template)
-  await fs.writeFile('dist/purescript-book-ja.html', page)
+  // concat htmls
+  const head = integrated.shift()
+  for (let i = 0; i < integrated.length; i++) {
+    const $ = integrated[i]
+    head('body').append($('body > *'))
+  }
 
+  // render to file
+  await renderWithTemplate('dist/purescript-book-ja.html', head, template)
+
+  // copy resources
   fs.copy('node_modules/github-markdown-css/github-markdown.css', 'dist/github-markdown.css')
 }
 
