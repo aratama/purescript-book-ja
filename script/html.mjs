@@ -3,7 +3,7 @@ import fs from 'fs-extra'
 import util from 'util'
 import glob from 'glob'
 import cheerio from 'cheerio'
-import { writeHtml, renderMarkdown, readMarkdown, numberHeadings, insertPageBreak, insertNextChapterLink, insertLinkToHome, markdownToHtml, transformExercise, highlightCodes } from './render'
+import { concatHtmls, writeHtml, renderMarkdown, readMarkdown, numberHeadings, insertPageBreak, insertNextChapterLink, insertLinkToHome, markdownToHtml, transformExercise, highlightCodes } from './render'
 
 async function renderWithTemplate (path, content, template) {
   const $ = cheerio.load(template, { decodeEntities: false })
@@ -47,15 +47,8 @@ async function main () {
     return $
   }))
 
-  // concat htmls
-  const head = integrated.shift()
-  for (let i = 0; i < integrated.length; i++) {
-    const $ = integrated[i]
-    head('body').append($('body > *'))
-  }
-
   // render to file
-  await renderWithTemplate('dist/purescript-book-ja.html', head, template)
+  await renderWithTemplate('dist/purescript-book-ja.html', concatHtmls(integrated), template)
 
   // copy resources
   fs.copy('node_modules/github-markdown-css/github-markdown.css', 'dist/github-markdown.css')

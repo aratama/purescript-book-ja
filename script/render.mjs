@@ -118,3 +118,12 @@ export async function writeHtml (path, $) {
 export function insertPageBreak ($) {
   $('body').append($(`<div class="pagebreak"></div>`))
 }
+
+export function concatHtmls (htmls) {
+  const head = htmls.shift()
+  for (let i = 0; i < htmls.length; i++) {
+    const $ = htmls[i]
+    head('body').append($('body > *'))
+  }
+  return head
+}

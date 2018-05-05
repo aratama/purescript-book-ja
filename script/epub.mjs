@@ -2,17 +2,22 @@
 import util from 'util'
 import glob from 'glob'
 import Epub from 'epub-gen'
-import { renderMarkdown, readMarkdown } from './render'
+import { insertPageBreak, transformExercise, highlightCodes, markdownToHtml, numberHeadings, readMarkdown } from './render'
 
 async function main () {
   const files = await util.promisify(glob)('src/chapter*.md')
   const css = await util.promisify(glob)('node_modules/github-markdown-css/github-markdown.css', 'utf8')
   const chapters = await Promise.all(files.map(async (file, i) => {
-    const buffer = await readMarkdown(file)
-    const html = renderMarkdown(buffer, { chapter: i + 1, lastChapter: null, homeLinks: false })
+    const chapter = i + 1
+    const document = await readMarkdown(file)
+    numberHeadings(document, chapter)
+    const $ = markdownToHtml(document)
+    highlightCodes($)
+    transformExercise($)
+    insertPageBreak($)
     return {
       title: `chapter${(i + 1).toString().padStart(2, '0')}`,
-      data: html,
+      data: $.html(),
       css: css
     }
   }))
