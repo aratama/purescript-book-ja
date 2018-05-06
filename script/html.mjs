@@ -12,6 +12,7 @@ async function renderWithTemplate (path, content, template) {
 }
 
 async function main () {
+  debugger
   await fs.ensureDir('dist')
   const files = await util.promisify(glob)('src/chapter*.md')
 
