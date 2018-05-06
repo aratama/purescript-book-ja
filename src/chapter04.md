@@ -190,7 +190,7 @@ show <$> 1 .. 5
 ```text
 import Data.Array
 
-filter (\n -> n % 2 == 0) (1 .. 10)
+filter (\n -> n `mod` 2 == 0) (1 .. 10)
 [2,4,6,8,10]
 ```
 
