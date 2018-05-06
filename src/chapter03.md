@@ -333,7 +333,7 @@ $ pulp build
 次に、 `PSCi`を起動し、この新しいモジュールをインポートするために `import`命令を使います。
 
 ```text
-$ pulp build
+$ pulp repl
 
 > import Data.AddressBook
 ```
