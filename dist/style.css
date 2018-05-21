@@ -22,6 +22,11 @@
     font-display: swap;
 }
 
+::selection {
+    background: rgb(69, 63, 158);
+    color: white;
+}
+
 body {
     background-color: #f5f5f5;
     margin: 0;
@@ -100,7 +105,6 @@ div.content strong {
     color: #333;
 }
 
-
 /* Bug Workaround for Readium */
 
 .markdown-body.content {
@@ -150,6 +154,12 @@ div.content strong {
     padding-right: 8px;
 }
 
+.markdown-body.content .exercise ul,
+.markdown-body.content .exercise ol {
+    padding-left: 2em;
+    padding-right: 1em;
+}
+
 .markdown-body.content li p {
     padding: 0;
 }
@@ -182,7 +192,7 @@ div.content strong {
     border: solid 1px lightgrey;
     margin: 30px;
     margin-top: 100px;
-    margin-bottom: 100px;    
+    margin-bottom: 100px;
 }
 
 .markdown-body.content .exercise h2 {
@@ -190,7 +200,6 @@ div.content strong {
     text-align: center;
     margin-top: 10px;
 }
-
 
 table.sourceCode tr {
     padding: 0;
@@ -218,9 +227,6 @@ table.sourceCode pre {
         min-width: 540px;
         max-width: 800px;
     }
-
-    
-
     .markdown-body.content h1,
     .markdown-body.content h2,
     .markdown-body.content h3,
@@ -232,11 +238,10 @@ table.sourceCode pre {
         padding-left: 40px;
         padding-right: 40px;
     }
-
     .markdown-body.content ul,
     .markdown-body.content ol {
-        padding-left: 80px;
-        padding-right: 40px;
+        padding-left: 3em;
+        padding-right: 2em;
     }
 }
 
@@ -274,13 +279,9 @@ table.sourceCode pre {
         margin-bottom: 2em;
         page-break-before: always;
     }
-
-
 }
 
 .sourceCode,
 .shell {
     font-family: 'Fira Code', 'Courier New', Monospace;
 }
-
-
