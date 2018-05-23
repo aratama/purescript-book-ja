@@ -1,20 +1,5 @@
 ## 目次
 
-1. [はじめに](chapter01.html)
-2. [開発環境の準備](chapter02.html)
-3. [関数とレコード](chapter03.html)
-4. [再帰、マップ、畳み込み](chapter04.html)
-5. [パターン照合](chapter05.html)
-6. [型クラス](chapter06.html)
-7. [Applicativeによる検証](chapter07.html)
-8. [Effモナド](chapter08.html)
-9. [キャンバスグラフィックス](chapter09.html)
-10. [外部関数インタフェース](chapter10.html)
-11. [モナドの探求](chapter11.html)
-12. [コールバック地獄](chapter12.html)
-13. [テストの自動生成](chapter13.html)
-14. [領域特化言語](chapter14.html)
-
 ## そのほかのフォーマット
 
 - [原書GitHub](https://github.com/paf31/purescript-book)

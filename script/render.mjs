@@ -11,9 +11,12 @@ export async function readMarkdown (path) {
 
 export function numberHeadings (document, chapter) {
   let sectionCounter = 1
+  let chapterTitle = null
+  let sections = []
   for (let child = document.firstChild; child; child = child.next) {
     if (child.type === 'heading') {
       if (child.level === 1) {
+        chapterTitle = child.firstChild.literal
         const text = new commonmark.Node('text')
         text.literal = `第${chapter}章 `
         child.prependChild(text)
@@ -21,6 +24,7 @@ export function numberHeadings (document, chapter) {
       } else if (child.level === 2) {
         const text = child.firstChild.literal.trim()
         if (text !== 'まとめ' && text.indexOf('演習') < 0) {
+          sections.push(child.firstChild.literal)
           const text = new commonmark.Node('text')
           text.literal = chapter + '.' + sectionCounter + ' '
           child.prependChild(text)
@@ -29,6 +33,7 @@ export function numberHeadings (document, chapter) {
       }
     }
   }
+  return { chapterTitle, sections }
 }
 
 export function insertNextChapterLink (document, chapter, lastChapter) {
@@ -80,8 +85,14 @@ export function transformExercise ($) {
 
 export function markdownToHtml (document) {
   const writer = new commonmark.HtmlRenderer()
-  const rendered = writer.render(document) // result is a String
-  return cheerio.load(rendered, { decodeEntities: false })
+  try {
+    const rendered = writer.render(document) // result is a String
+    return cheerio.load(rendered, { decodeEntities: false })
+  } catch (e) {
+    debugger
+    const rendered = writer.render(document) // result is a String
+    return cheerio.load(rendered, { decodeEntities: false })
+  }
 }
 
 // renderMarkdown :: Markdown -> String

@@ -9,7 +9,8 @@
     "epub": "node --experimental-modules script/epub.mjs",
     "pdf": "node --experimental-modules script/pdf.mjs",
     "all": "npm run lint && npm run clean && npm run html && npm run epub && npm run pdf",
-    "lint": "eslint --ext .mjs --fix script"
+    "lint": "eslint --ext .mjs --fix script", 
+    "inspect": "npm run lint && npm run clean && node --experimental-modules --inspect-brk script/html.mjs"
   },
   "repository": {
     "type": "git",
