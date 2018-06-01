@@ -9,7 +9,7 @@
     "epub": "node --experimental-modules script/epub.mjs",
     "pdf": "node --experimental-modules script/pdf.mjs",
     "all": "npm run lint && npm run clean && npm run html && npm run epub && npm run pdf",
-    "lint": "eslint --ext .mjs --fix script", 
+    "lint": "eslint --ext .mjs --fix script",
     "inspect": "npm run lint && npm run clean && node --experimental-modules --inspect-brk script/html.mjs"
   },
   "repository": {
@@ -24,12 +24,13 @@
     "commonmark": "^0.28.1",
     "epub-gen": "0.0.20",
     "eslint": "^4.19.1",
-    "eslint-config-standard": "^11.0.0",
+    "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-promise": "^3.7.0",
-    "eslint-plugin-standard": "^3.1.0",
     "highlightjs": "^9.10.0",
+    "prettier": "^1.13.4",
     "puppeteer": "^1.3.0"
   },
   "devDependencies": {
