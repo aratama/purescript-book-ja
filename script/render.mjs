@@ -59,7 +59,7 @@ export function insertLinkToHome(document) {
 
 export function highlightCodes($) {
   $(
-    `pre code[class="language-haskell"], pre code[class="language-purescript"], pre code[class="language-javascript"]`
+    `pre code[class="language-haskell"], pre code[class="language-purescript"], pre code[class="language-javascript"], pre code[class="language-html"]`
   ).map((i, node) => {
     const result = highlightjs.highlightAuto($(node).text(), [
       "haskell",
