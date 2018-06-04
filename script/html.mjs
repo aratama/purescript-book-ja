@@ -80,6 +80,7 @@ async function main() {
         slist.listStart = 1;
         slist.listDelimiter = ".";
 
+        /*
         chapter.sections.forEach((section, j) => {
           const text = new commonmark.Node("text");
           text.literal = section;
@@ -88,6 +89,7 @@ async function main() {
           item.appendChild(text);
           slist.appendChild(item);
         });
+        */
 
         list.appendChild(slist);
       });
