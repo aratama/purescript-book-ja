@@ -415,23 +415,23 @@ instance showEither :: (Show a, Show b) => Show (Either a b) where
     ```haskell
     data NonEmpty a = NonEmpty a (Array a)
     ```
->
+
     `Eq a`と `Eq (Array a)`のインスタンスを再利用して、型 `NonEmpty a`に対する `Eq`インスタンスを書いてみましょう。    
->
+
 1. (やや難しい)`Semigroup`インスタンスを `Array`に再利用して `NonEmpty a`の `Semigroup`インスタンスを作成しましょう。
->
+
 1. (やや難しい)`NonEmpty`の `Functor`インスタンスを書いてみましょう。
->
+
 1. (やや難しい)`Ord`のインスタンスを持つ型 `a`があれば、他の値より大きい新しい **無限**の値を追加することができます。
->
+
     ```haskell
     data Extended a = Finite a | Infinite
     ```
->
+
     `a`の `Ord`インスタンスを再利用して、 `Extended a`の `Ord`インスタンスを書いてみましょう。
->
+
 1. (難しい)`NonEmpty`の `Foldable`インスタンスを書いてみましょう。**ヒント**：配列の `Foldable`インスタンスを再利用してみましょう。
->
+
 1. (難しい)　順序付きコンテナを定義する(そして `Foldable`のインスタンスを持っている)ような型構築子 `f`が与えられたとき、追加の要素を先頭に含めるような新たなコンテナ型を作ることができます。
 
     ```haskell
